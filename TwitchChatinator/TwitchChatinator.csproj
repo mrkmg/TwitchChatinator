@@ -61,17 +61,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataStore.cs" />
-    <Compile Include="MessageBrowser.cs">
+    <Compile Include="Libs\Log.cs" />
+    <Compile Include="Libs\DataStore.cs" />
+    <Compile Include="Froms\MessageBrowser.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MessageBrowser.Designer.cs">
+    <Compile Include="Froms\MessageBrowser.Designer.cs">
       <DependentUpon>MessageBrowser.cs</DependentUpon>
     </Compile>
-    <Compile Include="SetCredentialsScreen.cs">
+    <Compile Include="Froms\SetCredentialsScreen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SetCredentialsScreen.Designer.cs">
+    <Compile Include="Froms\SetCredentialsScreen.Designer.cs">
       <DependentUpon>SetCredentialsScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -81,17 +82,17 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="TwitchIRC.cs" />
-    <Compile Include="WelcomeScreen.cs">
+    <Compile Include="Libs\TwitchIRC.cs" />
+    <Compile Include="Froms\WelcomeScreen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="WelcomeScreen.Designer.cs">
+    <Compile Include="Froms\WelcomeScreen.Designer.cs">
       <DependentUpon>WelcomeScreen.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="MessageBrowser.resx">
+    <EmbeddedResource Include="Froms\MessageBrowser.resx">
       <DependentUpon>MessageBrowser.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SetCredentialsScreen.resx">
+    <EmbeddedResource Include="Froms\SetCredentialsScreen.resx">
       <DependentUpon>SetCredentialsScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -104,7 +105,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="WelcomeScreen.resx">
+    <EmbeddedResource Include="Froms\WelcomeScreen.resx">
       <DependentUpon>WelcomeScreen.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />

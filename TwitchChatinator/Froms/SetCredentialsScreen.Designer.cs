@@ -33,12 +33,14 @@
             this.label1 = new System.Windows.Forms.Label();
             this.PasswordInput = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.CancelButton = new System.Windows.Forms.Button();
+            this.CancelButtonC = new System.Windows.Forms.Button();
+            this.ChannelInput = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // LoginButton
             // 
-            this.LoginButton.Location = new System.Drawing.Point(36, 142);
+            this.LoginButton.Location = new System.Drawing.Point(36, 195);
             this.LoginButton.Name = "LoginButton";
             this.LoginButton.Size = new System.Drawing.Size(75, 23);
             this.LoginButton.TabIndex = 0;
@@ -80,20 +82,38 @@
             // 
             // CancelButton
             // 
-            this.CancelButton.Location = new System.Drawing.Point(110, 142);
-            this.CancelButton.Name = "CancelButton";
-            this.CancelButton.Size = new System.Drawing.Size(75, 23);
-            this.CancelButton.TabIndex = 5;
-            this.CancelButton.Text = "Cancel";
-            this.CancelButton.UseVisualStyleBackColor = true;
-            this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
+            this.CancelButtonC.Location = new System.Drawing.Point(110, 195);
+            this.CancelButtonC.Name = "CancelButtonC";
+            this.CancelButtonC.Size = new System.Drawing.Size(75, 23);
+            this.CancelButtonC.TabIndex = 5;
+            this.CancelButtonC.Text = "Cancel";
+            this.CancelButtonC.UseVisualStyleBackColor = true;
+            this.CancelButtonC.Click += new System.EventHandler(this.CancelButtonC_Click);
+            // 
+            // ChannelInput
+            // 
+            this.ChannelInput.Location = new System.Drawing.Point(38, 145);
+            this.ChannelInput.Name = "ChannelInput";
+            this.ChannelInput.Size = new System.Drawing.Size(145, 20);
+            this.ChannelInput.TabIndex = 6;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(41, 126);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(81, 13);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Twitch Channel";
             // 
             // SetCredentialsScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(214, 186);
-            this.Controls.Add(this.CancelButton);
+            this.ClientSize = new System.Drawing.Size(214, 245);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.ChannelInput);
+            this.Controls.Add(this.CancelButtonC);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.PasswordInput);
             this.Controls.Add(this.label1);
@@ -114,6 +134,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox PasswordInput;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button CancelButton;
+        private System.Windows.Forms.Button CancelButtonC;
+        private System.Windows.Forms.TextBox ChannelInput;
+        private System.Windows.Forms.Label label3;
     }
 }

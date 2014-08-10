@@ -46,5 +46,17 @@ namespace TwitchChatinator {
                 this["TwitchPassword"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string TwithChannel {
+            get {
+                return ((string)(this["TwithChannel"]));
+            }
+            set {
+                this["TwithChannel"] = value;
+            }
+        }
     }
 }
