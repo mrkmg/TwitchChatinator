@@ -9,7 +9,7 @@ using System.IO;
 
 namespace TwitchChatinator
 {
-    public class DataStoreSQLite
+    public class DataStoreSQLite : IDisposable
     {
         private SQLiteConnection Connection;
         string LastError;
@@ -22,10 +22,18 @@ namespace TwitchChatinator
             InitDB();
         }
 
-        public DataSet getDataSet()
+        public DataSet getDataSet(DataSetSelection selection)
         {
+            StringBuilder sql = new StringBuilder("SELECT datetime, user, message FROM messages");
+
+            if (selection.Start != DateTime.MinValue && selection.End != DateTime.MinValue)
+            {
+                sql.Append(" WHERE datetime BETWEEN " + selection.Start.ToString(datetimeFormat) + " AND " + selection.End.ToString(datetimeFormat));
+            }
+            sql.Append(" ORDER BY datetime DESC LIMIT 5000");
+            Log.LogInfo("SQL\t" + sql.ToString());
             var ds = new DataSet();
-            var da = new SQLiteDataAdapter("SELECT * FROM messages ORDER BY datetime DESC LIMIT 5000",Connection);
+            var da = new SQLiteDataAdapter(sql.ToString(),Connection);
             da.Fill(ds);
             return ds;
         }
@@ -62,5 +70,16 @@ namespace TwitchChatinator
             SQLiteCommand SCommand = new SQLiteCommand(Command,Connection);
             SCommand.ExecuteNonQuery();
         }
+
+        public void Dispose()
+        {
+            Connection.Close();
+        }
+    }
+
+    public class DataSetSelection
+    {
+        public DateTime Start;
+        public DateTime End;
     }
 }

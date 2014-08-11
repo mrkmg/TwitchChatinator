@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -12,7 +13,6 @@ namespace TwitchChatinator
 {
     public partial class WelcomeScreen : Form
     {
-        public DataStoreSQLite DS;
         public TwitchIRC TI;
 
         private bool isConnected = false;
@@ -23,8 +23,6 @@ namespace TwitchChatinator
             InitializeComponent();
             this.ShowIcon = false;
             this.FormClosed += WelcomeScreen_FormClosed;
-
-            DS = new DataStoreSQLite();
 
             TI = new TwitchIRC();
             TI.OnReceiveMessage += ReceiveMessage;
@@ -79,7 +77,6 @@ namespace TwitchChatinator
 
         private void ReceiveMessage(TwitchMessageObject Message)
         {
-            DS.InsertMessage(Message.username, Message.message);
         }
 
         public void ShowListenButton()
@@ -101,7 +98,7 @@ namespace TwitchChatinator
         private void SetCredentialsButton_Click(object sender, EventArgs e)
         {
             SetCredentialsScreen LS = new SetCredentialsScreen(ShowListenButton);
-            LS.Show();
+            LS.ShowDialog();
         }
 
         private void StartListenButton_Click(object sender, EventArgs e)
@@ -123,6 +120,19 @@ namespace TwitchChatinator
         {
             MessageBrowser MB = new MessageBrowser();
             MB.Show();
+        }
+
+        private void ShowPollConfig_Click(object sender, EventArgs e)
+        {
+            PollSetup PS = new PollSetup();
+
+            PS.ShowDialog();
+        }
+
+        private void StartPollButton_Click(object sender, EventArgs e)
+        {
+            RunPoll RP = new RunPoll();
+            RP.Show();
         }
     }
 }

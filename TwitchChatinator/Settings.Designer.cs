@@ -58,5 +58,65 @@ namespace TwitchChatinator {
                 this["TwithChannel"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Yes")]
+        public string PollOption1 {
+            get {
+                return ((string)(this["PollOption1"]));
+            }
+            set {
+                this["PollOption1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("No")]
+        public string PollOption2 {
+            get {
+                return ((string)(this["PollOption2"]));
+            }
+            set {
+                this["PollOption2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string PollOption3 {
+            get {
+                return ((string)(this["PollOption3"]));
+            }
+            set {
+                this["PollOption3"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string PollOption4 {
+            get {
+                return ((string)(this["PollOption4"]));
+            }
+            set {
+                this["PollOption4"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string PollChromaKey {
+            get {
+                return ((string)(this["PollChromaKey"]));
+            }
+            set {
+                this["PollChromaKey"] = value;
+            }
+        }
     }
 }

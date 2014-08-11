@@ -58,17 +58,21 @@
             // 
             // StartTimeDatepicker
             // 
+            this.StartTimeDatepicker.Checked = false;
             this.StartTimeDatepicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.StartTimeDatepicker.Location = new System.Drawing.Point(148, 13);
             this.StartTimeDatepicker.Name = "StartTimeDatepicker";
+            this.StartTimeDatepicker.ShowCheckBox = true;
             this.StartTimeDatepicker.Size = new System.Drawing.Size(164, 20);
             this.StartTimeDatepicker.TabIndex = 2;
             // 
             // EndTimeDatepicker
             // 
+            this.EndTimeDatepicker.Checked = false;
             this.EndTimeDatepicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.EndTimeDatepicker.Location = new System.Drawing.Point(341, 13);
             this.EndTimeDatepicker.Name = "EndTimeDatepicker";
+            this.EndTimeDatepicker.ShowCheckBox = true;
             this.EndTimeDatepicker.Size = new System.Drawing.Size(152, 20);
             this.EndTimeDatepicker.TabIndex = 3;
             // 
@@ -81,6 +85,7 @@
             this.Controls.Add(this.StartTimeDatepicker);
             this.Controls.Add(this.GetDataButton);
             this.Controls.Add(this.MessagesList);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "MessageBrowser";
             this.Text = "Message Browser";
             ((System.ComponentModel.ISupportInitialize)(this.MessagesList)).EndInit();

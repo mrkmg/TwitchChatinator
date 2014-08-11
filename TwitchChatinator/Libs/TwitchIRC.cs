@@ -1,4 +1,5 @@
-﻿//Much Code Boworroed from https://github.com/Phoinx/PhoinxBot/blob/master/PhoinxBot/IRC.cs
+﻿//Much Code Boworroed/Stolen from https://github.com/Phoinx/PhoinxBot/blob/master/PhoinxBot/IRC.cs
+//Thank you to Phoinx for making this avaliable
 
 using System;
 using System.Collections.Generic;
@@ -31,6 +32,8 @@ namespace TwitchChatinator
         public event Disconnected OnDisconnected;
 
         private bool isConnected = false;
+
+        private bool _shouldStop = false;
 
         public TwitchIRC()
         {
@@ -73,6 +76,7 @@ namespace TwitchChatinator
 
         public void Start()
         {
+            _shouldStop = false;
             switch (Listen.ThreadState)
             {
                 case ThreadState.Unstarted:
@@ -93,58 +97,72 @@ namespace TwitchChatinator
 
         public void Stop()
         {
-            Write("QUIT\n");
-            Listen.Abort();
-            if (OnDisconnected != null)
-            {
-                OnDisconnected();
-            }
+            _shouldStop = true;
+            Write("QUIT");
+        }
+
+        public void DoReceiveMessage(TwitchMessageObject Message, DataStoreSQLite DS)
+        {
+            DS.InsertMessage(Message.username, Message.message);
+
+            OnReceiveMessage(Message);
         }
 
         public void ListenThread()
         {
+            isConnected = false;
             try
             {
                 Log.LogInfo("Pre - Client");
                 using (Client = new TcpClient("irc.twitch.tv", 6667))
                 {
-                    Log.LogInfo("Post Client - Pre NwStream");
-                    NwStream = Client.GetStream();
-                    Reader = new StreamReader(NwStream, Encoding.GetEncoding("iso8859-1"));
-                    Writer = new StreamWriter(NwStream, Encoding.GetEncoding("iso8859-1"));
-                    Log.LogInfo("Post Stream");
-
-                    Login();
-                    JoinChannel();
-
-                    string Data = "";
-                    string msgStringDel = "PRIVMSG #" + Settings.Default.TwithChannel;
-                    while ((Data = Reader.ReadLine()) != null)
+                    using (DataStoreSQLite DS = new DataStoreSQLite())
                     {
-                        if (Listen.ThreadState == ThreadState.AbortRequested)
-                        {
-                            break;
-                        }
-                        Log.LogInfo("TwitchMessageReceived\t" + Data);
-                        //TODO: Look for a better way to do this.
-                        //Not sure if this is reliable
-                        //IDEA: Check if properly joined channel
-                        if (!isConnected && Data.Contains(":Welcome, GLHF!"))
-                        {
-                            setConnected();
-                        }
+                        Log.LogInfo("Post Client - Pre NwStream");
+                        NwStream = Client.GetStream();
+                        Reader = new StreamReader(NwStream, Encoding.GetEncoding("iso8859-1"));
+                        Writer = new StreamWriter(NwStream, Encoding.GetEncoding("iso8859-1"));
+                        Log.LogInfo("Post Stream");
 
-                        if (OnReceiveMessage != null)
+                        Login();
+                        JoinChannel();
+
+                        string Data = "";
+                        string msgStringIdent = "PRIVMSG #" + Settings.Default.TwithChannel;
+                        string[] ex;
+                        while ((Data = Reader.ReadLine()) != null && !_shouldStop)
                         {
-                            if (Data.Contains(msgStringDel))
+                            Log.LogInfo("TwitchMessageReceived\t" + Data);
+                            //TODO: Look for a better way to do this.
+                            //Not sure if this is reliable
+                            //IDEA: Check if properly joined channel
+                            if (!isConnected && Data.Contains(":Welcome, GLHF!"))
                             {
-                                int usrStart = Data.IndexOf("!");
-                                string Username = Data.Substring(1, usrStart-1);
-                                int msgStart = Data.IndexOf(msgStringDel);
-                                string Message = Data.Substring(msgStart + msgStringDel.Length + 2);
-                                OnReceiveMessage(new TwitchMessageObject(Username, Message));
+                                setConnected();
+                            }
+
+                            //Check for Pings, and Pong them back
+                            ex = Data.Split(new char[] { ' ' }, 5);
+                            if (ex[0] == "PING")
+                            {
+                                Write("PONG " + ex[1]);
+                            }
+
+                            //Check for and Handle Message Object
+                            if (OnReceiveMessage != null)
+                            {
+                                if (Data.Contains(msgStringIdent))
+                                {
+                                    int usrStart = Data.IndexOf("!");
+                                    string Username = Data.Substring(1, usrStart - 1);
+                                    int msgStart = Data.IndexOf(msgStringIdent);
+                                    string Message = Data.Substring(msgStart + msgStringIdent.Length + 2);
+                                    DoReceiveMessage(new TwitchMessageObject(Username, Message),DS);
+                                }
                             }
                         }
+
+                        OnDisconnected();
                     }
                 }
             }
@@ -175,6 +193,7 @@ namespace TwitchChatinator
             }
             catch (Exception e)
             {
+                //We do not throw here because this bot is a listen only. May look into this later
                 Log.LogException(e);
             }
         }

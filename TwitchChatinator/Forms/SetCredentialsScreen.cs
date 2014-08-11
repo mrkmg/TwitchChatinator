@@ -25,6 +25,7 @@ namespace TwitchChatinator
             UsernameInput.KeyUp += checkInputs;
             PasswordInput.KeyUp += checkInputs;
             ChannelInput.KeyUp += checkInputs;
+            UsernameInput.KeyUp += copyUserToChannel;
 
             if (Settings.Default.TwitchUsername != "" && Settings.Default.TwitchPassword != "" && Settings.Default.TwithChannel != ""){
                 LoginButton.Enabled = true;
@@ -33,6 +34,11 @@ namespace TwitchChatinator
                 ChannelInput.Text = Settings.Default.TwithChannel;
             }
             else LoginButton.Enabled = false;
+        }
+
+        public void copyUserToChannel(object sender, KeyEventArgs e)
+        {
+            ChannelInput.Text = UsernameInput.Text.ToLower();
         }
 
         private void checkInputs(object sender, KeyEventArgs e)

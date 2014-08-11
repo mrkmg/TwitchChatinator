@@ -33,6 +33,8 @@
             this.ShowMessageBrowser = new System.Windows.Forms.Button();
             this.ListeningStatus = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.ShowPollConfig = new System.Windows.Forms.Button();
+            this.StartPollButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ListeningStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -60,7 +62,7 @@
             // 
             // ShowMessageBrowser
             // 
-            this.ShowMessageBrowser.Location = new System.Drawing.Point(13, 63);
+            this.ShowMessageBrowser.Location = new System.Drawing.Point(12, 62);
             this.ShowMessageBrowser.Name = "ShowMessageBrowser";
             this.ShowMessageBrowser.Size = new System.Drawing.Size(85, 44);
             this.ShowMessageBrowser.TabIndex = 5;
@@ -87,16 +89,39 @@
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
+            // ShowPollConfig
+            // 
+            this.ShowPollConfig.Location = new System.Drawing.Point(12, 112);
+            this.ShowPollConfig.Name = "ShowPollConfig";
+            this.ShowPollConfig.Size = new System.Drawing.Size(85, 44);
+            this.ShowPollConfig.TabIndex = 6;
+            this.ShowPollConfig.Text = "Setup Poll";
+            this.ShowPollConfig.UseVisualStyleBackColor = true;
+            this.ShowPollConfig.Click += new System.EventHandler(this.ShowPollConfig_Click);
+            // 
+            // StartPollButton
+            // 
+            this.StartPollButton.Location = new System.Drawing.Point(104, 112);
+            this.StartPollButton.Name = "StartPollButton";
+            this.StartPollButton.Size = new System.Drawing.Size(85, 44);
+            this.StartPollButton.TabIndex = 7;
+            this.StartPollButton.Text = "Start Poll";
+            this.StartPollButton.UseVisualStyleBackColor = true;
+            this.StartPollButton.Click += new System.EventHandler(this.StartPollButton_Click);
+            // 
             // WelcomeScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(527, 223);
+            this.Controls.Add(this.StartPollButton);
+            this.Controls.Add(this.ShowPollConfig);
             this.Controls.Add(this.ShowMessageBrowser);
             this.Controls.Add(this.ListeningStatus);
             this.Controls.Add(this.StartListenButton);
             this.Controls.Add(this.SetCredentialsButton);
             this.Controls.Add(this.pictureBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "WelcomeScreen";
             this.Text = "Twitch Chatinator";
             ((System.ComponentModel.ISupportInitialize)(this.ListeningStatus)).EndInit();
@@ -112,5 +137,7 @@
         public System.Windows.Forms.Button StartListenButton;
         public System.Windows.Forms.PictureBox ListeningStatus;
         private System.Windows.Forms.Button ShowMessageBrowser;
+        private System.Windows.Forms.Button ShowPollConfig;
+        private System.Windows.Forms.Button StartPollButton;
     }
 }
