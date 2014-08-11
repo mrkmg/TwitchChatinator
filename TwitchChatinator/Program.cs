@@ -21,6 +21,7 @@ namespace TwitchChatinator
 
         static public DataStore getSelectedDataStore()
         {
+            Console.WriteLine("TwitchChatinator.DataStore" + Settings.Default.StorageEngine);
             return (DataStore) Activator.CreateInstance(Type.GetType("TwitchChatinator.DataStore" + Settings.Default.StorageEngine));
         }
     }

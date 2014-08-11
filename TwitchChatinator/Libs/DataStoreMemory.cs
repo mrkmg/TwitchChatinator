@@ -27,22 +27,25 @@ namespace TwitchChatinator
             table.Columns.Add("user");
             table.Columns.Add("message");
 
+            bool addRow = false;
             foreach (string[] data in Messages)
             {
+                addRow = true;
                 if (data.Length == 3)
                 {
-                    if (selection.Start != DateTime.MinValue && selection.End != DateTime.MinValue)
-                    {
-                        if(long.Parse(data[0]) >= long.Parse(selection.Start.ToString(datetimeFormat)) &&
-                           long.Parse(data[0]) <= long.Parse(selection.End.ToString(datetimeFormat)))
-                        {
-                            table.Rows.Add(data);
-                        }
+                    if((selection.Start != DateTime.MinValue && long.Parse(data[0]) < long.Parse(selection.Start.ToString(datetimeFormat)))){
+                        addRow = false;
                     }
-                    else
+                    if (addRow && (selection.End != DateTime.MinValue && long.Parse(data[0]) > long.Parse(selection.End.ToString(datetimeFormat))))
                     {
-                        table.Rows.Add(data);
+                        addRow = false;
                     }
+                } else {
+                    addRow = false;
+                }
+
+                if(addRow){
+                   table.Rows.Add(data);
                 }
             }
 

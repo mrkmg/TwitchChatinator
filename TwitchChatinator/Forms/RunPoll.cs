@@ -8,23 +8,35 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 
 namespace TwitchChatinator
 {
     public partial class RunPoll : Form
     {
-        private const int WM_NCHITTEST = 0x84;
-        private const int HTCLIENT = 0x1;
+        private const int WM_NCLBUTTONDOWN = 0xA1;
         private const int HTCAPTION = 0x2;
 
         public bool _stopThread = false;
         Thread GetDataThread;
+        PollData data;
         public int ss = 1;
 
+        delegate void SetHeightCallback(int height);
+
         private const int POLLBAR_PADDING = 10;
+        private const int POLLBAR_HEIGHT = 50;
+        private const float POLLBAR_TEXTSIZE = 16f;
+        private Color[] POLLBAR_COLORS;
 
         public RunPoll()
         {
+            POLLBAR_COLORS = new Color[4];
+            POLLBAR_COLORS[0] = PollSetup.getColorFromString(Settings.Default.PollOption1Color);
+            POLLBAR_COLORS[1] = PollSetup.getColorFromString(Settings.Default.PollOption2Color);
+            POLLBAR_COLORS[2] = PollSetup.getColorFromString(Settings.Default.PollOption3Color);
+            POLLBAR_COLORS[3] = PollSetup.getColorFromString(Settings.Default.PollOption4Color);
+
             InitializeComponent();
             CenterToScreen();
             SetStyle(ControlStyles.ResizeRedraw, true);
@@ -35,10 +47,19 @@ namespace TwitchChatinator
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             BackColor = PollSetup.getColorFromString(Settings.Default.PollChromaKey);
             this.KeyUp += RunPoll_KeyUp;
+            this.Paint += RunPoll_Paint;
             this.FormClosing += RunPoll_FormClosing;
+            this.MouseDown += RunPoll_MouseDown;
+            Width = 400;
 
             GetDataThread = new Thread(new ThreadStart(GetDataRunner));
             GetDataThread.Start();
+
+            System.Windows.Forms.Timer DrawTimer = new System.Windows.Forms.Timer();
+            DrawTimer.Interval = 32;
+            DrawTimer.Tick += DrawGraph;
+
+            DrawTimer.Start();
         }
 
         void RunPoll_FormClosing(object sender, FormClosingEventArgs e)
@@ -46,33 +67,82 @@ namespace TwitchChatinator
             StopThread();
         }
 
-        void DrawGraph(PollData data)
+        void DrawGraph(object sender, EventArgs ev)
         {
-            Invalidate();
-            int windowWidth = Width;
-            int windowHeight = Height;
-
-            int countOptions = data.options.Length;
-
-            int pollBarHeight = (windowHeight / countOptions) - ((countOptions + 1) * POLLBAR_PADDING);
-
-            Graphics G = this.CreateGraphics();
-            SolidBrush SBrush;
-            Font F = new Font(FontFamily.GenericSansSerif, (float)16);
-
-            for (int i = 0; i < countOptions; i++)
+            try
             {
-                SBrush = new SolidBrush(Color.White);
- 
+                Invalidate();
             }
+            catch (Exception e)
+            {
+                //Just Log
+                Log.LogException(e);
+            }
+        }
+
+        void setHeight(int hei)
+        {
+            if (this.InvokeRequired)
+            {
+                SetHeightCallback h = new SetHeightCallback(setHeight);
+                this.Invoke(h, new object[] { hei });
+            }
+            else
+            {
+                Height = hei;
+            }
+        }
 
 
+        void RunPoll_Paint(object sender, PaintEventArgs e)
+        {
+            if (data != null)
+            {
+                int windowWidth = Width;
+                int windowHeight = Height;
+
+                int countOptions = data.options.Length;
+
+                Graphics G = this.CreateGraphics();
+                SolidBrush TextBrush = new SolidBrush(Color.Black);
+                List<SolidBrush> Bars = new List<SolidBrush>();
+                Font F = new Font(FontFamily.GenericSansSerif, POLLBAR_TEXTSIZE);
+
+                int TextXPos;
+                int TextYPos;
+                int BarX1;
+                int BarY1;
+                int BarW;
+                for (int i = 0; i < countOptions; i++)
+                {
+                    TextXPos = 15;
+                    TextYPos = (POLLBAR_PADDING * (i + 1)) + (POLLBAR_HEIGHT * i) + (POLLBAR_HEIGHT / 2) - 16;
+
+                    BarX1 = 10;
+                    BarY1 = (POLLBAR_PADDING * (i+1)) + (POLLBAR_HEIGHT * i);
+                    if (data.totalVotes == 0)
+                        BarW = 0;
+                    else
+                        BarW = (windowWidth * data.amounts[i] / data.totalVotes) - 15;
+
+                    Bars.Add(new SolidBrush(POLLBAR_COLORS[i]));
+
+                    G.FillRectangle(Bars[i], BarX1, BarY1, BarW, POLLBAR_HEIGHT);
+                    G.DrawString(data.options[i], F, TextBrush, TextXPos, TextYPos);
+                }
+
+                foreach (SolidBrush a in Bars)
+                {
+                    a.Dispose();
+                }
+                TextBrush.Dispose();
+                F.Dispose();
+                G.Dispose();
+            }
         }
 
         void GetDataRunner()
         {
-            PollData data;
-
             int setItems = 0;
 
             if (Settings.Default.PollOption4 != String.Empty)
@@ -92,21 +162,23 @@ namespace TwitchChatinator
                 setItems = 1;
             }
 
+            setHeight((setItems * POLLBAR_HEIGHT) + ((setItems + 1) * POLLBAR_PADDING));
+
             data = new PollData(setItems);
             for (int i = 0; i < setItems; i++)
             {
                 switch (i)
                 {
-                    case 1:
+                    case 0:
                         data.options[i] = Settings.Default.PollOption1;
                         break;
-                    case 2:
+                    case 1:
                         data.options[i] = Settings.Default.PollOption2;
                         break;
-                    case 3:
+                    case 2:
                         data.options[i] = Settings.Default.PollOption3;
                         break;
-                    case 4:
+                    case 3:
                         data.options[i] = Settings.Default.PollOption4;
                         break;
                 }
@@ -116,13 +188,14 @@ namespace TwitchChatinator
             int[] rowData;
             List<string> recordedUsers;
 
-            while (!_stopThread)
+            using (DataStore DS = Program.getSelectedDataStore())
             {
-                if (setItems > 0)
+                DataSetSelection DSS = new DataSetSelection();
+                DSS.Start = DateTime.Now;
+                while (!_stopThread)
                 {
-                    using (DataStore DS = Program.getSelectedDataStore())
+                    if (setItems > 0)
                     {
-                        DataSetSelection DSS = new DataSetSelection();
                         DataSet RawData = DS.getDataSet(DSS);
 
                         totalRows = 0;
@@ -134,8 +207,10 @@ namespace TwitchChatinator
                             for (int i = 0; i < setItems; i++)
                             {
                                 if (
-                                    row.ItemArray[3].ToString().ToLower().Contains(Settings.Default.PollOption1.ToLower()) &&
-                                    !recordedUsers.Contains(row.ItemArray[1].ToString())
+                                    row.ItemArray[2].ToString().ToLower().Contains(data.options[i].ToLower())
+                                    && (
+                                        Settings.Default.PollAllowMulti || !recordedUsers.Contains(row.ItemArray[1].ToString())
+                                       )
                                    )
                                 {
                                     recordedUsers.Add(row.ItemArray[1].ToString());
@@ -152,20 +227,14 @@ namespace TwitchChatinator
                         }
                         data.totalVotes = totalRows;
                     }
+                    Thread.Sleep(50);
                 }
-
-                DrawGraph(data);
-                Thread.Sleep(32);
             }
-        }
-
-        void RunPoll_Paint(object sender, PaintEventArgs e)
-        {
         }
 
         void RunPoll_Resize(object sender, EventArgs e)
         {
-            // Invalidate(); Will be invalidated soon
+            // Invalidate(); Will be invalidated by timer
         }
 
         void RunPoll_KeyUp(object sender, KeyEventArgs e)
@@ -176,16 +245,22 @@ namespace TwitchChatinator
             }
         }
 
-        //Dragging Forms.
-        // http://stackoverflow.com/questions/4767831/drag-borderless-windows-form-by-mouse
-        // Thank you http://stackoverflow.com/users/39106/filip-ekberg
 
-        protected override void WndProc(ref Message message)
+        //Thanks to http://www.codeproject.com/Articles/11114/Move-window-form-without-Titlebar-in-C
+        //<3
+        [DllImportAttribute("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+
+        [DllImportAttribute("user32.dll")]
+        public static extern bool ReleaseCapture();
+
+        private void RunPoll_MouseDown(object sender, MouseEventArgs e)
         {
-            base.WndProc(ref message);
-
-            if (message.Msg == WM_NCHITTEST && (int)message.Result == HTCLIENT)
-                message.Result = (IntPtr)HTCAPTION;
+           if(e.Button == MouseButtons.Left)
+           {
+               ReleaseCapture();
+               SendMessage(Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0);
+           }
         }
 
         private void StopThread()

@@ -29,5 +29,20 @@
     <Setting Name="StorageEngine" Type="System.String" Scope="User">
       <Value Profile="(Default)">SQLite</Value>
     </Setting>
+    <Setting Name="PollAllowMulti" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="PollOption1Color" Type="System.String" Scope="User">
+      <Value Profile="(Default)">000191255</Value>
+    </Setting>
+    <Setting Name="PollOption2Color" Type="System.String" Scope="User">
+      <Value Profile="(Default)">219112147</Value>
+    </Setting>
+    <Setting Name="PollOption3Color" Type="System.String" Scope="User">
+      <Value Profile="(Default)">124252000</Value>
+    </Setting>
+    <Setting Name="PollOption4Color" Type="System.String" Scope="User">
+      <Value Profile="(Default)">255165000</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -40,6 +40,12 @@
             this.SavePollSetup = new System.Windows.Forms.Button();
             this.ChromaKeyInput = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.AllowMultiDropdown = new System.Windows.Forms.ComboBox();
+            this.Option1Color = new System.Windows.Forms.TextBox();
+            this.Option2Color = new System.Windows.Forms.TextBox();
+            this.Option3Color = new System.Windows.Forms.TextBox();
+            this.Option4Color = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -58,15 +64,15 @@
             this.label2.Location = new System.Drawing.Point(13, 63);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(47, 13);
-            this.label2.TabIndex = 1;
+            this.label2.TabIndex = 15;
             this.label2.Text = "Option 1";
             // 
             // Option1Input
             // 
             this.Option1Input.Location = new System.Drawing.Point(96, 60);
             this.Option1Input.Name = "Option1Input";
-            this.Option1Input.Size = new System.Drawing.Size(257, 20);
-            this.Option1Input.TabIndex = 2;
+            this.Option1Input.Size = new System.Drawing.Size(100, 20);
+            this.Option1Input.TabIndex = 0;
             // 
             // label3
             // 
@@ -74,15 +80,15 @@
             this.label3.Location = new System.Drawing.Point(13, 94);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(47, 13);
-            this.label3.TabIndex = 1;
+            this.label3.TabIndex = 15;
             this.label3.Text = "Option 2";
             // 
             // Option2Input
             // 
             this.Option2Input.Location = new System.Drawing.Point(96, 91);
             this.Option2Input.Name = "Option2Input";
-            this.Option2Input.Size = new System.Drawing.Size(257, 20);
-            this.Option2Input.TabIndex = 2;
+            this.Option2Input.Size = new System.Drawing.Size(100, 20);
+            this.Option2Input.TabIndex = 1;
             // 
             // label4
             // 
@@ -90,14 +96,14 @@
             this.label4.Location = new System.Drawing.Point(13, 123);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(47, 13);
-            this.label4.TabIndex = 1;
+            this.label4.TabIndex = 15;
             this.label4.Text = "Option 3";
             // 
             // Option3Input
             // 
             this.Option3Input.Location = new System.Drawing.Point(96, 120);
             this.Option3Input.Name = "Option3Input";
-            this.Option3Input.Size = new System.Drawing.Size(257, 20);
+            this.Option3Input.Size = new System.Drawing.Size(100, 20);
             this.Option3Input.TabIndex = 2;
             // 
             // label5
@@ -106,22 +112,22 @@
             this.label5.Location = new System.Drawing.Point(13, 153);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(47, 13);
-            this.label5.TabIndex = 1;
+            this.label5.TabIndex = 16;
             this.label5.Text = "Option 4";
             // 
             // Option4Input
             // 
             this.Option4Input.Location = new System.Drawing.Point(96, 150);
             this.Option4Input.Name = "Option4Input";
-            this.Option4Input.Size = new System.Drawing.Size(257, 20);
-            this.Option4Input.TabIndex = 2;
+            this.Option4Input.Size = new System.Drawing.Size(100, 20);
+            this.Option4Input.TabIndex = 3;
             // 
             // SavePollSetup
             // 
-            this.SavePollSetup.Location = new System.Drawing.Point(150, 235);
+            this.SavePollSetup.Location = new System.Drawing.Point(150, 263);
             this.SavePollSetup.Name = "SavePollSetup";
             this.SavePollSetup.Size = new System.Drawing.Size(75, 23);
-            this.SavePollSetup.TabIndex = 3;
+            this.SavePollSetup.TabIndex = 4;
             this.SavePollSetup.Text = "Save";
             this.SavePollSetup.UseVisualStyleBackColor = true;
             this.SavePollSetup.Click += new System.EventHandler(this.SavePollSetup_Click);
@@ -130,8 +136,8 @@
             // 
             this.ChromaKeyInput.Location = new System.Drawing.Point(96, 179);
             this.ChromaKeyInput.Name = "ChromaKeyInput";
-            this.ChromaKeyInput.Size = new System.Drawing.Size(257, 20);
-            this.ChromaKeyInput.TabIndex = 2;
+            this.ChromaKeyInput.Size = new System.Drawing.Size(61, 20);
+            this.ChromaKeyInput.TabIndex = 6;
             // 
             // label7
             // 
@@ -139,14 +145,68 @@
             this.label7.Location = new System.Drawing.Point(12, 182);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(64, 13);
-            this.label7.TabIndex = 4;
+            this.label7.TabIndex = 17;
             this.label7.Text = "Chroma Key";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(183, 182);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(101, 13);
+            this.label6.TabIndex = 15;
+            this.label6.Text = "Allow Multiple Votes";
+            // 
+            // AllowMultiDropdown
+            // 
+            this.AllowMultiDropdown.FormattingEnabled = true;
+            this.AllowMultiDropdown.Items.AddRange(new object[] {
+            "Yes",
+            "No"});
+            this.AllowMultiDropdown.Location = new System.Drawing.Point(291, 177);
+            this.AllowMultiDropdown.Name = "AllowMultiDropdown";
+            this.AllowMultiDropdown.Size = new System.Drawing.Size(62, 21);
+            this.AllowMultiDropdown.TabIndex = 16;
+            // 
+            // Option1Color
+            // 
+            this.Option1Color.Location = new System.Drawing.Point(202, 60);
+            this.Option1Color.Name = "Option1Color";
+            this.Option1Color.Size = new System.Drawing.Size(62, 20);
+            this.Option1Color.TabIndex = 7;
+            // 
+            // Option2Color
+            // 
+            this.Option2Color.Location = new System.Drawing.Point(202, 91);
+            this.Option2Color.Name = "Option2Color";
+            this.Option2Color.Size = new System.Drawing.Size(62, 20);
+            this.Option2Color.TabIndex = 11;
+            // 
+            // Option3Color
+            // 
+            this.Option3Color.Location = new System.Drawing.Point(202, 120);
+            this.Option3Color.Name = "Option3Color";
+            this.Option3Color.Size = new System.Drawing.Size(62, 20);
+            this.Option3Color.TabIndex = 13;
+            // 
+            // Option4Color
+            // 
+            this.Option4Color.Location = new System.Drawing.Point(202, 150);
+            this.Option4Color.Name = "Option4Color";
+            this.Option4Color.Size = new System.Drawing.Size(62, 20);
+            this.Option4Color.TabIndex = 14;
             // 
             // PollSetup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(385, 270);
+            this.ClientSize = new System.Drawing.Size(385, 298);
+            this.Controls.Add(this.Option4Color);
+            this.Controls.Add(this.Option3Color);
+            this.Controls.Add(this.Option2Color);
+            this.Controls.Add(this.Option1Color);
+            this.Controls.Add(this.AllowMultiDropdown);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.SavePollSetup);
             this.Controls.Add(this.ChromaKeyInput);
@@ -182,6 +242,12 @@
         private System.Windows.Forms.Button SavePollSetup;
         private System.Windows.Forms.TextBox ChromaKeyInput;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ComboBox AllowMultiDropdown;
+        private System.Windows.Forms.TextBox Option1Color;
+        private System.Windows.Forms.TextBox Option2Color;
+        private System.Windows.Forms.TextBox Option3Color;
+        private System.Windows.Forms.TextBox Option4Color;
 
     }
 }

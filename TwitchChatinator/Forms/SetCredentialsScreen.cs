@@ -49,14 +49,22 @@ namespace TwitchChatinator
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
-            Settings.Default.TwitchUsername = this.UsernameInput.Text;
-            Settings.Default.TwitchPassword = this.PasswordInput.Text;
-            Settings.Default.TwithChannel = this.ChannelInput.Text;
-            Settings.Default.StorageEngine = this.DataSourceDropdown.Text;
-            Settings.Default.Save();
+            if (this.DataSourceDropdown.Text == string.Empty)
+            {
+                MessageBox.Show("Storage Engine Can not be blank");
+            }
+            else
+            {
+                Settings.Default.TwitchUsername = this.UsernameInput.Text;
+                Settings.Default.TwitchPassword = this.PasswordInput.Text;
+                Settings.Default.TwithChannel = this.ChannelInput.Text;
+                Settings.Default.StorageEngine = this.DataSourceDropdown.Text;
+                Settings.Default.Save();
 
-            LoginHandler();
-            this.Close();
+                LoginHandler();
+                this.Close();
+            }
+            
         }
 
         private void CancelButtonC_Click(object sender, EventArgs e)

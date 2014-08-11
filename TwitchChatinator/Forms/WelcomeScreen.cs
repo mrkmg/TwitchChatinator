@@ -14,6 +14,7 @@ namespace TwitchChatinator
     public partial class WelcomeScreen : Form
     {
         public TwitchIRC TI;
+        public RunPoll RP;
 
         private bool isConnected = false;
 
@@ -72,6 +73,7 @@ namespace TwitchChatinator
         void WelcomeScreen_FormClosed(object sender, FormClosedEventArgs e)
         {
             StopListen();
+            if (RP != null && !RP.IsDisposed) RP.Close();
             Console.WriteLine("Good Bye");
         }
 
@@ -131,8 +133,11 @@ namespace TwitchChatinator
 
         private void StartPollButton_Click(object sender, EventArgs e)
         {
-            RunPoll RP = new RunPoll();
-            RP.Show();
+            if (RP == null || RP.IsDisposed)
+            {
+                RP = new RunPoll();
+                RP.Show();
+            }
         }
     }
 }

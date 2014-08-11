@@ -130,5 +130,65 @@ namespace TwitchChatinator {
                 this["StorageEngine"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool PollAllowMulti {
+            get {
+                return ((bool)(this["PollAllowMulti"]));
+            }
+            set {
+                this["PollAllowMulti"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("000191255")]
+        public string PollOption1Color {
+            get {
+                return ((string)(this["PollOption1Color"]));
+            }
+            set {
+                this["PollOption1Color"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("219112147")]
+        public string PollOption2Color {
+            get {
+                return ((string)(this["PollOption2Color"]));
+            }
+            set {
+                this["PollOption2Color"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("124252000")]
+        public string PollOption3Color {
+            get {
+                return ((string)(this["PollOption3Color"]));
+            }
+            set {
+                this["PollOption3Color"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("255165000")]
+        public string PollOption4Color {
+            get {
+                return ((string)(this["PollOption4Color"]));
+            }
+            set {
+                this["PollOption4Color"] = value;
+            }
+        }
     }
 }
