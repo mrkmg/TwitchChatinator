@@ -22,12 +22,12 @@ namespace TwitchChatinator
             EndTimeDatepicker.Format = DateTimePickerFormat.Custom;
             EndTimeDatepicker.CustomFormat = "yyyy-MM-dd hh:mm tt";
 
-
+            GetData();
         }
 
-        private void GetDataButton_Click(object sender, EventArgs e)
+        private void GetData()
         {
-            using (DataStoreSQLite DS = new DataStoreSQLite())
+            using (DataStore DS = Program.getSelectedDataStore())
             {
                 DataSetSelection dss = new DataSetSelection();
                 if (StartTimeDatepicker.Checked) dss.Start = StartTimeDatepicker.Value;
@@ -35,7 +35,13 @@ namespace TwitchChatinator
                 DataSet ds = DS.getDataSet(dss);
                 MessagesList.DataSource = ds.Tables[0].DefaultView;
             }
-           
+
+            MessagesList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
+
+        private void GetDataButton_Click(object sender, EventArgs e)
+        {
+            GetData();
         }
     }
 }

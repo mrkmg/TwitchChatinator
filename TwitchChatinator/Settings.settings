@@ -26,5 +26,8 @@
     <Setting Name="PollChromaKey" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="StorageEngine" Type="System.String" Scope="User">
+      <Value Profile="(Default)">SQLite</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -43,7 +43,7 @@
             this.MessagesList.Location = new System.Drawing.Point(0, 45);
             this.MessagesList.Name = "MessagesList";
             this.MessagesList.ReadOnly = true;
-            this.MessagesList.Size = new System.Drawing.Size(901, 364);
+            this.MessagesList.Size = new System.Drawing.Size(901, 347);
             this.MessagesList.TabIndex = 0;
             // 
             // GetDataButton

@@ -101,7 +101,7 @@ namespace TwitchChatinator
             Write("QUIT");
         }
 
-        public void DoReceiveMessage(TwitchMessageObject Message, DataStoreSQLite DS)
+        public void DoReceiveMessage(TwitchMessageObject Message, DataStore DS)
         {
             DS.InsertMessage(Message.username, Message.message);
 
@@ -116,13 +116,11 @@ namespace TwitchChatinator
                 Log.LogInfo("Pre - Client");
                 using (Client = new TcpClient("irc.twitch.tv", 6667))
                 {
-                    using (DataStoreSQLite DS = new DataStoreSQLite())
+                    using (DataStore DS = Program.getSelectedDataStore())
                     {
-                        Log.LogInfo("Post Client - Pre NwStream");
                         NwStream = Client.GetStream();
                         Reader = new StreamReader(NwStream, Encoding.GetEncoding("iso8859-1"));
                         Writer = new StreamWriter(NwStream, Encoding.GetEncoding("iso8859-1"));
-                        Log.LogInfo("Post Stream");
 
                         Login();
                         JoinChannel();
@@ -187,6 +185,7 @@ namespace TwitchChatinator
             {
                 if (Writer != null && Listen.ThreadState == ThreadState.Running)
                 {
+                    Log.LogInfo("TwitchMessageSent\t" + s);
                     Writer.WriteLine(s);
                     Writer.Flush();
                 }

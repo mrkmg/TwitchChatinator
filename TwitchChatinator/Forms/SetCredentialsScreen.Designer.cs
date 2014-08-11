@@ -36,11 +36,14 @@
             this.CancelButtonC = new System.Windows.Forms.Button();
             this.ChannelInput = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.GetTokenLink = new System.Windows.Forms.LinkLabel();
+            this.DataSourceDropdown = new System.Windows.Forms.ListBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // LoginButton
             // 
-            this.LoginButton.Location = new System.Drawing.Point(36, 195);
+            this.LoginButton.Location = new System.Drawing.Point(36, 240);
             this.LoginButton.Name = "LoginButton";
             this.LoginButton.Size = new System.Drawing.Size(75, 23);
             this.LoginButton.TabIndex = 0;
@@ -80,9 +83,9 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "Twitch OAuth Token";
             // 
-            // CancelButton
+            // CancelButtonC
             // 
-            this.CancelButtonC.Location = new System.Drawing.Point(110, 195);
+            this.CancelButtonC.Location = new System.Drawing.Point(110, 240);
             this.CancelButtonC.Name = "CancelButtonC";
             this.CancelButtonC.Size = new System.Drawing.Size(75, 23);
             this.CancelButtonC.TabIndex = 5;
@@ -92,7 +95,7 @@
             // 
             // ChannelInput
             // 
-            this.ChannelInput.Location = new System.Drawing.Point(38, 145);
+            this.ChannelInput.Location = new System.Drawing.Point(38, 157);
             this.ChannelInput.Name = "ChannelInput";
             this.ChannelInput.Size = new System.Drawing.Size(145, 20);
             this.ChannelInput.TabIndex = 6;
@@ -100,17 +103,52 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(41, 126);
+            this.label3.Location = new System.Drawing.Point(41, 138);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(81, 13);
             this.label3.TabIndex = 7;
             this.label3.Text = "Twitch Channel";
             // 
+            // GetTokenLink
+            // 
+            this.GetTokenLink.AutoSize = true;
+            this.GetTokenLink.Location = new System.Drawing.Point(99, 115);
+            this.GetTokenLink.Name = "GetTokenLink";
+            this.GetTokenLink.Size = new System.Drawing.Size(84, 13);
+            this.GetTokenLink.TabIndex = 8;
+            this.GetTokenLink.TabStop = true;
+            this.GetTokenLink.Text = "Get Token Here";
+            this.GetTokenLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.GetTokenLink_LinkClicked);
+            // 
+            // DataSourceDropdown
+            // 
+            this.DataSourceDropdown.AllowDrop = true;
+            this.DataSourceDropdown.FormattingEnabled = true;
+            this.DataSourceDropdown.Items.AddRange(new object[] {
+            "SQLite",
+            "Memory"});
+            this.DataSourceDropdown.Location = new System.Drawing.Point(38, 208);
+            this.DataSourceDropdown.Name = "DataSourceDropdown";
+            this.DataSourceDropdown.Size = new System.Drawing.Size(145, 17);
+            this.DataSourceDropdown.TabIndex = 9;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(41, 192);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(67, 13);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "Data Source";
+            // 
             // SetCredentialsScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(214, 245);
+            this.ClientSize = new System.Drawing.Size(214, 318);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.DataSourceDropdown);
+            this.Controls.Add(this.GetTokenLink);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.ChannelInput);
             this.Controls.Add(this.CancelButtonC);
@@ -137,5 +175,8 @@
         private System.Windows.Forms.Button CancelButtonC;
         private System.Windows.Forms.TextBox ChannelInput;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.LinkLabel GetTokenLink;
+        private System.Windows.Forms.ListBox DataSourceDropdown;
+        private System.Windows.Forms.Label label4;
     }
 }

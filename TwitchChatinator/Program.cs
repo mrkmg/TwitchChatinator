@@ -18,5 +18,10 @@ namespace TwitchChatinator
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new WelcomeScreen());
         }
+
+        static public DataStore getSelectedDataStore()
+        {
+            return (DataStore) Activator.CreateInstance(Type.GetType("TwitchChatinator.DataStore" + Settings.Default.StorageEngine));
+        }
     }
 }

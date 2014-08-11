@@ -52,6 +52,7 @@ namespace TwitchChatinator
             Settings.Default.TwitchUsername = this.UsernameInput.Text;
             Settings.Default.TwitchPassword = this.PasswordInput.Text;
             Settings.Default.TwithChannel = this.ChannelInput.Text;
+            Settings.Default.StorageEngine = this.DataSourceDropdown.Text;
             Settings.Default.Save();
 
             LoginHandler();
@@ -61,6 +62,11 @@ namespace TwitchChatinator
         private void CancelButtonC_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void GetTokenLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://www.twitchapps.com/tmi/");
         }
     }
 }
