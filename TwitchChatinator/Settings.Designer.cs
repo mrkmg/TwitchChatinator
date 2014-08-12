@@ -265,7 +265,7 @@ namespace TwitchChatinator {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Calibri")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Segoe UI")]
         public string _PollFontName {
             get {
                 return ((string)(this["_PollFontName"]));

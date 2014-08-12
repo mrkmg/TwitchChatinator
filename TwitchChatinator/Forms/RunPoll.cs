@@ -17,9 +17,10 @@ namespace TwitchChatinator
         private const int WM_NCLBUTTONDOWN = 0xA1;
         private const int HTCAPTION = 0x2;
 
-        public bool _stopThread = false;
+        bool _stopThread = false;
         Thread GetDataThread;
         PollData data;
+        DateTime StartTime;
 
         private int _LeftMargin;
         private int _RightMargin;
@@ -36,9 +37,8 @@ namespace TwitchChatinator
         private string _CountColor;
         private string _TotalColor;
         private int _TotalWidth;
-        private Color[] POLLBAR_COLORS;
+        private Color[] BarColors;
 
-        Graphics Graphic;
         SolidBrush TitleBrush;
         SolidBrush TotalBrush;
         SolidBrush CountBrush;
@@ -47,15 +47,45 @@ namespace TwitchChatinator
         Font TotalFont;
         List<SolidBrush> BarsBrush;
 
-        System.Drawing.Text.PrivateFontCollection OpenSans;
-
-        public RunPoll()
+        public RunPoll(DateTime startTime)
         {
-            POLLBAR_COLORS = new Color[4];
-            POLLBAR_COLORS[0] = PollSetup.getColorFromString(Settings.Default.PollOption1Color);
-            POLLBAR_COLORS[1] = PollSetup.getColorFromString(Settings.Default.PollOption2Color);
-            POLLBAR_COLORS[2] = PollSetup.getColorFromString(Settings.Default.PollOption3Color);
-            POLLBAR_COLORS[3] = PollSetup.getColorFromString(Settings.Default.PollOption4Color);
+            StartTime = startTime;
+            SetupVars();
+
+            InitializeComponent();
+
+            CenterToScreen();
+            SetStyle(ControlStyles.ResizeRedraw, true);
+            this.Text = "Twitch Poll - Chatinator";
+            this.Resize += RunPoll_Resize;
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            BackColor = PollSetup.getColorFromString(Settings.Default.PollChromaKey);
+            this.KeyUp += RunPoll_KeyUp;
+            this.Paint += RunPoll_Paint;
+            this.FormClosing += RunPoll_FormClosing;
+            this.MouseDown += RunPoll_MouseDown;
+
+            GetDataThread = new Thread(new ThreadStart(GetDataRunner));
+            GetDataThread.Start();
+        }
+
+        public DateTime getStartTime()
+        {
+            return StartTime;
+        }
+
+        void StopThread()
+        {
+            _stopThread = true;
+        }
+
+        void SetupVars()
+        {
+            BarColors = new Color[4];
+            BarColors[0] = PollSetup.getColorFromString(Settings.Default.PollOption1Color);
+            BarColors[1] = PollSetup.getColorFromString(Settings.Default.PollOption2Color);
+            BarColors[2] = PollSetup.getColorFromString(Settings.Default.PollOption3Color);
+            BarColors[3] = PollSetup.getColorFromString(Settings.Default.PollOption4Color);
 
             _LeftMargin = Settings.Default._PollLeftMargin;
             _RightMargin = Settings.Default._PollRightMargin;
@@ -73,7 +103,6 @@ namespace TwitchChatinator
             _TotalColor = Settings.Default._PollTotalColor;
             _TotalWidth = Settings.Default._PollTotalWidth;
 
-            Graphic = this.CreateGraphics();
             TitleBrush = new SolidBrush(PollSetup.getColorFromString(_TitleColor));
             CountBrush = new SolidBrush(PollSetup.getColorFromString(_CountColor));
             TotalBrush = new SolidBrush(PollSetup.getColorFromString(_TotalColor));
@@ -82,38 +111,30 @@ namespace TwitchChatinator
             TotalFont = new Font(_FontName, _TotalSize);
             BarsBrush = new List<SolidBrush>();
             for (int i = 0; i <= 3; i++)
-                BarsBrush.Add(new SolidBrush(POLLBAR_COLORS[i]));
+                BarsBrush.Add(new SolidBrush(BarColors[i]));
+        }
 
-            InitializeComponent();
-            CenterToScreen();
-            SetStyle(ControlStyles.ResizeRedraw, true);
-            this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
-            this.ClientSize = new System.Drawing.Size(292, 273);
-            this.Text = "Twitch Poll - Chatinator";
-            this.Resize += RunPoll_Resize;
-            FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            BackColor = PollSetup.getColorFromString(Settings.Default.PollChromaKey);
-            this.KeyUp += RunPoll_KeyUp;
-            this.Paint += RunPoll_Paint;
-            this.FormClosing += RunPoll_FormClosing;
-            this.MouseDown += RunPoll_MouseDown;
+        void DisposeVars()
+        {
 
-            GetDataThread = new Thread(new ThreadStart(GetDataRunner));
-            GetDataThread.Start();
+            for (int i = 0; i <= 3; i++)
+                BarsBrush[i].Dispose();
 
-            System.Windows.Forms.Timer DrawTimer = new System.Windows.Forms.Timer();
-            DrawTimer.Interval = 32;
-            DrawTimer.Tick += DrawGraph;
-
-            DrawTimer.Start();
+            TotalFont.Dispose();
+            CountFont.Dispose();
+            TitleFont.Dispose();
+            TotalBrush.Dispose();
+            CountBrush.Dispose();
+            TitleBrush.Dispose();
         }
 
         void RunPoll_FormClosing(object sender, FormClosingEventArgs e)
         {
             StopThread();
+            DisposeVars();
         }
 
-        void DrawGraph(object sender, EventArgs ev)
+        void DrawGraph()
         {
             try
             {
@@ -126,58 +147,88 @@ namespace TwitchChatinator
             }
         }
 
+        static int PtToPxV(float font, Graphics G)
+        {
+            return (int)((font * G.DpiY)/72);
+        }
 
         void RunPoll_Paint(object sender, PaintEventArgs e)
         {
             if (data != null)
             {
-                int Count = data.options.Length;
-
-                if(Width !=_LeftMargin + _BarWidth + _TotalWidth + _RightMargin)
+                using (Graphics Graphic = CreateGraphics())
                 {
-                    Width = _LeftMargin + _BarWidth + _TotalWidth + _RightMargin;
-                }
-                if(Height != _TopMargin + (Count * _BarHeight) + ( (Count - 1) * _BarSpacing) + _BottomMargin)
-                {
-                    Height = _TopMargin + (Count * _BarHeight) + ((Count - 1) * _BarSpacing) + _BottomMargin;
-                }
+                    int Count = data.options.Length;
 
-                for(int i = 0; i<Count; i++){
-                    //Draw Bar
-                    Graphic.FillRectangle(BarsBrush[i])
+                    if (Width != _LeftMargin + _BarWidth + _TotalWidth + _RightMargin || Height != _TopMargin + (Count * _BarHeight) + ((Count - 1) * _BarSpacing) + _BottomMargin)
+                    {
+                        int W = _LeftMargin + _BarWidth + _TotalWidth + _RightMargin;
+                        int H = _TopMargin + (Count * _BarHeight) + ((Count - 1) * _BarSpacing) + _BottomMargin;
+                        this.SetClientSizeCore(W, H);
+                    }
 
-                    Graphic.FillRectangle(BarsBrush[i],
-                            _LeftMargin,
-                            (int)(_TopMargin + (i * _BarSpacing) + (i * _BarHeight)),
-                            (int)((_BarWidth * data.amounts[i]/(data.totalVotes==0?1:data.totalVotes))),
-                            _BarHeight
-                        );
-                    //Write Text
+                    int BarX;
+                    int BarY;
+                    int BarW;
+                    int BarH;
+                    int TitleX;
+                    int TitleY;
+                    int CountX;
+                    int CountY;
+                    int TotalX;
+                    int TotalY;
+                    int Wid = Width;
+                    int Hei = Height;
+
+                    for (int i = 0; i < Count; i++)
+                    {
+                        BarX = _LeftMargin;
+                        BarY = _TopMargin + (i * _BarSpacing) + (i * _BarHeight);
+                        BarW = (_BarWidth * data.amounts[i] / (data.totalVotes == 0 ? 1 : data.totalVotes));
+                        BarH = _BarHeight;
+                        TitleX = _LeftMargin + 10;
+                        TitleY = _TopMargin + (i * _BarSpacing) + ((i) * _BarHeight) + 3;
+                        CountX = _LeftMargin + 10;
+                        CountY = _TopMargin + (i * _BarSpacing) + ((i + 1) * _BarHeight) - PtToPxV(_CountSize,Graphic) - 5;
+
+
+                        //Draw Bar
+                        Graphic.FillRectangle(
+                                BarsBrush[i],
+                                BarX,
+                                BarY,
+                                BarW,
+                                BarH
+                            );
+                        //Write Text
+                        Graphic.DrawString(
+                                data.options[i],
+                                TitleFont,
+                                TitleBrush,
+                                TitleX,
+                                TitleY
+                            );
+                        //Write Counts
+                        Graphic.DrawString(
+                                data.amounts[i].ToString(),
+                                CountFont,
+                                CountBrush,
+                                CountX,
+                                CountY
+                            );
+                    }
+
+                    TotalX = _LeftMargin + _BarWidth;
+                    TotalY = ((Height / 2) - (PtToPxV(_TotalSize,Graphic) / 2));
+                    //Write Title
                     Graphic.DrawString(
-                            data.options[i],
-                            TitleFont,
-                            TitleBrush,
-                            (int)(_TopMargin + (i * _BarSpacing) + ( (i - 1) * _BarHeight) + (_BarHeight / 2 )),
-                            _LeftMargin + 10
+                            data.totalVotes.ToString(),
+                            TotalFont,
+                            TotalBrush,
+                            TotalX,
+                            TotalY
                         );
                 }
-
-                Graphic.DrawString(
-                        data.totalVotes.ToString(),
-                        TotalFont,
-                        TotalBrush,
-                        _LeftMargin + _BarWidth + 10,
-                        (Height / 2) - (_TotalSize/2)
-                    );
-
-                foreach (SolidBrush a in BarsBrush)
-                {
-                    a.Dispose();
-                }
-                TotalFont.Dispose();
-                CountFont.Dispose();
-                TitleFont.Dispose();
-
             }
         }
 
@@ -229,7 +280,7 @@ namespace TwitchChatinator
             using (DataStore DS = Program.getSelectedDataStore())
             {
                 DataSetSelection DSS = new DataSetSelection();
-                DSS.Start = DateTime.Now;
+                DSS.Start = StartTime;
                 while (!_stopThread)
                 {
                     if (setItems > 0)
@@ -265,6 +316,7 @@ namespace TwitchChatinator
                         }
                         data.totalVotes = totalRows;
                     }
+                    DrawGraph();
                     Thread.Sleep(50);
                 }
             }
@@ -299,11 +351,6 @@ namespace TwitchChatinator
                 ReleaseCapture();
                 SendMessage(Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0);
             }
-        }
-
-        private void StopThread()
-        {
-            _stopThread = true;
         }
     }
 

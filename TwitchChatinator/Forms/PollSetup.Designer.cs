@@ -46,6 +46,47 @@
             this.Option2Color = new System.Windows.Forms.TextBox();
             this.Option3Color = new System.Windows.Forms.TextBox();
             this.Option4Color = new System.Windows.Forms.TextBox();
+            this.LeftMarginNum = new System.Windows.Forms.NumericUpDown();
+            this.RightMarginNum = new System.Windows.Forms.NumericUpDown();
+            this.TopMarginNum = new System.Windows.Forms.NumericUpDown();
+            this.BottomMarginNum = new System.Windows.Forms.NumericUpDown();
+            this.BarHeightNum = new System.Windows.Forms.NumericUpDown();
+            this.BarWidthNum = new System.Windows.Forms.NumericUpDown();
+            this.TitleSizeNum = new System.Windows.Forms.NumericUpDown();
+            this.CountSizeNum = new System.Windows.Forms.NumericUpDown();
+            this.TotalSizeNum = new System.Windows.Forms.NumericUpDown();
+            this.TotalWidthNum = new System.Windows.Forms.NumericUpDown();
+            this.BarSpacingNum = new System.Windows.Forms.NumericUpDown();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.TitleColorInput = new System.Windows.Forms.TextBox();
+            this.CountColorInput = new System.Windows.Forms.TextBox();
+            this.TotalColorInput = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.FontInput = new System.Windows.Forms.TextBox();
+            this.label22 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.LeftMarginNum)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RightMarginNum)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TopMarginNum)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BottomMarginNum)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BarHeightNum)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BarWidthNum)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TitleSizeNum)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CountSizeNum)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TotalSizeNum)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TotalWidthNum)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BarSpacingNum)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -124,7 +165,7 @@
             // 
             // SavePollSetup
             // 
-            this.SavePollSetup.Location = new System.Drawing.Point(150, 263);
+            this.SavePollSetup.Location = new System.Drawing.Point(237, 332);
             this.SavePollSetup.Name = "SavePollSetup";
             this.SavePollSetup.Size = new System.Drawing.Size(75, 23);
             this.SavePollSetup.TabIndex = 4;
@@ -134,7 +175,7 @@
             // 
             // ChromaKeyInput
             // 
-            this.ChromaKeyInput.Location = new System.Drawing.Point(96, 179);
+            this.ChromaKeyInput.Location = new System.Drawing.Point(121, 183);
             this.ChromaKeyInput.Name = "ChromaKeyInput";
             this.ChromaKeyInput.Size = new System.Drawing.Size(61, 20);
             this.ChromaKeyInput.TabIndex = 6;
@@ -142,7 +183,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(12, 182);
+            this.label7.Location = new System.Drawing.Point(49, 186);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(64, 13);
             this.label7.TabIndex = 17;
@@ -151,7 +192,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(183, 182);
+            this.label6.Location = new System.Drawing.Point(12, 220);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(101, 13);
             this.label6.TabIndex = 15;
@@ -163,7 +204,7 @@
             this.AllowMultiDropdown.Items.AddRange(new object[] {
             "Yes",
             "No"});
-            this.AllowMultiDropdown.Location = new System.Drawing.Point(291, 177);
+            this.AllowMultiDropdown.Location = new System.Drawing.Point(121, 217);
             this.AllowMultiDropdown.Name = "AllowMultiDropdown";
             this.AllowMultiDropdown.Size = new System.Drawing.Size(62, 21);
             this.AllowMultiDropdown.TabIndex = 16;
@@ -196,11 +237,447 @@
             this.Option4Color.Size = new System.Drawing.Size(62, 20);
             this.Option4Color.TabIndex = 14;
             // 
+            // LeftMarginNum
+            // 
+            this.LeftMarginNum.Location = new System.Drawing.Point(385, 29);
+            this.LeftMarginNum.Maximum = new decimal(new int[] {
+            900,
+            0,
+            0,
+            0});
+            this.LeftMarginNum.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.LeftMarginNum.Name = "LeftMarginNum";
+            this.LeftMarginNum.Size = new System.Drawing.Size(62, 20);
+            this.LeftMarginNum.TabIndex = 18;
+            this.LeftMarginNum.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // RightMarginNum
+            // 
+            this.RightMarginNum.Location = new System.Drawing.Point(385, 55);
+            this.RightMarginNum.Maximum = new decimal(new int[] {
+            900,
+            0,
+            0,
+            0});
+            this.RightMarginNum.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.RightMarginNum.Name = "RightMarginNum";
+            this.RightMarginNum.Size = new System.Drawing.Size(62, 20);
+            this.RightMarginNum.TabIndex = 18;
+            this.RightMarginNum.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // TopMarginNum
+            // 
+            this.TopMarginNum.Location = new System.Drawing.Point(385, 81);
+            this.TopMarginNum.Maximum = new decimal(new int[] {
+            900,
+            0,
+            0,
+            0});
+            this.TopMarginNum.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.TopMarginNum.Name = "TopMarginNum";
+            this.TopMarginNum.Size = new System.Drawing.Size(62, 20);
+            this.TopMarginNum.TabIndex = 18;
+            this.TopMarginNum.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // BottomMarginNum
+            // 
+            this.BottomMarginNum.Location = new System.Drawing.Point(385, 107);
+            this.BottomMarginNum.Maximum = new decimal(new int[] {
+            900,
+            0,
+            0,
+            0});
+            this.BottomMarginNum.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.BottomMarginNum.Name = "BottomMarginNum";
+            this.BottomMarginNum.Size = new System.Drawing.Size(62, 20);
+            this.BottomMarginNum.TabIndex = 18;
+            this.BottomMarginNum.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // BarHeightNum
+            // 
+            this.BarHeightNum.Location = new System.Drawing.Point(385, 133);
+            this.BarHeightNum.Maximum = new decimal(new int[] {
+            900,
+            0,
+            0,
+            0});
+            this.BarHeightNum.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.BarHeightNum.Name = "BarHeightNum";
+            this.BarHeightNum.Size = new System.Drawing.Size(62, 20);
+            this.BarHeightNum.TabIndex = 18;
+            this.BarHeightNum.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // BarWidthNum
+            // 
+            this.BarWidthNum.Location = new System.Drawing.Point(385, 159);
+            this.BarWidthNum.Maximum = new decimal(new int[] {
+            900,
+            0,
+            0,
+            0});
+            this.BarWidthNum.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.BarWidthNum.Name = "BarWidthNum";
+            this.BarWidthNum.Size = new System.Drawing.Size(62, 20);
+            this.BarWidthNum.TabIndex = 18;
+            this.BarWidthNum.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // TitleSizeNum
+            // 
+            this.TitleSizeNum.Location = new System.Drawing.Point(385, 211);
+            this.TitleSizeNum.Maximum = new decimal(new int[] {
+            900,
+            0,
+            0,
+            0});
+            this.TitleSizeNum.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.TitleSizeNum.Name = "TitleSizeNum";
+            this.TitleSizeNum.Size = new System.Drawing.Size(62, 20);
+            this.TitleSizeNum.TabIndex = 18;
+            this.TitleSizeNum.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // CountSizeNum
+            // 
+            this.CountSizeNum.Location = new System.Drawing.Point(385, 237);
+            this.CountSizeNum.Maximum = new decimal(new int[] {
+            900,
+            0,
+            0,
+            0});
+            this.CountSizeNum.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.CountSizeNum.Name = "CountSizeNum";
+            this.CountSizeNum.Size = new System.Drawing.Size(62, 20);
+            this.CountSizeNum.TabIndex = 18;
+            this.CountSizeNum.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // TotalSizeNum
+            // 
+            this.TotalSizeNum.Location = new System.Drawing.Point(385, 263);
+            this.TotalSizeNum.Maximum = new decimal(new int[] {
+            900,
+            0,
+            0,
+            0});
+            this.TotalSizeNum.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.TotalSizeNum.Name = "TotalSizeNum";
+            this.TotalSizeNum.Size = new System.Drawing.Size(62, 20);
+            this.TotalSizeNum.TabIndex = 18;
+            this.TotalSizeNum.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // TotalWidthNum
+            // 
+            this.TotalWidthNum.Location = new System.Drawing.Point(385, 289);
+            this.TotalWidthNum.Maximum = new decimal(new int[] {
+            900,
+            0,
+            0,
+            0});
+            this.TotalWidthNum.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.TotalWidthNum.Name = "TotalWidthNum";
+            this.TotalWidthNum.Size = new System.Drawing.Size(62, 20);
+            this.TotalWidthNum.TabIndex = 18;
+            this.TotalWidthNum.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // BarSpacingNum
+            // 
+            this.BarSpacingNum.Location = new System.Drawing.Point(385, 185);
+            this.BarSpacingNum.Maximum = new decimal(new int[] {
+            900,
+            0,
+            0,
+            0});
+            this.BarSpacingNum.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.BarSpacingNum.Name = "BarSpacingNum";
+            this.BarSpacingNum.Size = new System.Drawing.Size(62, 20);
+            this.BarSpacingNum.TabIndex = 18;
+            this.BarSpacingNum.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(300, 57);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(67, 13);
+            this.label8.TabIndex = 19;
+            this.label8.Text = "Right Margin";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(307, 31);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(60, 13);
+            this.label9.TabIndex = 20;
+            this.label9.Text = "Left Margin";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(306, 83);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(61, 13);
+            this.label10.TabIndex = 21;
+            this.label10.Text = "Top Margin";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(292, 109);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(75, 13);
+            this.label11.TabIndex = 22;
+            this.label11.Text = "Bottom Margin";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(310, 135);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(57, 13);
+            this.label12.TabIndex = 23;
+            this.label12.Text = "Bar Height";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(313, 161);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(54, 13);
+            this.label13.TabIndex = 23;
+            this.label13.Text = "Bar Width";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(317, 213);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(50, 13);
+            this.label14.TabIndex = 23;
+            this.label14.Text = "Title Size";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(309, 239);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(58, 13);
+            this.label15.TabIndex = 23;
+            this.label15.Text = "Count Size";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(313, 265);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(54, 13);
+            this.label16.TabIndex = 23;
+            this.label16.Text = "Total Size";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(305, 291);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(62, 13);
+            this.label17.TabIndex = 23;
+            this.label17.Text = "Total Width";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(302, 187);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(65, 13);
+            this.label18.TabIndex = 23;
+            this.label18.Text = "Bar Spacing";
+            // 
+            // TitleColorInput
+            // 
+            this.TitleColorInput.Location = new System.Drawing.Point(475, 56);
+            this.TitleColorInput.Name = "TitleColorInput";
+            this.TitleColorInput.Size = new System.Drawing.Size(74, 20);
+            this.TitleColorInput.TabIndex = 24;
+            // 
+            // CountColorInput
+            // 
+            this.CountColorInput.Location = new System.Drawing.Point(475, 107);
+            this.CountColorInput.Name = "CountColorInput";
+            this.CountColorInput.Size = new System.Drawing.Size(74, 20);
+            this.CountColorInput.TabIndex = 24;
+            // 
+            // TotalColorInput
+            // 
+            this.TotalColorInput.Location = new System.Drawing.Point(475, 159);
+            this.TotalColorInput.Name = "TotalColorInput";
+            this.TotalColorInput.Size = new System.Drawing.Size(74, 20);
+            this.TotalColorInput.TabIndex = 24;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(475, 37);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(54, 13);
+            this.label19.TabIndex = 25;
+            this.label19.Text = "Title Color";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(475, 88);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(62, 13);
+            this.label20.TabIndex = 25;
+            this.label20.Text = "Count Color";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(475, 140);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(58, 13);
+            this.label21.TabIndex = 26;
+            this.label21.Text = "Total Color";
+            // 
+            // FontInput
+            // 
+            this.FontInput.Location = new System.Drawing.Point(121, 253);
+            this.FontInput.Name = "FontInput";
+            this.FontInput.Size = new System.Drawing.Size(100, 20);
+            this.FontInput.TabIndex = 27;
+            this.FontInput.TextChanged += new System.EventHandler(this.FontInput_TextChanged);
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(85, 256);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(28, 13);
+            this.label22.TabIndex = 28;
+            this.label22.Text = "Font";
+            // 
             // PollSetup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(385, 298);
+            this.ClientSize = new System.Drawing.Size(608, 367);
+            this.Controls.Add(this.label22);
+            this.Controls.Add(this.FontInput);
+            this.Controls.Add(this.label21);
+            this.Controls.Add(this.label20);
+            this.Controls.Add(this.label19);
+            this.Controls.Add(this.TotalColorInput);
+            this.Controls.Add(this.CountColorInput);
+            this.Controls.Add(this.TitleColorInput);
+            this.Controls.Add(this.label18);
+            this.Controls.Add(this.label17);
+            this.Controls.Add(this.label16);
+            this.Controls.Add(this.label15);
+            this.Controls.Add(this.label14);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.BarSpacingNum);
+            this.Controls.Add(this.TotalWidthNum);
+            this.Controls.Add(this.TotalSizeNum);
+            this.Controls.Add(this.CountSizeNum);
+            this.Controls.Add(this.TitleSizeNum);
+            this.Controls.Add(this.BarWidthNum);
+            this.Controls.Add(this.BarHeightNum);
+            this.Controls.Add(this.BottomMarginNum);
+            this.Controls.Add(this.TopMarginNum);
+            this.Controls.Add(this.RightMarginNum);
+            this.Controls.Add(this.LeftMarginNum);
             this.Controls.Add(this.Option4Color);
             this.Controls.Add(this.Option3Color);
             this.Controls.Add(this.Option2Color);
@@ -223,6 +700,17 @@
             this.Name = "PollSetup";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "PollSetup";
+            ((System.ComponentModel.ISupportInitialize)(this.LeftMarginNum)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RightMarginNum)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TopMarginNum)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BottomMarginNum)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BarHeightNum)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BarWidthNum)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TitleSizeNum)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CountSizeNum)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TotalSizeNum)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TotalWidthNum)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BarSpacingNum)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -248,6 +736,36 @@
         private System.Windows.Forms.TextBox Option2Color;
         private System.Windows.Forms.TextBox Option3Color;
         private System.Windows.Forms.TextBox Option4Color;
+        private System.Windows.Forms.NumericUpDown LeftMarginNum;
+        private System.Windows.Forms.NumericUpDown RightMarginNum;
+        private System.Windows.Forms.NumericUpDown TopMarginNum;
+        private System.Windows.Forms.NumericUpDown BottomMarginNum;
+        private System.Windows.Forms.NumericUpDown BarHeightNum;
+        private System.Windows.Forms.NumericUpDown BarWidthNum;
+        private System.Windows.Forms.NumericUpDown TitleSizeNum;
+        private System.Windows.Forms.NumericUpDown CountSizeNum;
+        private System.Windows.Forms.NumericUpDown TotalSizeNum;
+        private System.Windows.Forms.NumericUpDown TotalWidthNum;
+        private System.Windows.Forms.NumericUpDown BarSpacingNum;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TextBox TitleColorInput;
+        private System.Windows.Forms.TextBox CountColorInput;
+        private System.Windows.Forms.TextBox TotalColorInput;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.TextBox FontInput;
+        private System.Windows.Forms.Label label22;
 
     }
 }

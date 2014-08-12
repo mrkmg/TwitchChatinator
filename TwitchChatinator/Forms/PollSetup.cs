@@ -12,6 +12,9 @@ namespace TwitchChatinator
 {
     public partial class PollSetup : Form
     {
+        public delegate void Save();
+        public event Save OnSave;
+
         public PollSetup()
         {
             InitializeComponent();
@@ -20,6 +23,10 @@ namespace TwitchChatinator
             Option2Color.MouseDown += Option2Color_MouseDown;
             Option3Color.MouseDown += Option3Color_MouseDown;
             Option4Color.MouseDown += Option4Color_MouseDown;
+
+            TitleColorInput.MouseDown += TitleColorInput_MouseDown;
+            CountColorInput.MouseDown += CountColorInput_MouseDown;
+            TotalColorInput.MouseDown += TotalColorInput_MouseDown;
 
             Option1Input.Text = Settings.Default.PollOption1;
             Option2Input.Text = Settings.Default.PollOption2;
@@ -39,6 +46,62 @@ namespace TwitchChatinator
             Option4Color.BackColor = getColorFromString(Option4Color.Text);
 
 
+
+            TitleColorInput.BackColor = getColorFromString(TitleColorInput.Text);
+            CountColorInput.BackColor = getColorFromString(CountColorInput.Text);
+            TotalColorInput.BackColor = getColorFromString(TotalColorInput.Text);
+
+            LeftMarginNum.Value = Settings.Default._PollLeftMargin;
+            RightMarginNum.Value = Settings.Default._PollRightMargin;
+            TopMarginNum.Value = Settings.Default._PollTopMargin;
+            BottomMarginNum.Value = Settings.Default._PollBottomMargin;
+
+            BarHeightNum.Value = Settings.Default._PollBarHeight;
+            BarWidthNum.Value = Settings.Default._PollBarWidth;
+            BarSpacingNum.Value = Settings.Default._PollBarSpacing;
+
+            FontInput.Text = Settings.Default._PollFontName;
+
+            TitleSizeNum.Value = (int)Settings.Default._PollTitleSize;
+            CountSizeNum.Value = (int)Settings.Default._PollCountSize;
+            TotalSizeNum.Value = (int)Settings.Default._PollTotalSize;
+
+            TitleColorInput.Text = Settings.Default._PollTitleColor;
+            CountColorInput.Text = Settings.Default._PollCountColor;
+            TotalColorInput.Text = Settings.Default._PollTotalColor;
+        }
+
+        void TotalColorInput_MouseDown(object sender, MouseEventArgs e)
+        {
+            ColorDialog CD = new ColorDialog();
+
+            if (CD.ShowDialog() == DialogResult.OK)
+            {
+                TotalColorInput.Text = CD.Color.R.ToString().PadLeft(3, '0') + CD.Color.G.ToString().PadLeft(3, '0') + CD.Color.B.ToString().PadLeft(3, '0');
+                TotalColorInput.BackColor = CD.Color;
+            }
+        }
+
+        void CountColorInput_MouseDown(object sender, MouseEventArgs e)
+        {
+            ColorDialog CD = new ColorDialog();
+
+            if (CD.ShowDialog() == DialogResult.OK)
+            {
+                CountColorInput.Text = CD.Color.R.ToString().PadLeft(3, '0') + CD.Color.G.ToString().PadLeft(3, '0') + CD.Color.B.ToString().PadLeft(3, '0');
+                CountColorInput.BackColor = CD.Color;
+            }
+        }
+
+        void TitleColorInput_MouseDown(object sender, MouseEventArgs e)
+        {
+            ColorDialog CD = new ColorDialog();
+
+            if (CD.ShowDialog() == DialogResult.OK)
+            {
+                TitleColorInput.Text = CD.Color.R.ToString().PadLeft(3, '0') + CD.Color.G.ToString().PadLeft(3, '0') + CD.Color.B.ToString().PadLeft(3, '0');
+                TitleColorInput.BackColor = CD.Color;
+            }
         }
 
         public static Color getColorFromString(string s)
@@ -84,9 +147,32 @@ namespace TwitchChatinator
             Settings.Default.PollChromaKey = ChromaKeyInput.Text;
 
             Settings.Default.PollAllowMulti = AllowMultiDropdown.Text == "Yes";
+
+            Settings.Default._PollLeftMargin = (int)LeftMarginNum.Value;
+            Settings.Default._PollRightMargin = (int)RightMarginNum.Value;
+            Settings.Default._PollTopMargin = (int)TopMarginNum.Value;
+            Settings.Default._PollBottomMargin = (int)BottomMarginNum.Value;
+
+            Settings.Default._PollBarHeight = (int)BarHeightNum.Value;
+            Settings.Default._PollBarWidth = (int)BarWidthNum.Value;
+            Settings.Default._PollBarSpacing = (int)BarSpacingNum.Value;
+
+            Settings.Default._PollFontName = FontInput.Text;
+
+            Settings.Default._PollTitleSize = (float)TitleSizeNum.Value;
+            Settings.Default._PollCountSize = (float)CountSizeNum.Value;
+            Settings.Default._PollTotalSize = (float)TotalSizeNum.Value;
+
+            Settings.Default._PollTitleColor = TitleColorInput.Text;
+            Settings.Default._PollCountColor = CountColorInput.Text;
+            Settings.Default._PollTotalColor = TotalColorInput.Text;
+
             
             Settings.Default.Save();
-            Close();
+            if (OnSave != null)
+            {
+                OnSave();
+            }
         }
 
         void ChromaKeyInput_MouseDown(object sender, MouseEventArgs e)
@@ -142,6 +228,11 @@ namespace TwitchChatinator
                 Option4Color.Text = CD.Color.R.ToString().PadLeft(3, '0') + CD.Color.G.ToString().PadLeft(3, '0') + CD.Color.B.ToString().PadLeft(3, '0');
                 Option4Color.BackColor = CD.Color;
             }
+        }
+
+        private void FontInput_TextChanged(object sender, EventArgs e)
+        {
+            FontInput.Font = new Font(FontInput.Text, FontInput.Font.Size);
         }
 
         

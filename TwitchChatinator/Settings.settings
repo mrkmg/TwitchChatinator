@@ -63,7 +63,7 @@
       <Value Profile="(Default)">300</Value>
     </Setting>
     <Setting Name="_PollFontName" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Calibri</Value>
+      <Value Profile="(Default)">Segoe UI</Value>
     </Setting>
     <Setting Name="_PollTitleSize" Type="System.Single" Scope="User">
       <Value Profile="(Default)">16</Value>

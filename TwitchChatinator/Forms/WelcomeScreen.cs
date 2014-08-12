@@ -15,6 +15,7 @@ namespace TwitchChatinator
     {
         public TwitchIRC TI;
         public RunPoll RP;
+        DateTime PollStart;
 
         private bool isConnected = false;
 
@@ -127,17 +128,36 @@ namespace TwitchChatinator
         private void ShowPollConfig_Click(object sender, EventArgs e)
         {
             PollSetup PS = new PollSetup();
+            PS.OnSave += PS_OnSave;
 
-            PS.ShowDialog();
+            PS.Show();
+        }
+
+        void PS_OnSave()
+        {
+            if(RP != null && !RP.IsDisposed)
+                StartRunPoll();
         }
 
         private void StartPollButton_Click(object sender, EventArgs e)
         {
-            if (RP == null || RP.IsDisposed)
+            PollStart = DateTime.Now;
+            StartRunPoll();
+        }
+
+        void StartRunPoll()
+        {
+            if (RP != null && !RP.IsDisposed)
             {
-                RP = new RunPoll();
-                RP.Show();
+                RP.Close();
+                while (!RP.IsDisposed) Thread.Sleep(50);
+                RP = new RunPoll(PollStart);
             }
+            else
+            {
+                RP = new RunPoll(PollStart);
+            }
+            RP.Show();
         }
 
         private void ResetButton_Click(object sender, EventArgs e)
