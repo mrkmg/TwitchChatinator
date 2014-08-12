@@ -139,5 +139,11 @@ namespace TwitchChatinator
                 RP.Show();
             }
         }
+
+        private void ResetButton_Click(object sender, EventArgs e)
+        {
+            Settings.Default.Reset();
+            Close();
+        }
     }
 }

@@ -11,6 +11,15 @@
     <Setting Name="TwithChannel" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="StorageEngine" Type="System.String" Scope="User">
+      <Value Profile="(Default)">SQLite</Value>
+    </Setting>
+    <Setting Name="PollChromaKey" Type="System.String" Scope="User">
+      <Value Profile="(Default)">000000000</Value>
+    </Setting>
+    <Setting Name="PollAllowMulti" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
     <Setting Name="PollOption1" Type="System.String" Scope="User">
       <Value Profile="(Default)">Yes</Value>
     </Setting>
@@ -23,15 +32,6 @@
     <Setting Name="PollOption4" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="PollChromaKey" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="StorageEngine" Type="System.String" Scope="User">
-      <Value Profile="(Default)">SQLite</Value>
-    </Setting>
-    <Setting Name="PollAllowMulti" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
     <Setting Name="PollOption1Color" Type="System.String" Scope="User">
       <Value Profile="(Default)">000191255</Value>
     </Setting>
@@ -43,6 +43,51 @@
     </Setting>
     <Setting Name="PollOption4Color" Type="System.String" Scope="User">
       <Value Profile="(Default)">255165000</Value>
+    </Setting>
+    <Setting Name="_PollLeftMargin" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="_PollRightMargin" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="_PollTopMargin" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="_PollBottomMargin" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="_PollBarHeight" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">50</Value>
+    </Setting>
+    <Setting Name="_PollBarWidth" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">300</Value>
+    </Setting>
+    <Setting Name="_PollFontName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Calibri</Value>
+    </Setting>
+    <Setting Name="_PollTitleSize" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">16</Value>
+    </Setting>
+    <Setting Name="_PollTitleColor" Type="System.String" Scope="User">
+      <Value Profile="(Default)">255255255</Value>
+    </Setting>
+    <Setting Name="_PollCountSize" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">12</Value>
+    </Setting>
+    <Setting Name="_PollCountColor" Type="System.String" Scope="User">
+      <Value Profile="(Default)">255255255</Value>
+    </Setting>
+    <Setting Name="_PollTotalSize" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">16</Value>
+    </Setting>
+    <Setting Name="_PollTotalColor" Type="System.String" Scope="User">
+      <Value Profile="(Default)">255255255</Value>
+    </Setting>
+    <Setting Name="_PollTotalWidth" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">60</Value>
+    </Setting>
+    <Setting Name="_PollBarSpacing" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">15</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -34,6 +34,8 @@ namespace TwitchChatinator
                 ChannelInput.Text = Settings.Default.TwithChannel;
             }
             else LoginButton.Enabled = false;
+
+            DataSourceDropdown.Text = Settings.Default.StorageEngine;
         }
 
         public void copyUserToChannel(object sender, KeyEventArgs e)

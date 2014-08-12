@@ -61,6 +61,42 @@ namespace TwitchChatinator {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("SQLite")]
+        public string StorageEngine {
+            get {
+                return ((string)(this["StorageEngine"]));
+            }
+            set {
+                this["StorageEngine"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("000000000")]
+        public string PollChromaKey {
+            get {
+                return ((string)(this["PollChromaKey"]));
+            }
+            set {
+                this["PollChromaKey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool PollAllowMulti {
+            get {
+                return ((bool)(this["PollAllowMulti"]));
+            }
+            set {
+                this["PollAllowMulti"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Yes")]
         public string PollOption1 {
             get {
@@ -109,42 +145,6 @@ namespace TwitchChatinator {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string PollChromaKey {
-            get {
-                return ((string)(this["PollChromaKey"]));
-            }
-            set {
-                this["PollChromaKey"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("SQLite")]
-        public string StorageEngine {
-            get {
-                return ((string)(this["StorageEngine"]));
-            }
-            set {
-                this["StorageEngine"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool PollAllowMulti {
-            get {
-                return ((bool)(this["PollAllowMulti"]));
-            }
-            set {
-                this["PollAllowMulti"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("000191255")]
         public string PollOption1Color {
             get {
@@ -188,6 +188,186 @@ namespace TwitchChatinator {
             }
             set {
                 this["PollOption4Color"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int _PollLeftMargin {
+            get {
+                return ((int)(this["_PollLeftMargin"]));
+            }
+            set {
+                this["_PollLeftMargin"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int _PollRightMargin {
+            get {
+                return ((int)(this["_PollRightMargin"]));
+            }
+            set {
+                this["_PollRightMargin"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int _PollTopMargin {
+            get {
+                return ((int)(this["_PollTopMargin"]));
+            }
+            set {
+                this["_PollTopMargin"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int _PollBottomMargin {
+            get {
+                return ((int)(this["_PollBottomMargin"]));
+            }
+            set {
+                this["_PollBottomMargin"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public int _PollBarHeight {
+            get {
+                return ((int)(this["_PollBarHeight"]));
+            }
+            set {
+                this["_PollBarHeight"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("300")]
+        public int _PollBarWidth {
+            get {
+                return ((int)(this["_PollBarWidth"]));
+            }
+            set {
+                this["_PollBarWidth"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Calibri")]
+        public string _PollFontName {
+            get {
+                return ((string)(this["_PollFontName"]));
+            }
+            set {
+                this["_PollFontName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("16")]
+        public float _PollTitleSize {
+            get {
+                return ((float)(this["_PollTitleSize"]));
+            }
+            set {
+                this["_PollTitleSize"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("255255255")]
+        public string _PollTitleColor {
+            get {
+                return ((string)(this["_PollTitleColor"]));
+            }
+            set {
+                this["_PollTitleColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("12")]
+        public float _PollCountSize {
+            get {
+                return ((float)(this["_PollCountSize"]));
+            }
+            set {
+                this["_PollCountSize"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("255255255")]
+        public string _PollCountColor {
+            get {
+                return ((string)(this["_PollCountColor"]));
+            }
+            set {
+                this["_PollCountColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("16")]
+        public float _PollTotalSize {
+            get {
+                return ((float)(this["_PollTotalSize"]));
+            }
+            set {
+                this["_PollTotalSize"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("255255255")]
+        public string _PollTotalColor {
+            get {
+                return ((string)(this["_PollTotalColor"]));
+            }
+            set {
+                this["_PollTotalColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("60")]
+        public int _PollTotalWidth {
+            get {
+                return ((int)(this["_PollTotalWidth"]));
+            }
+            set {
+                this["_PollTotalWidth"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("15")]
+        public int _PollBarSpacing {
+            get {
+                return ((int)(this["_PollBarSpacing"]));
+            }
+            set {
+                this["_PollBarSpacing"] = value;
             }
         }
     }
