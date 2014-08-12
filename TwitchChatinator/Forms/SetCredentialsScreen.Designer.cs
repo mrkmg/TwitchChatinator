@@ -158,7 +158,7 @@
             this.Controls.Add(this.LoginButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "SetCredentialsScreen";
-            this.Text = "Set Credentials";
+            this.Text = "Set Credentials - Chatinator";
             this.ResumeLayout(false);
             this.PerformLayout();
 

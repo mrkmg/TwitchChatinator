@@ -24,7 +24,7 @@ namespace TwitchChatinator
 
         public DataSet getDataSet(DataSetSelection selection)
         {
-            StringBuilder sql = new StringBuilder("SELECT datetime, user, message FROM messages");
+            StringBuilder sql = new StringBuilder("SELECT datetime, channel, user, message FROM messages");
 
 
 
@@ -40,36 +40,40 @@ namespace TwitchChatinator
             {
                 sql.Append(" WHERE datetime <= " + selection.End.ToString(datetimeFormat));
             }
-            sql.Append(" ORDER BY datetime DESC LIMIT 5000");
-            Log.LogInfo("SQL\t" + sql.ToString());
+            sql.Append(" ORDER BY datetime DESC");
             var ds = new DataSet();
-            var da = new SQLiteDataAdapter(sql.ToString(), Connection);
-            da.Fill(ds);
+            using (var da = new SQLiteDataAdapter(sql.ToString(), Connection))
+            {
+                da.Fill(ds);
+            }
             return ds;
         }
 
-        public bool InsertMessage(string User, string Message)
+        public bool InsertMessage(string Channel, string User, string Message)
         {
-            string Command = "INSERT INTO messages (datetime,user,message) VALUES (@datetime,@user,@message)";
-
-            SQLiteCommand SCommand = new SQLiteCommand(Command, Connection);
-            SCommand.Parameters.AddWithValue("@user", User);
-            SCommand.Parameters.AddWithValue("@message", Message);
-            SCommand.Parameters.AddWithValue("@datetime", DateTime.Now.ToString(datetimeFormat));
-
-            int results = 0;
-
-            try
+            string Command = "INSERT INTO messages (datetime,channel,user,message) VALUES (@datetime,@channel,@user,@message)";
+            bool good = false;
+            using (SQLiteCommand SCommand = new SQLiteCommand(Command, Connection))
             {
-                results = SCommand.ExecuteNonQuery();
-            }
-            catch (Exception e)
-            {
-                LastError = e.Message;
+                SCommand.Parameters.AddWithValue("@user", User);
+                SCommand.Parameters.AddWithValue("@channel", Channel);
+                SCommand.Parameters.AddWithValue("@message", Message);
+                SCommand.Parameters.AddWithValue("@datetime", DateTime.Now.ToString(datetimeFormat));
+
+
+                try
+                {
+                    good = SCommand.ExecuteNonQuery() > 0;
+                }
+                catch (Exception e)
+                {
+                    LastError = e.Message;
+                    good = InsertMessage(Channel, User, Message);
+                }
             }
 
 
-            return results > 0;
+            return good;
 
         }
 
@@ -78,6 +82,7 @@ namespace TwitchChatinator
             string Command = "CREATE TABLE IF NOT EXISTS messages (" +
                                 "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
                                 "datetime INTEGER NOT NULL," +
+                                "channel char(100) NOT NULL," +
                                 "user CHAR(100) NOT NULL," +
                                 "message TEXT);";
             SQLiteCommand SCommand = new SQLiteCommand(Command, Connection);

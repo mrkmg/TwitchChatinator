@@ -24,6 +24,7 @@ namespace TwitchChatinator
 
             DataTable table = new DataTable("messages");
             table.Columns.Add("datetime");
+            table.Columns.Add("channel");
             table.Columns.Add("user");
             table.Columns.Add("message");
 
@@ -54,9 +55,9 @@ namespace TwitchChatinator
             return DS;
         }
 
-        public bool InsertMessage(string User, string Message)
+        public bool InsertMessage(string Channel, string User, string Message)
         {
-            Messages.Add(new string[3] { DateTime.Now.ToString(datetimeFormat), User, Message });
+            Messages.Add(new string[4] { DateTime.Now.ToString(datetimeFormat), Channel, User, Message });
             return true;
         }
 

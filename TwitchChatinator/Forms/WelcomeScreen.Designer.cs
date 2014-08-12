@@ -135,7 +135,7 @@
             this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "WelcomeScreen";
-            this.Text = "Twitch Chatinator";
+            this.Text = "Chatinator";
             ((System.ComponentModel.ISupportInitialize)(this.ListeningStatus)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

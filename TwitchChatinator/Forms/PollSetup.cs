@@ -18,15 +18,15 @@ namespace TwitchChatinator
         public PollSetup()
         {
             InitializeComponent();
-            ChromaKeyInput.MouseDown += ChromaKeyInput_MouseDown;
-            Option1Color.MouseDown += Option1Color_MouseDown;
-            Option2Color.MouseDown += Option2Color_MouseDown;
-            Option3Color.MouseDown += Option3Color_MouseDown;
-            Option4Color.MouseDown += Option4Color_MouseDown;
 
-            TitleColorInput.MouseDown += TitleColorInput_MouseDown;
-            CountColorInput.MouseDown += CountColorInput_MouseDown;
-            TotalColorInput.MouseDown += TotalColorInput_MouseDown;
+            ChromaKeyInput.MouseDown += colorMouseDown;
+            Option1Color.MouseDown += colorMouseDown;
+            Option2Color.MouseDown += colorMouseDown;
+            Option3Color.MouseDown += colorMouseDown;
+            Option4Color.MouseDown += colorMouseDown;
+            TitleColorInput.MouseDown += colorMouseDown;
+            CountColorInput.MouseDown += colorMouseDown;
+            TotalColorInput.MouseDown += colorMouseDown;
 
             Option1Input.Text = Settings.Default.PollOption1;
             Option2Input.Text = Settings.Default.PollOption2;
@@ -36,20 +36,8 @@ namespace TwitchChatinator
             Option2Color.Text = Settings.Default.PollOption2Color;
             Option3Color.Text = Settings.Default.PollOption3Color;
             Option4Color.Text = Settings.Default.PollOption4Color;
-            ChromaKeyInput.Text = Settings.Default.PollChromaKey;
+
             AllowMultiDropdown.Text = Settings.Default.PollAllowMulti ? "Yes" : "No";
-
-            ChromaKeyInput.BackColor = getColorFromString(ChromaKeyInput.Text);
-            Option1Color.BackColor = getColorFromString(Option1Color.Text);
-            Option2Color.BackColor = getColorFromString(Option2Color.Text);
-            Option3Color.BackColor = getColorFromString(Option3Color.Text);
-            Option4Color.BackColor = getColorFromString(Option4Color.Text);
-
-
-
-            TitleColorInput.BackColor = getColorFromString(TitleColorInput.Text);
-            CountColorInput.BackColor = getColorFromString(CountColorInput.Text);
-            TotalColorInput.BackColor = getColorFromString(TotalColorInput.Text);
 
             LeftMarginNum.Value = Settings.Default._PollLeftMargin;
             RightMarginNum.Value = Settings.Default._PollRightMargin;
@@ -69,39 +57,28 @@ namespace TwitchChatinator
             TitleColorInput.Text = Settings.Default._PollTitleColor;
             CountColorInput.Text = Settings.Default._PollCountColor;
             TotalColorInput.Text = Settings.Default._PollTotalColor;
-        }
 
-        void TotalColorInput_MouseDown(object sender, MouseEventArgs e)
-        {
-            ColorDialog CD = new ColorDialog();
+            ChromaKeyInput.Text = Settings.Default.PollChromaKey;
 
-            if (CD.ShowDialog() == DialogResult.OK)
-            {
-                TotalColorInput.Text = CD.Color.R.ToString().PadLeft(3, '0') + CD.Color.G.ToString().PadLeft(3, '0') + CD.Color.B.ToString().PadLeft(3, '0');
-                TotalColorInput.BackColor = CD.Color;
-            }
-        }
+            ChromaKeyInput.BackColor = getColorFromString(ChromaKeyInput.Text);
+            Option1Color.BackColor = getColorFromString(Option1Color.Text);
+            Option2Color.BackColor = getColorFromString(Option2Color.Text);
+            Option3Color.BackColor = getColorFromString(Option3Color.Text);
+            Option4Color.BackColor = getColorFromString(Option4Color.Text);
 
-        void CountColorInput_MouseDown(object sender, MouseEventArgs e)
-        {
-            ColorDialog CD = new ColorDialog();
+            ChromaKeyInput.ForeColor = getColorFromString(ChromaKeyInput.Text);
+            Option1Color.ForeColor = getColorFromString(Option1Color.Text);
+            Option2Color.ForeColor = getColorFromString(Option2Color.Text);
+            Option3Color.ForeColor = getColorFromString(Option3Color.Text);
+            Option4Color.ForeColor = getColorFromString(Option4Color.Text);
 
-            if (CD.ShowDialog() == DialogResult.OK)
-            {
-                CountColorInput.Text = CD.Color.R.ToString().PadLeft(3, '0') + CD.Color.G.ToString().PadLeft(3, '0') + CD.Color.B.ToString().PadLeft(3, '0');
-                CountColorInput.BackColor = CD.Color;
-            }
-        }
+            TitleColorInput.BackColor = getColorFromString(TitleColorInput.Text);
+            CountColorInput.BackColor = getColorFromString(CountColorInput.Text);
+            TotalColorInput.BackColor = getColorFromString(TotalColorInput.Text);
 
-        void TitleColorInput_MouseDown(object sender, MouseEventArgs e)
-        {
-            ColorDialog CD = new ColorDialog();
-
-            if (CD.ShowDialog() == DialogResult.OK)
-            {
-                TitleColorInput.Text = CD.Color.R.ToString().PadLeft(3, '0') + CD.Color.G.ToString().PadLeft(3, '0') + CD.Color.B.ToString().PadLeft(3, '0');
-                TitleColorInput.BackColor = CD.Color;
-            }
+            TitleColorInput.ForeColor = getColorFromString(TitleColorInput.Text);
+            CountColorInput.ForeColor = getColorFromString(CountColorInput.Text);
+            TotalColorInput.ForeColor = getColorFromString(TotalColorInput.Text);
         }
 
         public static Color getColorFromString(string s)
@@ -175,59 +152,19 @@ namespace TwitchChatinator
             }
         }
 
-        void ChromaKeyInput_MouseDown(object sender, MouseEventArgs e)
+        void colorMouseDown(object sender, MouseEventArgs e)
         {
+            TextBox source = (TextBox)sender;
             ColorDialog CD = new ColorDialog();
 
             if (CD.ShowDialog() == DialogResult.OK)
             {
-                ChromaKeyInput.Text = CD.Color.R.ToString().PadLeft(3, '0') + CD.Color.G.ToString().PadLeft(3, '0') + CD.Color.B.ToString().PadLeft(3, '0');
-                ChromaKeyInput.BackColor = CD.Color;
+                source.Text = CD.Color.R.ToString().PadLeft(3, '0') + CD.Color.G.ToString().PadLeft(3, '0') + CD.Color.B.ToString().PadLeft(3, '0');
+                source.BackColor = CD.Color;
+                source.ForeColor = CD.Color;
             }
-        }
 
-        private void Option1Color_MouseDown(object sender, EventArgs e)
-        {
-            ColorDialog CD = new ColorDialog();
-
-            if (CD.ShowDialog() == DialogResult.OK)
-            {
-                Option1Color.Text = CD.Color.R.ToString().PadLeft(3, '0') + CD.Color.G.ToString().PadLeft(3, '0') + CD.Color.B.ToString().PadLeft(3, '0');
-                Option1Color.BackColor = CD.Color;
-            }
-        }
-
-        private void Option2Color_MouseDown(object sender, EventArgs e)
-        {
-            ColorDialog CD = new ColorDialog();
-
-            if (CD.ShowDialog() == DialogResult.OK)
-            {
-                Option2Color.Text = CD.Color.R.ToString().PadLeft(3, '0') + CD.Color.G.ToString().PadLeft(3, '0') + CD.Color.B.ToString().PadLeft(3, '0');
-                Option2Color.BackColor = CD.Color;
-            }
-        }
-
-        private void Option3Color_MouseDown(object sender, EventArgs e)
-        {
-            ColorDialog CD = new ColorDialog();
-
-            if (CD.ShowDialog() == DialogResult.OK)
-            {
-                Option3Color.Text = CD.Color.R.ToString().PadLeft(3, '0') + CD.Color.G.ToString().PadLeft(3, '0') + CD.Color.B.ToString().PadLeft(3, '0');
-                Option3Color.BackColor = CD.Color;
-            }
-        }
-
-        private void Option4Color_MouseDown(object sender, EventArgs e)
-        {
-            ColorDialog CD = new ColorDialog();
-
-            if (CD.ShowDialog() == DialogResult.OK)
-            {
-                Option4Color.Text = CD.Color.R.ToString().PadLeft(3, '0') + CD.Color.G.ToString().PadLeft(3, '0') + CD.Color.B.ToString().PadLeft(3, '0');
-                Option4Color.BackColor = CD.Color;
-            }
+            SavePollSetup.Focus();
         }
 
         private void FontInput_TextChanged(object sender, EventArgs e)

@@ -35,6 +35,8 @@ namespace TwitchChatinator
 
         private bool _shouldStop = false;
 
+        private string Channel;
+
         public TwitchIRC()
         {
             CreateListenThread();
@@ -60,16 +62,16 @@ namespace TwitchChatinator
 
         private void JoinChannel()
         {
-            string Channel;
+            Channel = Settings.Default.TwithChannel;
 
-            Channel = "#" + Settings.Default.TwithChannel;
-
-            Write("JOIN " + Channel + "\n");
+            Write("JOIN #" + Channel + "\n");
         }
 
-        private void setConnected(){
+        private void setConnected()
+        {
             isConnected = true;
-            if(OnConnected != null){
+            if (OnConnected != null)
+            {
                 OnConnected();
             }
         }
@@ -101,9 +103,12 @@ namespace TwitchChatinator
             Write("QUIT");
         }
 
-        public void DoReceiveMessage(TwitchMessageObject Message, DataStore DS)
+        public void DoReceiveMessage(TwitchMessageObject Message)
         {
-            DS.InsertMessage(Message.username, Message.message);
+            using (DataStore DS = Program.getSelectedDataStore())
+            {
+                DS.InsertMessage(Message.channel,Message.username, Message.message);
+            }
 
             OnReceiveMessage(Message);
         }
@@ -116,52 +121,48 @@ namespace TwitchChatinator
                 Log.LogInfo("Pre - Client");
                 using (Client = new TcpClient("irc.twitch.tv", 6667))
                 {
-                    using (DataStore DS = Program.getSelectedDataStore())
+                    NwStream = Client.GetStream();
+                    Reader = new StreamReader(NwStream, Encoding.GetEncoding("iso8859-1"));
+                    Writer = new StreamWriter(NwStream, Encoding.GetEncoding("iso8859-1"));
+
+                    Login();
+                    JoinChannel();
+
+                    string Data = "";
+                    string msgStringIdent = "PRIVMSG #" + Settings.Default.TwithChannel;
+                    string[] ex;
+                    while ((Data = Reader.ReadLine()) != null && !_shouldStop)
                     {
-                        NwStream = Client.GetStream();
-                        Reader = new StreamReader(NwStream, Encoding.GetEncoding("iso8859-1"));
-                        Writer = new StreamWriter(NwStream, Encoding.GetEncoding("iso8859-1"));
-
-                        Login();
-                        JoinChannel();
-
-                        string Data = "";
-                        string msgStringIdent = "PRIVMSG #" + Settings.Default.TwithChannel;
-                        string[] ex;
-                        while ((Data = Reader.ReadLine()) != null && !_shouldStop)
+                        Log.LogInfo("TwitchMessageReceived\t" + Data);
+                        //TODO: Look for a better way to do this.
+                        //Not sure if this is reliable
+                        //IDEA: Check if properly joined channel
+                        if (!isConnected && Data.Contains(":Welcome, GLHF!"))
                         {
-                            Log.LogInfo("TwitchMessageReceived\t" + Data);
-                            //TODO: Look for a better way to do this.
-                            //Not sure if this is reliable
-                            //IDEA: Check if properly joined channel
-                            if (!isConnected && Data.Contains(":Welcome, GLHF!"))
-                            {
-                                setConnected();
-                            }
-
-                            //Check for Pings, and Pong them back
-                            ex = Data.Split(new char[] { ' ' }, 5);
-                            if (ex[0] == "PING")
-                            {
-                                Write("PONG " + ex[1]);
-                            }
-
-                            //Check for and Handle Message Object
-                            if (OnReceiveMessage != null)
-                            {
-                                if (Data.Contains(msgStringIdent))
-                                {
-                                    int usrStart = Data.IndexOf("!");
-                                    string Username = Data.Substring(1, usrStart - 1);
-                                    int msgStart = Data.IndexOf(msgStringIdent);
-                                    string Message = Data.Substring(msgStart + msgStringIdent.Length + 2);
-                                    DoReceiveMessage(new TwitchMessageObject(Username, Message),DS);
-                                }
-                            }
+                            setConnected();
                         }
 
-                        OnDisconnected();
+                        //Check for Pings, and Pong them back
+                        ex = Data.Split(new char[] { ' ' }, 5);
+                        if (ex[0] == "PING")
+                        {
+                            Write("PONG " + ex[1]);
+                        }
+
+                        //Check for and Handle Message Object
+                        if (OnReceiveMessage != null)
+                        {
+                            if (Data.Contains(msgStringIdent))
+                            {
+                                int usrStart = Data.IndexOf("!");
+                                string Username = Data.Substring(1, usrStart - 1);
+                                int msgStart = Data.IndexOf(msgStringIdent);
+                                string Message = Data.Substring(msgStart + msgStringIdent.Length + 2);
+                                DoReceiveMessage(new TwitchMessageObject(Channel, Username, Message));
+                            }
+                        }
                     }
+                    OnDisconnected();
                 }
             }
             catch (Exception e)
@@ -202,9 +203,11 @@ namespace TwitchChatinator
     {
         public string username;
         public string message;
+        public string channel;
 
-        public TwitchMessageObject(string u, string m)
+        public TwitchMessageObject(string c, string u, string m)
         {
+            channel = c;
             username = u;
             message = m;
         }

@@ -53,8 +53,8 @@ namespace TwitchChatinator
             SetupVars();
 
             InitializeComponent();
+            Console.WriteLine(Settings.Default._PositionPollLocation.ToString());
 
-            CenterToScreen();
             SetStyle(ControlStyles.ResizeRedraw, true);
             this.Text = "Twitch Poll - Chatinator";
             this.Resize += RunPoll_Resize;
@@ -64,9 +64,40 @@ namespace TwitchChatinator
             this.Paint += RunPoll_Paint;
             this.FormClosing += RunPoll_FormClosing;
             this.MouseDown += RunPoll_MouseDown;
+            this.Load += RunPoll_Load;
+
+            int setItems = 0;
+
+            if (Settings.Default.PollOption4 != String.Empty)
+            {
+                setItems = 4;
+            }
+            else if (Settings.Default.PollOption3 != String.Empty)
+            {
+                setItems = 3;
+            }
+            else if (Settings.Default.PollOption2 != String.Empty)
+            {
+                setItems = 2;
+            }
+            else if (Settings.Default.PollOption1 != String.Empty)
+            {
+                setItems = 1;
+            }
+
+            int W = _LeftMargin + _BarWidth + _TotalWidth + _RightMargin;
+            int H = _TopMargin + (setItems * _BarHeight) + ((setItems - 1) * _BarSpacing) + _BottomMargin;
+            this.SetClientSizeCore(W, H);
+
+            data = new PollData(setItems);
 
             GetDataThread = new Thread(new ThreadStart(GetDataRunner));
             GetDataThread.Start();
+        }
+
+        void RunPoll_Load(object sender, EventArgs e)
+        {
+            Location = Settings.Default._PositionPollLocation;
         }
 
         public DateTime getStartTime()
@@ -130,6 +161,9 @@ namespace TwitchChatinator
 
         void RunPoll_FormClosing(object sender, FormClosingEventArgs e)
         {
+            Settings.Default._PositionPollLocation = Location;
+            Console.WriteLine(Location);
+            Settings.Default.Save();
             StopThread();
             DisposeVars();
         }
@@ -149,7 +183,7 @@ namespace TwitchChatinator
 
         static int PtToPxV(float font, Graphics G)
         {
-            return (int)((font * G.DpiY)/72);
+            return (int)((font * G.DpiY) / 72);
         }
 
         void RunPoll_Paint(object sender, PaintEventArgs e)
@@ -159,13 +193,6 @@ namespace TwitchChatinator
                 using (Graphics Graphic = CreateGraphics())
                 {
                     int Count = data.options.Length;
-
-                    if (Width != _LeftMargin + _BarWidth + _TotalWidth + _RightMargin || Height != _TopMargin + (Count * _BarHeight) + ((Count - 1) * _BarSpacing) + _BottomMargin)
-                    {
-                        int W = _LeftMargin + _BarWidth + _TotalWidth + _RightMargin;
-                        int H = _TopMargin + (Count * _BarHeight) + ((Count - 1) * _BarSpacing) + _BottomMargin;
-                        this.SetClientSizeCore(W, H);
-                    }
 
                     int BarX;
                     int BarY;
@@ -177,20 +204,23 @@ namespace TwitchChatinator
                     int CountY;
                     int TotalX;
                     int TotalY;
-                    int Wid = Width;
-                    int Hei = Height;
+                    int MaxAmount = 1;
+
+                    for (int i = 0; i < Count; i++)
+                    {
+                        if (data.amounts[i] > MaxAmount) MaxAmount = data.amounts[i];
+                    }
 
                     for (int i = 0; i < Count; i++)
                     {
                         BarX = _LeftMargin;
                         BarY = _TopMargin + (i * _BarSpacing) + (i * _BarHeight);
-                        BarW = (_BarWidth * data.amounts[i] / (data.totalVotes == 0 ? 1 : data.totalVotes));
+                        BarW = (_BarWidth * data.amounts[i] / MaxAmount);
                         BarH = _BarHeight;
                         TitleX = _LeftMargin + 10;
                         TitleY = _TopMargin + (i * _BarSpacing) + ((i) * _BarHeight) + 3;
                         CountX = _LeftMargin + 10;
-                        CountY = _TopMargin + (i * _BarSpacing) + ((i + 1) * _BarHeight) - PtToPxV(_CountSize,Graphic) - 5;
-
+                        CountY = _TopMargin + (i * _BarSpacing) + ((i + 1) * _BarHeight) - PtToPxV(_CountSize, Graphic) - 5;
 
                         //Draw Bar
                         Graphic.FillRectangle(
@@ -219,7 +249,7 @@ namespace TwitchChatinator
                     }
 
                     TotalX = _LeftMargin + _BarWidth;
-                    TotalY = ((Height / 2) - (PtToPxV(_TotalSize,Graphic) / 2));
+                    TotalY = ((Height / 2) - (PtToPxV(_TotalSize, Graphic) / 2));
                     //Write Title
                     Graphic.DrawString(
                             data.totalVotes.ToString(),
@@ -234,26 +264,7 @@ namespace TwitchChatinator
 
         void GetDataRunner()
         {
-            int setItems = 0;
-
-            if (Settings.Default.PollOption4 != String.Empty)
-            {
-                setItems = 4;
-            }
-            else if (Settings.Default.PollOption3 != String.Empty)
-            {
-                setItems = 3;
-            }
-            else if (Settings.Default.PollOption2 != String.Empty)
-            {
-                setItems = 2;
-            }
-            else if (Settings.Default.PollOption1 != String.Empty)
-            {
-                setItems = 1;
-            }
-
-            data = new PollData(setItems);
+            int setItems = data.options.Length;
             for (int i = 0; i < setItems; i++)
             {
                 switch (i)
@@ -277,48 +288,50 @@ namespace TwitchChatinator
             int[] rowData;
             List<string> recordedUsers;
 
-            using (DataStore DS = Program.getSelectedDataStore())
+
+            DataSetSelection DSS = new DataSetSelection();
+            DSS.Start = StartTime;
+            while (!_stopThread)
             {
-                DataSetSelection DSS = new DataSetSelection();
-                DSS.Start = StartTime;
-                while (!_stopThread)
+                if (setItems > 0)
                 {
-                    if (setItems > 0)
+                    DataSet RawData;
+                    using (DataStore DS = Program.getSelectedDataStore())
                     {
-                        DataSet RawData = DS.getDataSet(DSS);
+                        RawData = DS.getDataSet(DSS);
+                    }
 
-                        totalRows = 0;
-                        rowData = new int[setItems];
-                        recordedUsers = new List<string>();
+                    totalRows = 0;
+                    rowData = new int[setItems];
+                    recordedUsers = new List<string>();
 
-                        foreach (DataRow row in RawData.Tables[0].Rows)
-                        {
-                            for (int i = 0; i < setItems; i++)
-                            {
-                                if (
-                                    row.ItemArray[2].ToString().ToLower().Contains(data.options[i].ToLower())
-                                    && (
-                                        Settings.Default.PollAllowMulti || !recordedUsers.Contains(row.ItemArray[1].ToString())
-                                       )
-                                   )
-                                {
-                                    recordedUsers.Add(row.ItemArray[1].ToString());
-                                    rowData[i]++;
-                                    totalRows++;
-                                    break;
-                                }
-                            }
-                        }
-
+                    foreach (DataRow row in RawData.Tables[0].Rows)
+                    {
                         for (int i = 0; i < setItems; i++)
                         {
-                            data.amounts[i] = rowData[i];
+                            if (
+                                row.ItemArray[3].ToString().ToLower().Contains(data.options[i].ToLower())
+                                && (
+                                    Settings.Default.PollAllowMulti || !recordedUsers.Contains(row.ItemArray[2].ToString())
+                                   )
+                               )
+                            {
+                                recordedUsers.Add(row.ItemArray[2].ToString());
+                                rowData[i]++;
+                                totalRows++;
+                                break;
+                            }
                         }
-                        data.totalVotes = totalRows;
                     }
-                    DrawGraph();
-                    Thread.Sleep(50);
+
+                    for (int i = 0; i < setItems; i++)
+                    {
+                        data.amounts[i] = rowData[i];
+                    }
+                    data.totalVotes = totalRows;
                 }
+                DrawGraph();
+                Thread.Sleep(50);
             }
         }
 

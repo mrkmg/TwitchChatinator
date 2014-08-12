@@ -21,12 +21,12 @@ namespace TwitchChatinator
 
         public static void LogInfo(string Message)
         {
-            //LogItem LI = new LogItem();
+            LogItem LI = new LogItem();
 
-            //LI.Level = "INFO";
-            //LI.Message = Message;
+            LI.Level = "INFO";
+            LI.Message = Message;
 
-            //Write(LI);  
+            Write(LI);  
         }
 
         private static void Write(LogItem LI){

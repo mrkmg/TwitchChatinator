@@ -87,7 +87,7 @@
             this.Controls.Add(this.MessagesList);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "MessageBrowser";
-            this.Text = "Message Browser";
+            this.Text = "Message Browser - Chatinator";
             ((System.ComponentModel.ISupportInitialize)(this.MessagesList)).EndInit();
             this.ResumeLayout(false);
 
