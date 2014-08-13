@@ -13,14 +13,23 @@ Current Features
     - Can customize about every aspect (In a simple way)
     - Saves settings between sessions
 
+In Progress Features
+--------------------
+
+  - Giveaways
+  	- Can run a give-away
+  	- Settings page coming soon!
+
 Future Features
 ---------------
 
-  - Giveaways
   - Hype Meter
   - User Activity Lookup
   - Chat Reports
-    - 
+    - Most Active Users
+    - Topic Lookup
+    - Most Asked Questions
+    - More!
 
 License
 -------
