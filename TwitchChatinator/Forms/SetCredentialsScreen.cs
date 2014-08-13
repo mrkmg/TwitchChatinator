@@ -34,8 +34,6 @@ namespace TwitchChatinator
                 ChannelInput.Text = Settings.Default.TwithChannel;
             }
             else LoginButton.Enabled = false;
-
-            DataSourceDropdown.Text = Settings.Default.StorageEngine;
         }
 
         public void copyUserToChannel(object sender, KeyEventArgs e)
@@ -51,21 +49,13 @@ namespace TwitchChatinator
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
-            if (this.DataSourceDropdown.Text == string.Empty)
-            {
-                MessageBox.Show("Storage Engine Can not be blank");
-            }
-            else
-            {
                 Settings.Default.TwitchUsername = this.UsernameInput.Text;
                 Settings.Default.TwitchPassword = this.PasswordInput.Text;
                 Settings.Default.TwithChannel = this.ChannelInput.Text;
-                Settings.Default.StorageEngine = this.DataSourceDropdown.Text;
                 Settings.Default.Save();
 
                 LoginHandler();
                 this.Close();
-            }
             
         }
 

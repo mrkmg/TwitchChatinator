@@ -7,7 +7,7 @@ using System.Data;
 
 namespace TwitchChatinator
 {
-    public class DataStoreMemory : DataStore
+    public class DataStoreMemory
     {
         public static List<string[]> Messages;
         string datetimeFormat = "yyyyMMddHHmmssffff";
@@ -18,7 +18,7 @@ namespace TwitchChatinator
                 Messages = new List<string[]>();
         }
 
-        public DataSet getDataSet(DataSetSelection selection)
+        public DataSet GetDataSet(DataSetSelection selection)
         {
             DataSet DS = new DataSet();
 

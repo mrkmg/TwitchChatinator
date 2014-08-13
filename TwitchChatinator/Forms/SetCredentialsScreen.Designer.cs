@@ -37,13 +37,11 @@
             this.ChannelInput = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.GetTokenLink = new System.Windows.Forms.LinkLabel();
-            this.label4 = new System.Windows.Forms.Label();
-            this.DataSourceDropdown = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // LoginButton
             // 
-            this.LoginButton.Location = new System.Drawing.Point(36, 240);
+            this.LoginButton.Location = new System.Drawing.Point(36, 196);
             this.LoginButton.Name = "LoginButton";
             this.LoginButton.Size = new System.Drawing.Size(75, 23);
             this.LoginButton.TabIndex = 0;
@@ -85,7 +83,7 @@
             // 
             // CancelButtonC
             // 
-            this.CancelButtonC.Location = new System.Drawing.Point(110, 240);
+            this.CancelButtonC.Location = new System.Drawing.Point(110, 196);
             this.CancelButtonC.Name = "CancelButtonC";
             this.CancelButtonC.Size = new System.Drawing.Size(75, 23);
             this.CancelButtonC.TabIndex = 5;
@@ -120,33 +118,11 @@
             this.GetTokenLink.Text = "Get Token Here";
             this.GetTokenLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.GetTokenLink_LinkClicked);
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(41, 192);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(67, 13);
-            this.label4.TabIndex = 10;
-            this.label4.Text = "Data Source";
-            // 
-            // DataSourceDropdown
-            // 
-            this.DataSourceDropdown.FormattingEnabled = true;
-            this.DataSourceDropdown.Items.AddRange(new object[] {
-            "SQLite",
-            "Memory"});
-            this.DataSourceDropdown.Location = new System.Drawing.Point(38, 209);
-            this.DataSourceDropdown.Name = "DataSourceDropdown";
-            this.DataSourceDropdown.Size = new System.Drawing.Size(145, 21);
-            this.DataSourceDropdown.TabIndex = 11;
-            // 
             // SetCredentialsScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(214, 318);
-            this.Controls.Add(this.DataSourceDropdown);
-            this.Controls.Add(this.label4);
+            this.ClientSize = new System.Drawing.Size(214, 239);
             this.Controls.Add(this.GetTokenLink);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.ChannelInput);
@@ -175,7 +151,5 @@
         private System.Windows.Forms.TextBox ChannelInput;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.LinkLabel GetTokenLink;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox DataSourceDropdown;
     }
 }

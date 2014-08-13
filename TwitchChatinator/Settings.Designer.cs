@@ -194,192 +194,396 @@ namespace TwitchChatinator {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public int _PollLeftMargin {
+        public int PollLeftMargin {
             get {
-                return ((int)(this["_PollLeftMargin"]));
+                return ((int)(this["PollLeftMargin"]));
             }
             set {
-                this["_PollLeftMargin"] = value;
+                this["PollLeftMargin"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public int _PollRightMargin {
+        public int PollRightMargin {
             get {
-                return ((int)(this["_PollRightMargin"]));
+                return ((int)(this["PollRightMargin"]));
             }
             set {
-                this["_PollRightMargin"] = value;
+                this["PollRightMargin"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public int _PollTopMargin {
+        public int PollTopMargin {
             get {
-                return ((int)(this["_PollTopMargin"]));
+                return ((int)(this["PollTopMargin"]));
             }
             set {
-                this["_PollTopMargin"] = value;
+                this["PollTopMargin"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public int _PollBottomMargin {
+        public int PollBottomMargin {
             get {
-                return ((int)(this["_PollBottomMargin"]));
+                return ((int)(this["PollBottomMargin"]));
             }
             set {
-                this["_PollBottomMargin"] = value;
+                this["PollBottomMargin"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("50")]
-        public int _PollBarHeight {
+        public int PollBarHeight {
             get {
-                return ((int)(this["_PollBarHeight"]));
+                return ((int)(this["PollBarHeight"]));
             }
             set {
-                this["_PollBarHeight"] = value;
+                this["PollBarHeight"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("300")]
-        public int _PollBarWidth {
+        public int PollBarWidth {
             get {
-                return ((int)(this["_PollBarWidth"]));
+                return ((int)(this["PollBarWidth"]));
             }
             set {
-                this["_PollBarWidth"] = value;
+                this["PollBarWidth"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Segoe UI")]
-        public string _PollFontName {
+        public string PollFontName {
             get {
-                return ((string)(this["_PollFontName"]));
+                return ((string)(this["PollFontName"]));
             }
             set {
-                this["_PollFontName"] = value;
+                this["PollFontName"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("16")]
-        public float _PollTitleSize {
+        public float PollTitleSize {
             get {
-                return ((float)(this["_PollTitleSize"]));
+                return ((float)(this["PollTitleSize"]));
             }
             set {
-                this["_PollTitleSize"] = value;
+                this["PollTitleSize"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("255255255")]
-        public string _PollTitleColor {
+        public string PollTitleColor {
             get {
-                return ((string)(this["_PollTitleColor"]));
+                return ((string)(this["PollTitleColor"]));
             }
             set {
-                this["_PollTitleColor"] = value;
+                this["PollTitleColor"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("12")]
-        public float _PollCountSize {
+        public float PollCountSize {
             get {
-                return ((float)(this["_PollCountSize"]));
+                return ((float)(this["PollCountSize"]));
             }
             set {
-                this["_PollCountSize"] = value;
+                this["PollCountSize"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("255255255")]
-        public string _PollCountColor {
+        public string PollCountColor {
             get {
-                return ((string)(this["_PollCountColor"]));
+                return ((string)(this["PollCountColor"]));
             }
             set {
-                this["_PollCountColor"] = value;
+                this["PollCountColor"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("16")]
-        public float _PollTotalSize {
+        public float PollTotalSize {
             get {
-                return ((float)(this["_PollTotalSize"]));
+                return ((float)(this["PollTotalSize"]));
             }
             set {
-                this["_PollTotalSize"] = value;
+                this["PollTotalSize"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("255255255")]
-        public string _PollTotalColor {
+        public string PollTotalColor {
             get {
-                return ((string)(this["_PollTotalColor"]));
+                return ((string)(this["PollTotalColor"]));
             }
             set {
-                this["_PollTotalColor"] = value;
+                this["PollTotalColor"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("60")]
-        public int _PollTotalWidth {
+        public int PollTotalWidth {
             get {
-                return ((int)(this["_PollTotalWidth"]));
+                return ((int)(this["PollTotalWidth"]));
             }
             set {
-                this["_PollTotalWidth"] = value;
+                this["PollTotalWidth"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("15")]
-        public int _PollBarSpacing {
+        public int PollBarSpacing {
             get {
-                return ((int)(this["_PollBarSpacing"]));
+                return ((int)(this["PollBarSpacing"]));
             }
             set {
-                this["_PollBarSpacing"] = value;
+                this["PollBarSpacing"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
-        public global::System.Drawing.Point _PositionPollLocation {
+        public global::System.Drawing.Point PollWindowLocation {
             get {
-                return ((global::System.Drawing.Point)(this["_PositionPollLocation"]));
+                return ((global::System.Drawing.Point)(this["PollWindowLocation"]));
             }
             set {
-                this["_PositionPollLocation"] = value;
+                this["PollWindowLocation"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int RollLeftMargin {
+            get {
+                return ((int)(this["RollLeftMargin"]));
+            }
+            set {
+                this["RollLeftMargin"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int RollRightMargin {
+            get {
+                return ((int)(this["RollRightMargin"]));
+            }
+            set {
+                this["RollRightMargin"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int RollTopMargin {
+            get {
+                return ((int)(this["RollTopMargin"]));
+            }
+            set {
+                this["RollTopMargin"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int RollBottomMargin {
+            get {
+                return ((int)(this["RollBottomMargin"]));
+            }
+            set {
+                this["RollBottomMargin"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("300")]
+        public int RollTotalWidth {
+            get {
+                return ((int)(this["RollTotalWidth"]));
+            }
+            set {
+                this["RollTotalWidth"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("White")]
+        public global::System.Drawing.Color RollTitleColor {
+            get {
+                return ((global::System.Drawing.Color)(this["RollTitleColor"]));
+            }
+            set {
+                this["RollTitleColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("White")]
+        public global::System.Drawing.Color RollRollerColor {
+            get {
+                return ((global::System.Drawing.Color)(this["RollRollerColor"]));
+            }
+            set {
+                this["RollRollerColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("White")]
+        public global::System.Drawing.Color RollEntriesColor {
+            get {
+                return ((global::System.Drawing.Color)(this["RollEntriesColor"]));
+            }
+            set {
+                this["RollEntriesColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Roll")]
+        public string RollRollerText {
+            get {
+                return ((string)(this["RollRollerText"]));
+            }
+            set {
+                this["RollRollerText"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Segoe UI, 24pt")]
+        public global::System.Drawing.Font RollTitleFont {
+            get {
+                return ((global::System.Drawing.Font)(this["RollTitleFont"]));
+            }
+            set {
+                this["RollTitleFont"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Segoe UI, 28pt")]
+        public global::System.Drawing.Font RollRollerFont {
+            get {
+                return ((global::System.Drawing.Font)(this["RollRollerFont"]));
+            }
+            set {
+                this["RollRollerFont"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Segoe UI, 16pt")]
+        public global::System.Drawing.Font RollEntriesFont {
+            get {
+                return ((global::System.Drawing.Font)(this["RollEntriesFont"]));
+            }
+            set {
+                this["RollEntriesFont"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Black")]
+        public global::System.Drawing.Color RollChromaKey {
+            get {
+                return ((global::System.Drawing.Color)(this["RollChromaKey"]));
+            }
+            set {
+                this["RollChromaKey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        public int RollEntriesTop {
+            get {
+                return ((int)(this["RollEntriesTop"]));
+            }
+            set {
+                this["RollEntriesTop"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        public int RollRollerTop {
+            get {
+                return ((int)(this["RollRollerTop"]));
+            }
+            set {
+                this["RollRollerTop"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("GIVEAWAY")]
+        public string RollTitleText {
+            get {
+                return ((string)(this["RollTitleText"]));
+            }
+            set {
+                this["RollTitleText"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
+        public global::System.Drawing.Point RollWindowLocation {
+            get {
+                return ((global::System.Drawing.Point)(this["RollWindowLocation"]));
+            }
+            set {
+                this["RollWindowLocation"] = value;
             }
         }
     }

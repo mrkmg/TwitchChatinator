@@ -36,6 +36,7 @@
             this.ListeningStatus = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.ResetButton = new System.Windows.Forms.Button();
+            this.StartRollButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ListeningStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -120,12 +121,23 @@
             this.ResetButton.UseVisualStyleBackColor = true;
             this.ResetButton.Click += new System.EventHandler(this.ResetButton_Click);
             // 
+            // StartRollButton
+            // 
+            this.StartRollButton.Location = new System.Drawing.Point(104, 162);
+            this.StartRollButton.Name = "StartRollButton";
+            this.StartRollButton.Size = new System.Drawing.Size(85, 44);
+            this.StartRollButton.TabIndex = 7;
+            this.StartRollButton.Text = "Start Roll";
+            this.StartRollButton.UseVisualStyleBackColor = true;
+            this.StartRollButton.Click += new System.EventHandler(this.StartRollButton_Click);
+            // 
             // WelcomeScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(527, 223);
             this.Controls.Add(this.ResetButton);
+            this.Controls.Add(this.StartRollButton);
             this.Controls.Add(this.StartPollButton);
             this.Controls.Add(this.ShowPollConfig);
             this.Controls.Add(this.ShowMessageBrowser);
@@ -152,5 +164,6 @@
         private System.Windows.Forms.Button ShowPollConfig;
         private System.Windows.Forms.Button StartPollButton;
         private System.Windows.Forms.Button ResetButton;
+        private System.Windows.Forms.Button StartRollButton;
     }
 }

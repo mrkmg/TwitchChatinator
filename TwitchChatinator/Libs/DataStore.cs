@@ -9,8 +9,10 @@ namespace TwitchChatinator
 {
     public interface DataStore : IDisposable
     {
-        DataSet getDataSet(DataSetSelection selection);
+        DataSet GetDataSet(DataSetSelection selection);
         bool InsertMessage(string Channel, string User, string Message);
+        int GetUniqueUsersCount(DataSetSelection selection);
+        List<string> GetUniqueUsersString(DataSetSelection selection);
 
     }
 

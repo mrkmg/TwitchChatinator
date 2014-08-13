@@ -15,7 +15,9 @@ namespace TwitchChatinator
     {
         public TwitchIRC TI;
         public RunPoll RP;
+        public RunRoll RR;
         DateTime PollStart;
+        DateTime RollStart;
 
         private bool isConnected = false;
 
@@ -125,6 +127,18 @@ namespace TwitchChatinator
             MB.Show();
         }
 
+        private void ResetButton_Click(object sender, EventArgs e)
+        {
+            string u = Settings.Default.TwitchUsername;
+            string p = Settings.Default.TwitchPassword;
+            string c = Settings.Default.TwithChannel;
+            Settings.Default.Reset();
+            Settings.Default.TwitchUsername = u;
+            Settings.Default.TwitchPassword = p;
+            Settings.Default.TwithChannel = c;
+            Settings.Default.Save();
+        }
+
         private void ShowPollConfig_Click(object sender, EventArgs e)
         {
             PollSetup PS = new PollSetup();
@@ -160,10 +174,25 @@ namespace TwitchChatinator
             RP.Show();
         }
 
-        private void ResetButton_Click(object sender, EventArgs e)
+        private void StartRollButton_Click(object sender, EventArgs e)
         {
-            Settings.Default.Reset();
-            Close();
+            RollStart = DateTime.Now;
+            StartRunRoll();
+        }
+
+        void StartRunRoll()
+        {
+            if (RR != null && !RR.IsDisposed)
+            {
+                RR.Close();
+                while (!RR.IsDisposed) Thread.Sleep(50);
+                RR = new RunRoll(RollStart);
+            }
+            else
+            {
+                RR = new RunRoll(RollStart);
+            }
+            RR.Show();
         }
     }
 }

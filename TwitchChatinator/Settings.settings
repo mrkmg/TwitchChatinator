@@ -44,52 +44,103 @@
     <Setting Name="PollOption4Color" Type="System.String" Scope="User">
       <Value Profile="(Default)">255165000</Value>
     </Setting>
-    <Setting Name="_PollLeftMargin" Type="System.Int32" Scope="User">
+    <Setting Name="PollLeftMargin" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
-    <Setting Name="_PollRightMargin" Type="System.Int32" Scope="User">
+    <Setting Name="PollRightMargin" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
-    <Setting Name="_PollTopMargin" Type="System.Int32" Scope="User">
+    <Setting Name="PollTopMargin" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
-    <Setting Name="_PollBottomMargin" Type="System.Int32" Scope="User">
+    <Setting Name="PollBottomMargin" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
-    <Setting Name="_PollBarHeight" Type="System.Int32" Scope="User">
+    <Setting Name="PollBarHeight" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">50</Value>
     </Setting>
-    <Setting Name="_PollBarWidth" Type="System.Int32" Scope="User">
+    <Setting Name="PollBarWidth" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">300</Value>
     </Setting>
-    <Setting Name="_PollFontName" Type="System.String" Scope="User">
+    <Setting Name="PollFontName" Type="System.String" Scope="User">
       <Value Profile="(Default)">Segoe UI</Value>
     </Setting>
-    <Setting Name="_PollTitleSize" Type="System.Single" Scope="User">
+    <Setting Name="PollTitleSize" Type="System.Single" Scope="User">
       <Value Profile="(Default)">16</Value>
     </Setting>
-    <Setting Name="_PollTitleColor" Type="System.String" Scope="User">
+    <Setting Name="PollTitleColor" Type="System.String" Scope="User">
       <Value Profile="(Default)">255255255</Value>
     </Setting>
-    <Setting Name="_PollCountSize" Type="System.Single" Scope="User">
+    <Setting Name="PollCountSize" Type="System.Single" Scope="User">
       <Value Profile="(Default)">12</Value>
     </Setting>
-    <Setting Name="_PollCountColor" Type="System.String" Scope="User">
+    <Setting Name="PollCountColor" Type="System.String" Scope="User">
       <Value Profile="(Default)">255255255</Value>
     </Setting>
-    <Setting Name="_PollTotalSize" Type="System.Single" Scope="User">
+    <Setting Name="PollTotalSize" Type="System.Single" Scope="User">
       <Value Profile="(Default)">16</Value>
     </Setting>
-    <Setting Name="_PollTotalColor" Type="System.String" Scope="User">
+    <Setting Name="PollTotalColor" Type="System.String" Scope="User">
       <Value Profile="(Default)">255255255</Value>
     </Setting>
-    <Setting Name="_PollTotalWidth" Type="System.Int32" Scope="User">
+    <Setting Name="PollTotalWidth" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">60</Value>
     </Setting>
-    <Setting Name="_PollBarSpacing" Type="System.Int32" Scope="User">
+    <Setting Name="PollBarSpacing" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">15</Value>
     </Setting>
-    <Setting Name="_PositionPollLocation" Type="System.Drawing.Point" Scope="User">
+    <Setting Name="PollWindowLocation" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">0, 0</Value>
+    </Setting>
+    <Setting Name="RollLeftMargin" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="RollRightMargin" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="RollTopMargin" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="RollBottomMargin" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="RollTotalWidth" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">300</Value>
+    </Setting>
+    <Setting Name="RollTitleColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">White</Value>
+    </Setting>
+    <Setting Name="RollRollerColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">White</Value>
+    </Setting>
+    <Setting Name="RollEntriesColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">White</Value>
+    </Setting>
+    <Setting Name="RollRollerText" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Roll</Value>
+    </Setting>
+    <Setting Name="RollTitleFont" Type="System.Drawing.Font" Scope="User">
+      <Value Profile="(Default)">Segoe UI, 24pt</Value>
+    </Setting>
+    <Setting Name="RollRollerFont" Type="System.Drawing.Font" Scope="User">
+      <Value Profile="(Default)">Segoe UI, 28pt</Value>
+    </Setting>
+    <Setting Name="RollEntriesFont" Type="System.Drawing.Font" Scope="User">
+      <Value Profile="(Default)">Segoe UI, 16pt</Value>
+    </Setting>
+    <Setting Name="RollChromaKey" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Black</Value>
+    </Setting>
+    <Setting Name="RollEntriesTop" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">5</Value>
+    </Setting>
+    <Setting Name="RollRollerTop" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">5</Value>
+    </Setting>
+    <Setting Name="RollTitleText" Type="System.String" Scope="User">
+      <Value Profile="(Default)">GIVEAWAY</Value>
+    </Setting>
+    <Setting Name="RollWindowLocation" Type="System.Drawing.Point" Scope="User">
       <Value Profile="(Default)">0, 0</Value>
     </Setting>
   </Settings>

@@ -22,7 +22,7 @@ namespace TwitchChatinator
             InitDB();
         }
 
-        public DataSet getDataSet(DataSetSelection selection)
+        public DataSet GetDataSet(DataSetSelection selection)
         {
             StringBuilder sql = new StringBuilder("SELECT datetime, channel, user, message FROM messages");
 
@@ -75,6 +75,77 @@ namespace TwitchChatinator
 
             return good;
 
+        }
+
+        public int GetUniqueUsersCount(DataSetSelection Selection)
+        {
+            int count = 0;
+            StringBuilder Command = new StringBuilder();
+            Command.Append("SELECT COUNT(DISTINCT user) as count FROM messages");
+            if (Selection.Start != DateTime.MinValue && Selection.End != DateTime.MinValue)
+            {
+                Command.Append(" WHERE datetime BETWEEN " + Selection.Start.ToString(datetimeFormat) + " AND " + Selection.End.ToString(datetimeFormat));
+            }
+            else if (Selection.Start != DateTime.MinValue)
+            {
+                Command.Append(" WHERE datetime >= " + Selection.Start.ToString(datetimeFormat));
+            }
+            else if (Selection.End != DateTime.MinValue)
+            {
+                Command.Append(" WHERE datetime <= " + Selection.End.ToString(datetimeFormat));
+            }
+
+            using (SQLiteCommand SCommand = new SQLiteCommand(Command.ToString(),Connection))
+            {
+                try
+                {
+                    object a = SCommand.ExecuteScalar();
+                    count = int.Parse(a.ToString());
+                }
+                catch (Exception e)
+                {
+                    Log.LogException(e);
+                }
+            }
+
+            return (int)count;
+        }
+
+        public List<string> GetUniqueUsersString(DataSetSelection Selection)
+        {
+            List<string> users = new List<string>();
+            StringBuilder Command = new StringBuilder();
+            Command.Append("SELECT DISTINCT user as count FROM messages");
+            if (Selection.Start != DateTime.MinValue && Selection.End != DateTime.MinValue)
+            {
+                Command.Append(" WHERE datetime BETWEEN " + Selection.Start.ToString(datetimeFormat) + " AND " + Selection.End.ToString(datetimeFormat));
+            }
+            else if (Selection.Start != DateTime.MinValue)
+            {
+                Command.Append(" WHERE datetime >= " + Selection.Start.ToString(datetimeFormat));
+            }
+            else if (Selection.End != DateTime.MinValue)
+            {
+                Command.Append(" WHERE datetime <= " + Selection.End.ToString(datetimeFormat));
+            }
+
+            using (SQLiteCommand SCommand = new SQLiteCommand(Command.ToString(),Connection))
+            {
+                try
+                {
+                    SQLiteDataReader Reader = SCommand.ExecuteReader();
+                    while (Reader.Read())
+                    {
+                        users.Add(Reader.GetValue(0).ToString());
+                    }
+                }
+                catch (Exception e)
+                {
+                    Log.LogException(e);
+                }
+            }
+
+            return users;
         }
 
         private void InitDB()

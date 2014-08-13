@@ -39,24 +39,26 @@ namespace TwitchChatinator
 
             AllowMultiDropdown.Text = Settings.Default.PollAllowMulti ? "Yes" : "No";
 
-            LeftMarginNum.Value = Settings.Default._PollLeftMargin;
-            RightMarginNum.Value = Settings.Default._PollRightMargin;
-            TopMarginNum.Value = Settings.Default._PollTopMargin;
-            BottomMarginNum.Value = Settings.Default._PollBottomMargin;
+            LeftMarginNum.Value = Settings.Default.PollLeftMargin;
+            RightMarginNum.Value = Settings.Default.PollRightMargin;
+            TopMarginNum.Value = Settings.Default.PollTopMargin;
+            BottomMarginNum.Value = Settings.Default.PollBottomMargin;
 
-            BarHeightNum.Value = Settings.Default._PollBarHeight;
-            BarWidthNum.Value = Settings.Default._PollBarWidth;
-            BarSpacingNum.Value = Settings.Default._PollBarSpacing;
+            BarHeightNum.Value = Settings.Default.PollBarHeight;
+            BarWidthNum.Value = Settings.Default.PollBarWidth;
+            BarSpacingNum.Value = Settings.Default.PollBarSpacing;
 
-            FontInput.Text = Settings.Default._PollFontName;
+            TotalWidthNum.Value = Settings.Default.PollTotalWidth;
 
-            TitleSizeNum.Value = (int)Settings.Default._PollTitleSize;
-            CountSizeNum.Value = (int)Settings.Default._PollCountSize;
-            TotalSizeNum.Value = (int)Settings.Default._PollTotalSize;
+            FontInput.Text = Settings.Default.PollFontName;
 
-            TitleColorInput.Text = Settings.Default._PollTitleColor;
-            CountColorInput.Text = Settings.Default._PollCountColor;
-            TotalColorInput.Text = Settings.Default._PollTotalColor;
+            TitleSizeNum.Value = (int)Settings.Default.PollTitleSize;
+            CountSizeNum.Value = (int)Settings.Default.PollCountSize;
+            TotalSizeNum.Value = (int)Settings.Default.PollTotalSize;
+
+            TitleColorInput.Text = Settings.Default.PollTitleColor;
+            CountColorInput.Text = Settings.Default.PollCountColor;
+            TotalColorInput.Text = Settings.Default.PollTotalColor;
 
             ChromaKeyInput.Text = Settings.Default.PollChromaKey;
 
@@ -121,28 +123,31 @@ namespace TwitchChatinator
             Settings.Default.PollOption2Color = Option2Color.Text;
             Settings.Default.PollOption3Color = Option3Color.Text;
             Settings.Default.PollOption4Color = Option4Color.Text;
+
             Settings.Default.PollChromaKey = ChromaKeyInput.Text;
+
+            Settings.Default.PollTitleColor = TitleColorInput.Text;
+            Settings.Default.PollCountColor = CountColorInput.Text;
+            Settings.Default.PollTotalColor = TotalColorInput.Text;
 
             Settings.Default.PollAllowMulti = AllowMultiDropdown.Text == "Yes";
 
-            Settings.Default._PollLeftMargin = (int)LeftMarginNum.Value;
-            Settings.Default._PollRightMargin = (int)RightMarginNum.Value;
-            Settings.Default._PollTopMargin = (int)TopMarginNum.Value;
-            Settings.Default._PollBottomMargin = (int)BottomMarginNum.Value;
+            Settings.Default.PollLeftMargin = (int)LeftMarginNum.Value;
+            Settings.Default.PollRightMargin = (int)RightMarginNum.Value;
+            Settings.Default.PollTopMargin = (int)TopMarginNum.Value;
+            Settings.Default.PollBottomMargin = (int)BottomMarginNum.Value;
 
-            Settings.Default._PollBarHeight = (int)BarHeightNum.Value;
-            Settings.Default._PollBarWidth = (int)BarWidthNum.Value;
-            Settings.Default._PollBarSpacing = (int)BarSpacingNum.Value;
+            Settings.Default.PollBarHeight = (int)BarHeightNum.Value;
+            Settings.Default.PollBarWidth = (int)BarWidthNum.Value;
+            Settings.Default.PollBarSpacing = (int)BarSpacingNum.Value;
 
-            Settings.Default._PollFontName = FontInput.Text;
+            Settings.Default.PollTotalWidth = (int)TotalWidthNum.Value;
 
-            Settings.Default._PollTitleSize = (float)TitleSizeNum.Value;
-            Settings.Default._PollCountSize = (float)CountSizeNum.Value;
-            Settings.Default._PollTotalSize = (float)TotalSizeNum.Value;
+            Settings.Default.PollFontName = FontInput.Text;
 
-            Settings.Default._PollTitleColor = TitleColorInput.Text;
-            Settings.Default._PollCountColor = CountColorInput.Text;
-            Settings.Default._PollTotalColor = TotalColorInput.Text;
+            Settings.Default.PollTitleSize = (float)TitleSizeNum.Value;
+            Settings.Default.PollCountSize = (float)CountSizeNum.Value;
+            Settings.Default.PollTotalSize = (float)TotalSizeNum.Value;
 
             
             Settings.Default.Save();

@@ -32,7 +32,7 @@ namespace TwitchChatinator
                 DataSetSelection dss = new DataSetSelection();
                 if (StartTimeDatepicker.Checked) dss.Start = StartTimeDatepicker.Value;
                 if (EndTimeDatepicker.Checked) dss.End = EndTimeDatepicker.Value;
-                DataSet ds = DS.getDataSet(dss);
+                DataSet ds = DS.GetDataSet(dss);
                 MessagesList.DataSource = ds.Tables[0].DefaultView;
             }
 
