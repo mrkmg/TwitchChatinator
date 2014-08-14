@@ -8,6 +8,8 @@ using System.Runtime.InteropServices;
 
 namespace TwitchChatinator
 {
+    //Thanks to http://www.codeproject.com/Articles/11114/Move-window-form-without-Titlebar-in-C
+    //2014-08-13
     public class PaintWindow : Form
     {
         private const int WM_NCLBUTTONDOWN = 0xA1;
@@ -35,8 +37,6 @@ namespace TwitchChatinator
             // Invalidate(); Will be invalidated by timer
         }
 
-        //Thanks to http://www.codeproject.com/Articles/11114/Move-window-form-without-Titlebar-in-C
-        //<3
         [DllImportAttribute("user32.dll")]
         public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
 

@@ -19,31 +19,24 @@ namespace TwitchChatinator
         const short STAGE_DIE = 255;
 
         const double ROLLING_MAGIC_NUM = 1.35;
+        const int ROLLING_ENTRIES_COUNT = 100;
 
-        int LeftMargin;
-        int RightMargin;
-        int TopMargin;
-        int BottomMargin;
-        int TotalWidth;
+        string RollerText;
+        string TitleText;
+
+        Color ChromaKey;
 
         Font TitleFont;
         Font RollerFont;
         Font EntriesFont;
 
-        Color TitleColor;
-        Color RollerColor;
-        Color EntriesColor;
-        Color ChromaKey;
-
-        int RollerTop;
-        int EntriesTop;
-
-        string RollerText;
-        string TitleText;
-
         SolidBrush TitleBrush;
         SolidBrush RollerBrush;
         SolidBrush EntriesBrush;
+
+        Rectangle TitleRec;
+        Rectangle RollerRec;
+        Rectangle EntriesRec;
 
         DateTime StartTime;
         DateTime EndTime;
@@ -59,9 +52,10 @@ namespace TwitchChatinator
         public RunRoll(DateTime startTime)
         {
             StartTime = startTime;
-            SetupVars();
 
             InitializeComponent();
+
+            SetupVars();
 
             this.Text = "Roller - Chatinator";
             this.BackColor = ChromaKey;
@@ -71,19 +65,6 @@ namespace TwitchChatinator
             this.MouseMove += RunRoll_MouseMove;
             this.FormClosing += RunRoll_FormClosing;
             this.Load += RunRoll_Load;
-            using (Graphics G = CreateGraphics())
-            {
-                int WindowHeight =
-                        TopMargin +
-                        BottomMargin +
-                        RollerTop +
-                        EntriesTop +
-                        TitleFont.Height +
-                        RollerFont.Height +
-                        EntriesFont.Height;
-                int WindowWidth = TotalWidth;
-                SetClientSizeCore(WindowWidth, WindowHeight);
-            }
 
             DrawingTick = new System.Windows.Forms.Timer();
             DrawingTick.Tick += DrawingTick_Tick;
@@ -105,13 +86,6 @@ namespace TwitchChatinator
 
         void RunRoll_MouseMove(object sender, MouseEventArgs e)
         {
-            Rectangle RollerRec = new Rectangle(
-                    LeftMargin,
-                    TopMargin + TitleFont.Height + RollerTop,
-                    TotalWidth - LeftMargin - RightMargin,
-                    RollerFont.Height
-                );
-
             if (RollerRec.Contains(e.X, e.Y))
             {
                 Cursor = Cursors.Hand;
@@ -124,14 +98,6 @@ namespace TwitchChatinator
 
         void RunRoll_MouseDown(object sender, MouseEventArgs e)
         {
-
-            Rectangle RollerRec = new Rectangle(
-                    LeftMargin,
-                    TopMargin + TitleFont.Height + RollerTop,
-                    TotalWidth - LeftMargin - RightMargin,
-                    RollerFont.Height
-                );
-
             if (RollerRec.Contains(e.X, e.Y))
             {
                 if (EndTime == DateTime.MinValue) EndTime = DateTime.Now;
@@ -147,8 +113,8 @@ namespace TwitchChatinator
                         EntryList = DS.GetUniqueUsersString(DSS);
                         if (EntryList.Count == 0) EntryList.Add("No Entries :-(");
                     }
-                    Program.Shuffle(EntryList);
-                    TotalEntriesFound = Math.Min(EntryList.Count, 100);
+                    EntryList.Shuffle();
+                    TotalEntriesFound = Math.Min(EntryList.Count, ROLLING_ENTRIES_COUNT);
                     CurrentEntryIndex = 0;
                     DrawingTick.Interval = 1;
                     Stage = STAGE_ROLLING;
@@ -180,7 +146,7 @@ namespace TwitchChatinator
             }
         }
 
-        private void PaintPostroll()
+        private void PaintScreen(string Title, string Roller, string Entries)
         {
             using (Graphics Graphic = CreateGraphics())
             {
@@ -188,97 +154,26 @@ namespace TwitchChatinator
                 SF.Alignment = StringAlignment.Center;
                 SF.LineAlignment = StringAlignment.Center;
 
-                Rectangle TitleRec = new Rectangle(
-                        LeftMargin,
-                        TopMargin,
-                        TotalWidth - LeftMargin - RightMargin,
-                        TitleFont.Height
-                    );
-                Rectangle RollerRec = new Rectangle(
-                        LeftMargin,
-                        TitleRec.Bottom + RollerTop,
-                        TotalWidth - LeftMargin - RightMargin,
-                        RollerFont.Height
-                    );
-                Rectangle EntriesRec = new Rectangle(
-                        LeftMargin,
-                        RollerRec.Bottom + EntriesTop,
-                        TotalWidth - LeftMargin - RightMargin,
-                        EntriesFont.Height
-                    );
-
-                Graphic.DrawString(TitleText, TitleFont, TitleBrush, TitleRec, SF);
-                Graphic.DrawString(EntryList[CurrentEntryIndex - 1], RollerFont, RollerBrush, RollerRec, SF);
-                Graphic.DrawString("Of " + Count.ToString() + ", you won!", EntriesFont, EntriesBrush, EntriesRec, SF);
+                Graphic.DrawString(Title, TitleFont, TitleBrush, TitleRec, SF);
+                Graphic.DrawString(Roller, RollerFont, RollerBrush, RollerRec, SF);
+                Graphic.DrawString(Entries, EntriesFont, EntriesBrush, EntriesRec, SF);
             }
+        }
+
+        void PaintPostroll()
+        {
+            PaintScreen(TitleText, EntryList[CurrentEntryIndex % (EntryList.Count())], "Of " + Count.ToString() + ", you won!");
             DrawingTick.Enabled = false;
         }
 
-        private void PaintRolling()
+        void PaintRolling()
         {
-            using (Graphics Graphic = CreateGraphics())
-            {
-                StringFormat SF = new StringFormat();
-                SF.Alignment = StringAlignment.Center;
-                SF.LineAlignment = StringAlignment.Center;
-
-                Rectangle TitleRec = new Rectangle(
-                        LeftMargin,
-                        TopMargin,
-                        TotalWidth - LeftMargin - RightMargin,
-                        TitleFont.Height
-                    );
-                Rectangle RollerRec = new Rectangle(
-                        LeftMargin,
-                        TitleRec.Bottom + RollerTop,
-                        TotalWidth - LeftMargin - RightMargin,
-                        RollerFont.Height
-                    );
-                Rectangle EntriesRec = new Rectangle(
-                        LeftMargin,
-                        RollerRec.Bottom + EntriesTop,
-                        TotalWidth - LeftMargin - RightMargin,
-                        EntriesFont.Height
-                    );
-
-                Graphic.DrawString(TitleText, TitleFont, TitleBrush, TitleRec, SF);
-                Graphic.DrawString(EntryList[CurrentEntryIndex - 1], RollerFont, RollerBrush, RollerRec, SF);
-                Graphic.DrawString("Rolling Through " + Count.ToString() + " Entries", EntriesFont, EntriesBrush, EntriesRec, SF);
-            }
+            PaintScreen(TitleText, EntryList[CurrentEntryIndex % (EntryList.Count())], "Rolling!!!");
         }
 
         void PaintWaiting()
         {
-            using (Graphics Graphic = CreateGraphics())
-            {
-                StringFormat SF = new StringFormat();
-                SF.Alignment = StringAlignment.Center;
-                SF.LineAlignment = StringAlignment.Center;
-
-                Rectangle TitleRec = new Rectangle(
-                        LeftMargin,
-                        TopMargin,
-                        TotalWidth - LeftMargin - RightMargin,
-                        TitleFont.Height
-                    );
-                Rectangle RollerRec = new Rectangle(
-                        LeftMargin,
-                        TitleRec.Bottom + RollerTop,
-                        TotalWidth - LeftMargin - RightMargin,
-                        RollerFont.Height
-                    );
-                Rectangle EntriesRec = new Rectangle(
-                        LeftMargin,
-                        RollerRec.Bottom + EntriesTop,
-                        TotalWidth - LeftMargin - RightMargin,
-                        EntriesFont.Height
-                    );
-
-                Graphic.DrawString(TitleText, TitleFont, TitleBrush, TitleRec, SF);
-                Graphic.DrawString(RollerText, RollerFont, RollerBrush, RollerRec, SF);
-                Graphic.DrawString("Total Entries: " + Count.ToString(), EntriesFont, EntriesBrush, EntriesRec, SF);
-            }
-
+            PaintScreen(TitleText, RollerText, "Total Entries: " + Count.ToString());
         }
 
         void DrawingTick_Tick(object sender, EventArgs e)
@@ -301,9 +196,9 @@ namespace TwitchChatinator
                     }
                     break;
                 case STAGE_ROLLING:
-                    DrawingTick.Interval = (int)Math.Pow(ROLLING_MAGIC_NUM,(CurrentEntryIndex*20)/TotalEntriesFound);
+                    DrawingTick.Interval = (int)Math.Pow(ROLLING_MAGIC_NUM,(CurrentEntryIndex*20)/ROLLING_ENTRIES_COUNT);
                     CurrentEntryIndex++;
-                    if (CurrentEntryIndex == TotalEntriesFound - 1)
+                    if (CurrentEntryIndex == ROLLING_ENTRIES_COUNT - 1)
                     {
                         Stage = STAGE_POSTROLL;
                     }
@@ -312,25 +207,28 @@ namespace TwitchChatinator
             Invalidate();
         }
 
-        private void SetupVars()
+        void SetupVars()
         {
-            LeftMargin = Settings.Default.RollLeftMargin;
-            RightMargin = Settings.Default.RollRightMargin;
-            TopMargin = Settings.Default.RollTopMargin;
-            BottomMargin = Settings.Default.RollBottomMargin;
-            TotalWidth = Settings.Default.RollTotalWidth;
+
+            var LeftMargin = Settings.Default.RollLeftMargin;
+            var RightMargin = Settings.Default.RollRightMargin;
+            var TopMargin = Settings.Default.RollTopMargin;
+            var BottomMargin = Settings.Default.RollBottomMargin;
+            var TotalWidth = Settings.Default.RollTotalWidth;
+
+            var TitleColor = Settings.Default.RollTitleColor;
+            var RollerColor = Settings.Default.RollRollerColor;
+            var EntriesColor = Settings.Default.RollEntriesColor;
+
+            var RollerTop = Settings.Default.RollRollerTop;
+            var EntriesTop = Settings.Default.RollEntriesTop;
+
+            ChromaKey = Settings.Default.RollChromaKey;
 
             TitleFont = Settings.Default.RollTitleFont;
             RollerFont = Settings.Default.RollRollerFont;
             EntriesFont = Settings.Default.RollEntriesFont;
 
-            TitleColor = Settings.Default.RollTitleColor;
-            RollerColor = Settings.Default.RollRollerColor;
-            EntriesColor = Settings.Default.RollEntriesColor;
-            ChromaKey = Settings.Default.RollChromaKey;
-
-            RollerTop = Settings.Default.RollRollerTop;
-            EntriesTop = Settings.Default.RollEntriesTop;
 
             RollerText = Settings.Default.RollRollerText;
             TitleText = Settings.Default.RollTitleText;
@@ -339,6 +237,45 @@ namespace TwitchChatinator
             RollerBrush = new SolidBrush(RollerColor);
             EntriesBrush = new SolidBrush(EntriesColor);
 
+            TitleRec = new Rectangle(
+                        LeftMargin,
+                        TopMargin,
+                        TotalWidth - LeftMargin - RightMargin,
+                        TitleFont.Height
+                    );
+            RollerRec = new Rectangle(
+                    LeftMargin,
+                    TitleRec.Bottom + RollerTop,
+                    TotalWidth - LeftMargin - RightMargin,
+                    RollerFont.Height
+                );
+            EntriesRec = new Rectangle(
+                    LeftMargin,
+                    RollerRec.Bottom + EntriesTop,
+                    TotalWidth - LeftMargin - RightMargin,
+                    EntriesFont.Height
+                );
+
+            using (Graphics G = CreateGraphics())
+            {
+                int WindowHeight = EntriesRec.Bottom + BottomMargin;
+                int WindowWidth = TotalWidth;
+                SetClientSizeCore(WindowWidth, WindowHeight);
+            }
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+
+            TitleBrush.Dispose();
+            EntriesBrush.Dispose();
+            RollerBrush.Dispose();
+
+            base.Dispose(disposing);
         }
     }
 }

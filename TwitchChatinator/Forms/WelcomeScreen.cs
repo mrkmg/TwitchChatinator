@@ -194,5 +194,17 @@ namespace TwitchChatinator
             }
             RR.Show();
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+
+            TI.Dispose();
+
+            base.Dispose(disposing);
+        }
     }
 }

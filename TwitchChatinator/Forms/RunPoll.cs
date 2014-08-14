@@ -189,18 +189,15 @@ namespace TwitchChatinator
                     int CountY;
                     int TotalX;
                     int TotalY;
-                    int MaxAmount = 1;
-
-                    for (int i = 0; i < Count; i++)
-                    {
-                        if (data.amounts[i] > MaxAmount) MaxAmount = data.amounts[i];
-                    }
 
                     for (int i = 0; i < Count; i++)
                     {
                         BarX = LeftMargin;
                         BarY = TopMargin + (i * BarSpacing) + (i * BarHeight);
-                        BarW = (BarWidth * data.amounts[i] / MaxAmount);
+                        if (data.totalVotes == 0)
+                            BarW = 0;
+                        else 
+                            BarW = (BarWidth * data.amounts[i] / data.amounts.Sum());
                         BarH = BarHeight;
                         TitleX = LeftMargin + 10;
                         TitleY = TopMargin + (i * BarSpacing) + ((i) * BarHeight) + 3;
@@ -318,6 +315,24 @@ namespace TwitchChatinator
                 DrawGraph();
                 Thread.Sleep(50);
             }
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+
+            TitleBrush.Dispose();
+            CountBrush.Dispose();
+            TotalBrush.Dispose();
+
+            TitleFont.Dispose();
+            CountFont.Dispose();
+            TotalFont.Dispose();
+
+            base.Dispose(disposing);
         }
     }
 

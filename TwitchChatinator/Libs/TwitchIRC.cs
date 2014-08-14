@@ -14,7 +14,7 @@ using System.Text.RegularExpressions;
 
 namespace TwitchChatinator
 {
-    public class TwitchIRC
+    public class TwitchIRC : IDisposable
     {
         private TcpClient Client;
         private NetworkStream NwStream;
@@ -196,6 +196,13 @@ namespace TwitchChatinator
                 //We do not throw here because this bot is a listen only. May look into this later
                 Log.LogException(e);
             }
+        }
+
+        public void Dispose()
+        {
+            Writer.Dispose();
+            Reader.Dispose();
+            NwStream.Dispose();
         }
     }
 
