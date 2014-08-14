@@ -136,26 +136,11 @@ namespace TwitchChatinator
                 BarsBrush.Add(new SolidBrush(BarColors[i]));
         }
 
-        void DisposeVars()
-        {
-
-            for (int i = 0; i <= 3; i++)
-                BarsBrush[i].Dispose();
-
-            TotalFont.Dispose();
-            CountFont.Dispose();
-            TitleFont.Dispose();
-            TotalBrush.Dispose();
-            CountBrush.Dispose();
-            TitleBrush.Dispose();
-        }
-
         void RunPoll_FormClosing(object sender, FormClosingEventArgs e)
         {
             Settings.Default.PollWindowLocation = Location;
             Settings.Default.Save();
             StopThread();
-            DisposeVars();
         }
 
         void DrawGraph()
@@ -331,6 +316,9 @@ namespace TwitchChatinator
             TitleFont.Dispose();
             CountFont.Dispose();
             TotalFont.Dispose();
+
+            for (int i = 0; i <= 3; i++)
+                BarsBrush[i].Dispose();
 
             base.Dispose(disposing);
         }
