@@ -24,11 +24,6 @@ namespace TwitchChatinator
             Application.Run(new WelcomeScreen());
         }
 
-        static public DataStore getSelectedDataStore()
-        {
-            return (DataStore) Activator.CreateInstance(Type.GetType("TwitchChatinator.DataStore" + Settings.Default.StorageEngine));
-        }
-
         //Thank you [grenade](http://stackoverflow.com/users/68115/grenade)
         //http://stackoverflow.com/questions/273313/randomize-a-listt-in-c-sharp 2014-08-13
         public static void Shuffle<T>(this IList<T> list)

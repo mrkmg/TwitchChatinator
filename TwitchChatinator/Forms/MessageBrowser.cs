@@ -27,14 +27,11 @@ namespace TwitchChatinator
 
         private void GetData()
         {
-            using (DataStore DS = Program.getSelectedDataStore())
-            {
                 DataSetSelection dss = new DataSetSelection();
                 if (StartTimeDatepicker.Checked) dss.Start = StartTimeDatepicker.Value;
                 if (EndTimeDatepicker.Checked) dss.End = EndTimeDatepicker.Value;
-                DataSet ds = DS.GetDataSet(dss);
+                DataSet ds = DataStore.GetDataSet(dss);
                 MessagesList.DataSource = ds.Tables[0].DefaultView;
-            }
 
             MessagesList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }

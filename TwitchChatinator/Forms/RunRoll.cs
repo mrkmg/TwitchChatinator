@@ -105,14 +105,11 @@ namespace TwitchChatinator
 
                 if (Stage == STAGE_WAITING || Stage == STAGE_POSTROLL)
                 {
-                    using (DataStore DS = Program.getSelectedDataStore())
-                    {
-                        DataSetSelection DSS = new DataSetSelection();
-                        DSS.Start = StartTime;
-                        DSS.End = EndTime;
-                        EntryList = DS.GetUniqueUsersString(DSS);
-                        if (EntryList.Count == 0) EntryList.Add("No Entries :-(");
-                    }
+                    DataSetSelection DSS = new DataSetSelection();
+                    DSS.Start = StartTime;
+                    DSS.End = EndTime;
+                    EntryList = DataStore.GetUniqueUsersString(DSS);
+                    if (EntryList.Count == 0) EntryList.Add("No Entries :-(");
                     EntryList.Shuffle();
                     TotalEntriesFound = Math.Min(EntryList.Count, ROLLING_ENTRIES_COUNT);
                     CurrentEntryIndex = 0;
@@ -181,18 +178,15 @@ namespace TwitchChatinator
             switch (Stage)
             {
                 case STAGE_WAITING:
-                    using (DataStore DS = Program.getSelectedDataStore())
+                    DataSetSelection DSS = new DataSetSelection();
+                    DSS.Start = StartTime;
+                    try
                     {
-                        DataSetSelection DSS = new DataSetSelection();
-                        DSS.Start = StartTime;
-                        try
-                        {
-                            Count = DS.GetUniqueUsersCount(DSS);
-                        }
-                        catch (Exception ex)
-                        {
-                            Log.LogException(ex);
-                        }
+                        Count = DataStore.GetUniqueUsersCount(DSS);
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.LogException(ex);
                     }
                     break;
                 case STAGE_ROLLING:

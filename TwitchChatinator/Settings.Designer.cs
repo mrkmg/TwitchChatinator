@@ -61,18 +61,6 @@ namespace TwitchChatinator {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("SQLite")]
-        public string StorageEngine {
-            get {
-                return ((string)(this["StorageEngine"]));
-            }
-            set {
-                this["StorageEngine"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("000000000")]
         public string PollChromaKey {
             get {

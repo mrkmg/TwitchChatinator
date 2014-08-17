@@ -185,7 +185,7 @@ namespace TwitchChatinator
                             BarW = (BarWidth * data.amounts[i] / data.amounts.Sum());
                         BarH = BarHeight;
                         TitleX = LeftMargin + 10;
-                        TitleY = TopMargin + (i * BarSpacing) + ((i) * BarHeight) + 3;
+                        TitleY = TopMargin + (i * BarSpacing) + ((i) * BarHeight);
                         CountX = LeftMargin + 10;
                         CountY = TopMargin + (i * BarSpacing) + ((i + 1) * BarHeight) - CountFont.Height - 5;
 
@@ -262,11 +262,7 @@ namespace TwitchChatinator
             {
                 if (setItems > 0)
                 {
-                    DataSet RawData;
-                    using (DataStore DS = Program.getSelectedDataStore())
-                    {
-                        RawData = DS.GetDataSet(DSS);
-                    }
+                    DataSet RawData = DataStore.GetDataSet(DSS);
 
                     totalRows = 0;
                     rowData = new int[setItems];

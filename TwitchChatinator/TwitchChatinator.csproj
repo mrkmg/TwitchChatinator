@@ -38,7 +38,7 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -49,7 +49,7 @@
     <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -57,6 +57,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <RunCodeAnalysis>false</RunCodeAnalysis>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release-Dist|AnyCPU'">
     <OutputPath>..\..\..\Desktop\Chatinator\</OutputPath>
@@ -64,7 +65,7 @@
     </DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
@@ -148,10 +149,14 @@
     <Compile Include="Forms\RunRoll.Designer.cs">
       <DependentUpon>RunRoll.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\SetupRoll.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SetupRoll.Designer.cs">
+      <DependentUpon>SetupRoll.cs</DependentUpon>
+    </Compile>
     <Compile Include="Libs\DataStore.cs" />
-    <Compile Include="Libs\DataStoreMemory.cs" />
     <Compile Include="Libs\Log.cs" />
-    <Compile Include="Libs\DataStoreSQLite.cs" />
     <Compile Include="Forms\MessageBrowser.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -196,6 +201,9 @@
     <EmbeddedResource Include="Forms\SetCredentialsScreen.resx">
       <DependentUpon>SetCredentialsScreen.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SetupRoll.resx">
+      <DependentUpon>SetupRoll.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -226,12 +234,11 @@
     <None Include="Resources\Red.png" />
     <None Include="Resources\Green.png" />
     <Content Include="ChatinatorIcon.ico" />
+    <None Include="Resources\ChatinatorIcon.ico" />
     <Content Include="x64\SQLite.Interop.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="x86\SQLite.Interop.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="x86\SQLite.Interop.dll" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
@@ -251,6 +258,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

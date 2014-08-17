@@ -22,6 +22,7 @@ namespace TwitchChatinator
             SetStyle(ControlStyles.ResizeRedraw, true);
             this.Resize += PaintWindow_Resize;
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = TwitchChatinator.Properties.Resources.ChatinatorIcon;
         }
 
         void PaintWindow_KeyUp(object sender, KeyEventArgs e)
@@ -50,6 +51,30 @@ namespace TwitchChatinator
                 ReleaseCapture();
                 SendMessage(Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0);
             }
+        }
+
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                var cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000;    // Turn on WS_EX_COMPOSITED
+                return cp;
+            }
+        }
+
+        private void InitializeComponent()
+        {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PaintWindow));
+            this.SuspendLayout();
+            // 
+            // PaintWindow
+            // 
+            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "PaintWindow";
+            this.ResumeLayout(false);
+
         }
     }
 

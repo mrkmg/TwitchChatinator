@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MessageBrowser));
             this.MessagesList = new System.Windows.Forms.DataGridView();
             this.GetDataButton = new System.Windows.Forms.Button();
             this.StartTimeDatepicker = new System.Windows.Forms.DateTimePicker();
@@ -86,6 +87,7 @@
             this.Controls.Add(this.GetDataButton);
             this.Controls.Add(this.MessagesList);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MessageBrowser";
             this.Text = "Message Browser - Chatinator";
             ((System.ComponentModel.ISupportInitialize)(this.MessagesList)).EndInit();

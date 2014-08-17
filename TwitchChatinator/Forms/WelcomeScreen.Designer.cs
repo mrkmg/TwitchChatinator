@@ -16,6 +16,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WelcomeScreen));
             this.SetCredentialsButton = new System.Windows.Forms.Button();
             this.StartListenButton = new System.Windows.Forms.Button();
             this.ShowMessageBrowser = new System.Windows.Forms.Button();
@@ -25,6 +26,8 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.ResetButton = new System.Windows.Forms.Button();
             this.StartRollButton = new System.Windows.Forms.Button();
+            this.SetupRollButton = new System.Windows.Forms.Button();
+            this.ExportButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ListeningStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -119,13 +122,35 @@
             this.StartRollButton.UseVisualStyleBackColor = true;
             this.StartRollButton.Click += new System.EventHandler(this.StartRollButton_Click);
             // 
+            // SetupRollButton
+            // 
+            this.SetupRollButton.Location = new System.Drawing.Point(12, 162);
+            this.SetupRollButton.Name = "SetupRollButton";
+            this.SetupRollButton.Size = new System.Drawing.Size(85, 44);
+            this.SetupRollButton.TabIndex = 9;
+            this.SetupRollButton.Text = "Setup Roll";
+            this.SetupRollButton.UseVisualStyleBackColor = true;
+            this.SetupRollButton.Click += new System.EventHandler(this.SetupRollButton_Click);
+            // 
+            // ExportButton
+            // 
+            this.ExportButton.Location = new System.Drawing.Point(104, 62);
+            this.ExportButton.Name = "ExportButton";
+            this.ExportButton.Size = new System.Drawing.Size(85, 44);
+            this.ExportButton.TabIndex = 7;
+            this.ExportButton.Text = "Export Data";
+            this.ExportButton.UseVisualStyleBackColor = true;
+            this.ExportButton.Click += new System.EventHandler(this.ExportButton_Click);
+            // 
             // WelcomeScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(527, 223);
+            this.Controls.Add(this.SetupRollButton);
             this.Controls.Add(this.ResetButton);
             this.Controls.Add(this.StartRollButton);
+            this.Controls.Add(this.ExportButton);
             this.Controls.Add(this.StartPollButton);
             this.Controls.Add(this.ShowPollConfig);
             this.Controls.Add(this.ShowMessageBrowser);
@@ -133,9 +158,10 @@
             this.Controls.Add(this.StartListenButton);
             this.Controls.Add(this.SetCredentialsButton);
             this.Controls.Add(this.pictureBox1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "WelcomeScreen";
-            this.Text = "Chatinator";
+            this.Text = "Chatinator - Welcome";
             ((System.ComponentModel.ISupportInitialize)(this.ListeningStatus)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
@@ -153,5 +179,7 @@
         private System.Windows.Forms.Button StartPollButton;
         private System.Windows.Forms.Button ResetButton;
         private System.Windows.Forms.Button StartRollButton;
+        private System.Windows.Forms.Button SetupRollButton;
+        private System.Windows.Forms.Button ExportButton;
     }
 }

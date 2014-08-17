@@ -12,13 +12,44 @@ Current Features
   - Poll
     - Can customize about every aspect (In a simple way)
     - Saves settings between sessions
+  - Roll
+    - Do a Giveaway/Contents
+    - Can customize about every aspect (In a simple way)
+    - Saves settings
+  - Export Data to CSV
+
+
+
+Usage
+-----
+
+Coming Soon
+
+Screen Shots
+-------------
+
+Coming Soon
+
+Where to get
+------------
+
+Binaries - Coming Soon
+
+Build yourself
+- Download or Clone this repository.
+- Open in [Visual Studio Express for Windows Desktop](http://www.visualstudio.com/downloads/download-visual-studio-vs#d-express-windows-desktop)
+- Set Build Type to Release
+- Hit F7 (This will build the app)
+- Navigate in Windows Exporer to PROJECTDIR/bin/release
+- Copy all files to your desired location
+- Run "Twitch Chatinator.exe"
 
 In Progress Features
 --------------------
 
-  - Giveaways
-  	- Can run a give-away
-  	- Settings page coming soon!
+  - Random User Chooser
+    - Inserts a random (active) user into your clipboard (Copy-Paste)
+    - Settings to choose time range
 
 Future Features
 ---------------

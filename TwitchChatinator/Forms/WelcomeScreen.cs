@@ -25,7 +25,6 @@ namespace TwitchChatinator
         public WelcomeScreen()
         {
             InitializeComponent();
-            this.ShowIcon = false;
             this.FormClosed += WelcomeScreen_FormClosed;
 
             TI = new TwitchIRC();
@@ -137,6 +136,12 @@ namespace TwitchChatinator
             Settings.Default.TwitchPassword = p;
             Settings.Default.TwithChannel = c;
             Settings.Default.Save();
+
+            if (RP != null && !RP.IsDisposed)
+                StartRunPoll();
+
+            if (RR != null && !RR.IsDisposed)
+                StartRunRoll();
         }
 
         private void ShowPollConfig_Click(object sender, EventArgs e)
@@ -205,6 +210,33 @@ namespace TwitchChatinator
             TI.Dispose();
 
             base.Dispose(disposing);
+        }
+
+        private void SetupRollButton_Click(object sender, EventArgs e)
+        {
+            SetupRoll SR = new SetupRoll();
+            SR.OnSave += SR_OnSave;
+
+            SR.Show();
+        }
+
+        void SR_OnSave()
+        {
+            if (RR != null && !RR.IsDisposed)
+                StartRunRoll();
+        }
+
+        private void ExportButton_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog D = new SaveFileDialog();
+            D.AddExtension = true;
+            D.DefaultExt = "csv";
+            D.Filter = "CSV files (*.csv)|*.csv|All files (*.*)|*.*";
+
+            if (D.ShowDialog() == DialogResult.OK)
+            {
+                DataStore.ExportToCsv(D.FileName);
+            }
         }
     }
 }

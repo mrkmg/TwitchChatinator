@@ -105,10 +105,7 @@ namespace TwitchChatinator
 
         public void DoReceiveMessage(TwitchMessageObject Message)
         {
-            using (DataStore DS = Program.getSelectedDataStore())
-            {
-                DS.InsertMessage(Message.channel,Message.username, Message.message);
-            }
+            DataStore.InsertMessage(Message.channel, Message.username, Message.message);
 
             OnReceiveMessage(Message);
         }
@@ -163,6 +160,10 @@ namespace TwitchChatinator
                         }
                     }
                     OnDisconnected();
+
+                    Writer.Dispose();
+                    Reader.Dispose();
+                    NwStream.Dispose();
                 }
             }
             catch (Exception e)
@@ -200,9 +201,16 @@ namespace TwitchChatinator
 
         public void Dispose()
         {
-            Writer.Dispose();
-            Reader.Dispose();
-            NwStream.Dispose();
+            try
+            {
+                Writer.Dispose();
+                Reader.Dispose();
+                NwStream.Dispose();
+            }
+            catch(Exception e)
+            {
+                Log.LogException(e);
+            }
         }
     }
 
