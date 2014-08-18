@@ -8,7 +8,6 @@ Chatinator allows you to run polls, giveaways, and more on stream using your twi
 Current Features
 ----------------
 
-  - Message Saving in SQLite Database
   - Poll
     - Can customize about every aspect (In a simple way)
     - Saves settings between sessions
@@ -16,7 +15,10 @@ Current Features
     - Do a Giveaway/Contents
     - Can customize about every aspect (In a simple way)
     - Saves settings
+  - Random User Chooser
+    - Inserts a random (active in past 5 minutes) user into your clipboard (Copy-Paste)
   - Export Data to CSV
+  - Message Saving in SQLite Database
 
 
 
@@ -63,10 +65,6 @@ In Progress Features
 
   - Re-design settings page for Poll to be more friendly
     - Use Real Font Picker
-
-  - Random User Chooser
-    - Inserts a random (active) user into your clipboard (Copy-Paste)
-    - Settings to choose time range
 
 Future Features
 ---------------
