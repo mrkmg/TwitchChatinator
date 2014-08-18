@@ -20,14 +20,14 @@ Quick Start
 Advanced Usage
 --------------
 
-**Adjusting Poll Settings**
-
 ---
+
+**Adjusting Poll Settings**
 
 *Coming Soon*
 
-**Adjusting Roll Settings**
-
 ---
 
-*Coming Soon
+**Adjusting Roll Settings**
+
+*Coming Soon*
