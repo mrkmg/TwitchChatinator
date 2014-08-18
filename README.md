@@ -23,7 +23,7 @@ Current Features
 Usage
 -----
 
-See [USAGE.md](https://github.com/mrkmg/TwitchChatinator/blob/master/TwitchChatinator/USAGE.md)
+See [USAGE.md](https://github.com/mrkmg/TwitchChatinator/blob/master/USAGE.md)
 
 Where to get
 ------------
