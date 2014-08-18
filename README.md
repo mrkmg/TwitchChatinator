@@ -60,6 +60,9 @@ Build yourself
 In Progress Features
 --------------------
 
+  - Re-design settings page for Poll to be more friendly
+    - Use Real Font Picker
+
   - Random User Chooser
     - Inserts a random (active) user into your clipboard (Copy-Paste)
     - Settings to choose time range
