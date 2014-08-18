@@ -25,6 +25,21 @@ Usage
 
 Coming Soon
 
+Where to get
+------------
+
+Binaries
+- Download the [Setup.exe](https://mrkmg.com/chatinator/setup.exe) from my server. I do not have the resources right now to get a Code Signing Certificate, so it's going to throw a million security warnings. Proceed at your own risk. (I will get one eventually (hopefully, maybe..)
+
+Build yourself
+- Download or Clone this repository.
+- Open in [Visual Studio Express for Windows Desktop](http://www.visualstudio.com/downloads/download-visual-studio-vs#d-express-windows-desktop)
+- Set Build Type to Release
+- Hit F7 (This will build the app)
+- Navigate in Windows Exporer to PROJECTDIR/bin/release
+- Copy all files to your desired location
+- Run "Twitch Chatinator.exe"
+
 Screen Shots
 -------------
 
@@ -42,20 +57,6 @@ Screen Shots
 ![Roll Setup](http://i.imgur.com/3cUkWGw.png)
 
 ![Message Browser](http://i.imgur.com/xXTVlZb.png)
-
-Where to get
-------------
-
-Binaries - Coming Soon
-
-Build yourself
-- Download or Clone this repository.
-- Open in [Visual Studio Express for Windows Desktop](http://www.visualstudio.com/downloads/download-visual-studio-vs#d-express-windows-desktop)
-- Set Build Type to Release
-- Hit F7 (This will build the app)
-- Navigate in Windows Exporer to PROJECTDIR/bin/release
-- Copy all files to your desired location
-- Run "Twitch Chatinator.exe"
 
 In Progress Features
 --------------------
