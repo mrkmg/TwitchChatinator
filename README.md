@@ -23,13 +23,13 @@ Current Features
 Usage
 -----
 
-Coming Soon
+See [USAGE.md](https://github.com/mrkmg/TwitchChatinator/blob/master/TwitchChatinator/USAGE.md)
 
 Where to get
 ------------
 
 Binaries
-- Download the binary from [Bintray](https://bintray.com/mrkmg/TwitchChatinator/TwitchChatinator/v1.1/view/files) from my server. I do not have the resources right now to get a Code Signing Certificate, so it's going to throw a million security warnings. Proceed at your own risk. (I will get one eventually)
+- Download the binary from [Bintray](https://bintray.com/mrkmg/TwitchChatinator/TwitchChatinator/v1.1/view/files). I do not have the resources right now to get a Code Signing Certificate, so it's going to throw a million security warnings. Proceed at your own risk. (I will get one eventually)
 
 Build yourself
 - Download or Clone this repository.
