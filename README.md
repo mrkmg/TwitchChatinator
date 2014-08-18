@@ -29,7 +29,7 @@ Where to get
 ------------
 
 Binaries
-- Download the [Setup.exe](https://mrkmg.com/chatinator/setup.exe) from my server. I do not have the resources right now to get a Code Signing Certificate, so it's going to throw a million security warnings. Proceed at your own risk. (I will get one eventually (hopefully, maybe..)
+- Download the [Setup.exe](https://mrkmg.com/chatinator/setup.exe) from my server. I do not have the resources right now to get a Code Signing Certificate, so it's going to throw a million security warnings. Proceed at your own risk. (I will get one eventually)
 
 Build yourself
 - Download or Clone this repository.
