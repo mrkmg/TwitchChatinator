@@ -25,15 +25,11 @@ Usage
 
 Coming Soon
 
-Screen Shots
--------------
-
-Coming Soon
-
 Where to get
 ------------
 
-Binaries - Coming Soon
+Binaries
+- Download the [Setup.exe](https://mrkmg.com/chatinator/setup.exe) from my server. I do not have the resources right now to get a Code Signing Certificate, so it's going to throw a million security warnings. Proceed at your own risk. (I will get one eventually)
 
 Build yourself
 - Download or Clone this repository.
@@ -44,8 +40,29 @@ Build yourself
 - Copy all files to your desired location
 - Run "Twitch Chatinator.exe"
 
+Screen Shots
+-------------
+
+
+![Welcome Screen](http://i.imgur.com/WzUaPUD.png)
+
+![Credentials Setup](http://i.imgur.com/4ZPCZDy.png)
+
+![Poll Example](http://i.imgur.com/vjpBhL3.png)
+
+![Roll Example](http://i.imgur.com/v7EPGyy.png)
+
+![Poll Setup](http://i.imgur.com/MiqqweS.png)
+
+![Roll Setup](http://i.imgur.com/3cUkWGw.png)
+
+![Message Browser](http://i.imgur.com/xXTVlZb.png)
+
 In Progress Features
 --------------------
+
+  - Re-design settings page for Poll to be more friendly
+    - Use Real Font Picker
 
   - Random User Chooser
     - Inserts a random (active) user into your clipboard (Copy-Paste)
