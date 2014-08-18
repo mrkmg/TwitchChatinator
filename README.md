@@ -2,7 +2,7 @@ Chatinator
 =========
 For Twitch
 
-Chatinator is a twitch chat interaction for streamers who wish to display results from chat on their stream.
+Chatinator allows you to run polls, giveaways, and more on stream using your twitch chat to get data from your viewers.
 
 
 Current Features
@@ -71,9 +71,10 @@ In Progress Features
 Future Features
 ---------------
 
-  - Hype Meter
+  - Hype Meter (Need ideas for this)
   - User Activity Lookup
-  - Chat Reports
+  - On Scren Chat Window (with optional filtering)
+  - Chat Reports (Will not come for a long time)
     - Most Active Users
     - Topic Lookup
     - Most Asked Questions
