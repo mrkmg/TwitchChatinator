@@ -57,19 +57,21 @@ namespace TwitchChatinator
             StartListenButton.Text = "Start Listening";
             StartListenButton.Enabled = true;
             isConnected = false;
+            ConnectedLabel.Text = "Not Connected";
         }
 
-        void TI_OnConnected()
+        void TI_OnConnected(string channel)
         {
-            Invoke(new Action(OnListenConnected));
+            Invoke(new Action<string>(OnListenConnected), new string[1] { channel });
         }
 
-        void OnListenConnected()
+        void OnListenConnected(string channel)
         {
             ListeningStatus.Image = Properties.Resources.Green;
             StartListenButton.Text = "Stop Listening";
             StartListenButton.Enabled = true;
             isConnected = true;
+            ConnectedLabel.Text = "Connected to " + channel;
         }
 
         void WelcomeScreen_FormClosed(object sender, FormClosedEventArgs e)
@@ -92,11 +94,13 @@ namespace TwitchChatinator
         public void StartListen()
         {
             TI.Start();
+            ConnectedLabel.Text = "Connecting";
         }
 
         public void StopListen()
         {
             TI.Stop();
+            ConnectedLabel.Text = "Disconnecting";
         }
 
         private void SetCredentialsButton_Click(object sender, EventArgs e)
@@ -110,12 +114,12 @@ namespace TwitchChatinator
             if(isConnected)
             {
                 StopListen();
-                StartListenButton.Text = "Disconnecting";
+                StartListenButton.Text = "Please Wait";
             }
             else
             {
                 StartListen();
-                StartListenButton.Text = "Connecting";
+                StartListenButton.Text = "Please Wait";
             }
             StartListenButton.Enabled = false;
         }
@@ -237,6 +241,17 @@ namespace TwitchChatinator
             {
                 DataStore.ExportToCsv(D.FileName);
             }
+        }
+
+        private void CopyRandomButton_Click(object sender, EventArgs e)
+        {
+            var DSS = new DataSetSelection();
+            DSS.Start = DateTime.Now.AddMinutes(-5);
+
+            List<string> users = DataStore.GetUniqueUsersString(DSS);
+            Random r = new Random();
+            string winner = users[(int)(r.NextDouble()*(users.Count-1))];
+            Clipboard.SetText(winner);
         }
     }
 }

@@ -25,7 +25,7 @@ namespace TwitchChatinator
         public delegate void ReceiveMessage(TwitchMessageObject Message);
         public event ReceiveMessage OnReceiveMessage;
 
-        public delegate void Connected();
+        public delegate void Connected(string channel);
         public event Connected OnConnected;
 
         public delegate void Disconnected();
@@ -72,7 +72,7 @@ namespace TwitchChatinator
             isConnected = true;
             if (OnConnected != null)
             {
-                OnConnected();
+                OnConnected(Channel);
             }
         }
 

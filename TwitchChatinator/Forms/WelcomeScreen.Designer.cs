@@ -28,6 +28,8 @@
             this.StartRollButton = new System.Windows.Forms.Button();
             this.SetupRollButton = new System.Windows.Forms.Button();
             this.ExportButton = new System.Windows.Forms.Button();
+            this.CopyRandomButton = new System.Windows.Forms.Button();
+            this.ConnectedLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.ListeningStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -46,7 +48,7 @@
             // 
             this.StartListenButton.Location = new System.Drawing.Point(103, 12);
             this.StartListenButton.Name = "StartListenButton";
-            this.StartListenButton.Size = new System.Drawing.Size(80, 44);
+            this.StartListenButton.Size = new System.Drawing.Size(86, 44);
             this.StartListenButton.TabIndex = 3;
             this.StartListenButton.Text = "Start Listening";
             this.StartListenButton.UseVisualStyleBackColor = true;
@@ -55,7 +57,7 @@
             // 
             // ShowMessageBrowser
             // 
-            this.ShowMessageBrowser.Location = new System.Drawing.Point(12, 62);
+            this.ShowMessageBrowser.Location = new System.Drawing.Point(429, 277);
             this.ShowMessageBrowser.Name = "ShowMessageBrowser";
             this.ShowMessageBrowser.Size = new System.Drawing.Size(85, 44);
             this.ShowMessageBrowser.TabIndex = 5;
@@ -65,7 +67,7 @@
             // 
             // ShowPollConfig
             // 
-            this.ShowPollConfig.Location = new System.Drawing.Point(12, 112);
+            this.ShowPollConfig.Location = new System.Drawing.Point(13, 327);
             this.ShowPollConfig.Name = "ShowPollConfig";
             this.ShowPollConfig.Size = new System.Drawing.Size(85, 44);
             this.ShowPollConfig.TabIndex = 6;
@@ -75,7 +77,7 @@
             // 
             // StartPollButton
             // 
-            this.StartPollButton.Location = new System.Drawing.Point(104, 112);
+            this.StartPollButton.Location = new System.Drawing.Point(13, 162);
             this.StartPollButton.Name = "StartPollButton";
             this.StartPollButton.Size = new System.Drawing.Size(85, 44);
             this.StartPollButton.TabIndex = 7;
@@ -86,7 +88,7 @@
             // ListeningStatus
             // 
             this.ListeningStatus.Image = global::TwitchChatinator.Properties.Resources.Red;
-            this.ListeningStatus.Location = new System.Drawing.Point(190, 17);
+            this.ListeningStatus.Location = new System.Drawing.Point(13, 79);
             this.ListeningStatus.Name = "ListeningStatus";
             this.ListeningStatus.Size = new System.Drawing.Size(32, 32);
             this.ListeningStatus.TabIndex = 4;
@@ -104,9 +106,9 @@
             // 
             // ResetButton
             // 
-            this.ResetButton.Location = new System.Drawing.Point(451, 199);
+            this.ResetButton.Location = new System.Drawing.Point(338, 327);
             this.ResetButton.Name = "ResetButton";
-            this.ResetButton.Size = new System.Drawing.Size(75, 23);
+            this.ResetButton.Size = new System.Drawing.Size(85, 44);
             this.ResetButton.TabIndex = 8;
             this.ResetButton.Text = "Reset";
             this.ResetButton.UseVisualStyleBackColor = true;
@@ -124,7 +126,7 @@
             // 
             // SetupRollButton
             // 
-            this.SetupRollButton.Location = new System.Drawing.Point(12, 162);
+            this.SetupRollButton.Location = new System.Drawing.Point(103, 327);
             this.SetupRollButton.Name = "SetupRollButton";
             this.SetupRollButton.Size = new System.Drawing.Size(85, 44);
             this.SetupRollButton.TabIndex = 9;
@@ -134,7 +136,7 @@
             // 
             // ExportButton
             // 
-            this.ExportButton.Location = new System.Drawing.Point(104, 62);
+            this.ExportButton.Location = new System.Drawing.Point(429, 327);
             this.ExportButton.Name = "ExportButton";
             this.ExportButton.Size = new System.Drawing.Size(85, 44);
             this.ExportButton.TabIndex = 7;
@@ -142,11 +144,33 @@
             this.ExportButton.UseVisualStyleBackColor = true;
             this.ExportButton.Click += new System.EventHandler(this.ExportButton_Click);
             // 
+            // CopyRandomButton
+            // 
+            this.CopyRandomButton.Location = new System.Drawing.Point(13, 212);
+            this.CopyRandomButton.Name = "CopyRandomButton";
+            this.CopyRandomButton.Size = new System.Drawing.Size(85, 44);
+            this.CopyRandomButton.TabIndex = 10;
+            this.CopyRandomButton.Text = "Copy Random User";
+            this.CopyRandomButton.UseVisualStyleBackColor = true;
+            this.CopyRandomButton.Click += new System.EventHandler(this.CopyRandomButton_Click);
+            // 
+            // ConnectedLabel
+            // 
+            this.ConnectedLabel.AutoSize = true;
+            this.ConnectedLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ConnectedLabel.Location = new System.Drawing.Point(52, 83);
+            this.ConnectedLabel.Name = "ConnectedLabel";
+            this.ConnectedLabel.Size = new System.Drawing.Size(137, 24);
+            this.ConnectedLabel.TabIndex = 11;
+            this.ConnectedLabel.Text = "Not Connected";
+            // 
             // WelcomeScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(527, 223);
+            this.ClientSize = new System.Drawing.Size(527, 392);
+            this.Controls.Add(this.ConnectedLabel);
+            this.Controls.Add(this.CopyRandomButton);
             this.Controls.Add(this.SetupRollButton);
             this.Controls.Add(this.ResetButton);
             this.Controls.Add(this.StartRollButton);
@@ -165,6 +189,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.ListeningStatus)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -181,5 +206,7 @@
         private System.Windows.Forms.Button StartRollButton;
         private System.Windows.Forms.Button SetupRollButton;
         private System.Windows.Forms.Button ExportButton;
+        private System.Windows.Forms.Button CopyRandomButton;
+        private System.Windows.Forms.Label ConnectedLabel;
     }
 }
