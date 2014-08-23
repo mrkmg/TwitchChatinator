@@ -165,8 +165,8 @@ namespace TwitchChatinator
             BarColors[3] = Settings.Default.PollOption4Color;
 
             TitleBrush = new SolidBrush(Settings.Default.PollTitleColor);
-            CountBrush = new SolidBrush(Settings.Default.PollTitleColor);
-            TotalBrush = new SolidBrush(Settings.Default.PollTitleColor);
+            CountBrush = new SolidBrush(Settings.Default.PollCountColor);
+            TotalBrush = new SolidBrush(Settings.Default.PollTotalColor);
 
             BarsBrush = new List<SolidBrush>();
             for (int i = 0; i <= 3; i++)

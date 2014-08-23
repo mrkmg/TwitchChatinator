@@ -69,8 +69,6 @@
             this.label19 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
-            this.FontInput = new System.Windows.Forms.TextBox();
-            this.label22 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
@@ -163,7 +161,7 @@
             // 
             // SavePollSetup
             // 
-            this.SavePollSetup.Location = new System.Drawing.Point(384, 311);
+            this.SavePollSetup.Location = new System.Drawing.Point(384, 288);
             this.SavePollSetup.Name = "SavePollSetup";
             this.SavePollSetup.Size = new System.Drawing.Size(75, 23);
             this.SavePollSetup.TabIndex = 4;
@@ -173,7 +171,7 @@
             // 
             // ChromaKeyInput
             // 
-            this.ChromaKeyInput.Location = new System.Drawing.Point(307, 216);
+            this.ChromaKeyInput.Location = new System.Drawing.Point(307, 193);
             this.ChromaKeyInput.Name = "ChromaKeyInput";
             this.ChromaKeyInput.Size = new System.Drawing.Size(20, 20);
             this.ChromaKeyInput.TabIndex = 6;
@@ -181,7 +179,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(224, 218);
+            this.label7.Location = new System.Drawing.Point(224, 195);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(64, 13);
             this.label7.TabIndex = 17;
@@ -190,7 +188,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(13, 218);
+            this.label6.Location = new System.Drawing.Point(13, 195);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(101, 13);
             this.label6.TabIndex = 15;
@@ -202,7 +200,7 @@
             this.AllowMultiDropdown.Items.AddRange(new object[] {
             "Yes",
             "No"});
-            this.AllowMultiDropdown.Location = new System.Drawing.Point(122, 215);
+            this.AllowMultiDropdown.Location = new System.Drawing.Point(122, 192);
             this.AllowMultiDropdown.Name = "AllowMultiDropdown";
             this.AllowMultiDropdown.Size = new System.Drawing.Size(62, 21);
             this.AllowMultiDropdown.TabIndex = 16;
@@ -369,7 +367,7 @@
             // 
             // TotalWidthNum
             // 
-            this.TotalWidthNum.Location = new System.Drawing.Point(436, 262);
+            this.TotalWidthNum.Location = new System.Drawing.Point(436, 239);
             this.TotalWidthNum.Maximum = new decimal(new int[] {
             900,
             0,
@@ -468,7 +466,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(356, 264);
+            this.label17.Location = new System.Drawing.Point(356, 241);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(62, 13);
             this.label17.TabIndex = 23;
@@ -485,21 +483,21 @@
             // 
             // TitleColorInput
             // 
-            this.TitleColorInput.Location = new System.Drawing.Point(256, 257);
+            this.TitleColorInput.Location = new System.Drawing.Point(256, 234);
             this.TitleColorInput.Name = "TitleColorInput";
             this.TitleColorInput.Size = new System.Drawing.Size(20, 20);
             this.TitleColorInput.TabIndex = 24;
             // 
             // CountColorInput
             // 
-            this.CountColorInput.Location = new System.Drawing.Point(256, 288);
+            this.CountColorInput.Location = new System.Drawing.Point(256, 265);
             this.CountColorInput.Name = "CountColorInput";
             this.CountColorInput.Size = new System.Drawing.Size(20, 20);
             this.CountColorInput.TabIndex = 24;
             // 
             // TotalColorInput
             // 
-            this.TotalColorInput.Location = new System.Drawing.Point(256, 318);
+            this.TotalColorInput.Location = new System.Drawing.Point(256, 295);
             this.TotalColorInput.Name = "TotalColorInput";
             this.TotalColorInput.Size = new System.Drawing.Size(20, 20);
             this.TotalColorInput.TabIndex = 24;
@@ -507,7 +505,7 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(184, 260);
+            this.label19.Location = new System.Drawing.Point(184, 237);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(54, 13);
             this.label19.TabIndex = 25;
@@ -516,7 +514,7 @@
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(176, 291);
+            this.label20.Location = new System.Drawing.Point(176, 268);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(62, 13);
             this.label20.TabIndex = 25;
@@ -525,32 +523,16 @@
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(180, 321);
+            this.label21.Location = new System.Drawing.Point(180, 298);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(58, 13);
             this.label21.TabIndex = 26;
             this.label21.Text = "Total Color";
             // 
-            // FontInput
-            // 
-            this.FontInput.Location = new System.Drawing.Point(96, 183);
-            this.FontInput.Name = "FontInput";
-            this.FontInput.Size = new System.Drawing.Size(126, 20);
-            this.FontInput.TabIndex = 27;
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(13, 186);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(28, 13);
-            this.label22.TabIndex = 28;
-            this.label22.Text = "Font";
-            // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(44, 264);
+            this.label14.Location = new System.Drawing.Point(44, 241);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(51, 13);
             this.label14.TabIndex = 29;
@@ -559,7 +541,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(36, 295);
+            this.label15.Location = new System.Drawing.Point(36, 272);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(59, 13);
             this.label15.TabIndex = 30;
@@ -568,7 +550,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(40, 325);
+            this.label16.Location = new System.Drawing.Point(40, 302);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(55, 13);
             this.label16.TabIndex = 31;
@@ -576,7 +558,7 @@
             // 
             // TitleFontButton
             // 
-            this.TitleFontButton.Location = new System.Drawing.Point(101, 260);
+            this.TitleFontButton.Location = new System.Drawing.Point(101, 237);
             this.TitleFontButton.Name = "TitleFontButton";
             this.TitleFontButton.Size = new System.Drawing.Size(20, 20);
             this.TitleFontButton.TabIndex = 32;
@@ -585,7 +567,7 @@
             // 
             // CountFontButton
             // 
-            this.CountFontButton.Location = new System.Drawing.Point(101, 291);
+            this.CountFontButton.Location = new System.Drawing.Point(101, 268);
             this.CountFontButton.Name = "CountFontButton";
             this.CountFontButton.Size = new System.Drawing.Size(20, 20);
             this.CountFontButton.TabIndex = 33;
@@ -594,7 +576,7 @@
             // 
             // TotalFontButton
             // 
-            this.TotalFontButton.Location = new System.Drawing.Point(101, 321);
+            this.TotalFontButton.Location = new System.Drawing.Point(101, 298);
             this.TotalFontButton.Name = "TotalFontButton";
             this.TotalFontButton.Size = new System.Drawing.Size(20, 20);
             this.TotalFontButton.TabIndex = 34;
@@ -605,15 +587,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(531, 383);
+            this.ClientSize = new System.Drawing.Size(531, 332);
             this.Controls.Add(this.TotalFontButton);
             this.Controls.Add(this.CountFontButton);
             this.Controls.Add(this.TitleFontButton);
             this.Controls.Add(this.label16);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.label14);
-            this.Controls.Add(this.label22);
-            this.Controls.Add(this.FontInput);
             this.Controls.Add(this.label21);
             this.Controls.Add(this.label20);
             this.Controls.Add(this.label19);
@@ -714,8 +694,6 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.TextBox FontInput;
-        private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label16;
