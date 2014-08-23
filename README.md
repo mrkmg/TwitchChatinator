@@ -45,20 +45,7 @@ Build yourself
 Screen Shots
 -------------
 
-
-![Welcome Screen](http://i.imgur.com/WzUaPUD.png)
-
-![Credentials Setup](http://i.imgur.com/4ZPCZDy.png)
-
-![Poll Example](http://i.imgur.com/vjpBhL3.png)
-
-![Roll Example](http://i.imgur.com/v7EPGyy.png)
-
-![Poll Setup](http://i.imgur.com/MiqqweS.png)
-
-![Roll Setup](http://i.imgur.com/3cUkWGw.png)
-
-![Message Browser](http://i.imgur.com/xXTVlZb.png)
+![Version 1](https://mrkmg.com/wp-content/uploads/2014/08/All_v1.png)
 
 In Progress Features
 --------------------
