@@ -11,8 +11,8 @@
     <Setting Name="TwithChannel" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="PollChromaKey" Type="System.String" Scope="User">
-      <Value Profile="(Default)">000000000</Value>
+    <Setting Name="PollChromaKey" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Black</Value>
     </Setting>
     <Setting Name="PollAllowMulti" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -29,17 +29,17 @@
     <Setting Name="PollOption4" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="PollOption1Color" Type="System.String" Scope="User">
-      <Value Profile="(Default)">000191255</Value>
+    <Setting Name="PollOption1Color" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Maroon</Value>
     </Setting>
-    <Setting Name="PollOption2Color" Type="System.String" Scope="User">
-      <Value Profile="(Default)">219112147</Value>
+    <Setting Name="PollOption2Color" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">RoyalBlue</Value>
     </Setting>
-    <Setting Name="PollOption3Color" Type="System.String" Scope="User">
-      <Value Profile="(Default)">124252000</Value>
+    <Setting Name="PollOption3Color" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Orange</Value>
     </Setting>
-    <Setting Name="PollOption4Color" Type="System.String" Scope="User">
-      <Value Profile="(Default)">255165000</Value>
+    <Setting Name="PollOption4Color" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">ForestGreen</Value>
     </Setting>
     <Setting Name="PollLeftMargin" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1</Value>
@@ -59,26 +59,23 @@
     <Setting Name="PollBarWidth" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">300</Value>
     </Setting>
-    <Setting Name="PollFontName" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Segoe UI</Value>
+    <Setting Name="PollTitleFont" Type="System.Drawing.Font" Scope="User">
+      <Value Profile="(Default)">Segoe UI, 15.75pt</Value>
     </Setting>
-    <Setting Name="PollTitleSize" Type="System.Single" Scope="User">
-      <Value Profile="(Default)">16</Value>
+    <Setting Name="PollTitleColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">White</Value>
     </Setting>
-    <Setting Name="PollTitleColor" Type="System.String" Scope="User">
-      <Value Profile="(Default)">255255255</Value>
+    <Setting Name="PollCountFont" Type="System.Drawing.Font" Scope="User">
+      <Value Profile="(Default)">Segoe UI, 12pt</Value>
     </Setting>
-    <Setting Name="PollCountSize" Type="System.Single" Scope="User">
-      <Value Profile="(Default)">12</Value>
+    <Setting Name="PollCountColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">White</Value>
     </Setting>
-    <Setting Name="PollCountColor" Type="System.String" Scope="User">
-      <Value Profile="(Default)">255255255</Value>
+    <Setting Name="PollTotalFont" Type="System.Drawing.Font" Scope="User">
+      <Value Profile="(Default)">Segoe UI, 14.25pt</Value>
     </Setting>
-    <Setting Name="PollTotalSize" Type="System.Single" Scope="User">
-      <Value Profile="(Default)">16</Value>
-    </Setting>
-    <Setting Name="PollTotalColor" Type="System.String" Scope="User">
-      <Value Profile="(Default)">255255255</Value>
+    <Setting Name="PollTotalColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">White</Value>
     </Setting>
     <Setting Name="PollTotalWidth" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">60</Value>

@@ -31,7 +31,7 @@ Where to get
 ------------
 
 Binaries
-- Download the binary from [Bintray](https://bintray.com/mrkmg/TwitchChatinator/TwitchChatinator/v1.1/view/files). I do not have the resources right now to get a Code Signing Certificate, so it's going to throw a million security warnings. Proceed at your own risk. (I will get one eventually)
+- Download the binary from [My Blog](https://mrkmg.com/chatinator)
 
 Build yourself
 - Download or Clone this repository.
@@ -63,8 +63,7 @@ Screen Shots
 In Progress Features
 --------------------
 
-  - Re-design settings page for Poll to be more friendly
-    - Use Real Font Picker
+  - Working on Release 1
 
 Future Features
 ---------------

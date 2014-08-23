@@ -201,6 +201,7 @@ namespace TwitchChatinator
             {
                 RR = new RunRoll(RollStart);
             }
+            Thread.Sleep(100);
             RR.Show();
         }
 

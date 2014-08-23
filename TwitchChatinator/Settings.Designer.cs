@@ -61,10 +61,10 @@ namespace TwitchChatinator {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("000000000")]
-        public string PollChromaKey {
+        [global::System.Configuration.DefaultSettingValueAttribute("Black")]
+        public global::System.Drawing.Color PollChromaKey {
             get {
-                return ((string)(this["PollChromaKey"]));
+                return ((global::System.Drawing.Color)(this["PollChromaKey"]));
             }
             set {
                 this["PollChromaKey"] = value;
@@ -133,10 +133,10 @@ namespace TwitchChatinator {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("000191255")]
-        public string PollOption1Color {
+        [global::System.Configuration.DefaultSettingValueAttribute("Maroon")]
+        public global::System.Drawing.Color PollOption1Color {
             get {
-                return ((string)(this["PollOption1Color"]));
+                return ((global::System.Drawing.Color)(this["PollOption1Color"]));
             }
             set {
                 this["PollOption1Color"] = value;
@@ -145,10 +145,10 @@ namespace TwitchChatinator {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("219112147")]
-        public string PollOption2Color {
+        [global::System.Configuration.DefaultSettingValueAttribute("RoyalBlue")]
+        public global::System.Drawing.Color PollOption2Color {
             get {
-                return ((string)(this["PollOption2Color"]));
+                return ((global::System.Drawing.Color)(this["PollOption2Color"]));
             }
             set {
                 this["PollOption2Color"] = value;
@@ -157,10 +157,10 @@ namespace TwitchChatinator {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("124252000")]
-        public string PollOption3Color {
+        [global::System.Configuration.DefaultSettingValueAttribute("Orange")]
+        public global::System.Drawing.Color PollOption3Color {
             get {
-                return ((string)(this["PollOption3Color"]));
+                return ((global::System.Drawing.Color)(this["PollOption3Color"]));
             }
             set {
                 this["PollOption3Color"] = value;
@@ -169,10 +169,10 @@ namespace TwitchChatinator {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("255165000")]
-        public string PollOption4Color {
+        [global::System.Configuration.DefaultSettingValueAttribute("ForestGreen")]
+        public global::System.Drawing.Color PollOption4Color {
             get {
-                return ((string)(this["PollOption4Color"]));
+                return ((global::System.Drawing.Color)(this["PollOption4Color"]));
             }
             set {
                 this["PollOption4Color"] = value;
@@ -253,34 +253,22 @@ namespace TwitchChatinator {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Segoe UI")]
-        public string PollFontName {
+        [global::System.Configuration.DefaultSettingValueAttribute("Segoe UI, 15.75pt")]
+        public global::System.Drawing.Font PollTitleFont {
             get {
-                return ((string)(this["PollFontName"]));
+                return ((global::System.Drawing.Font)(this["PollTitleFont"]));
             }
             set {
-                this["PollFontName"] = value;
+                this["PollTitleFont"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("16")]
-        public float PollTitleSize {
+        [global::System.Configuration.DefaultSettingValueAttribute("White")]
+        public global::System.Drawing.Color PollTitleColor {
             get {
-                return ((float)(this["PollTitleSize"]));
-            }
-            set {
-                this["PollTitleSize"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("255255255")]
-        public string PollTitleColor {
-            get {
-                return ((string)(this["PollTitleColor"]));
+                return ((global::System.Drawing.Color)(this["PollTitleColor"]));
             }
             set {
                 this["PollTitleColor"] = value;
@@ -289,22 +277,22 @@ namespace TwitchChatinator {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("12")]
-        public float PollCountSize {
+        [global::System.Configuration.DefaultSettingValueAttribute("Segoe UI, 12pt")]
+        public global::System.Drawing.Font PollCountFont {
             get {
-                return ((float)(this["PollCountSize"]));
+                return ((global::System.Drawing.Font)(this["PollCountFont"]));
             }
             set {
-                this["PollCountSize"] = value;
+                this["PollCountFont"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("255255255")]
-        public string PollCountColor {
+        [global::System.Configuration.DefaultSettingValueAttribute("White")]
+        public global::System.Drawing.Color PollCountColor {
             get {
-                return ((string)(this["PollCountColor"]));
+                return ((global::System.Drawing.Color)(this["PollCountColor"]));
             }
             set {
                 this["PollCountColor"] = value;
@@ -313,22 +301,22 @@ namespace TwitchChatinator {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("16")]
-        public float PollTotalSize {
+        [global::System.Configuration.DefaultSettingValueAttribute("Segoe UI, 14.25pt")]
+        public global::System.Drawing.Font PollTotalFont {
             get {
-                return ((float)(this["PollTotalSize"]));
+                return ((global::System.Drawing.Font)(this["PollTotalFont"]));
             }
             set {
-                this["PollTotalSize"] = value;
+                this["PollTotalFont"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("255255255")]
-        public string PollTotalColor {
+        [global::System.Configuration.DefaultSettingValueAttribute("White")]
+        public global::System.Drawing.Color PollTotalColor {
             get {
-                return ((string)(this["PollTotalColor"]));
+                return ((global::System.Drawing.Color)(this["PollTotalColor"]));
             }
             set {
                 this["PollTotalColor"] = value;

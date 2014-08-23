@@ -52,9 +52,7 @@ namespace TwitchChatinator
         public RunRoll(DateTime startTime)
         {
             StartTime = startTime;
-
             InitializeComponent();
-
             SetupVars();
 
             this.Text = "Roller - Chatinator";

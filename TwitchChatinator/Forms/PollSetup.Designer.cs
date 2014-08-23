@@ -53,9 +53,6 @@
             this.BottomMarginNum = new System.Windows.Forms.NumericUpDown();
             this.BarHeightNum = new System.Windows.Forms.NumericUpDown();
             this.BarWidthNum = new System.Windows.Forms.NumericUpDown();
-            this.TitleSizeNum = new System.Windows.Forms.NumericUpDown();
-            this.CountSizeNum = new System.Windows.Forms.NumericUpDown();
-            this.TotalSizeNum = new System.Windows.Forms.NumericUpDown();
             this.TotalWidthNum = new System.Windows.Forms.NumericUpDown();
             this.BarSpacingNum = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
@@ -64,9 +61,6 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.TitleColorInput = new System.Windows.Forms.TextBox();
@@ -77,15 +71,18 @@
             this.label21 = new System.Windows.Forms.Label();
             this.FontInput = new System.Windows.Forms.TextBox();
             this.label22 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.TitleFontButton = new System.Windows.Forms.Button();
+            this.CountFontButton = new System.Windows.Forms.Button();
+            this.TotalFontButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.LeftMarginNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.RightMarginNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TopMarginNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BottomMarginNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BarHeightNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BarWidthNum)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.TitleSizeNum)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CountSizeNum)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.TotalSizeNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TotalWidthNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BarSpacingNum)).BeginInit();
             this.SuspendLayout();
@@ -166,7 +163,7 @@
             // 
             // SavePollSetup
             // 
-            this.SavePollSetup.Location = new System.Drawing.Point(98, 308);
+            this.SavePollSetup.Location = new System.Drawing.Point(384, 311);
             this.SavePollSetup.Name = "SavePollSetup";
             this.SavePollSetup.Size = new System.Drawing.Size(75, 23);
             this.SavePollSetup.TabIndex = 4;
@@ -370,75 +367,9 @@
             0,
             0});
             // 
-            // TitleSizeNum
-            // 
-            this.TitleSizeNum.Location = new System.Drawing.Point(436, 238);
-            this.TitleSizeNum.Maximum = new decimal(new int[] {
-            900,
-            0,
-            0,
-            0});
-            this.TitleSizeNum.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.TitleSizeNum.Name = "TitleSizeNum";
-            this.TitleSizeNum.Size = new System.Drawing.Size(62, 20);
-            this.TitleSizeNum.TabIndex = 18;
-            this.TitleSizeNum.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // CountSizeNum
-            // 
-            this.CountSizeNum.Location = new System.Drawing.Point(436, 264);
-            this.CountSizeNum.Maximum = new decimal(new int[] {
-            900,
-            0,
-            0,
-            0});
-            this.CountSizeNum.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.CountSizeNum.Name = "CountSizeNum";
-            this.CountSizeNum.Size = new System.Drawing.Size(62, 20);
-            this.CountSizeNum.TabIndex = 18;
-            this.CountSizeNum.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // TotalSizeNum
-            // 
-            this.TotalSizeNum.Location = new System.Drawing.Point(436, 290);
-            this.TotalSizeNum.Maximum = new decimal(new int[] {
-            900,
-            0,
-            0,
-            0});
-            this.TotalSizeNum.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.TotalSizeNum.Name = "TotalSizeNum";
-            this.TotalSizeNum.Size = new System.Drawing.Size(62, 20);
-            this.TotalSizeNum.TabIndex = 18;
-            this.TotalSizeNum.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
             // TotalWidthNum
             // 
-            this.TotalWidthNum.Location = new System.Drawing.Point(436, 316);
+            this.TotalWidthNum.Location = new System.Drawing.Point(436, 262);
             this.TotalWidthNum.Maximum = new decimal(new int[] {
             900,
             0,
@@ -534,37 +465,10 @@
             this.label13.TabIndex = 23;
             this.label13.Text = "Bar Width";
             // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(368, 240);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(50, 13);
-            this.label14.TabIndex = 23;
-            this.label14.Text = "Title Size";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(360, 266);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(58, 13);
-            this.label15.TabIndex = 23;
-            this.label15.Text = "Count Size";
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(364, 292);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(54, 13);
-            this.label16.TabIndex = 23;
-            this.label16.Text = "Total Size";
-            // 
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(356, 318);
+            this.label17.Location = new System.Drawing.Point(356, 264);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(62, 13);
             this.label17.TabIndex = 23;
@@ -581,21 +485,21 @@
             // 
             // TitleColorInput
             // 
-            this.TitleColorInput.Location = new System.Drawing.Point(81, 250);
+            this.TitleColorInput.Location = new System.Drawing.Point(256, 257);
             this.TitleColorInput.Name = "TitleColorInput";
             this.TitleColorInput.Size = new System.Drawing.Size(20, 20);
             this.TitleColorInput.TabIndex = 24;
             // 
             // CountColorInput
             // 
-            this.CountColorInput.Location = new System.Drawing.Point(190, 250);
+            this.CountColorInput.Location = new System.Drawing.Point(256, 288);
             this.CountColorInput.Name = "CountColorInput";
             this.CountColorInput.Size = new System.Drawing.Size(20, 20);
             this.CountColorInput.TabIndex = 24;
             // 
             // TotalColorInput
             // 
-            this.TotalColorInput.Location = new System.Drawing.Point(307, 250);
+            this.TotalColorInput.Location = new System.Drawing.Point(256, 318);
             this.TotalColorInput.Name = "TotalColorInput";
             this.TotalColorInput.Size = new System.Drawing.Size(20, 20);
             this.TotalColorInput.TabIndex = 24;
@@ -603,7 +507,7 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(13, 253);
+            this.label19.Location = new System.Drawing.Point(184, 260);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(54, 13);
             this.label19.TabIndex = 25;
@@ -612,7 +516,7 @@
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(122, 253);
+            this.label20.Location = new System.Drawing.Point(176, 291);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(62, 13);
             this.label20.TabIndex = 25;
@@ -621,7 +525,7 @@
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(239, 253);
+            this.label21.Location = new System.Drawing.Point(180, 321);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(58, 13);
             this.label21.TabIndex = 26;
@@ -633,7 +537,6 @@
             this.FontInput.Name = "FontInput";
             this.FontInput.Size = new System.Drawing.Size(126, 20);
             this.FontInput.TabIndex = 27;
-            this.FontInput.TextChanged += new System.EventHandler(this.FontInput_TextChanged);
             // 
             // label22
             // 
@@ -644,11 +547,71 @@
             this.label22.TabIndex = 28;
             this.label22.Text = "Font";
             // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(44, 264);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(51, 13);
+            this.label14.TabIndex = 29;
+            this.label14.Text = "Title Font";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(36, 295);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(59, 13);
+            this.label15.TabIndex = 30;
+            this.label15.Text = "Count Font";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(40, 325);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(55, 13);
+            this.label16.TabIndex = 31;
+            this.label16.Text = "Total Font";
+            // 
+            // TitleFontButton
+            // 
+            this.TitleFontButton.Location = new System.Drawing.Point(101, 260);
+            this.TitleFontButton.Name = "TitleFontButton";
+            this.TitleFontButton.Size = new System.Drawing.Size(20, 20);
+            this.TitleFontButton.TabIndex = 32;
+            this.TitleFontButton.UseVisualStyleBackColor = true;
+            this.TitleFontButton.Click += new System.EventHandler(this.TitleFontButton_Click);
+            // 
+            // CountFontButton
+            // 
+            this.CountFontButton.Location = new System.Drawing.Point(101, 291);
+            this.CountFontButton.Name = "CountFontButton";
+            this.CountFontButton.Size = new System.Drawing.Size(20, 20);
+            this.CountFontButton.TabIndex = 33;
+            this.CountFontButton.UseVisualStyleBackColor = true;
+            this.CountFontButton.Click += new System.EventHandler(this.CountFontButton_Click);
+            // 
+            // TotalFontButton
+            // 
+            this.TotalFontButton.Location = new System.Drawing.Point(101, 321);
+            this.TotalFontButton.Name = "TotalFontButton";
+            this.TotalFontButton.Size = new System.Drawing.Size(20, 20);
+            this.TotalFontButton.TabIndex = 34;
+            this.TotalFontButton.UseVisualStyleBackColor = true;
+            this.TotalFontButton.Click += new System.EventHandler(this.TotalFontButton_Click);
+            // 
             // PollSetup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(549, 353);
+            this.ClientSize = new System.Drawing.Size(531, 383);
+            this.Controls.Add(this.TotalFontButton);
+            this.Controls.Add(this.CountFontButton);
+            this.Controls.Add(this.TitleFontButton);
+            this.Controls.Add(this.label16);
+            this.Controls.Add(this.label15);
+            this.Controls.Add(this.label14);
             this.Controls.Add(this.label22);
             this.Controls.Add(this.FontInput);
             this.Controls.Add(this.label21);
@@ -659,9 +622,6 @@
             this.Controls.Add(this.TitleColorInput);
             this.Controls.Add(this.label18);
             this.Controls.Add(this.label17);
-            this.Controls.Add(this.label16);
-            this.Controls.Add(this.label15);
-            this.Controls.Add(this.label14);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label11);
@@ -670,9 +630,6 @@
             this.Controls.Add(this.label8);
             this.Controls.Add(this.BarSpacingNum);
             this.Controls.Add(this.TotalWidthNum);
-            this.Controls.Add(this.TotalSizeNum);
-            this.Controls.Add(this.CountSizeNum);
-            this.Controls.Add(this.TitleSizeNum);
             this.Controls.Add(this.BarWidthNum);
             this.Controls.Add(this.BarHeightNum);
             this.Controls.Add(this.BottomMarginNum);
@@ -708,9 +665,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.BottomMarginNum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BarHeightNum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BarWidthNum)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.TitleSizeNum)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CountSizeNum)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.TotalSizeNum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TotalWidthNum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BarSpacingNum)).EndInit();
             this.ResumeLayout(false);
@@ -744,9 +698,6 @@
         private System.Windows.Forms.NumericUpDown BottomMarginNum;
         private System.Windows.Forms.NumericUpDown BarHeightNum;
         private System.Windows.Forms.NumericUpDown BarWidthNum;
-        private System.Windows.Forms.NumericUpDown TitleSizeNum;
-        private System.Windows.Forms.NumericUpDown CountSizeNum;
-        private System.Windows.Forms.NumericUpDown TotalSizeNum;
         private System.Windows.Forms.NumericUpDown TotalWidthNum;
         private System.Windows.Forms.NumericUpDown BarSpacingNum;
         private System.Windows.Forms.Label label8;
@@ -755,9 +706,6 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.TextBox TitleColorInput;
@@ -768,6 +716,12 @@
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.TextBox FontInput;
         private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Button TitleFontButton;
+        private System.Windows.Forms.Button CountFontButton;
+        private System.Windows.Forms.Button TotalFontButton;
 
     }
 }
