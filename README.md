@@ -31,7 +31,7 @@ Where to get
 ------------
 
 Binaries
-- Download the binary from [My Blog](https://mrkmg.com/chatinator)
+- Download the Installer or ZIP from [My Blog](https://mrkmg.com/chatinator)
 
 Build yourself
 - Download or Clone this repository.
