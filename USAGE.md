@@ -12,7 +12,7 @@ Quick Start
 1. Run TwitchChatinator.exe
 2. Setup your credentials by clicking the "Set Credentials" button.
   - Enter your username
-  - Enter your password
+  - Enter your Twitch Chat OAuth - You can use [Twitch Chat OAuth Password Generator](http://www.twitchapps.com/tmi/)
   - (If you want to monitor a different channel, enter your channel in all lowercase)
 3. Start the monitor by clicking "Start Listening". This will connect to twitch and start watching the chat.
 4. Start a poll or giveaway, click "Start Poll" or "Start Roll" respectively
