@@ -141,24 +141,19 @@
     <Compile Include="Forms\RunPoll.Designer.cs">
       <DependentUpon>RunPoll.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\PollSetup.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\PollSetup.Designer.cs">
-      <DependentUpon>PollSetup.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\RunRoll.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\RunRoll.Designer.cs">
       <DependentUpon>RunRoll.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\SetupRoll.cs">
+    <Compile Include="Forms\SetupBarGraph.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\SetupRoll.Designer.cs">
-      <DependentUpon>SetupRoll.cs</DependentUpon>
+    <Compile Include="Forms\SetupBarGraph.Designer.cs">
+      <DependentUpon>SetupBarGraph.cs</DependentUpon>
     </Compile>
+    <Compile Include="Libs\BarGraphOptions.cs" />
     <Compile Include="Libs\DataStore.cs" />
     <Compile Include="Libs\Log.cs" />
     <Compile Include="Forms\MessageBrowser.cs">
@@ -193,9 +188,6 @@
     <EmbeddedResource Include="Forms\MessageBrowser.resx">
       <DependentUpon>MessageBrowser.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PollSetup.resx">
-      <DependentUpon>PollSetup.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\RunPoll.resx">
       <DependentUpon>RunPoll.cs</DependentUpon>
     </EmbeddedResource>
@@ -205,8 +197,8 @@
     <EmbeddedResource Include="Forms\SetCredentialsScreen.resx">
       <DependentUpon>SetCredentialsScreen.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SetupRoll.resx">
-      <DependentUpon>SetupRoll.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\SetupBarGraph.resx">
+      <DependentUpon>SetupBarGraph.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
