@@ -14,10 +14,6 @@ namespace TwitchChatinator
     public partial class WelcomeScreen : Form
     {
         public TwitchIRC TI;
-        public RunPoll RP;
-        public RunRoll RR;
-        DateTime PollStart;
-        DateTime RollStart;
 
         private bool isConnected = false;
 
@@ -77,7 +73,6 @@ namespace TwitchChatinator
         void WelcomeScreen_FormClosed(object sender, FormClosedEventArgs e)
         {
             StopListen();
-            if (RP != null && !RP.IsDisposed) RP.Close();
             Console.WriteLine("Good Bye");
         }
 
@@ -130,79 +125,18 @@ namespace TwitchChatinator
             MB.Show();
         }
 
-        private void ResetButton_Click(object sender, EventArgs e)
-        {
-            string u = Settings.Default.TwitchUsername;
-            string p = Settings.Default.TwitchPassword;
-            string c = Settings.Default.TwithChannel;
-            Settings.Default.Reset();
-            Settings.Default.TwitchUsername = u;
-            Settings.Default.TwitchPassword = p;
-            Settings.Default.TwithChannel = c;
-            Settings.Default.Save();
-
-            if (RP != null && !RP.IsDisposed)
-                StartRunPoll();
-
-            if (RR != null && !RR.IsDisposed)
-                StartRunRoll();
-        }
-
         private void ShowPollConfig_Click(object sender, EventArgs e)
         {
-            PollSetup PS = new PollSetup();
-            PS.OnSave += PS_OnSave;
-
-            PS.Show();
-        }
-
-        void PS_OnSave()
-        {
-            if(RP != null && !RP.IsDisposed)
-                StartRunPoll();
+            var Manager = new ManagePolls();
+            Manager.Show();
         }
 
         private void StartPollButton_Click(object sender, EventArgs e)
         {
-            PollStart = DateTime.Now;
-            StartRunPoll();
-        }
-
-        void StartRunPoll()
-        {
-            if (RP != null && !RP.IsDisposed)
-            {
-                RP.Close();
-                while (!RP.IsDisposed) Thread.Sleep(50);
-                RP = new RunPoll(PollStart);
-            }
-            else
-            {
-                RP = new RunPoll(PollStart);
-            }
-            RP.Show();
         }
 
         private void StartRollButton_Click(object sender, EventArgs e)
         {
-            RollStart = DateTime.Now;
-            StartRunRoll();
-        }
-
-        void StartRunRoll()
-        {
-            if (RR != null && !RR.IsDisposed)
-            {
-                RR.Close();
-                while (!RR.IsDisposed) Thread.Sleep(50);
-                RR = new RunRoll(RollStart);
-            }
-            else
-            {
-                RR = new RunRoll(RollStart);
-            }
-            Thread.Sleep(100);
-            RR.Show();
         }
 
         protected override void Dispose(bool disposing)
@@ -219,16 +153,7 @@ namespace TwitchChatinator
 
         private void SetupRollButton_Click(object sender, EventArgs e)
         {
-            SetupRoll SR = new SetupRoll();
-            SR.OnSave += SR_OnSave;
 
-            SR.Show();
-        }
-
-        void SR_OnSave()
-        {
-            if (RR != null && !RR.IsDisposed)
-                StartRunRoll();
         }
 
         private void ExportButton_Click(object sender, EventArgs e)

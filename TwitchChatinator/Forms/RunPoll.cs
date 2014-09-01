@@ -13,6 +13,7 @@ namespace TwitchChatinator
 {
     public partial class RunPoll : PaintWindow
     {
+        /*
         DateTime StartTime;
 
         int LeftMargin;
@@ -284,6 +285,7 @@ namespace TwitchChatinator
                 BarsBrush[i].Dispose();
 
         }
+         * */
     }
 
     class PollData

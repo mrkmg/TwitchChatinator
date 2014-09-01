@@ -22,7 +22,7 @@ namespace TwitchChatinator
 
         private DataStore()
         {
-            string saveLocation = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            string saveLocation = Program.AppDataFolder();
             Connection = new SQLiteConnection("Data Source=" + saveLocation + @"\Database.sqlite;Version=3");
             Connection.Open();
             InitDB();

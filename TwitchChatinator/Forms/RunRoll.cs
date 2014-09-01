@@ -13,6 +13,7 @@ namespace TwitchChatinator
 {
     public partial class RunRoll : PaintWindow
     {
+        /*
         const short STAGE_WAITING = 0;
         const short STAGE_ROLLING = 1;
         const short STAGE_POSTROLL = 2;
@@ -269,5 +270,6 @@ namespace TwitchChatinator
 
             base.Dispose(disposing);
         }
+         */
     }
 }

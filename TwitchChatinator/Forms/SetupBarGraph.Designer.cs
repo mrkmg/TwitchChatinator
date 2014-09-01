@@ -35,6 +35,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.BarSpacing = new System.Windows.Forms.NumericUpDown();
+            this.label16 = new System.Windows.Forms.Label();
             this.MarginRight = new System.Windows.Forms.NumericUpDown();
             this.MarginLeft = new System.Windows.Forms.NumericUpDown();
             this.MarginBottom = new System.Windows.Forms.NumericUpDown();
@@ -67,14 +69,13 @@
             this.SaveButton = new System.Windows.Forms.Button();
             this.CancelButton = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.label15 = new System.Windows.Forms.Label();
             this.TotalPosition = new System.Windows.Forms.ComboBox();
-            this.BarSpacing = new System.Windows.Forms.NumericUpDown();
-            this.label16 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.HeightInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.WidthInput)).BeginInit();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.BarSpacing)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.MarginRight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.MarginLeft)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.MarginBottom)).BeginInit();
@@ -82,7 +83,6 @@
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.BarSpacing)).BeginInit();
             this.SuspendLayout();
             // 
             // NameLabel
@@ -168,6 +168,27 @@
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Margins";
+            // 
+            // BarSpacing
+            // 
+            this.BarSpacing.Location = new System.Drawing.Point(128, 99);
+            this.BarSpacing.Maximum = new decimal(new int[] {
+            9999999,
+            0,
+            0,
+            0});
+            this.BarSpacing.Name = "BarSpacing";
+            this.BarSpacing.Size = new System.Drawing.Size(66, 20);
+            this.BarSpacing.TabIndex = 9;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(6, 101);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(73, 13);
+            this.label16.TabIndex = 8;
+            this.label16.Text = "Between Bars";
             // 
             // MarginRight
             // 
@@ -474,17 +495,9 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Other";
             // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(9, 20);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(71, 13);
-            this.label15.TabIndex = 0;
-            this.label15.Text = "Total Position";
-            // 
             // TotalPosition
             // 
+            this.TotalPosition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.TotalPosition.FormattingEnabled = true;
             this.TotalPosition.Items.AddRange(new object[] {
             "Top Left",
@@ -500,26 +513,14 @@
             this.TotalPosition.Size = new System.Drawing.Size(75, 21);
             this.TotalPosition.TabIndex = 1;
             // 
-            // BarSpacing
+            // label15
             // 
-            this.BarSpacing.Location = new System.Drawing.Point(128, 99);
-            this.BarSpacing.Maximum = new decimal(new int[] {
-            9999999,
-            0,
-            0,
-            0});
-            this.BarSpacing.Name = "BarSpacing";
-            this.BarSpacing.Size = new System.Drawing.Size(66, 20);
-            this.BarSpacing.TabIndex = 9;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(6, 101);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(73, 13);
-            this.label16.TabIndex = 8;
-            this.label16.Text = "Between Bars";
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(9, 20);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(71, 13);
+            this.label15.TabIndex = 0;
+            this.label15.Text = "Total Position";
             // 
             // SetupBarGraph
             // 
@@ -543,6 +544,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.WidthInput)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.BarSpacing)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.MarginRight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.MarginLeft)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.MarginBottom)).EndInit();
@@ -553,7 +555,6 @@
             this.groupBox4.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.BarSpacing)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

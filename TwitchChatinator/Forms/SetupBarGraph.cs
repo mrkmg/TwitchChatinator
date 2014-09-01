@@ -12,17 +12,17 @@ namespace TwitchChatinator
 {
     public partial class SetupBarGraph : Form
     {
-        private string Name;
+        private string OptionsName;
         private BarGraphOptions Options;
 
         private Font OptionLabelFont;
         private Font CountFont;
         private Font TotalFont;
 
-        public SetupBarGraph(string name)
+        public SetupBarGraph(string N)
         {
-            Name = name;
             InitializeComponent();
+            OptionsName = N;
             Populate();
             ChromaKey.Click += ColorClickHandler;
             Option1Color.Click += ColorClickHandler;
@@ -43,25 +43,6 @@ namespace TwitchChatinator
 
         void SaveButton_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
-        }
-
-        void CancelButton_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
-        private bool Populate()
-        {
-            try
-            {
-                Options = BarGraphOptions.Load(Name);
-            }
-            catch (Exception e)
-            {
-                return false;
-            }
-
             Options.Height = (int)HeightInput.Value;
             Options.Width = (int)WidthInput.Value;
 
@@ -86,7 +67,54 @@ namespace TwitchChatinator
             Options.TotalFont = TotalFont;
             Options.TotalFontColor = TotalFontColor.BackColor;
 
-            Options.Save(Name);
+            Options.TotalPosition = TotalPosition.SelectedItem.ToString();
+
+            Options.Save(OptionsName);
+        }
+
+        void CancelButton_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private bool Populate()
+        {
+            try
+            {
+                Options = BarGraphOptions.Load(OptionsName);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            NameLabel.Text = OptionsName;
+
+            HeightInput.Value = Options.Height;
+            WidthInput.Value = Options.Width;
+
+            MarginTop.Value = Options.MarginTop;
+            MarginBottom.Value = Options.MarginBottom;
+            MarginLeft.Value = Options.MarginLeft;
+            MarginRight.Value = Options.MarginRight;
+            BarSpacing.Value = Options.BarSpacing;
+
+            ChromaKey.BackColor = Options.ChromaKey;
+            Option1Color.BackColor = Options.Option1Color;
+            Option2Color.BackColor = Options.Option2Color;
+            Option3Color.BackColor = Options.Option3Color;
+            Option4Color.BackColor = Options.Option4Color;
+
+            OptionLabelFont = Options.OptionFont;
+            OptionFontColor.BackColor = Options.OptionFontColor;
+
+            CountFont = Options.CountFont;
+            CountFontColor.BackColor = Options.CountFontColor;
+
+            TotalFont = Options.TotalFont;
+            TotalFontColor.BackColor = Options.TotalFontColor;
+
+            TotalPosition.SelectedItem = Options.TotalPosition;
 
             return true;
         }

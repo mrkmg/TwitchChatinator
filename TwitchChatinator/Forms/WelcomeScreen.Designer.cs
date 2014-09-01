@@ -112,7 +112,6 @@
             this.ResetButton.TabIndex = 8;
             this.ResetButton.Text = "Reset";
             this.ResetButton.UseVisualStyleBackColor = true;
-            this.ResetButton.Click += new System.EventHandler(this.ResetButton_Click);
             // 
             // StartRollButton
             // 

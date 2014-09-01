@@ -9,36 +9,108 @@ using System.IO;
 
 namespace TwitchChatinator
 {
-    class BarGraphOptions
+    public class BarGraphOptions
     {
+        [XmlElement]
         public int Width { get; set; }
+        [XmlElement]
         public int Height { get; set; }
 
+        [XmlElement]
         public int MarginTop { get; set; }
+        [XmlElement]
         public int MarginBottom { get; set; }
+        [XmlElement]
         public int MarginLeft { get; set; }
+        [XmlElement]
         public int MarginRight { get; set; }
 
+        [XmlElement]
         public int BarSpacing { get; set; }
 
+        [XmlIgnore]
         public Color ChromaKey { get; set; }
+        [XmlIgnore]
         public Color Option1Color { get; set; }
+        [XmlIgnore]
         public Color Option2Color { get; set; }
+        [XmlIgnore]
         public Color Option3Color { get; set; }
+        [XmlIgnore]
         public Color Option4Color { get; set; }
 
+        [XmlIgnore]
         public Color OptionFontColor { get; set; }
-        public Font OptionFont { get; set; }
+        [XmlElement]
+        public SerializableFont OptionFont { get; set; }
 
+        [XmlIgnore]
         public Color CountFontColor { get; set; }
-        public Font CountFont { get; set; }
+        [XmlElement]
+        public SerializableFont CountFont { get; set; }
 
+        [XmlIgnore]
         public Color TotalFontColor { get; set; }
-        public Font TotalFont { get; set; }
+        [XmlElement]
+        public SerializableFont TotalFont { get; set; }
 
+        [XmlElement]
         public bool AllowMulti { get; set; }
 
+        [XmlElement]
         public string TotalPosition { get; set; }
+
+
+        //Special for XMLSerialization
+        [XmlElement]
+        public string ChromaKeyCode
+        {
+            get { return ColorTranslator.ToHtml(ChromaKey); }
+            set { ChromaKey = ColorTranslator.FromHtml(value); }
+        }
+        [XmlElement]
+        public string Option1ColorCode
+        {
+            get { return ColorTranslator.ToHtml(Option1Color); }
+            set { Option1Color = ColorTranslator.FromHtml(value); }
+        }
+        [XmlElement]
+        public string Option2ColorCode
+        {
+            get { return ColorTranslator.ToHtml(Option2Color); }
+            set { Option2Color = ColorTranslator.FromHtml(value); }
+        }
+        [XmlElement]
+        public string Option3ColorCode
+        {
+            get { return ColorTranslator.ToHtml(Option3Color); }
+            set { Option3Color = ColorTranslator.FromHtml(value); }
+        }
+        [XmlElement]
+        public string Option4ColorCode
+        {
+            get { return ColorTranslator.ToHtml(Option4Color); }
+            set { Option4Color = ColorTranslator.FromHtml(value); }
+        }
+        [XmlElement]
+        public string OptionFontColorCode
+        {
+            get { return ColorTranslator.ToHtml(OptionFontColor); }
+            set { OptionFontColor = ColorTranslator.FromHtml(value); }
+        }
+        [XmlElement]
+        public string CountFontColorCode
+        {
+            get { return ColorTranslator.ToHtml(CountFontColor); }
+            set { CountFontColor = ColorTranslator.FromHtml(value); }
+        }
+        [XmlElement]
+        public string TotalFontColorCode
+        {
+            get { return ColorTranslator.ToHtml(TotalFontColor); }
+            set { TotalFontColor = ColorTranslator.FromHtml(value); }
+        }
+
 
         //TODO - Add in exception login
         static public BarGraphOptions Load(string name)
@@ -56,7 +128,7 @@ namespace TwitchChatinator
         public void Save(string name)
         {
             var writer = new XmlSerializer(typeof(BarGraphOptions));
-            var stream = new StreamWriter(getPathFromName(name),false);
+            var stream = new StreamWriter(getPathFromName(name));
 
             writer.Serialize(stream, this);
 
@@ -87,14 +159,14 @@ namespace TwitchChatinator
             obj.OptionFont = new Font("Segoe UI", 15.75f, FontStyle.Bold);
 
             obj.CountFontColor = Color.White;
-            obj.CountFont =  new Font("Segoe UI", 10.25f, FontStyle.Italic);
+            obj.CountFont = new Font("Segoe UI", 10.25f, FontStyle.Italic);
 
             obj.TotalFontColor = Color.White;
             obj.TotalFont = new Font("Segoe UI", 15.75f, FontStyle.Bold);
 
             obj.AllowMulti = false;
 
-            obj.TotalPosition = "BottomMiddle";
+            obj.TotalPosition = "Bottom Middle";
 
             obj.Save(name);
         }
@@ -106,12 +178,34 @@ namespace TwitchChatinator
 
         static public void Rename(string fromName, string toName)
         {
-            File.Move(getPathFromName(fromName),getPathFromName(toName));
+            File.Move(getPathFromName(fromName), getPathFromName(toName));
+        }
+
+        static public List<string> GetAvaliable()
+        {
+            var names = new List<string>();
+            string directory = Program.AppDataFolder() + @"\Polls\BarGraphs";
+
+            if (!Directory.Exists(directory))
+            {
+                Directory.CreateDirectory(directory);
+            }
+
+            string[] files = Directory.GetFiles(directory);
+
+            foreach (string file in files)
+            {
+                names.Add(Path.GetFileNameWithoutExtension(file));
+            }
+
+            names.Sort();
+
+            return names;
         }
 
         static public string getPathFromName(string name)
         {
-            return Environment.SpecialFolder.ApplicationData + @"\BarGraph_" + name + ".xml";
+            return Program.AppDataFolder() + @"\Polls\BarGraphs\" + name + ".xml";
         }
     }
 }

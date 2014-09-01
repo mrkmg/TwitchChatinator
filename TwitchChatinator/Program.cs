@@ -62,5 +62,10 @@ namespace TwitchChatinator
 
             return true;
         }
+
+        public static string AppDataFolder()
+        {
+            return Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Chatinator";
+        }
     }
 }
