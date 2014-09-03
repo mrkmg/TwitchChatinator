@@ -64,8 +64,8 @@ namespace TwitchChatinator
             Options.CountFont = CountFont;
             Options.CountFontColor = CountFontColor.BackColor;
 
-            Options.TotalFont = TotalFont;
-            Options.TotalFontColor = TotalFontColor.BackColor;
+            Options.TitleFont = TotalFont;
+            Options.TitleFontColor = TotalFontColor.BackColor;
 
             Options.TotalPosition = TotalPosition.SelectedItem.ToString();
 
@@ -111,8 +111,8 @@ namespace TwitchChatinator
             CountFont = Options.CountFont;
             CountFontColor.BackColor = Options.CountFontColor;
 
-            TotalFont = Options.TotalFont;
-            TotalFontColor.BackColor = Options.TotalFontColor;
+            TotalFont = Options.TitleFont;
+            TotalFontColor.BackColor = Options.TitleFontColor;
 
             TotalPosition.SelectedItem = Options.TotalPosition;
 

@@ -19,6 +19,7 @@ namespace TwitchChatinator
         {
             InitializeComponent();
 
+            List.SelectionMode = SelectionMode.One;
             PopulateList();
         }
 
@@ -44,50 +45,100 @@ namespace TwitchChatinator
                 Options.Add(new SelectListObject(n, "Pie"));
                 List.Items.Add("Pie - " + n);
             }
+
+
+            if (List.Items.Count > 0)
+            {
+                List.SelectedIndex = 0;
+                EditButton.Enabled = true;
+                DeleteButton.Enabled = true;
+                CopyButton.Enabled = true;
+                RenameButton.Enabled = true;
+            }
+            else
+            {
+                EditButton.Enabled = false;
+                DeleteButton.Enabled = false;
+                CopyButton.Enabled = false;
+                RenameButton.Enabled = false;
+            }
         }
 
         private void NewBarButton_Click(object sender, EventArgs e)
         {
-            InputBoxResult result = InputBox.Show("Name:", "New Bar Graph", "", null);
+            InputBoxResult result = InputBox.Show("Name:", "New Bar Graph", "", BarGraphOptions.ValidateNameHandler);
             if (result.OK)
             {
                 //TODO: Add Exception Control
                 BarGraphOptions.CreateNew(result.Text);
-                PopulateList();
             }
+            PopulateList();
         }
 
         private void EditButton_Click(object sender, EventArgs e)
         {
-            if (Options.Count != 0)
+            switch (Options[List.SelectedIndex].type)
             {
-                switch(Options[List.SelectedIndex].type){
-                    case "Bar":
-                        var sp = new SetupBarGraph(Options[List.SelectedIndex].name);
-                        sp.Show();
-                        break;
-                    case "Pie":
+                case "Bar":
+                    var sp = new SetupBarGraph(Options[List.SelectedIndex].name);
+                    sp.Show();
+                    break;
+                case "Pie":
 
-                        break;
-                }
+                    break;
             }
         }
-    }
 
-    class SelectListObject
-    {
-        public string name { get; set; }
-        public string type { get; set; }
-
-        public SelectListObject()
+        private void DeleteButton_Click(object sender, EventArgs e)
         {
+            switch (Options[List.SelectedIndex].type)
+            {
+                case "Bar":
+                    BarGraphOptions.Remove(Options[List.SelectedIndex].name);
+                    break;
+                case "Pie":
 
+                    break;
+            }
+            PopulateList();
         }
 
-        public SelectListObject(string n, string t)
+        private void RenameButton_Click(object sender, EventArgs e)
         {
-            name = n;
-            type = t;
+            switch (Options[List.SelectedIndex].type)
+            {
+                case "Bar":
+                    InputBoxResult result = InputBox.Show("New Name:", "Rename Bar Graph", "", BarGraphOptions.ValidateNameHandler);
+                    if (result.OK)
+                    {
+                        BarGraphOptions.Rename(Options[List.SelectedIndex].name, result.Text);
+                    }
+                    break;
+                case "Pie":
+
+                    break;
+            }
+            PopulateList();
+        }
+
+        private void CopyButton_Click(object sender, EventArgs e)
+        {
+            switch (Options[List.SelectedIndex].type)
+            {
+                case "Bar":
+                    InputBoxResult result = InputBox.Show("Copy To:", "Copy Bar Graph", "", BarGraphOptions.ValidateNameHandler);
+                    if (result.OK)
+                    {
+
+                        var o = BarGraphOptions.Load(Options[List.SelectedIndex].name);
+                        o.Save(result.Text);
+                    }
+                    break;
+                case "Pie":
+
+                    break;
+            }
+            PopulateList();
         }
     }
 }

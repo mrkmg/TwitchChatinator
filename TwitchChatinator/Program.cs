@@ -68,4 +68,21 @@ namespace TwitchChatinator
             return Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Chatinator";
         }
     }
+
+    class SelectListObject
+    {
+        public string name { get; set; }
+        public string type { get; set; }
+
+        public SelectListObject()
+        {
+
+        }
+
+        public SelectListObject(string n, string t)
+        {
+            name = n;
+            type = t;
+        }
+    }
 }

@@ -41,18 +41,18 @@ namespace TwitchChatinator
 
         [XmlIgnore]
         public Color OptionFontColor { get; set; }
-        [XmlElement]
-        public SerializableFont OptionFont { get; set; }
+        [XmlIgnore]
+        public Font OptionFont { get; set; }
 
         [XmlIgnore]
         public Color CountFontColor { get; set; }
-        [XmlElement]
-        public SerializableFont CountFont { get; set; }
+        [XmlIgnore]
+        public Font CountFont { get; set; }
 
         [XmlIgnore]
-        public Color TotalFontColor { get; set; }
-        [XmlElement]
-        public SerializableFont TotalFont { get; set; }
+        public Color TitleFontColor { get; set; }
+        [XmlIgnore]
+        public Font TitleFont { get; set; }
 
         [XmlElement]
         public bool AllowMulti { get; set; }
@@ -62,6 +62,8 @@ namespace TwitchChatinator
 
 
         //Special for XMLSerialization
+        //Thank you [BenAlabaster] (https://stackoverflow.com/users/40650/benalabaster)
+        //https://stackoverflow.com/questions/376234/best-solution-for-xmlserializer-and-system-drawing-color/376254#376254
         [XmlElement]
         public string ChromaKeyCode
         {
@@ -105,14 +107,66 @@ namespace TwitchChatinator
             set { CountFontColor = ColorTranslator.FromHtml(value); }
         }
         [XmlElement]
-        public string TotalFontColorCode
+        public string TitleFontColorCode
         {
-            get { return ColorTranslator.ToHtml(TotalFontColor); }
-            set { TotalFontColor = ColorTranslator.FromHtml(value); }
+            get { return ColorTranslator.ToHtml(TitleFontColor); }
+            set { TitleFontColor = ColorTranslator.FromHtml(value); }
         }
 
 
-        //TODO - Add in exception login
+        [XmlElement]
+        public string OptionFontName
+        {
+            get { return FontXmlConverter.ConvertToString(OptionFont); }
+            set { OptionFont = FontXmlConverter.ConvertToFont(value); }
+        }
+        [XmlElement]
+        public string CountFontName
+        {
+            get { return FontXmlConverter.ConvertToString(CountFont); }
+            set { CountFont = FontXmlConverter.ConvertToFont(value); }
+        }
+        [XmlElement]
+        public string TitleFontName
+        {
+            get { return FontXmlConverter.ConvertToString(TitleFont); }
+            set { TitleFont = FontXmlConverter.ConvertToFont(value); }
+        }
+
+        public BarGraphOptions()
+        {
+            Width = 200;
+            Height = 400;
+
+            MarginTop = 5;
+            MarginBottom = 5;
+            MarginLeft = 5;
+            MarginRight = 5;
+
+            BarSpacing = 3;
+
+            ChromaKey = Color.Black;
+            Option1Color = Color.Maroon;
+            Option2Color = Color.RoyalBlue;
+            Option3Color = Color.Orange;
+            Option4Color = Color.ForestGreen;
+
+            OptionFontColor = Color.White;
+            OptionFont = new Font("Segoe UI", 15.75f, FontStyle.Bold);
+
+            CountFontColor = Color.White;
+            CountFont = new Font("Segoe UI", 10.25f, FontStyle.Italic);
+
+            TitleFontColor = Color.White;
+            TitleFont = new Font("Segoe UI", 15.75f, FontStyle.Bold);
+            
+            AllowMulti = false;
+
+            TotalPosition = "Bottom";
+        }
+
+
+        //TODO - Add in exception
         static public BarGraphOptions Load(string name)
         {
             var reader = new XmlSerializer(typeof(BarGraphOptions));
@@ -124,7 +178,7 @@ namespace TwitchChatinator
             return obj;
         }
 
-        //TODO - Add in exception login
+        //TODO - Add in exception
         public void Save(string name)
         {
             var writer = new XmlSerializer(typeof(BarGraphOptions));
@@ -138,36 +192,6 @@ namespace TwitchChatinator
         static public void CreateNew(string name)
         {
             var obj = new BarGraphOptions();
-
-            obj.Width = 300;
-            obj.Height = 300;
-
-            obj.MarginTop = 5;
-            obj.MarginBottom = 5;
-            obj.MarginLeft = 5;
-            obj.MarginRight = 5;
-
-            obj.BarSpacing = 3;
-
-            obj.ChromaKey = Color.Black;
-            obj.Option1Color = Color.Maroon;
-            obj.Option2Color = Color.RoyalBlue;
-            obj.Option3Color = Color.Orange;
-            obj.Option4Color = Color.ForestGreen;
-
-            obj.OptionFontColor = Color.White;
-            obj.OptionFont = new Font("Segoe UI", 15.75f, FontStyle.Bold);
-
-            obj.CountFontColor = Color.White;
-            obj.CountFont = new Font("Segoe UI", 10.25f, FontStyle.Italic);
-
-            obj.TotalFontColor = Color.White;
-            obj.TotalFont = new Font("Segoe UI", 15.75f, FontStyle.Bold);
-
-            obj.AllowMulti = false;
-
-            obj.TotalPosition = "Bottom Middle";
-
             obj.Save(name);
         }
 
@@ -206,6 +230,25 @@ namespace TwitchChatinator
         static public string getPathFromName(string name)
         {
             return Program.AppDataFolder() + @"\Polls\BarGraphs\" + name + ".xml";
+        }
+
+        static public void ValidateNameHandler(object sender, InputBoxValidatingArgs e)
+        {
+            if (e.Text.Length == 0)
+            {
+                e.Cancel = true;
+                e.Message = "Name is Required";
+            }
+
+            try
+            {
+                new FileInfo(getPathFromName(e.Text));
+            }
+            catch(Exception ex)
+            {
+                e.Cancel = true;
+                e.Message = "Invalid Characters";
+            }
         }
     }
 }

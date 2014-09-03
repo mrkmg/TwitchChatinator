@@ -287,17 +287,4 @@ namespace TwitchChatinator
         }
          * */
     }
-
-    class PollData
-    {
-        public string[] options;
-        public int[] amounts;
-        public int totalVotes = 0;
-
-        public PollData(int count)
-        {
-            options = new string[count];
-            amounts = new int[count];
-        }
-    }
 }

@@ -138,6 +138,12 @@
     <Compile Include="Forms\InputBox.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\LaunchPoll.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LaunchPoll.Designer.cs">
+      <DependentUpon>LaunchPoll.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ManagePolls.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -149,6 +155,12 @@
     </Compile>
     <Compile Include="Forms\RunPoll.Designer.cs">
       <DependentUpon>RunPoll.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\RunPollBar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\RunPollBar.Designer.cs">
+      <DependentUpon>RunPollBar.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\RunRoll.cs">
       <SubType>Form</SubType>
@@ -196,6 +208,9 @@
       <DependentUpon>WelcomeScreen.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Forms\InputBox.resx" />
+    <EmbeddedResource Include="Forms\LaunchPoll.resx">
+      <DependentUpon>LaunchPoll.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ManagePolls.resx">
       <DependentUpon>ManagePolls.cs</DependentUpon>
     </EmbeddedResource>

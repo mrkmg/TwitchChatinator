@@ -412,9 +412,9 @@
             this.label14.AutoSize = true;
             this.label14.Location = new System.Drawing.Point(8, 65);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(31, 13);
+            this.label14.Size = new System.Drawing.Size(27, 13);
             this.label14.TabIndex = 14;
-            this.label14.Text = "Total";
+            this.label14.Text = "Title";
             // 
             // CountFontColor
             // 
@@ -500,14 +500,8 @@
             this.TotalPosition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.TotalPosition.FormattingEnabled = true;
             this.TotalPosition.Items.AddRange(new object[] {
-            "Top Left",
-            "Top Center",
-            "Top Right",
-            "Middle Left",
-            "Middle Right",
-            "Bottom Left",
-            "Bottom Center",
-            "Bottom Right"});
+            "Top",
+            "Bottom"});
             this.TotalPosition.Location = new System.Drawing.Point(119, 17);
             this.TotalPosition.Name = "TotalPosition";
             this.TotalPosition.Size = new System.Drawing.Size(75, 21);
@@ -518,9 +512,9 @@
             this.label15.AutoSize = true;
             this.label15.Location = new System.Drawing.Point(9, 20);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(71, 13);
+            this.label15.Size = new System.Drawing.Size(67, 13);
             this.label15.TabIndex = 0;
-            this.label15.Text = "Total Position";
+            this.label15.Text = "Title Position";
             // 
             // SetupBarGraph
             // 

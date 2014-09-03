@@ -133,6 +133,8 @@ namespace TwitchChatinator
 
         private void StartPollButton_Click(object sender, EventArgs e)
         {
+            var Launcher = new LaunchPoll();
+            Launcher.Show();
         }
 
         private void StartRollButton_Click(object sender, EventArgs e)
