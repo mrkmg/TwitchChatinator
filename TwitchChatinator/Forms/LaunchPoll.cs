@@ -13,13 +13,98 @@ namespace TwitchChatinator
     public partial class LaunchPoll : Form
     {
         List<SelectListObject> Options;
+        List<TextBox> Inputs;
+        object Poll;
+        Type PollType;
+        DateTime StartTime;
 
         public LaunchPoll()
         {
             InitializeComponent();
 
             PopulateList();
+
+            Inputs = new List<TextBox>();
+
+            AddInput("Yes");
+            AddInput("No");
+            AddInput("");
+            StartTime = DateTime.Now;
+
+            InfoLabel.Text = "Stopped | " + StartTime.ToString("h:mm t");
         }
+
+        void AddInput()
+        {
+            AddInput("");
+        }
+
+        void AddInput(string option)
+        {
+            var Input = new TextBox();
+            Input.Width = Width - (SystemInformation.BorderSize.Width * 2) - 36;
+            Input.Left = 12;
+            Input.Text = option;
+
+            Controls.Add(Input);
+
+            Input.GotFocus += Input_GotFocus;
+            Input.LostFocus += Input_LostFocus;
+            Input.KeyUp += Input_KeyUp;
+
+            Inputs.Add(Input);
+
+            SetWindowSize();
+            PositionInputs();
+        }
+
+        void Input_GotFocus(object sender, EventArgs e)
+        {
+            var self = (TextBox)sender;
+
+            self.SelectAll();
+        }
+
+        void Input_KeyUp(object sender, KeyEventArgs e)
+        {
+            var self = (TextBox)sender;
+            
+            if (self.Text != String.Empty && self.Equals(Inputs.Last()))
+            {
+                AddInput("");
+                SetWindowSize();
+                PositionInputs();
+            }
+        }
+
+        private void Input_LostFocus(object sender, EventArgs e)
+        {
+            var self = (TextBox)sender;
+            
+            if (self.Text == String.Empty && !self.Equals(Inputs.Last()))
+            {
+                Inputs.Remove(self);
+                self.Dispose();
+                self = null;
+                SetWindowSize();
+                PositionInputs();
+            }
+        }
+
+        void PositionInputs()
+        {
+            for (int i = 0; i < Inputs.Count; i++)
+            {
+                Inputs[i].Top = i * 30 + 100;
+            }
+        }
+
+        void SetWindowSize()
+        {
+            Height = Inputs.Count * 30 + 160;
+            StartButton.Top = Height - 65;
+            InfoLabel.Top = Height - 63;
+        }        
 
         void PopulateList()
         {
@@ -58,37 +143,57 @@ namespace TwitchChatinator
 
         private void StartButton_Click(object sender, EventArgs e)
         {
-            List<string> Labels = new List<string>();
+            if (Giveaway == null)
+            {
+                List<string> Labels = new List<string>();
 
-            if (Option1.Text.Trim() != "")
-            {
-                Labels.Add(Option1.Text.Trim());
-            }
-            if (Option2.Text.Trim() != "")
-            {
-                Labels.Add(Option2.Text.Trim());
-            }
-            if (Option3.Text.Trim() != "")
-            {
-                Labels.Add(Option3.Text.Trim());
-            }
-            if (Option4.Text.Trim() != "")
-            {
-                Labels.Add(Option4.Text.Trim());
-            }
-            switch (Options[List.SelectedIndex].type)
-            {
-                case "Bar":
-                    RunPollBar RPB = new RunPollBar(DateTime.Now, Options[List.SelectedIndex].name, PollTitle.Text, Labels.ToArray());
-                    RPB.Show();
-                    break;
-                case "Pie":
+                foreach (var Input in Inputs)
+                {
+                    if (Input.Text.Trim() != String.Empty)
+                    {
+                        Labels.Add(Input.Text.Trim());
+                    }
+                }
 
-                    break;
+                switch (Options[List.SelectedIndex].type)
+                {
+                    case "Bar":
+                        RunPollBar RPB = new RunPollBar(StartTime, Options[List.SelectedIndex].name, PollTitle.Text, Labels.ToArray());
+                        RPB.Show();
+                        RPB.FormClosed += Poll_FormClosed;
+                        Giveaway = RPB;
+                        GiveawayType = typeof(RunPollBar);
+                        StartButton.Text = "Stop Poll";
+                        break;
+                    case "Pie":
+                        throw new NotImplementedException();
+                        break;
+                }
+                InfoLabel.Text = "Started | " + StartTime.ToString("h:mm t");
+            }
+            else
+            {
+                switch (GiveawayType.Name)
+                {
+                    case "RunPollBar":
+                        ((RunPollBar)Giveaway).Close();
+                        break;
+                    case "RunPollPie":
+                        throw new NotImplementedException();
+                        break;
+                }
+                StartButton.Text = "Start Poll";
+                InfoLabel.Text = "Stopped | " + StartTime.ToString("h:mm t");
             }
         }
-    }
 
+        void Poll_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Giveaway = null;
+            GiveawayType = null;
+            StartButton.Text = "Start Poll";
+        }
+    }
 
     public class PollData
     {

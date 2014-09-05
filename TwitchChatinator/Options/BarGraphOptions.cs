@@ -135,8 +135,8 @@ namespace TwitchChatinator
 
         public BarGraphOptions()
         {
-            Width = 200;
-            Height = 400;
+            Width = 400;
+            Height = 200;
 
             MarginTop = 5;
             MarginBottom = 5;

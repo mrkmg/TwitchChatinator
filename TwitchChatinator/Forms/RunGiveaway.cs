@@ -11,9 +11,8 @@ using System.Windows.Forms;
 
 namespace TwitchChatinator
 {
-    public partial class RunRoll : PaintWindow
+    public partial class RunGiveaway : PaintWindow
     {
-        /*
         const short STAGE_WAITING = 0;
         const short STAGE_ROLLING = 1;
         const short STAGE_POSTROLL = 2;
@@ -24,12 +23,6 @@ namespace TwitchChatinator
 
         string RollerText;
         string TitleText;
-
-        Color ChromaKey;
-
-        Font TitleFont;
-        Font RollerFont;
-        Font EntriesFont;
 
         SolidBrush TitleBrush;
         SolidBrush RollerBrush;
@@ -42,6 +35,10 @@ namespace TwitchChatinator
         DateTime StartTime;
         DateTime EndTime;
 
+        string GiveawayTitle;
+        string OptionsName;
+        GiveawayOptions Options;
+
         int Stage = STAGE_WAITING;
         System.Windows.Forms.Timer DrawingTick;
 
@@ -50,14 +47,21 @@ namespace TwitchChatinator
         int CurrentEntryIndex;
         int TotalEntriesFound;
 
-        public RunRoll(DateTime startTime)
+        public RunGiveaway(DateTime startTime, string name, string title)
         {
-            StartTime = startTime;
             InitializeComponent();
+
+            Text = "Giveaway (" + name + ") - Chatinator";
+
+            StartTime = startTime;
+            GiveawayTitle = title;
+            OptionsName = name;
+
+            ReadOptions();
             SetupVars();
 
             this.Text = "Roller - Chatinator";
-            this.BackColor = ChromaKey;
+            this.BackColor = Options.ChromaKey;
 
             this.Paint += RunRoll_Paint;
             this.MouseDown += RunRoll_MouseDown;
@@ -71,15 +75,23 @@ namespace TwitchChatinator
             DrawingTick.Start();
         }
 
+        void ReadOptions()
+        {
+            Options = GiveawayOptions.Load(OptionsName);
+        }
+
         void RunRoll_Load(object sender, EventArgs e)
         {
-            Location = Settings.Default.RollWindowLocation;
+            Point p = PositionsSaver.get("GIVEAWAY:" + OptionsName);
+            if (p != Point.Empty)
+            {
+                Location = p;
+            }
         }
 
         void RunRoll_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Settings.Default.RollWindowLocation = Location;
-            Settings.Default.Save();
+            PositionsSaver.put("GIVEAWAY:" + OptionsName, Location);
             DrawingTick.Stop();
         }
 
@@ -150,9 +162,9 @@ namespace TwitchChatinator
                 SF.Alignment = StringAlignment.Center;
                 SF.LineAlignment = StringAlignment.Center;
 
-                Graphic.DrawString(Title, TitleFont, TitleBrush, TitleRec, SF);
-                Graphic.DrawString(Roller, RollerFont, RollerBrush, RollerRec, SF);
-                Graphic.DrawString(Entries, EntriesFont, EntriesBrush, EntriesRec, SF);
+                Graphic.DrawString(Title, Options.TitleFont, TitleBrush, TitleRec, SF);
+                Graphic.DrawString(Roller, Options.RollerFont, RollerBrush, RollerRec, SF);
+                Graphic.DrawString(Entries, Options.EntriesFont, EntriesBrush, EntriesRec, SF);
             }
         }
 
@@ -189,7 +201,7 @@ namespace TwitchChatinator
                     }
                     break;
                 case STAGE_ROLLING:
-                    DrawingTick.Interval = (int)Math.Pow(ROLLING_MAGIC_NUM,(CurrentEntryIndex*20)/ROLLING_ENTRIES_COUNT);
+                    DrawingTick.Interval = (int)Math.Pow(ROLLING_MAGIC_NUM, (CurrentEntryIndex * 20) / ROLLING_ENTRIES_COUNT);
                     CurrentEntryIndex++;
                     if (CurrentEntryIndex == ROLLING_ENTRIES_COUNT - 1)
                     {
@@ -202,59 +214,32 @@ namespace TwitchChatinator
 
         void SetupVars()
         {
-
-            var LeftMargin = Settings.Default.RollLeftMargin;
-            var RightMargin = Settings.Default.RollRightMargin;
-            var TopMargin = Settings.Default.RollTopMargin;
-            var BottomMargin = Settings.Default.RollBottomMargin;
-            var TotalWidth = Settings.Default.RollTotalWidth;
-
-            var TitleColor = Settings.Default.RollTitleColor;
-            var RollerColor = Settings.Default.RollRollerColor;
-            var EntriesColor = Settings.Default.RollEntriesColor;
-
-            var RollerTop = Settings.Default.RollRollerTop;
-            var EntriesTop = Settings.Default.RollEntriesTop;
-
-            ChromaKey = Settings.Default.RollChromaKey;
-
-            TitleFont = Settings.Default.RollTitleFont;
-            RollerFont = Settings.Default.RollRollerFont;
-            EntriesFont = Settings.Default.RollEntriesFont;
-
-
-            RollerText = Settings.Default.RollRollerText;
-            TitleText = Settings.Default.RollTitleText;
-
-            TitleBrush = new SolidBrush(TitleColor);
-            RollerBrush = new SolidBrush(RollerColor);
-            EntriesBrush = new SolidBrush(EntriesColor);
+            TitleBrush = new SolidBrush(Options.TitleFontColor);
+            RollerBrush = new SolidBrush(Options.RollerFontColor);
+            EntriesBrush = new SolidBrush(Options.EntriesFontColor);
 
             TitleRec = new Rectangle(
-                        LeftMargin,
-                        TopMargin,
-                        TotalWidth - LeftMargin - RightMargin,
-                        TitleFont.Height
+                        Options.MarginLeft,
+                        Options.MarginTop,
+                        Options.Width - Options.MarginLeft - Options.MarginRight,
+                        Options.TitleFont.Height
                     );
             RollerRec = new Rectangle(
-                    LeftMargin,
-                    TitleRec.Bottom + RollerTop,
-                    TotalWidth - LeftMargin - RightMargin,
-                    RollerFont.Height
+                    Options.MarginLeft,
+                    TitleRec.Bottom + Options.Spacing,
+                    Options.Width - Options.MarginLeft - Options.MarginRight,
+                    Options.RollerFont.Height
                 );
             EntriesRec = new Rectangle(
-                    LeftMargin,
-                    RollerRec.Bottom + EntriesTop,
-                    TotalWidth - LeftMargin - RightMargin,
-                    EntriesFont.Height
+                    Options.MarginLeft,
+                    RollerRec.Bottom + Options.Spacing,
+                    Options.Width - Options.MarginLeft - Options.MarginRight,
+                    Options.EntriesFont.Height
                 );
 
-            using (Graphics G = CreateGraphics())
-            {
-                int WindowHeight = EntriesRec.Bottom + BottomMargin;
-                int WindowWidth = TotalWidth;
-                SetClientSizeCore(WindowWidth, WindowHeight);
-            }
+            int WindowHeight = EntriesRec.Bottom + Options.MarginBottom;
+            int WindowWidth = Options.Width;
+            SetClientSizeCore(WindowWidth, WindowHeight);
         }
 
         protected override void Dispose(bool disposing)
@@ -270,6 +255,6 @@ namespace TwitchChatinator
 
             base.Dispose(disposing);
         }
-         */
+
     }
 }

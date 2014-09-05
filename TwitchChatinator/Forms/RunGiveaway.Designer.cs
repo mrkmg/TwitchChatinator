@@ -1,6 +1,6 @@
 ﻿namespace TwitchChatinator
 {
-    partial class RunPoll
+    partial class RunGiveaway
     {
         /// <summary>
         /// Required designer variable.
@@ -17,19 +17,17 @@
         {
             this.SuspendLayout();
             // 
-            // RunPoll
+            // RunRoll
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(124, 0);
-            this.Name = "RunPoll";
-            this.Text = "Form1";
+            this.Name = "RunRoll";
+            this.Text = "RunRoll";
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-
     }
 }

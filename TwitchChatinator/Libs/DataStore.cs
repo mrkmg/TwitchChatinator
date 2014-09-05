@@ -9,7 +9,7 @@ using System.IO;
 
 namespace TwitchChatinator
 {
-    public sealed class DataStore
+    public sealed class DataStore : IDisposable
     {
         private static readonly Lazy<DataStore> lazy =
             new Lazy<DataStore>(() => new DataStore());
@@ -51,7 +51,6 @@ namespace TwitchChatinator
                 SCommand.Parameters.AddWithValue("@channel", Channel);
                 SCommand.Parameters.AddWithValue("@message", Message);
                 SCommand.Parameters.AddWithValue("@datetime", DateTime.Now.ToString(datetimeFormat));
-
 
                 try
                 {

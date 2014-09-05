@@ -138,6 +138,12 @@
     <Compile Include="Forms\InputBox.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\LaunchGiveaway.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LaunchGiveaway.Designer.cs">
+      <DependentUpon>LaunchGiveaway.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\LaunchPoll.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -149,12 +155,6 @@
     </Compile>
     <Compile Include="Forms\ManagePolls.Designer.cs">
       <DependentUpon>ManagePolls.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\RunPoll.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\RunPoll.Designer.cs">
-      <DependentUpon>RunPoll.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\RunPollBar.cs">
       <SubType>Form</SubType>
@@ -174,7 +174,7 @@
     <Compile Include="Forms\SetupBarGraph.Designer.cs">
       <DependentUpon>SetupBarGraph.cs</DependentUpon>
     </Compile>
-    <Compile Include="Libs\BarGraphOptions.cs" />
+    <Compile Include="Options\BarGraphOptions.cs" />
     <Compile Include="Libs\DataStore.cs" />
     <Compile Include="Libs\Log.cs" />
     <Compile Include="Forms\MessageBrowser.cs">
@@ -193,6 +193,8 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Libs\SerializableFont.cs" />
+    <Compile Include="Options\GiveawayOptions.cs" />
+    <Compile Include="Options\PositionsSaver.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.Designer.cs">
@@ -208,6 +210,9 @@
       <DependentUpon>WelcomeScreen.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Forms\InputBox.resx" />
+    <EmbeddedResource Include="Forms\LaunchGiveaway.resx">
+      <DependentUpon>LaunchGiveaway.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\LaunchPoll.resx">
       <DependentUpon>LaunchPoll.cs</DependentUpon>
     </EmbeddedResource>
@@ -216,9 +221,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MessageBrowser.resx">
       <DependentUpon>MessageBrowser.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\RunPoll.resx">
-      <DependentUpon>RunPoll.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\RunRoll.resx">
       <DependentUpon>RunRoll.cs</DependentUpon>

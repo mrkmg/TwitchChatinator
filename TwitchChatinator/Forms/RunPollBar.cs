@@ -37,6 +37,8 @@ namespace TwitchChatinator
         StringFormat SFLabel;
         StringFormat SFCount;
 
+        
+
         public RunPollBar(DateTime start, string name, string title, string[] pollvars)
         {
             InitializeComponent();
@@ -57,12 +59,46 @@ namespace TwitchChatinator
             this.SetClientSizeCore(Options.Width, Options.Height);
             this.BackColor = Options.ChromaKey;
 
-            this.Paint += RunPollBar_Paint; 
+            this.Paint += RunPollBar_Paint;
+            this.Load += RunPollBar_Load;
+            this.FormClosing += RunPollBar_FormClosing;
+            this.Disposed += RunPollBar_Disposed;
 
             DrawingTick = new Timer();
             DrawingTick.Tick += DrawingTick_Tick;
             DrawingTick.Interval = 200;
             DrawingTick.Start();
+        }
+
+        void RunPollBar_Disposed(object sender, EventArgs e)
+        {
+            LabelBrush.Dispose();
+            CountBrush.Dispose();
+            TotalBrush.Dispose();
+
+            foreach(SolidBrush B in BarBrushes) if(B != null) B.Dispose();
+
+            DrawingTick.Stop();
+            DrawingTick.Dispose();
+
+            TitleStringFormat.Dispose();
+            TotalStringFormat.Dispose();
+            SFLabel.Dispose();
+            SFCount.Dispose();
+        }
+
+        void RunPollBar_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            PositionsSaver.put("BAR:" + OptionsName, Location);
+        }
+
+        void RunPollBar_Load(object sender, EventArgs e)
+        {
+            Point p = PositionsSaver.get("BAR:" + OptionsName);
+            if (p != Point.Empty)
+            {
+                Location = p;
+            }
         }
 
         void RunPollBar_Paint(object sender, PaintEventArgs e)
@@ -75,15 +111,14 @@ namespace TwitchChatinator
             using (Graphics Graphic = CreateGraphics())
             {
                 Graphic.DrawString(PollTitle, Options.TitleFont, TotalBrush, TotalRec, TitleStringFormat);
-                Graphic.DrawString(Data.totalVotes.ToString(), Options.TitleFont, TotalBrush, TotalRec, TotalStringFormat);
-
+                Graphic.DrawString(Data.totalVotes.ToString() + " Votes", Options.TitleFont, TotalBrush, TotalRec, TotalStringFormat);
                 for (int i = 0; i < CountEntries; i++)
                 {
                     if (Data.totalVotes > 0)
                         BarRectangles[i].Width = ((Options.Width - Options.MarginRight - Options.MarginLeft) * Data.amounts[i]) / Data.totalVotes;
                     else
                         BarRectangles[i].Width = 0;
-                    Graphic.FillRectangle(BarBrushes[i], BarRectangles[i]);
+                    Graphic.FillRectangle(BarBrushes[i % 4], BarRectangles[i]);
                     Graphic.DrawString(Data.options[i], Options.OptionFont, LabelBrush, BarRectangles[i], SFLabel);
                     if (Data.amounts[i] > 0)
                         Graphic.DrawString(Data.amounts[i].ToString(), Options.CountFont, CountBrush, BarRectangles[i], SFCount);
@@ -182,7 +217,7 @@ namespace TwitchChatinator
                 case "Bottom":
                 default:
                     TotalRec.X = Options.MarginLeft;
-                    TotalRec.Y = Options.Height - Options.MarginTop - Options.MarginBottom - Options.TitleFont.Height + Options.BarSpacing;
+                    TotalRec.Y = Options.Height - Options.MarginBottom - Options.TitleFont.Height;
                     offTop = Options.MarginTop;
                     break;
             }
@@ -190,7 +225,7 @@ namespace TwitchChatinator
             BarRectangles = new Rectangle[CountEntries];
             BarBrushes = new SolidBrush[CountEntries];
 
-            int avaliableHeight = Options.Height - Options.MarginBottom - TotalRec.Height - (CountEntries * Options.BarSpacing);
+            int avaliableHeight = Options.Height - TotalRec.Height - Options.MarginBottom - Options.MarginTop - (CountEntries * Options.BarSpacing);
             int barHeight = (avaliableHeight / CountEntries);
 
             for (int i = 0; i < CountEntries; i++)
