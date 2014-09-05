@@ -38,7 +38,7 @@ Build yourself
 - Open in [Visual Studio Express for Windows Desktop](http://www.visualstudio.com/downloads/download-visual-studio-vs#d-express-windows-desktop)
 - Set Build Type to Release
 - Hit F7 (This will build the app)
-- Navigate in Windows Exporer to PROJECTDIR/bin/release
+- Navigate in Windows Explorer to PROJECTDIR/bin/release
 - Copy all files to your desired location
 - Run "Twitch Chatinator.exe"
 
@@ -57,7 +57,7 @@ Future Features
 
   - Hype Meter (Need ideas for this)
   - User Activity Lookup
-  - On Scren Chat Window (with optional filtering)
+  - On Screen Chat Window (with optional filtering)
   - Chat Reports (Will not come for a long time)
     - Most Active Users
     - Topic Lookup
@@ -73,5 +73,5 @@ BEER-WARE
 <kevin@mrkmg.com> wrote this stuff. As long as you retain this notice you
 can do whatever you want with this stuff. If we meet some day, and you think
 this stuff is worth it, you can buy me a beer/soda in return. If you **really** want
-to, you can paypal me.
+to, you can Paypal me.
 
