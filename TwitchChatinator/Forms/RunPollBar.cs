@@ -37,8 +37,6 @@ namespace TwitchChatinator
         StringFormat SFLabel;
         StringFormat SFCount;
 
-        
-
         public RunPollBar(DateTime start, string name, string title, string[] pollvars)
         {
             InitializeComponent();
@@ -110,6 +108,11 @@ namespace TwitchChatinator
 
             using (Graphics Graphic = CreateGraphics())
             {
+                if (Options.BackgroundImage != null && Options.BackgroundImage.Image != null)
+                {
+                    Graphic.DrawImage(Options.BackgroundImage.Image, new Point(0, 0));
+                }
+
                 Graphic.DrawString(PollTitle, Options.TitleFont, TotalBrush, TotalRec, TitleStringFormat);
                 Graphic.DrawString(Data.totalVotes.ToString() + " Votes", Options.TitleFont, TotalBrush, TotalRec, TotalStringFormat);
                 for (int i = 0; i < CountEntries; i++)
@@ -122,6 +125,11 @@ namespace TwitchChatinator
                     Graphic.DrawString(Data.options[i], Options.OptionFont, LabelBrush, BarRectangles[i], SFLabel);
                     if (Data.amounts[i] > 0)
                         Graphic.DrawString(Data.amounts[i].ToString(), Options.CountFont, CountBrush, BarRectangles[i], SFCount);
+                }
+
+                if (Options.ForegroundImage != null && Options.ForegroundImage.Image != null)
+                {
+                    Graphic.DrawImage(Options.ForegroundImage.Image, new Point(0, 0));
                 }
             }
 

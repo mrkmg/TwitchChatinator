@@ -60,6 +60,11 @@ namespace TwitchChatinator
         [XmlElement]
         public string TotalPosition { get; set; }
 
+        [XmlElement]
+        public StorableImage BackgroundImage { get; set; }
+        [XmlElement]
+        public StorableImage ForegroundImage { get; set; }
+
 
         //Special for XMLSerialization
         //Thank you [BenAlabaster] (https://stackoverflow.com/users/40650/benalabaster)
@@ -163,6 +168,9 @@ namespace TwitchChatinator
             AllowMulti = false;
 
             TotalPosition = "Bottom";
+
+            BackgroundImage = new StorableImage();
+            ForegroundImage = new StorableImage();
         }
 
 

@@ -19,9 +19,24 @@ namespace TwitchChatinator
         [STAThread]
         static void Main()
         {
+            CreateDefaultTypes();
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new WelcomeScreen());
+        }
+
+        static void CreateDefaultTypes()
+        {
+            if (BarGraphOptions.GetAvaliable().Count == 0)
+            {
+                BarGraphOptions.CreateNew("Default");
+            }
+
+            if(GiveawayOptions.GetAvaliable().Count == 0)
+            {
+                GiveawayOptions.CreateNew("Default");
+            }
         }
 
         //Thank you [grenade](http://stackoverflow.com/users/68115/grenade)

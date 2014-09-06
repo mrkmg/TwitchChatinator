@@ -13,8 +13,7 @@ namespace TwitchChatinator
     public partial class LaunchGiveaway : Form
     {
         List<SelectListObject> Options;
-        object Giveaway;
-        Type GiveawayType;
+        RunGiveaway Giveaway;
         DateTime StartTime;
 
         public LaunchGiveaway()
@@ -23,6 +22,17 @@ namespace TwitchChatinator
 
             PopulateList();
             StartTime = DateTime.Now;
+            RollButton.Enabled = false;
+
+            FormClosed += LaunchGiveaway_FormClosed;
+        }
+
+        void LaunchGiveaway_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (Giveaway != null)
+            {
+                Giveaway.Close();
+            }
         }
 
         void PopulateList()
@@ -56,35 +66,33 @@ namespace TwitchChatinator
         {
             if (Giveaway == null)
             {
-                switch (Options[List.SelectedIndex].type)
-                {
-                    case "Giveaway":
-                        RunGiveaway RPB = new RunGiveaway(StartTime, Options[List.SelectedIndex].name, PollTitle.Text, Labels.ToArray());
-                        RPB.Show();
-                        RPB.FormClosed += Poll_FormClosed;
-                        Giveaway = RPB;
-                        GiveawayType = typeof(RunGiveaway);
-                        StartButton.Text = "Stop Giveaway";
-                        break;
-                }
+                RunGiveaway GV = new RunGiveaway(StartTime, Options[List.SelectedIndex].name, GiveawayTitle.Text);
+                GV.Show();
+                GV.FormClosed += Giveaway_FormClosed;
+                Giveaway = GV;
+                StartButton.Text = "Stop Giveaway";
+                RollButton.Enabled = true;
             }
             else
             {
-                switch (GiveawayType.Name)
-                {
-                    case "RunGiveaway":
-                        ((RunGiveaway)Giveaway).Close();
-                        break;
-                }
+                Giveaway.Close();
+                RollButton.Enabled = false;
                 StartButton.Text = "Start Poll";
             }
         }
 
-        void Poll_FormClosed(object sender, FormClosedEventArgs e)
+        void Giveaway_FormClosed(object sender, FormClosedEventArgs e)
         {
             Giveaway = null;
-            GiveawayType = null;
             StartButton.Text = "Start Poll";
+        }
+
+        private void RollButton_Click(object sender, EventArgs e)
+        {
+            if (Giveaway != null)
+            {
+                Giveaway.Roll();
+            }
         }
     }
 }

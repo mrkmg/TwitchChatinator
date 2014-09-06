@@ -3,77 +3,79 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.IO;
-using System.Drawing.Imaging;
 
 namespace TwitchChatinator
 {
-    public partial class SetupBarGraph : Form
+    public partial class SetupGiveaway : Form
     {
         private string OptionsName;
-        private BarGraphOptions Options;
+        private GiveawayOptions Options;
 
-        private Font OptionLabelFont;
-        private Font CountFont;
-        private Font TotalFont;
+        private Font RollerFont;
+        private Font EntriesFont;
+        private Font TitleFont;
 
-        public SetupBarGraph(string N)
+        public SetupGiveaway(string N)
         {
-            InitializeComponent();
             OptionsName = N;
+
+            InitializeComponent();
             Populate();
+            CalcuateAndShowHeight();
 
             ChangeBackgroundImage.Text = Options.BackgroundImage.Image == null ? "Load Image" : "Remove Image";
             ChangeForegroundImage.Text = Options.ForegroundImage.Image == null ? "Load Image" : "Remove Image";
 
             ChromaKey.Click += ColorClickHandler;
-            Option1Color.Click += ColorClickHandler;
-            Option2Color.Click += ColorClickHandler;
-            Option3Color.Click += ColorClickHandler;
-            Option4Color.Click += ColorClickHandler;
-            OptionFontColor.Click += ColorClickHandler;
-            CountFontColor.Click += ColorClickHandler;
-            TotalFontColor.Click += ColorClickHandler;
+            EntriesFontColor.Click += ColorClickHandler;
+            RollerFontColor.Click += ColorClickHandler;
+            TitleFontColor.Click += ColorClickHandler;
 
-            OptionFontSelector.Click += OptionFontSelector_Click;
-            CountFontSelector.Click += CountFontSelector_Click;
-            TotalFontSelector.Click += TotalFontSelector_Click;
+            EntriesFontSelector.Click += EntriesFontSelector_Click;
+            RollerFontSelector.Click += RollerFontSelector_Click;
+            TitleFontSelector.Click += TitleFontSelector_Click;
+
+            MarginTop.ValueChanged += ValueChanged;
+            MarginBottom.ValueChanged += ValueChanged;
+            EntriesFontSelector.FontChanged += ValueChanged;
+            RollerFontSelector.FontChanged += ValueChanged;
+            TitleFontSelector.FontChanged += ValueChanged;
+            Spacing.ValueChanged += ValueChanged;
 
             CancelButton.Click += CancelButton_Click;
             SaveButton.Click += SaveButton_Click;
         }
 
+        private void ValueChanged(object sender, EventArgs e)
+        {
+            CalcuateAndShowHeight();
+        }
+
         void SaveButton_Click(object sender, EventArgs e)
         {
-            Options.Height = (int)HeightInput.Value;
             Options.Width = (int)WidthInput.Value;
 
             Options.MarginTop = (int)MarginTop.Value;
             Options.MarginBottom = (int)MarginBottom.Value;
             Options.MarginLeft = (int)MarginLeft.Value;
             Options.MarginRight = (int)MarginRight.Value;
-            Options.BarSpacing = (int)BarSpacing.Value;
+            Options.Spacing = (int)Spacing.Value;
 
             Options.ChromaKey = ChromaKey.BackColor;
-            Options.Option1Color = Option1Color.BackColor;
-            Options.Option2Color = Option2Color.BackColor;
-            Options.Option3Color = Option3Color.BackColor;
-            Options.Option4Color = Option4Color.BackColor;
 
-            Options.OptionFont = OptionLabelFont;
-            Options.OptionFontColor = OptionFontColor.BackColor;
+            Options.RollerFont = RollerFont;
+            Options.RollerFontColor = EntriesFontColor.BackColor;
 
-            Options.CountFont = CountFont;
-            Options.CountFontColor = CountFontColor.BackColor;
+            Options.EntriesFont = EntriesFont;
+            Options.EntriesFontColor = RollerFontColor.BackColor;
 
-            Options.TitleFont = TotalFont;
-            Options.TitleFontColor = TotalFontColor.BackColor;
-
-            Options.TotalPosition = TotalPosition.SelectedItem.ToString();
+            Options.TitleFont = TitleFont;
+            Options.TitleFontColor = TitleFontColor.BackColor;
 
             Options.Save(OptionsName);
             Close();
@@ -84,11 +86,16 @@ namespace TwitchChatinator
             Close();
         }
 
+        void CalcuateAndShowHeight()
+        {
+            HeightInput.Value = MarginTop.Value + MarginBottom.Value + TitleFont.Height + RollerFont.Height + EntriesFont.Height + (Spacing.Value * 2);
+        }
+
         private bool Populate()
         {
             try
             {
-                Options = BarGraphOptions.Load(OptionsName);
+                Options = GiveawayOptions.Load(OptionsName);
             }
             catch (Exception e)
             {
@@ -97,31 +104,25 @@ namespace TwitchChatinator
 
             NameLabel.Text = OptionsName;
 
-            HeightInput.Value = Options.Height;
             WidthInput.Value = Options.Width;
 
             MarginTop.Value = Options.MarginTop;
             MarginBottom.Value = Options.MarginBottom;
             MarginLeft.Value = Options.MarginLeft;
             MarginRight.Value = Options.MarginRight;
-            BarSpacing.Value = Options.BarSpacing;
+            Spacing.Value = Options.Spacing;
 
             ChromaKey.BackColor = Options.ChromaKey;
-            Option1Color.BackColor = Options.Option1Color;
-            Option2Color.BackColor = Options.Option2Color;
-            Option3Color.BackColor = Options.Option3Color;
-            Option4Color.BackColor = Options.Option4Color;
 
-            OptionLabelFont = Options.OptionFont;
-            OptionFontColor.BackColor = Options.OptionFontColor;
+            RollerFont = Options.RollerFont;
+            RollerFontColor.BackColor = Options.RollerFontColor;
 
-            CountFont = Options.CountFont;
-            CountFontColor.BackColor = Options.CountFontColor;
+            EntriesFont = Options.EntriesFont;
+            EntriesFontColor.BackColor = Options.EntriesFontColor;
 
-            TotalFont = Options.TitleFont;
-            TotalFontColor.BackColor = Options.TitleFontColor;
+            TitleFont = Options.TitleFont;
+            TitleFontColor.BackColor = Options.TitleFontColor;
 
-            TotalPosition.SelectedItem = Options.TotalPosition;
             return true;
         }
 
@@ -140,38 +141,38 @@ namespace TwitchChatinator
             SaveButton.Focus();
         }
 
-        void OptionFontSelector_Click(object sender, EventArgs e)
+        void EntriesFontSelector_Click(object sender, EventArgs e)
         {
             using (FontDialog FD = new FontDialog())
             {
-                FD.Font = OptionLabelFont;
+                FD.Font = EntriesFont;
                 if (FD.ShowDialog() == DialogResult.OK)
                 {
-                    OptionLabelFont = FD.Font;
+                    EntriesFont = FD.Font;
                 }
             }
         }
 
-        void CountFontSelector_Click(object sender, EventArgs e)
+        void RollerFontSelector_Click(object sender, EventArgs e)
         {
             using (FontDialog FD = new FontDialog())
             {
-                FD.Font = CountFont;
+                FD.Font = RollerFont;
                 if (FD.ShowDialog() == DialogResult.OK)
                 {
-                    CountFont = FD.Font;
+                    RollerFont = FD.Font;
                 }
             }
         }
 
-        void TotalFontSelector_Click(object sender, EventArgs e)
+        void TitleFontSelector_Click(object sender, EventArgs e)
         {
             using (FontDialog FD = new FontDialog())
             {
-                FD.Font = TotalFont;
+                FD.Font = TitleFont;
                 if (FD.ShowDialog() == DialogResult.OK)
                 {
-                    TotalFont = FD.Font;
+                    TitleFont = FD.Font;
                 }
             }
         }

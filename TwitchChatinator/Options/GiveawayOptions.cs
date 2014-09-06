@@ -13,8 +13,6 @@ namespace TwitchChatinator
     {
         [XmlElement]
         public int Width { get; set; }
-        [XmlElement]
-        public int Height { get; set; }
 
         [XmlElement]
         public int MarginTop { get; set; }
@@ -45,6 +43,11 @@ namespace TwitchChatinator
         public Color EntriesFontColor { get; set; }
         [XmlIgnore]
         public Font EntriesFont { get; set; }
+
+        [XmlElement]
+        public StorableImage BackgroundImage { get; set; }
+        [XmlElement]
+        public StorableImage ForegroundImage { get; set; }
 
 
         //Special for XMLSerialization
@@ -98,7 +101,6 @@ namespace TwitchChatinator
         public GiveawayOptions()
         {
             Width = 400;
-            Height = 200;
 
             MarginTop = 5;
             MarginBottom = 5;
@@ -113,10 +115,13 @@ namespace TwitchChatinator
             TitleFont = new Font("Segoe UI", 15.75f, FontStyle.Bold);
 
             RollerFontColor = Color.White;
-            RollerFont = new Font("Segoe UI", 10.25f, FontStyle.Italic);
+            RollerFont = new Font("Segoe UI", 20.25f, FontStyle.Italic);
 
             EntriesFontColor = Color.White;
-            EntriesFont = new Font("Segoe UI", 15.75f, FontStyle.Bold);
+            EntriesFont = new Font("Segoe UI", 12f, FontStyle.Bold);
+
+            BackgroundImage = new StorableImage();
+            ForegroundImage = new StorableImage();
         }
 
 
@@ -162,7 +167,7 @@ namespace TwitchChatinator
         static public List<string> GetAvaliable()
         {
             var names = new List<string>();
-            string directory = Program.AppDataFolder() + @"\Polls\Giveaways";
+            string directory = Program.AppDataFolder() + @"\Giveaways";
 
             if (!Directory.Exists(directory))
             {
@@ -183,7 +188,7 @@ namespace TwitchChatinator
 
         static public string getPathFromName(string name)
         {
-            return Program.AppDataFolder() + @"\Polls\Giveaways\" + name + ".xml";
+            return Program.AppDataFolder() + @"\Giveaways\" + name + ".xml";
         }
 
         static public void ValidateNameHandler(object sender, InputBoxValidatingArgs e)

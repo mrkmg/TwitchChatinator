@@ -21,9 +21,6 @@ namespace TwitchChatinator
         const double ROLLING_MAGIC_NUM = 1.35;
         const int ROLLING_ENTRIES_COUNT = 100;
 
-        string RollerText;
-        string TitleText;
-
         SolidBrush TitleBrush;
         SolidBrush RollerBrush;
         SolidBrush EntriesBrush;
@@ -64,8 +61,6 @@ namespace TwitchChatinator
             this.BackColor = Options.ChromaKey;
 
             this.Paint += RunRoll_Paint;
-            this.MouseDown += RunRoll_MouseDown;
-            this.MouseMove += RunRoll_MouseMove;
             this.FormClosing += RunRoll_FormClosing;
             this.Load += RunRoll_Load;
 
@@ -95,46 +90,6 @@ namespace TwitchChatinator
             DrawingTick.Stop();
         }
 
-        void RunRoll_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (RollerRec.Contains(e.X, e.Y))
-            {
-                Cursor = Cursors.Hand;
-            }
-            else
-            {
-                Cursor = Cursors.Default;
-            }
-        }
-
-        void RunRoll_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (RollerRec.Contains(e.X, e.Y))
-            {
-                if (EndTime == DateTime.MinValue) EndTime = DateTime.Now;
-
-
-                if (Stage == STAGE_WAITING || Stage == STAGE_POSTROLL)
-                {
-                    DataSetSelection DSS = new DataSetSelection();
-                    DSS.Start = StartTime;
-                    DSS.End = EndTime;
-                    EntryList = DataStore.GetUniqueUsersString(DSS);
-                    if (EntryList.Count == 0) EntryList.Add("No Entries :-(");
-                    EntryList.Shuffle();
-                    TotalEntriesFound = Math.Min(EntryList.Count, ROLLING_ENTRIES_COUNT);
-                    CurrentEntryIndex = 0;
-                    DrawingTick.Interval = 1;
-                    Stage = STAGE_ROLLING;
-                    if (!DrawingTick.Enabled)
-                        DrawingTick.Enabled = true;
-
-                }
-            }
-        }
-
-
-
         void RunRoll_Paint(object sender, PaintEventArgs e)
         {
             switch (Stage)
@@ -162,26 +117,57 @@ namespace TwitchChatinator
                 SF.Alignment = StringAlignment.Center;
                 SF.LineAlignment = StringAlignment.Center;
 
+                if (Options.BackgroundImage != null && Options.BackgroundImage.Image != null)
+                {
+                    Graphic.DrawImage(Options.BackgroundImage.Image, new Point(0, 0));
+                }
+
                 Graphic.DrawString(Title, Options.TitleFont, TitleBrush, TitleRec, SF);
                 Graphic.DrawString(Roller, Options.RollerFont, RollerBrush, RollerRec, SF);
                 Graphic.DrawString(Entries, Options.EntriesFont, EntriesBrush, EntriesRec, SF);
+
+                if (Options.ForegroundImage != null && Options.ForegroundImage.Image != null)
+                {
+                    Graphic.DrawImage(Options.ForegroundImage.Image, new Point(0, 0));
+                }
             }
         }
 
         void PaintPostroll()
         {
-            PaintScreen(TitleText, EntryList[CurrentEntryIndex % (EntryList.Count())], "Of " + Count.ToString() + ", you won!");
+            PaintScreen(GiveawayTitle, EntryList[CurrentEntryIndex % (EntryList.Count())], "Of " + Count.ToString() + ", you won!");
             DrawingTick.Enabled = false;
         }
 
         void PaintRolling()
         {
-            PaintScreen(TitleText, EntryList[CurrentEntryIndex % (EntryList.Count())], "Rolling!!!");
+            PaintScreen(GiveawayTitle, EntryList[CurrentEntryIndex % (EntryList.Count())], "Rolling!!!");
         }
 
         void PaintWaiting()
         {
-            PaintScreen(TitleText, RollerText, "Total Entries: " + Count.ToString());
+            PaintScreen(GiveawayTitle, "Taking Votes", "Total Entries: " + Count.ToString());
+        }
+
+        public void Roll()
+        {
+            if (EndTime == DateTime.MinValue) EndTime = DateTime.Now;
+
+            if (Stage == STAGE_WAITING || Stage == STAGE_POSTROLL)
+            {
+                DataSetSelection DSS = new DataSetSelection();
+                DSS.Start = StartTime;
+                DSS.End = EndTime;
+                EntryList = DataStore.GetUniqueUsersString(DSS);
+                if (EntryList.Count == 0) EntryList.Add("No Entries :-(");
+                EntryList.Shuffle();
+                TotalEntriesFound = Math.Min(EntryList.Count, ROLLING_ENTRIES_COUNT);
+                CurrentEntryIndex = 0;
+                DrawingTick.Interval = 1;
+                Stage = STAGE_ROLLING;
+                if (!DrawingTick.Enabled)
+                    DrawingTick.Enabled = true;
+            }
         }
 
         void DrawingTick_Tick(object sender, EventArgs e)
@@ -255,6 +241,5 @@ namespace TwitchChatinator
 
             base.Dispose(disposing);
         }
-
     }
 }

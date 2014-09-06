@@ -10,12 +10,11 @@ using System.Windows.Forms;
 
 namespace TwitchChatinator
 {
-    public partial class ManagePolls : Form
+    public partial class ManageGiveaway : Form
     {
         List<SelectListObject> Options;
 
-
-        public ManagePolls()
+        public ManageGiveaway()
         {
             InitializeComponent();
 
@@ -28,22 +27,17 @@ namespace TwitchChatinator
             List.Items.Clear();
 
             //Get Bar Graphs
-            List<string> BarGraphs = BarGraphOptions.GetAvaliable();
+            List<string> Giveaways = GiveawayOptions.GetAvaliable();
 
             //Get Pie Graphs - TODO
             List<string> PieGraphs = new List<string>();
 
             Options = new List<SelectListObject>();
 
-            foreach (string n in BarGraphs)
+            foreach (string n in Giveaways)
             {
-                Options.Add(new SelectListObject(n, "Bar"));
-                List.Items.Add("Bar - " + n);
-            }
-            foreach (string n in PieGraphs)
-            {
-                Options.Add(new SelectListObject(n, "Pie"));
-                List.Items.Add("Pie - " + n);
+                Options.Add(new SelectListObject(n, "Giveaway"));
+                List.Items.Add(n);
             }
 
 
@@ -64,13 +58,13 @@ namespace TwitchChatinator
             }
         }
 
-        private void NewBarButton_Click(object sender, EventArgs e)
+        private void NewGiveawayButton_Click(object sender, EventArgs e)
         {
-            InputBoxResult result = InputBox.Show("Name:", "New Bar Graph", "", BarGraphOptions.ValidateNameHandler);
+            InputBoxResult result = InputBox.Show("Name:", "New Giveaway Tempalate", "", GiveawayOptions.ValidateNameHandler);
             if (result.OK)
             {
                 //TODO: Add Exception Control
-                BarGraphOptions.CreateNew(result.Text);
+                GiveawayOptions.CreateNew(result.Text);
             }
             PopulateList();
         }
@@ -79,12 +73,9 @@ namespace TwitchChatinator
         {
             switch (Options[List.SelectedIndex].type)
             {
-                case "Bar":
-                    var sp = new SetupBarGraph(Options[List.SelectedIndex].name);
+                case "Giveaway":
+                    var sp = new SetupGiveaway(Options[List.SelectedIndex].name);
                     sp.Show();
-                    break;
-                case "Pie":
-
                     break;
             }
         }
@@ -93,11 +84,8 @@ namespace TwitchChatinator
         {
             switch (Options[List.SelectedIndex].type)
             {
-                case "Bar":
-                    BarGraphOptions.Remove(Options[List.SelectedIndex].name);
-                    break;
-                case "Pie":
-
+                case "Giveaway":
+                    GiveawayOptions.Remove(Options[List.SelectedIndex].name);
                     break;
             }
             PopulateList();
@@ -107,15 +95,12 @@ namespace TwitchChatinator
         {
             switch (Options[List.SelectedIndex].type)
             {
-                case "Bar":
-                    InputBoxResult result = InputBox.Show("New Name:", "Rename Bar Graph", "", BarGraphOptions.ValidateNameHandler);
+                case "Giveaway":
+                    InputBoxResult result = InputBox.Show("New Name:", "Rename Giveaway Template", "", GiveawayOptions.ValidateNameHandler);
                     if (result.OK)
                     {
-                        BarGraphOptions.Rename(Options[List.SelectedIndex].name, result.Text);
+                        GiveawayOptions.Rename(Options[List.SelectedIndex].name, result.Text);
                     }
-                    break;
-                case "Pie":
-
                     break;
             }
             PopulateList();
@@ -125,25 +110,16 @@ namespace TwitchChatinator
         {
             switch (Options[List.SelectedIndex].type)
             {
-                case "Bar":
-                    InputBoxResult result = InputBox.Show("Copy To:", "Copy Bar Graph", "", BarGraphOptions.ValidateNameHandler);
+                case "Giveaway":
+                    InputBoxResult result = InputBox.Show("Copy To:", "Copy Bar Graph", "", GiveawayOptions.ValidateNameHandler);
                     if (result.OK)
                     {
-
-                        var o = BarGraphOptions.Load(Options[List.SelectedIndex].name);
+                        var o = GiveawayOptions.Load(Options[List.SelectedIndex].name);
                         o.Save(result.Text);
                     }
                     break;
-                case "Pie":
-
-                    break;
             }
             PopulateList();
-        }
-
-        private void NewPieButton_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Pie graphs are coming soon. Check https://mrkmg.com/chatinator for updates.");            
         }
     }
 }

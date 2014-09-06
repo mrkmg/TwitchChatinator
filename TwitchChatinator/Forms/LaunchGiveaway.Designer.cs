@@ -32,7 +32,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.StartButton = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
-            this.PollTitle = new System.Windows.Forms.TextBox();
+            this.GiveawayTitle = new System.Windows.Forms.TextBox();
             this.RollButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -73,13 +73,13 @@
             this.label6.TabIndex = 12;
             this.label6.Text = "Giveaway Title";
             // 
-            // PollTitle
+            // GiveawayTitle
             // 
-            this.PollTitle.Location = new System.Drawing.Point(98, 44);
-            this.PollTitle.Name = "PollTitle";
-            this.PollTitle.Size = new System.Drawing.Size(126, 20);
-            this.PollTitle.TabIndex = 1;
-            this.PollTitle.Text = "Strawpoll";
+            this.GiveawayTitle.Location = new System.Drawing.Point(98, 44);
+            this.GiveawayTitle.Name = "GiveawayTitle";
+            this.GiveawayTitle.Size = new System.Drawing.Size(126, 20);
+            this.GiveawayTitle.TabIndex = 1;
+            this.GiveawayTitle.Text = "Giveaway";
             // 
             // RollButton
             // 
@@ -89,6 +89,7 @@
             this.RollButton.TabIndex = 3;
             this.RollButton.Text = "Roll";
             this.RollButton.UseVisualStyleBackColor = true;
+            this.RollButton.Click += new System.EventHandler(this.RollButton_Click);
             // 
             // LaunchGiveaway
             // 
@@ -97,7 +98,7 @@
             this.ClientSize = new System.Drawing.Size(244, 105);
             this.Controls.Add(this.RollButton);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.PollTitle);
+            this.Controls.Add(this.GiveawayTitle);
             this.Controls.Add(this.StartButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.List);
@@ -115,7 +116,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button StartButton;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox PollTitle;
+        private System.Windows.Forms.TextBox GiveawayTitle;
         private System.Windows.Forms.Button RollButton;
     }
 }

@@ -14,8 +14,7 @@ namespace TwitchChatinator
     {
         List<SelectListObject> Options;
         List<TextBox> Inputs;
-        object Poll;
-        Type PollType;
+        Form Poll;
         DateTime StartTime;
 
         public LaunchPoll()
@@ -32,6 +31,16 @@ namespace TwitchChatinator
             StartTime = DateTime.Now;
 
             InfoLabel.Text = "Stopped | " + StartTime.ToString("h:mm t");
+
+            FormClosed += LaunchPoll_FormClosed;
+        }
+
+        void LaunchPoll_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if(Poll != null)
+            {
+                Poll.Close();
+            }
         }
 
         void AddInput()
@@ -143,7 +152,7 @@ namespace TwitchChatinator
 
         private void StartButton_Click(object sender, EventArgs e)
         {
-            if (Giveaway == null)
+            if (Poll == null)
             {
                 List<string> Labels = new List<string>();
 
@@ -161,8 +170,7 @@ namespace TwitchChatinator
                         RunPollBar RPB = new RunPollBar(StartTime, Options[List.SelectedIndex].name, PollTitle.Text, Labels.ToArray());
                         RPB.Show();
                         RPB.FormClosed += Poll_FormClosed;
-                        Giveaway = RPB;
-                        GiveawayType = typeof(RunPollBar);
+                        Poll = RPB;
                         StartButton.Text = "Stop Poll";
                         break;
                     case "Pie":
@@ -173,15 +181,7 @@ namespace TwitchChatinator
             }
             else
             {
-                switch (GiveawayType.Name)
-                {
-                    case "RunPollBar":
-                        ((RunPollBar)Giveaway).Close();
-                        break;
-                    case "RunPollPie":
-                        throw new NotImplementedException();
-                        break;
-                }
+                Poll.Close();
                 StartButton.Text = "Start Poll";
                 InfoLabel.Text = "Stopped | " + StartTime.ToString("h:mm t");
             }
@@ -189,8 +189,7 @@ namespace TwitchChatinator
 
         void Poll_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Giveaway = null;
-            GiveawayType = null;
+            Poll = null;
             StartButton.Text = "Start Poll";
         }
     }

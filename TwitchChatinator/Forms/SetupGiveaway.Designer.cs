@@ -1,6 +1,6 @@
 ﻿namespace TwitchChatinator
 {
-    partial class SetupBarGraph
+    partial class SetupGiveaway
     {
         /// <summary>
         /// Required designer variable.
@@ -35,7 +35,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.BarSpacing = new System.Windows.Forms.NumericUpDown();
+            this.Spacing = new System.Windows.Forms.NumericUpDown();
             this.label16 = new System.Windows.Forms.Label();
             this.MarginRight = new System.Windows.Forms.NumericUpDown();
             this.MarginLeft = new System.Windows.Forms.NumericUpDown();
@@ -46,25 +46,17 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.Option4Color = new System.Windows.Forms.TextBox();
-            this.Option3Color = new System.Windows.Forms.TextBox();
-            this.Option2Color = new System.Windows.Forms.TextBox();
-            this.Option1Color = new System.Windows.Forms.TextBox();
             this.ChromaKey = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.TotalFontColor = new System.Windows.Forms.TextBox();
-            this.TotalFontSelector = new System.Windows.Forms.Button();
+            this.TitleFontColor = new System.Windows.Forms.TextBox();
+            this.TitleFontSelector = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
-            this.CountFontColor = new System.Windows.Forms.TextBox();
-            this.CountFontSelector = new System.Windows.Forms.Button();
+            this.RollerFontColor = new System.Windows.Forms.TextBox();
+            this.RollerFontSelector = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
-            this.OptionFontColor = new System.Windows.Forms.TextBox();
-            this.OptionFontSelector = new System.Windows.Forms.Button();
+            this.EntriesFontColor = new System.Windows.Forms.TextBox();
+            this.EntriesFontSelector = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
             this.SaveButton = new System.Windows.Forms.Button();
             this.CancelButton = new System.Windows.Forms.Button();
@@ -73,13 +65,11 @@
             this.ChangeForegroundImage = new System.Windows.Forms.Button();
             this.label17 = new System.Windows.Forms.Label();
             this.ChangeBackgroundImage = new System.Windows.Forms.Button();
-            this.TotalPosition = new System.Windows.Forms.ComboBox();
-            this.label15 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.HeightInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.WidthInput)).BeginInit();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.BarSpacing)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Spacing)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.MarginRight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.MarginLeft)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.MarginBottom)).BeginInit();
@@ -114,6 +104,7 @@
             // 
             // HeightInput
             // 
+            this.HeightInput.Enabled = false;
             this.HeightInput.Location = new System.Drawing.Point(128, 37);
             this.HeightInput.Maximum = new decimal(new int[] {
             9999999,
@@ -156,7 +147,7 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.BarSpacing);
+            this.groupBox2.Controls.Add(this.Spacing);
             this.groupBox2.Controls.Add(this.label16);
             this.groupBox2.Controls.Add(this.MarginRight);
             this.groupBox2.Controls.Add(this.MarginLeft);
@@ -173,26 +164,26 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Margins";
             // 
-            // BarSpacing
+            // Spacing
             // 
-            this.BarSpacing.Location = new System.Drawing.Point(128, 99);
-            this.BarSpacing.Maximum = new decimal(new int[] {
+            this.Spacing.Location = new System.Drawing.Point(128, 99);
+            this.Spacing.Maximum = new decimal(new int[] {
             9999999,
             0,
             0,
             0});
-            this.BarSpacing.Name = "BarSpacing";
-            this.BarSpacing.Size = new System.Drawing.Size(66, 20);
-            this.BarSpacing.TabIndex = 9;
+            this.Spacing.Name = "Spacing";
+            this.Spacing.Size = new System.Drawing.Size(66, 20);
+            this.Spacing.TabIndex = 9;
             // 
             // label16
             // 
             this.label16.AutoSize = true;
             this.label16.Location = new System.Drawing.Point(6, 101);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(73, 13);
+            this.label16.Size = new System.Drawing.Size(83, 13);
             this.label16.TabIndex = 8;
-            this.label16.Text = "Between Bars";
+            this.label16.Text = "Between Words";
             // 
             // MarginRight
             // 
@@ -280,50 +271,14 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.Option4Color);
-            this.groupBox3.Controls.Add(this.Option3Color);
-            this.groupBox3.Controls.Add(this.Option2Color);
-            this.groupBox3.Controls.Add(this.Option1Color);
             this.groupBox3.Controls.Add(this.ChromaKey);
-            this.groupBox3.Controls.Add(this.label11);
-            this.groupBox3.Controls.Add(this.label10);
-            this.groupBox3.Controls.Add(this.label9);
-            this.groupBox3.Controls.Add(this.label8);
             this.groupBox3.Controls.Add(this.label7);
             this.groupBox3.Location = new System.Drawing.Point(12, 240);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(200, 135);
+            this.groupBox3.Size = new System.Drawing.Size(200, 47);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Colors";
-            // 
-            // Option4Color
-            // 
-            this.Option4Color.Location = new System.Drawing.Point(173, 105);
-            this.Option4Color.Name = "Option4Color";
-            this.Option4Color.Size = new System.Drawing.Size(20, 20);
-            this.Option4Color.TabIndex = 9;
-            // 
-            // Option3Color
-            // 
-            this.Option3Color.Location = new System.Drawing.Point(173, 83);
-            this.Option3Color.Name = "Option3Color";
-            this.Option3Color.Size = new System.Drawing.Size(20, 20);
-            this.Option3Color.TabIndex = 8;
-            // 
-            // Option2Color
-            // 
-            this.Option2Color.Location = new System.Drawing.Point(173, 61);
-            this.Option2Color.Name = "Option2Color";
-            this.Option2Color.Size = new System.Drawing.Size(20, 20);
-            this.Option2Color.TabIndex = 7;
-            // 
-            // Option1Color
-            // 
-            this.Option1Color.Location = new System.Drawing.Point(173, 39);
-            this.Option1Color.Name = "Option1Color";
-            this.Option1Color.Size = new System.Drawing.Size(20, 20);
-            this.Option1Color.TabIndex = 6;
             // 
             // ChromaKey
             // 
@@ -331,42 +286,6 @@
             this.ChromaKey.Name = "ChromaKey";
             this.ChromaKey.Size = new System.Drawing.Size(20, 20);
             this.ChromaKey.TabIndex = 5;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(6, 109);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(74, 13);
-            this.label11.TabIndex = 4;
-            this.label11.Text = "Option 4 Color";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(6, 87);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(74, 13);
-            this.label10.TabIndex = 3;
-            this.label10.Text = "Option 3 Color";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(6, 65);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(74, 13);
-            this.label9.TabIndex = 2;
-            this.label9.Text = "Option 2 Color";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(6, 43);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(74, 13);
-            this.label8.TabIndex = 1;
-            this.label8.Text = "Option 1 Color";
             // 
             // label7
             // 
@@ -379,100 +298,100 @@
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.TotalFontColor);
-            this.groupBox4.Controls.Add(this.TotalFontSelector);
+            this.groupBox4.Controls.Add(this.TitleFontColor);
+            this.groupBox4.Controls.Add(this.TitleFontSelector);
             this.groupBox4.Controls.Add(this.label14);
-            this.groupBox4.Controls.Add(this.CountFontColor);
-            this.groupBox4.Controls.Add(this.CountFontSelector);
+            this.groupBox4.Controls.Add(this.RollerFontColor);
+            this.groupBox4.Controls.Add(this.RollerFontSelector);
             this.groupBox4.Controls.Add(this.label13);
-            this.groupBox4.Controls.Add(this.OptionFontColor);
-            this.groupBox4.Controls.Add(this.OptionFontSelector);
+            this.groupBox4.Controls.Add(this.EntriesFontColor);
+            this.groupBox4.Controls.Add(this.EntriesFontSelector);
             this.groupBox4.Controls.Add(this.label12);
-            this.groupBox4.Location = new System.Drawing.Point(12, 384);
+            this.groupBox4.Location = new System.Drawing.Point(12, 293);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(200, 92);
             this.groupBox4.TabIndex = 4;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Fonts";
             // 
-            // TotalFontColor
+            // TitleFontColor
             // 
-            this.TotalFontColor.Location = new System.Drawing.Point(173, 61);
-            this.TotalFontColor.Name = "TotalFontColor";
-            this.TotalFontColor.Size = new System.Drawing.Size(20, 20);
-            this.TotalFontColor.TabIndex = 16;
+            this.TitleFontColor.Location = new System.Drawing.Point(173, 15);
+            this.TitleFontColor.Name = "TitleFontColor";
+            this.TitleFontColor.Size = new System.Drawing.Size(20, 20);
+            this.TitleFontColor.TabIndex = 19;
             // 
-            // TotalFontSelector
+            // TitleFontSelector
             // 
-            this.TotalFontSelector.Location = new System.Drawing.Point(127, 60);
-            this.TotalFontSelector.Name = "TotalFontSelector";
-            this.TotalFontSelector.Size = new System.Drawing.Size(40, 23);
-            this.TotalFontSelector.TabIndex = 15;
-            this.TotalFontSelector.Text = "Font";
-            this.TotalFontSelector.UseVisualStyleBackColor = true;
+            this.TitleFontSelector.Location = new System.Drawing.Point(127, 14);
+            this.TitleFontSelector.Name = "TitleFontSelector";
+            this.TitleFontSelector.Size = new System.Drawing.Size(40, 23);
+            this.TitleFontSelector.TabIndex = 18;
+            this.TitleFontSelector.Text = "Font";
+            this.TitleFontSelector.UseVisualStyleBackColor = true;
             // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(8, 65);
+            this.label14.Location = new System.Drawing.Point(8, 19);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(27, 13);
-            this.label14.TabIndex = 14;
+            this.label14.TabIndex = 17;
             this.label14.Text = "Title";
             // 
-            // CountFontColor
+            // RollerFontColor
             // 
-            this.CountFontColor.Location = new System.Drawing.Point(173, 39);
-            this.CountFontColor.Name = "CountFontColor";
-            this.CountFontColor.Size = new System.Drawing.Size(20, 20);
-            this.CountFontColor.TabIndex = 13;
+            this.RollerFontColor.Location = new System.Drawing.Point(173, 38);
+            this.RollerFontColor.Name = "RollerFontColor";
+            this.RollerFontColor.Size = new System.Drawing.Size(20, 20);
+            this.RollerFontColor.TabIndex = 13;
             // 
-            // CountFontSelector
+            // RollerFontSelector
             // 
-            this.CountFontSelector.Location = new System.Drawing.Point(127, 38);
-            this.CountFontSelector.Name = "CountFontSelector";
-            this.CountFontSelector.Size = new System.Drawing.Size(40, 23);
-            this.CountFontSelector.TabIndex = 12;
-            this.CountFontSelector.Text = "Font";
-            this.CountFontSelector.UseVisualStyleBackColor = true;
+            this.RollerFontSelector.Location = new System.Drawing.Point(127, 37);
+            this.RollerFontSelector.Name = "RollerFontSelector";
+            this.RollerFontSelector.Size = new System.Drawing.Size(40, 23);
+            this.RollerFontSelector.TabIndex = 12;
+            this.RollerFontSelector.Text = "Font";
+            this.RollerFontSelector.UseVisualStyleBackColor = true;
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(8, 43);
+            this.label13.Location = new System.Drawing.Point(8, 42);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(35, 13);
+            this.label13.Size = new System.Drawing.Size(34, 13);
             this.label13.TabIndex = 11;
-            this.label13.Text = "Count";
+            this.label13.Text = "Roller";
             // 
-            // OptionFontColor
+            // EntriesFontColor
             // 
-            this.OptionFontColor.Location = new System.Drawing.Point(173, 17);
-            this.OptionFontColor.Name = "OptionFontColor";
-            this.OptionFontColor.Size = new System.Drawing.Size(20, 20);
-            this.OptionFontColor.TabIndex = 10;
+            this.EntriesFontColor.Location = new System.Drawing.Point(173, 61);
+            this.EntriesFontColor.Name = "EntriesFontColor";
+            this.EntriesFontColor.Size = new System.Drawing.Size(20, 20);
+            this.EntriesFontColor.TabIndex = 10;
             // 
-            // OptionFontSelector
+            // EntriesFontSelector
             // 
-            this.OptionFontSelector.Location = new System.Drawing.Point(127, 16);
-            this.OptionFontSelector.Name = "OptionFontSelector";
-            this.OptionFontSelector.Size = new System.Drawing.Size(40, 23);
-            this.OptionFontSelector.TabIndex = 1;
-            this.OptionFontSelector.Text = "Font";
-            this.OptionFontSelector.UseVisualStyleBackColor = true;
+            this.EntriesFontSelector.Location = new System.Drawing.Point(127, 60);
+            this.EntriesFontSelector.Name = "EntriesFontSelector";
+            this.EntriesFontSelector.Size = new System.Drawing.Size(40, 23);
+            this.EntriesFontSelector.TabIndex = 1;
+            this.EntriesFontSelector.Text = "Font";
+            this.EntriesFontSelector.UseVisualStyleBackColor = true;
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(8, 21);
+            this.label12.Location = new System.Drawing.Point(8, 65);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(67, 13);
+            this.label12.Size = new System.Drawing.Size(39, 13);
             this.label12.TabIndex = 0;
-            this.label12.Text = "Option Label";
+            this.label12.Text = "Entries";
             // 
             // SaveButton
             // 
-            this.SaveButton.Location = new System.Drawing.Point(130, 606);
+            this.SaveButton.Location = new System.Drawing.Point(130, 478);
             this.SaveButton.Name = "SaveButton";
             this.SaveButton.Size = new System.Drawing.Size(75, 23);
             this.SaveButton.TabIndex = 5;
@@ -481,7 +400,7 @@
             // 
             // CancelButton
             // 
-            this.CancelButton.Location = new System.Drawing.Point(23, 606);
+            this.CancelButton.Location = new System.Drawing.Point(23, 478);
             this.CancelButton.Name = "CancelButton";
             this.CancelButton.Size = new System.Drawing.Size(75, 23);
             this.CancelButton.TabIndex = 6;
@@ -494,19 +413,17 @@
             this.groupBox5.Controls.Add(this.ChangeForegroundImage);
             this.groupBox5.Controls.Add(this.label17);
             this.groupBox5.Controls.Add(this.ChangeBackgroundImage);
-            this.groupBox5.Controls.Add(this.TotalPosition);
-            this.groupBox5.Controls.Add(this.label15);
-            this.groupBox5.Location = new System.Drawing.Point(12, 482);
+            this.groupBox5.Location = new System.Drawing.Point(12, 391);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(200, 118);
-            this.groupBox5.TabIndex = 7;
+            this.groupBox5.Size = new System.Drawing.Size(200, 79);
+            this.groupBox5.TabIndex = 8;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Other";
             // 
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(9, 70);
+            this.label18.Location = new System.Drawing.Point(9, 48);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(93, 13);
             this.label18.TabIndex = 5;
@@ -514,7 +431,7 @@
             // 
             // ChangeForegroundImage
             // 
-            this.ChangeForegroundImage.Location = new System.Drawing.Point(119, 65);
+            this.ChangeForegroundImage.Location = new System.Drawing.Point(119, 43);
             this.ChangeForegroundImage.Name = "ChangeForegroundImage";
             this.ChangeForegroundImage.Size = new System.Drawing.Size(75, 23);
             this.ChangeForegroundImage.TabIndex = 4;
@@ -525,7 +442,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(9, 46);
+            this.label17.Location = new System.Drawing.Point(9, 24);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(97, 13);
             this.label17.TabIndex = 3;
@@ -533,7 +450,7 @@
             // 
             // ChangeBackgroundImage
             // 
-            this.ChangeBackgroundImage.Location = new System.Drawing.Point(119, 41);
+            this.ChangeBackgroundImage.Location = new System.Drawing.Point(119, 19);
             this.ChangeBackgroundImage.Name = "ChangeBackgroundImage";
             this.ChangeBackgroundImage.Size = new System.Drawing.Size(75, 23);
             this.ChangeBackgroundImage.TabIndex = 2;
@@ -541,32 +458,11 @@
             this.ChangeBackgroundImage.UseVisualStyleBackColor = true;
             this.ChangeBackgroundImage.Click += new System.EventHandler(this.ChangeBackgroundImage_Click);
             // 
-            // TotalPosition
-            // 
-            this.TotalPosition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.TotalPosition.FormattingEnabled = true;
-            this.TotalPosition.Items.AddRange(new object[] {
-            "Top",
-            "Bottom"});
-            this.TotalPosition.Location = new System.Drawing.Point(119, 17);
-            this.TotalPosition.Name = "TotalPosition";
-            this.TotalPosition.Size = new System.Drawing.Size(75, 21);
-            this.TotalPosition.TabIndex = 1;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(9, 20);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(67, 13);
-            this.label15.TabIndex = 0;
-            this.label15.Text = "Title Position";
-            // 
-            // SetupBarGraph
+            // SetupGiveaway
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(227, 641);
+            this.ClientSize = new System.Drawing.Size(227, 521);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.CancelButton);
             this.Controls.Add(this.SaveButton);
@@ -576,15 +472,15 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.NameLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "SetupBarGraph";
-            this.Text = "Setup Bar Graph - Chatinator";
+            this.Name = "SetupGiveaway";
+            this.Text = "Setup Giveaway - Chatinator";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.HeightInput)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.WidthInput)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.BarSpacing)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Spacing)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.MarginRight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.MarginLeft)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.MarginBottom)).EndInit();
@@ -618,36 +514,26 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.TextBox Option4Color;
-        private System.Windows.Forms.TextBox Option3Color;
-        private System.Windows.Forms.TextBox Option2Color;
-        private System.Windows.Forms.TextBox Option1Color;
         private System.Windows.Forms.TextBox ChromaKey;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.TextBox TotalFontColor;
-        private System.Windows.Forms.Button TotalFontSelector;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.TextBox CountFontColor;
-        private System.Windows.Forms.Button CountFontSelector;
+        private System.Windows.Forms.TextBox RollerFontColor;
+        private System.Windows.Forms.Button RollerFontSelector;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox OptionFontColor;
-        private System.Windows.Forms.Button OptionFontSelector;
+        private System.Windows.Forms.TextBox EntriesFontColor;
+        private System.Windows.Forms.Button EntriesFontSelector;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Button SaveButton;
         private System.Windows.Forms.Button CancelButton;
-        private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.ComboBox TotalPosition;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.NumericUpDown BarSpacing;
+        private System.Windows.Forms.NumericUpDown Spacing;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Button ChangeBackgroundImage;
+        private System.Windows.Forms.TextBox TitleFontColor;
+        private System.Windows.Forms.Button TitleFontSelector;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Button ChangeForegroundImage;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Button ChangeBackgroundImage;
     }
 }

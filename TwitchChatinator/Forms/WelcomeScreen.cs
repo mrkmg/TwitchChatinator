@@ -21,6 +21,9 @@ namespace TwitchChatinator
         public WelcomeScreen()
         {
             InitializeComponent();
+
+            VersionLabel.Text = "V" + Application.ProductVersion;
+
             this.FormClosed += WelcomeScreen_FormClosed;
 
             TI = new TwitchIRC();
@@ -139,6 +142,8 @@ namespace TwitchChatinator
 
         private void StartRollButton_Click(object sender, EventArgs e)
         {
+            var Launcher = new LaunchGiveaway();
+            Launcher.Show();
         }
 
         protected override void Dispose(bool disposing)
@@ -155,7 +160,8 @@ namespace TwitchChatinator
 
         private void SetupRollButton_Click(object sender, EventArgs e)
         {
-
+            var Manager = new ManageGiveaway();
+            Manager.Show();
         }
 
         private void ExportButton_Click(object sender, EventArgs e)
@@ -178,8 +184,21 @@ namespace TwitchChatinator
 
             List<string> users = DataStore.GetUniqueUsersString(DSS);
             Random r = new Random();
-            string winner = users[(int)(r.NextDouble()*(users.Count-1))];
-            Clipboard.SetText(winner);
+            if (users.Count > 0)
+            {
+                string winner = users[(int)(r.NextDouble() * (users.Count - 1))];
+                Clipboard.SetText(winner);
+                ((Button)sender).Text = winner;
+            }
+            else
+            {
+                ((Button)sender).Text = "NO ENTRIES";
+            }
+            System.Windows.Forms.Timer T = new System.Windows.Forms.Timer();
+            //TODO - Make this timer go away if clicked again.
+            T.Tick += delegate(object S, EventArgs E) { ((Button)sender).Text = "Copy Random User"; T.Stop(); T.Dispose(); };
+            T.Interval = 1500;
+            T.Start();
         }
     }
 }
