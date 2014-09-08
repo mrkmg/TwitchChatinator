@@ -128,12 +128,6 @@ namespace TwitchChatinator
             MB.Show();
         }
 
-        private void ShowPollConfig_Click(object sender, EventArgs e)
-        {
-            var Manager = new ManagePolls();
-            Manager.Show();
-        }
-
         private void StartPollButton_Click(object sender, EventArgs e)
         {
             var Launcher = new LaunchPoll();
@@ -156,12 +150,6 @@ namespace TwitchChatinator
             TI.Dispose();
 
             base.Dispose(disposing);
-        }
-
-        private void SetupRollButton_Click(object sender, EventArgs e)
-        {
-            var Manager = new ManageGiveaway();
-            Manager.Show();
         }
 
         private void ExportButton_Click(object sender, EventArgs e)

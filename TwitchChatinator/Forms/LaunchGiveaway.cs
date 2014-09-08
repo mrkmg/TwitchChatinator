@@ -25,6 +25,24 @@ namespace TwitchChatinator
             RollButton.Enabled = false;
 
             FormClosed += LaunchGiveaway_FormClosed;
+
+            if (List.Items.Count > 0)
+            {
+                List.SelectedIndex = 0;
+                EditButton.Enabled = true;
+                DeleteButton.Enabled = true;
+                CopyButton.Enabled = true;
+                RenameButton.Enabled = true;
+                StartButton.Enabled = true;
+            }
+            else
+            {
+                StartButton.Enabled = false;
+                EditButton.Enabled = false;
+                DeleteButton.Enabled = false;
+                CopyButton.Enabled = false;
+                RenameButton.Enabled = false;
+            }
         }
 
         void LaunchGiveaway_FormClosed(object sender, FormClosedEventArgs e)
@@ -54,12 +72,22 @@ namespace TwitchChatinator
             if (List.Items.Count > 0)
             {
                 List.SelectedIndex = 0;
+                EditButton.Enabled = true;
+                DeleteButton.Enabled = true;
+                CopyButton.Enabled = true;
+                RenameButton.Enabled = true;
                 StartButton.Enabled = true;
             }
             else
             {
                 StartButton.Enabled = false;
+                EditButton.Enabled = false;
+                DeleteButton.Enabled = false;
+                CopyButton.Enabled = false;
+                RenameButton.Enabled = false;
             }
+
+
         }
 
         private void StartButton_Click(object sender, EventArgs e)
@@ -93,6 +121,70 @@ namespace TwitchChatinator
             {
                 Giveaway.Roll();
             }
+        }
+
+        private void NewGiveawayButton_Click(object sender, EventArgs e)
+        {
+            InputBoxResult result = InputBox.Show("Name:", "New Giveaway Tempalate", "", GiveawayOptions.ValidateNameHandler);
+            if (result.OK)
+            {
+                //TODO: Add Exception Control
+                GiveawayOptions.CreateNew(result.Text);
+            }
+            PopulateList();
+        }
+
+        private void EditButton_Click(object sender, EventArgs e)
+        {
+            switch (Options[List.SelectedIndex].type)
+            {
+                case "Giveaway":
+                    var sp = new SetupGiveaway(Options[List.SelectedIndex].name);
+                    sp.Show();
+                    break;
+            }
+        }
+
+        private void DeleteButton_Click(object sender, EventArgs e)
+        {
+            switch (Options[List.SelectedIndex].type)
+            {
+                case "Giveaway":
+                    GiveawayOptions.Remove(Options[List.SelectedIndex].name);
+                    break;
+            }
+            PopulateList();
+        }
+
+        private void RenameButton_Click(object sender, EventArgs e)
+        {
+            switch (Options[List.SelectedIndex].type)
+            {
+                case "Giveaway":
+                    InputBoxResult result = InputBox.Show("New Name:", "Rename Giveaway Template", "", GiveawayOptions.ValidateNameHandler);
+                    if (result.OK)
+                    {
+                        GiveawayOptions.Rename(Options[List.SelectedIndex].name, result.Text);
+                    }
+                    break;
+            }
+            PopulateList();
+        }
+
+        private void CopyButton_Click(object sender, EventArgs e)
+        {
+            switch (Options[List.SelectedIndex].type)
+            {
+                case "Giveaway":
+                    InputBoxResult result = InputBox.Show("Copy To:", "Copy Bar Graph", "", GiveawayOptions.ValidateNameHandler);
+                    if (result.OK)
+                    {
+                        var o = GiveawayOptions.Load(Options[List.SelectedIndex].name);
+                        o.Save(result.Text);
+                    }
+                    break;
+            }
+            PopulateList();
         }
     }
 }

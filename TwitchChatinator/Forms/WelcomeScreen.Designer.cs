@@ -20,18 +20,16 @@
             this.SetCredentialsButton = new System.Windows.Forms.Button();
             this.StartListenButton = new System.Windows.Forms.Button();
             this.ShowMessageBrowser = new System.Windows.Forms.Button();
-            this.ShowPollConfig = new System.Windows.Forms.Button();
             this.StartPollButton = new System.Windows.Forms.Button();
             this.ListeningStatus = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.ResetButton = new System.Windows.Forms.Button();
             this.StartRollButton = new System.Windows.Forms.Button();
-            this.SetupRollButton = new System.Windows.Forms.Button();
             this.ExportButton = new System.Windows.Forms.Button();
             this.CopyRandomButton = new System.Windows.Forms.Button();
             this.ConnectedLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.VersionLabel = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ListeningStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -59,7 +57,7 @@
             // 
             // ShowMessageBrowser
             // 
-            this.ShowMessageBrowser.Location = new System.Drawing.Point(429, 277);
+            this.ShowMessageBrowser.Location = new System.Drawing.Point(12, 217);
             this.ShowMessageBrowser.Name = "ShowMessageBrowser";
             this.ShowMessageBrowser.Size = new System.Drawing.Size(85, 44);
             this.ShowMessageBrowser.TabIndex = 5;
@@ -67,19 +65,9 @@
             this.ShowMessageBrowser.UseVisualStyleBackColor = true;
             this.ShowMessageBrowser.Click += new System.EventHandler(this.ShowMessageBrowser_Click);
             // 
-            // ShowPollConfig
-            // 
-            this.ShowPollConfig.Location = new System.Drawing.Point(13, 327);
-            this.ShowPollConfig.Name = "ShowPollConfig";
-            this.ShowPollConfig.Size = new System.Drawing.Size(85, 44);
-            this.ShowPollConfig.TabIndex = 6;
-            this.ShowPollConfig.Text = "Setup Poll";
-            this.ShowPollConfig.UseVisualStyleBackColor = true;
-            this.ShowPollConfig.Click += new System.EventHandler(this.ShowPollConfig_Click);
-            // 
             // StartPollButton
             // 
-            this.StartPollButton.Location = new System.Drawing.Point(13, 162);
+            this.StartPollButton.Location = new System.Drawing.Point(12, 117);
             this.StartPollButton.Name = "StartPollButton";
             this.StartPollButton.Size = new System.Drawing.Size(85, 44);
             this.StartPollButton.TabIndex = 7;
@@ -106,18 +94,9 @@
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
-            // ResetButton
-            // 
-            this.ResetButton.Location = new System.Drawing.Point(338, 327);
-            this.ResetButton.Name = "ResetButton";
-            this.ResetButton.Size = new System.Drawing.Size(85, 44);
-            this.ResetButton.TabIndex = 8;
-            this.ResetButton.Text = "Reset";
-            this.ResetButton.UseVisualStyleBackColor = true;
-            // 
             // StartRollButton
             // 
-            this.StartRollButton.Location = new System.Drawing.Point(104, 162);
+            this.StartRollButton.Location = new System.Drawing.Point(103, 117);
             this.StartRollButton.Name = "StartRollButton";
             this.StartRollButton.Size = new System.Drawing.Size(85, 44);
             this.StartRollButton.TabIndex = 7;
@@ -125,19 +104,9 @@
             this.StartRollButton.UseVisualStyleBackColor = true;
             this.StartRollButton.Click += new System.EventHandler(this.StartRollButton_Click);
             // 
-            // SetupRollButton
-            // 
-            this.SetupRollButton.Location = new System.Drawing.Point(103, 327);
-            this.SetupRollButton.Name = "SetupRollButton";
-            this.SetupRollButton.Size = new System.Drawing.Size(85, 44);
-            this.SetupRollButton.TabIndex = 9;
-            this.SetupRollButton.Text = "Setup Roll";
-            this.SetupRollButton.UseVisualStyleBackColor = true;
-            this.SetupRollButton.Click += new System.EventHandler(this.SetupRollButton_Click);
-            // 
             // ExportButton
             // 
-            this.ExportButton.Location = new System.Drawing.Point(429, 327);
+            this.ExportButton.Location = new System.Drawing.Point(103, 217);
             this.ExportButton.Name = "ExportButton";
             this.ExportButton.Size = new System.Drawing.Size(85, 44);
             this.ExportButton.TabIndex = 7;
@@ -147,7 +116,7 @@
             // 
             // CopyRandomButton
             // 
-            this.CopyRandomButton.Location = new System.Drawing.Point(13, 212);
+            this.CopyRandomButton.Location = new System.Drawing.Point(12, 167);
             this.CopyRandomButton.Name = "CopyRandomButton";
             this.CopyRandomButton.Size = new System.Drawing.Size(85, 44);
             this.CopyRandomButton.TabIndex = 10;
@@ -185,21 +154,29 @@
             this.VersionLabel.Text = "VERSION";
             this.VersionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // button1
+            // 
+            this.button1.Enabled = false;
+            this.button1.Location = new System.Drawing.Point(104, 168);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(84, 43);
+            this.button1.TabIndex = 14;
+            this.button1.Text = "Hype Meter";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // WelcomeScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(527, 392);
+            this.ClientSize = new System.Drawing.Size(527, 275);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.VersionLabel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ConnectedLabel);
             this.Controls.Add(this.CopyRandomButton);
-            this.Controls.Add(this.SetupRollButton);
-            this.Controls.Add(this.ResetButton);
             this.Controls.Add(this.StartRollButton);
             this.Controls.Add(this.ExportButton);
             this.Controls.Add(this.StartPollButton);
-            this.Controls.Add(this.ShowPollConfig);
             this.Controls.Add(this.ShowMessageBrowser);
             this.Controls.Add(this.ListeningStatus);
             this.Controls.Add(this.StartListenButton);
@@ -223,15 +200,13 @@
         public System.Windows.Forms.Button StartListenButton;
         public System.Windows.Forms.PictureBox ListeningStatus;
         private System.Windows.Forms.Button ShowMessageBrowser;
-        private System.Windows.Forms.Button ShowPollConfig;
         private System.Windows.Forms.Button StartPollButton;
-        private System.Windows.Forms.Button ResetButton;
         private System.Windows.Forms.Button StartRollButton;
-        private System.Windows.Forms.Button SetupRollButton;
         private System.Windows.Forms.Button ExportButton;
         private System.Windows.Forms.Button CopyRandomButton;
         private System.Windows.Forms.Label ConnectedLabel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label VersionLabel;
+        private System.Windows.Forms.Button button1;
     }
 }

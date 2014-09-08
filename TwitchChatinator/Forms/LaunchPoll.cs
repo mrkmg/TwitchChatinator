@@ -33,6 +33,24 @@ namespace TwitchChatinator
             InfoLabel.Text = "Stopped | " + StartTime.ToString("h:mm t");
 
             FormClosed += LaunchPoll_FormClosed;
+
+            if (List.Items.Count > 0)
+            {
+                List.SelectedIndex = 0;
+                EditButton.Enabled = true;
+                DeleteButton.Enabled = true;
+                CopyButton.Enabled = true;
+                RenameButton.Enabled = true;
+                StartButton.Enabled = true;
+            }
+            else
+            {
+                StartButton.Enabled = false;
+                EditButton.Enabled = false;
+                DeleteButton.Enabled = false;
+                CopyButton.Enabled = false;
+                RenameButton.Enabled = false;
+            }
         }
 
         void LaunchPoll_FormClosed(object sender, FormClosedEventArgs e)
@@ -143,10 +161,18 @@ namespace TwitchChatinator
             {
                 List.SelectedIndex = 0;
                 StartButton.Enabled = true;
+                EditButton.Enabled = true;
+                DeleteButton.Enabled = true;
+                CopyButton.Enabled = true;
+                RenameButton.Enabled = true;
             }
             else
             {
                 StartButton.Enabled = false;
+                EditButton.Enabled = false;
+                DeleteButton.Enabled = false;
+                CopyButton.Enabled = false;
+                RenameButton.Enabled = false;
             }
         }
 
@@ -191,6 +217,88 @@ namespace TwitchChatinator
         {
             Poll = null;
             StartButton.Text = "Start Poll";
+        }
+
+        private void NewBarButton_Click(object sender, EventArgs e)
+        {
+            InputBoxResult result = InputBox.Show("Name:", "New Bar Graph", "", BarGraphOptions.ValidateNameHandler);
+            if (result.OK)
+            {
+                //TODO: Add Exception Control
+                BarGraphOptions.CreateNew(result.Text);
+            }
+            PopulateList();
+        }
+
+        private void EditButton_Click(object sender, EventArgs e)
+        {
+            switch (Options[List.SelectedIndex].type)
+            {
+                case "Bar":
+                    var sp = new SetupBarGraph(Options[List.SelectedIndex].name);
+                    sp.Show();
+                    break;
+                case "Pie":
+
+                    break;
+            }
+        }
+
+        private void RenameButton_Click(object sender, EventArgs e)
+        {
+            switch (Options[List.SelectedIndex].type)
+            {
+                case "Bar":
+                    InputBoxResult result = InputBox.Show("New Name:", "Rename Bar Graph", "", BarGraphOptions.ValidateNameHandler);
+                    if (result.OK)
+                    {
+                        BarGraphOptions.Rename(Options[List.SelectedIndex].name, result.Text);
+                    }
+                    break;
+                case "Pie":
+
+                    break;
+            }
+            PopulateList();
+        }
+
+        private void DeleteButton_Click(object sender, EventArgs e)
+        {
+            switch (Options[List.SelectedIndex].type)
+            {
+                case "Bar":
+                    BarGraphOptions.Remove(Options[List.SelectedIndex].name);
+                    break;
+                case "Pie":
+
+                    break;
+            }
+            PopulateList();
+        }
+
+        private void CopyButton_Click(object sender, EventArgs e)
+        {
+            switch (Options[List.SelectedIndex].type)
+            {
+                case "Bar":
+                    InputBoxResult result = InputBox.Show("Copy To:", "Copy Bar Graph", "", BarGraphOptions.ValidateNameHandler);
+                    if (result.OK)
+                    {
+
+                        var o = BarGraphOptions.Load(Options[List.SelectedIndex].name);
+                        o.Save(result.Text);
+                    }
+                    break;
+                case "Pie":
+
+                    break;
+            }
+            PopulateList();
+        }
+
+        private void NewPieButton_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Pie graphs are coming soon. Check https://mrkmg.com/chatinator for updates.");            
         }
     }
 

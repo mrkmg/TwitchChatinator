@@ -35,6 +35,12 @@
             this.PollTitle = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.InfoLabel = new System.Windows.Forms.Label();
+            this.EditButton = new System.Windows.Forms.Button();
+            this.DeleteButton = new System.Windows.Forms.Button();
+            this.RenameButton = new System.Windows.Forms.Button();
+            this.CopyButton = new System.Windows.Forms.Button();
+            this.NewBarButton = new System.Windows.Forms.Button();
+            this.NewPieButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // List
@@ -100,11 +106,77 @@
             this.InfoLabel.TabIndex = 14;
             this.InfoLabel.Text = "INFO_LABEL_STARTTIME";
             // 
+            // EditButton
+            // 
+            this.EditButton.Location = new System.Drawing.Point(217, 12);
+            this.EditButton.Name = "EditButton";
+            this.EditButton.Size = new System.Drawing.Size(57, 23);
+            this.EditButton.TabIndex = 15;
+            this.EditButton.Text = "Edit";
+            this.EditButton.UseVisualStyleBackColor = true;
+            this.EditButton.Click += new System.EventHandler(this.EditButton_Click);
+            // 
+            // DeleteButton
+            // 
+            this.DeleteButton.Location = new System.Drawing.Point(280, 12);
+            this.DeleteButton.Name = "DeleteButton";
+            this.DeleteButton.Size = new System.Drawing.Size(57, 23);
+            this.DeleteButton.TabIndex = 16;
+            this.DeleteButton.Text = "Delete";
+            this.DeleteButton.UseVisualStyleBackColor = true;
+            this.DeleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
+            // 
+            // RenameButton
+            // 
+            this.RenameButton.Location = new System.Drawing.Point(343, 13);
+            this.RenameButton.Name = "RenameButton";
+            this.RenameButton.Size = new System.Drawing.Size(57, 23);
+            this.RenameButton.TabIndex = 17;
+            this.RenameButton.Text = "Rename";
+            this.RenameButton.UseVisualStyleBackColor = true;
+            this.RenameButton.Click += new System.EventHandler(this.RenameButton_Click);
+            // 
+            // CopyButton
+            // 
+            this.CopyButton.Location = new System.Drawing.Point(217, 42);
+            this.CopyButton.Name = "CopyButton";
+            this.CopyButton.Size = new System.Drawing.Size(57, 23);
+            this.CopyButton.TabIndex = 18;
+            this.CopyButton.Text = "Copy";
+            this.CopyButton.UseVisualStyleBackColor = true;
+            this.CopyButton.Click += new System.EventHandler(this.CopyButton_Click);
+            // 
+            // NewBarButton
+            // 
+            this.NewBarButton.Location = new System.Drawing.Point(280, 42);
+            this.NewBarButton.Name = "NewBarButton";
+            this.NewBarButton.Size = new System.Drawing.Size(57, 23);
+            this.NewBarButton.TabIndex = 19;
+            this.NewBarButton.Text = "New Bar";
+            this.NewBarButton.UseVisualStyleBackColor = true;
+            this.NewBarButton.Click += new System.EventHandler(this.NewBarButton_Click);
+            // 
+            // NewPieButton
+            // 
+            this.NewPieButton.Location = new System.Drawing.Point(343, 42);
+            this.NewPieButton.Name = "NewPieButton";
+            this.NewPieButton.Size = new System.Drawing.Size(57, 23);
+            this.NewPieButton.TabIndex = 20;
+            this.NewPieButton.Text = "New Pie";
+            this.NewPieButton.UseVisualStyleBackColor = true;
+            this.NewPieButton.Click += new System.EventHandler(this.NewPieButton_Click);
+            // 
             // LaunchPoll
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(224, 209);
+            this.ClientSize = new System.Drawing.Size(421, 209);
+            this.Controls.Add(this.NewPieButton);
+            this.Controls.Add(this.NewBarButton);
+            this.Controls.Add(this.CopyButton);
+            this.Controls.Add(this.RenameButton);
+            this.Controls.Add(this.DeleteButton);
+            this.Controls.Add(this.EditButton);
             this.Controls.Add(this.InfoLabel);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label6);
@@ -129,5 +201,11 @@
         private System.Windows.Forms.TextBox PollTitle;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label InfoLabel;
+        private System.Windows.Forms.Button EditButton;
+        private System.Windows.Forms.Button DeleteButton;
+        private System.Windows.Forms.Button RenameButton;
+        private System.Windows.Forms.Button CopyButton;
+        private System.Windows.Forms.Button NewBarButton;
+        private System.Windows.Forms.Button NewPieButton;
     }
 }
