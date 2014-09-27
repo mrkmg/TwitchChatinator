@@ -141,7 +141,7 @@ namespace TwitchChatinator
             List<string> BarGraphs = BarGraphOptions.GetAvaliable();
 
             //Get Pie Graphs - TODO
-            List<string> PieGraphs = new List<string>();
+            List<string> PieGraphs = PieGraphOptions.GetAvaliable();
 
             Options = new List<SelectListObject>();
 
@@ -200,7 +200,11 @@ namespace TwitchChatinator
                         StartButton.Text = "Stop Poll";
                         break;
                     case "Pie":
-                        throw new NotImplementedException();
+                        RunPollPie RPP = new RunPollPie(StartTime, Options[List.SelectedIndex].name, PollTitle.Text, Labels.ToArray());
+                        RPP.Show();
+                        RPP.FormClosed += Poll_FormClosed;
+                        Poll = RPP;
+                        StartButton.Text = "Stop Poll";
                         break;
                 }
                 InfoLabel.Text = "Started | " + StartTime.ToString("h:mm t");
@@ -219,44 +223,39 @@ namespace TwitchChatinator
             StartButton.Text = "Start Poll";
         }
 
-        private void NewBarButton_Click(object sender, EventArgs e)
-        {
-            InputBoxResult result = InputBox.Show("Name:", "New Bar Graph", "", BarGraphOptions.ValidateNameHandler);
-            if (result.OK)
-            {
-                //TODO: Add Exception Control
-                BarGraphOptions.CreateNew(result.Text);
-            }
-            PopulateList();
-        }
-
         private void EditButton_Click(object sender, EventArgs e)
         {
             switch (Options[List.SelectedIndex].type)
             {
                 case "Bar":
-                    var sp = new SetupBarGraph(Options[List.SelectedIndex].name);
-                    sp.Show();
+                    var sb = new SetupBarGraph(Options[List.SelectedIndex].name);
+                    sb.Show();
                     break;
                 case "Pie":
-
+                    var sp = new SetupPieGraph(Options[List.SelectedIndex].name);
+                    sp.Show();
                     break;
             }
         }
 
         private void RenameButton_Click(object sender, EventArgs e)
         {
+            InputBoxResult result;
             switch (Options[List.SelectedIndex].type)
             {
                 case "Bar":
-                    InputBoxResult result = InputBox.Show("New Name:", "Rename Bar Graph", "", BarGraphOptions.ValidateNameHandler);
+                    result = InputBox.Show("New Name:", "Rename Bar Graph", "", BarGraphOptions.ValidateNameHandler);
                     if (result.OK)
                     {
                         BarGraphOptions.Rename(Options[List.SelectedIndex].name, result.Text);
                     }
                     break;
                 case "Pie":
-
+                    result = InputBox.Show("New Name:", "Rename Pie Graph", "", PieGraphOptions.ValidateNameHandler);
+                    if (result.OK)
+                    {
+                        PieGraphOptions.Rename(Options[List.SelectedIndex].name, result.Text);
+                    }
                     break;
             }
             PopulateList();
@@ -270,7 +269,7 @@ namespace TwitchChatinator
                     BarGraphOptions.Remove(Options[List.SelectedIndex].name);
                     break;
                 case "Pie":
-
+                    PieGraphOptions.Remove(Options[List.SelectedIndex].name);
                     break;
             }
             PopulateList();
@@ -278,10 +277,11 @@ namespace TwitchChatinator
 
         private void CopyButton_Click(object sender, EventArgs e)
         {
+            InputBoxResult result;
             switch (Options[List.SelectedIndex].type)
             {
                 case "Bar":
-                    InputBoxResult result = InputBox.Show("Copy To:", "Copy Bar Graph", "", BarGraphOptions.ValidateNameHandler);
+                    result = InputBox.Show("Copy To:", "Copy Bar Graph", "", BarGraphOptions.ValidateNameHandler);
                     if (result.OK)
                     {
 
@@ -290,15 +290,51 @@ namespace TwitchChatinator
                     }
                     break;
                 case "Pie":
+                    result = InputBox.Show("Copy To:", "Copy Pie Graph", "", BarGraphOptions.ValidateNameHandler);
+                    if (result.OK)
+                    {
 
+                        var o = PieGraphOptions.Load(Options[List.SelectedIndex].name);
+                        o.Save(result.Text);
+                    }
                     break;
+            }
+            PopulateList();
+        }
+
+        private void NewBarButton_Click(object sender, EventArgs e)
+        {
+            InputBoxResult result = InputBox.Show("Name:", "New Bar Graph", "", BarGraphOptions.ValidateNameHandler);
+            if (result.OK)
+            {
+                //TODO: Add Exception Control
+                BarGraphOptions.CreateNew(result.Text);
             }
             PopulateList();
         }
 
         private void NewPieButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Pie graphs are coming soon. Check https://mrkmg.com/chatinator for updates.");            
+            InputBoxResult result = InputBox.Show("Name:", "New Pie Graph", "", PieGraphOptions.ValidateNameHandler);
+            if (result.OK)
+            {
+                //TODO: Add Exception Control
+                PieGraphOptions.CreateNew(result.Text);
+            }
+            PopulateList();          
+        }
+
+        private void ExportButton_Click(object sender, EventArgs e)
+        {
+            switch (Options[List.SelectedIndex].type)
+            {
+                case "Bar":
+                    BarGraphOptions.Export(Options[List.SelectedIndex].name);
+                    break;
+                case "Pie":
+                    PieGraphOptions.Export(Options[List.SelectedIndex].name);
+                    break;
+            }
         }
     }
 

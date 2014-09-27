@@ -41,6 +41,8 @@
             this.CopyButton = new System.Windows.Forms.Button();
             this.NewBarButton = new System.Windows.Forms.Button();
             this.NewPieButton = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.ExportButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // List
@@ -166,11 +168,32 @@
             this.NewPieButton.UseVisualStyleBackColor = true;
             this.NewPieButton.Click += new System.EventHandler(this.NewPieButton_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(406, 42);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(57, 23);
+            this.button1.TabIndex = 22;
+            this.button1.Text = "Import";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // ExportButton
+            // 
+            this.ExportButton.Location = new System.Drawing.Point(406, 13);
+            this.ExportButton.Name = "ExportButton";
+            this.ExportButton.Size = new System.Drawing.Size(57, 23);
+            this.ExportButton.TabIndex = 21;
+            this.ExportButton.Text = "Export";
+            this.ExportButton.UseVisualStyleBackColor = true;
+            this.ExportButton.Click += new System.EventHandler(this.ExportButton_Click);
+            // 
             // LaunchPoll
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(421, 209);
+            this.ClientSize = new System.Drawing.Size(471, 209);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.ExportButton);
             this.Controls.Add(this.NewPieButton);
             this.Controls.Add(this.NewBarButton);
             this.Controls.Add(this.CopyButton);
@@ -207,5 +230,7 @@
         private System.Windows.Forms.Button CopyButton;
         private System.Windows.Forms.Button NewBarButton;
         private System.Windows.Forms.Button NewPieButton;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button ExportButton;
     }
 }

@@ -231,7 +231,6 @@ namespace TwitchChatinator
             }
 
             BarRectangles = new Rectangle[CountEntries];
-            BarBrushes = new SolidBrush[CountEntries];
 
             int avaliableHeight = Options.Height - TotalRec.Height - Options.MarginBottom - Options.MarginTop - (CountEntries * Options.BarSpacing);
             int barHeight = (avaliableHeight / CountEntries);
@@ -241,23 +240,13 @@ namespace TwitchChatinator
                 BarRectangles[i].X = Options.MarginLeft;
                 BarRectangles[i].Y = offTop + (barHeight * i) + (i * Options.BarSpacing);
                 BarRectangles[i].Height = barHeight;
-
-                switch (i)
-                {
-                    case 0:
-                        BarBrushes[i] = new SolidBrush(Options.Option1Color);
-                        break;
-                    case 1:
-                        BarBrushes[i] = new SolidBrush(Options.Option2Color);
-                        break;
-                    case 2:
-                        BarBrushes[i] = new SolidBrush(Options.Option3Color);
-                        break;
-                    case 3:
-                        BarBrushes[i] = new SolidBrush(Options.Option4Color);
-                        break;
-                }
             }
+
+            BarBrushes = new SolidBrush[4];
+            BarBrushes[0] = new SolidBrush(Options.Option1Color);
+            BarBrushes[1] = new SolidBrush(Options.Option2Color);
+            BarBrushes[2] = new SolidBrush(Options.Option3Color);
+            BarBrushes[3] = new SolidBrush(Options.Option4Color);
         }
     }
 }

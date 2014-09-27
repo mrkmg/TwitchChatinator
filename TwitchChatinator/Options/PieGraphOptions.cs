@@ -9,7 +9,7 @@ using System.IO;
 
 namespace TwitchChatinator
 {
-    public class BarGraphOptions
+    public class PieGraphOptions
     {
         [XmlElement]
         public int Width { get; set; }
@@ -38,6 +38,8 @@ namespace TwitchChatinator
         public Color Option3Color { get; set; }
         [XmlIgnore]
         public Color Option4Color { get; set; }
+        [XmlIgnore]
+        public Color LabelBoxColor { get; set; }
 
         [XmlIgnore]
         public Color OptionFontColor { get; set; }
@@ -100,6 +102,12 @@ namespace TwitchChatinator
             set { Option4Color = ColorTranslator.FromHtml(value); }
         }
         [XmlElement]
+        public string LabelBoxColorCode
+        {
+            get { return ColorTranslator.ToHtml(LabelBoxColor); }
+            set { LabelBoxColor = ColorTranslator.FromHtml(value); }
+        }
+        [XmlElement]
         public string OptionFontColorCode
         {
             get { return ColorTranslator.ToHtml(OptionFontColor); }
@@ -138,7 +146,7 @@ namespace TwitchChatinator
             set { TitleFont = FontXmlConverter.ConvertToFont(value); }
         }
 
-        public BarGraphOptions()
+        public PieGraphOptions()
         {
             Width = 400;
             Height = 200;
@@ -155,6 +163,7 @@ namespace TwitchChatinator
             Option2Color = Color.RoyalBlue;
             Option3Color = Color.Orange;
             Option4Color = Color.ForestGreen;
+            LabelBoxColor = Color.Black;
 
             OptionFontColor = Color.White;
             OptionFont = new Font("Segoe UI", 15.75f, FontStyle.Bold);
@@ -164,7 +173,7 @@ namespace TwitchChatinator
 
             TitleFontColor = Color.White;
             TitleFont = new Font("Segoe UI", 15.75f, FontStyle.Bold);
-            
+
             AllowMulti = false;
 
             TotalPosition = "Bottom";
@@ -175,12 +184,12 @@ namespace TwitchChatinator
 
 
         //TODO - Add in exception
-        static public BarGraphOptions Load(string name)
+        static public PieGraphOptions Load(string name)
         {
-            var reader = new XmlSerializer(typeof(BarGraphOptions));
+            var reader = new XmlSerializer(typeof(PieGraphOptions));
             var stream = new StreamReader(getPathFromName(name));
-            var obj = new BarGraphOptions();
-            obj = (BarGraphOptions)reader.Deserialize(stream);
+            var obj = new PieGraphOptions();
+            obj = (PieGraphOptions)reader.Deserialize(stream);
 
             stream.Close();
             return obj;
@@ -189,7 +198,7 @@ namespace TwitchChatinator
         //TODO - Add in exception
         public void Save(string name)
         {
-            var writer = new XmlSerializer(typeof(BarGraphOptions));
+            var writer = new XmlSerializer(typeof(PieGraphOptions));
             var stream = new StreamWriter(getPathFromName(name));
 
             writer.Serialize(stream, this);
@@ -199,7 +208,7 @@ namespace TwitchChatinator
 
         static public void CreateNew(string name)
         {
-            var obj = new BarGraphOptions();
+            var obj = new PieGraphOptions();
             obj.Save(name);
         }
 
@@ -237,12 +246,12 @@ namespace TwitchChatinator
 
         static public string getPath()
         {
-            return Program.AppDataFolder() + @"\Polls\BarGraphs";
+            return Program.AppDataFolder() + @"\Polls\PieGraphs";
         }
 
         static public string getPathFromName(string name)
         {
-            return getPath() + @"\" + name + ".xbar";
+            return  getPath() + @"\" + name + ".xpie";
         }
 
         static public void ValidateNameHandler(object sender, InputBoxValidatingArgs e)
@@ -257,7 +266,7 @@ namespace TwitchChatinator
             {
                 new FileInfo(getPathFromName(e.Text));
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 e.Cancel = true;
                 e.Message = "Invalid Characters";
@@ -269,11 +278,11 @@ namespace TwitchChatinator
             System.Windows.Forms.SaveFileDialog Dialog = new System.Windows.Forms.SaveFileDialog();
 
             Dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            Dialog.Filter = "XBar Files (*.xbar)|*.xbar";
+            Dialog.Filter = "XPie Files (*.xpie)|*.xpie";
             Dialog.Title = "Save Pie Graph";
             Dialog.OverwritePrompt = true;
 
-            if(Dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (Dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 File.Copy(getPathFromName(name), Dialog.FileName, true);
             }

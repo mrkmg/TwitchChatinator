@@ -162,6 +162,18 @@
     <Compile Include="Forms\RunPollBar.Designer.cs">
       <DependentUpon>RunPollBar.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\RunPollPie.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\RunPollPie.Designer.cs">
+      <DependentUpon>RunPollPie.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SetupPieGraph.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SetupPieGraph.Designer.cs">
+      <DependentUpon>SetupPieGraph.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\SetupBarGraph.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -194,6 +206,7 @@
     </Compile>
     <Compile Include="Libs\SerializableFont.cs" />
     <Compile Include="Options\GiveawayOptions.cs" />
+    <Compile Include="Options\PieGraphOptions.cs" />
     <Compile Include="Options\PositionsSaver.cs" />
     <Compile Include="Options\StorableImage.cs" />
     <Compile Include="Program.cs" />
@@ -225,6 +238,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SetCredentialsScreen.resx">
       <DependentUpon>SetCredentialsScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SetupPieGraph.resx">
+      <DependentUpon>SetupPieGraph.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SetupBarGraph.resx">
       <DependentUpon>SetupBarGraph.cs</DependentUpon>

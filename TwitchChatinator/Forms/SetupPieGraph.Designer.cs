@@ -1,6 +1,6 @@
 ﻿namespace TwitchChatinator
 {
-    partial class SetupBarGraph
+    partial class SetupPieGraph
     {
         /// <summary>
         /// Required designer variable.
@@ -166,7 +166,7 @@
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Location = new System.Drawing.Point(224, 43);
+            this.groupBox2.Location = new System.Drawing.Point(12, 109);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(200, 125);
             this.groupBox2.TabIndex = 2;
@@ -290,9 +290,9 @@
             this.groupBox3.Controls.Add(this.label9);
             this.groupBox3.Controls.Add(this.label8);
             this.groupBox3.Controls.Add(this.label7);
-            this.groupBox3.Location = new System.Drawing.Point(12, 109);
+            this.groupBox3.Location = new System.Drawing.Point(218, 37);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(200, 135);
+            this.groupBox3.Size = new System.Drawing.Size(200, 131);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Colors";
@@ -388,7 +388,7 @@
             this.groupBox4.Controls.Add(this.OptionFontColor);
             this.groupBox4.Controls.Add(this.OptionFontSelector);
             this.groupBox4.Controls.Add(this.label12);
-            this.groupBox4.Location = new System.Drawing.Point(224, 180);
+            this.groupBox4.Location = new System.Drawing.Point(12, 240);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(200, 92);
             this.groupBox4.TabIndex = 4;
@@ -472,7 +472,7 @@
             // 
             // SaveButton
             // 
-            this.SaveButton.Location = new System.Drawing.Point(331, 310);
+            this.SaveButton.Location = new System.Drawing.Point(330, 301);
             this.SaveButton.Name = "SaveButton";
             this.SaveButton.Size = new System.Drawing.Size(75, 23);
             this.SaveButton.TabIndex = 5;
@@ -481,7 +481,7 @@
             // 
             // CancelButton
             // 
-            this.CancelButton.Location = new System.Drawing.Point(224, 310);
+            this.CancelButton.Location = new System.Drawing.Point(223, 301);
             this.CancelButton.Name = "CancelButton";
             this.CancelButton.Size = new System.Drawing.Size(75, 23);
             this.CancelButton.TabIndex = 6;
@@ -496,9 +496,9 @@
             this.groupBox5.Controls.Add(this.ChangeBackgroundImage);
             this.groupBox5.Controls.Add(this.TotalPosition);
             this.groupBox5.Controls.Add(this.label15);
-            this.groupBox5.Location = new System.Drawing.Point(12, 250);
+            this.groupBox5.Location = new System.Drawing.Point(218, 177);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(200, 106);
+            this.groupBox5.Size = new System.Drawing.Size(200, 118);
             this.groupBox5.TabIndex = 7;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Other";
@@ -562,11 +562,11 @@
             this.label15.TabIndex = 0;
             this.label15.Text = "Title Position";
             // 
-            // SetupBarGraph
+            // SetupPieGraph
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(431, 375);
+            this.ClientSize = new System.Drawing.Size(428, 342);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.CancelButton);
             this.Controls.Add(this.SaveButton);
@@ -576,8 +576,8 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.NameLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "SetupBarGraph";
-            this.Text = "Setup Bar Graph - Chatinator";
+            this.Name = "SetupPieGraph";
+            this.Text = "Setup Pie Graph - Chatinator";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.HeightInput)).EndInit();

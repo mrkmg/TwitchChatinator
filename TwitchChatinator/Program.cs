@@ -33,6 +33,11 @@ namespace TwitchChatinator
                 BarGraphOptions.CreateNew("Default");
             }
 
+            if (PieGraphOptions.GetAvaliable().Count == 0)
+            {
+                PieGraphOptions.CreateNew("Default");
+            }
+
             if(GiveawayOptions.GetAvaliable().Count == 0)
             {
                 GiveawayOptions.CreateNew("Default");
