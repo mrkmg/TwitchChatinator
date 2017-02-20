@@ -135,7 +135,17 @@ namespace TwitchChatinator
 
         }
 
-        void DrawingTick_Tick(object sender, EventArgs e)
+        void GeneratePreviewData()
+        {
+            Data.totalVotes = 0;
+            for (int i = 0; i < CountEntries; i++)
+            {
+                Data.amounts[i] = 100 * (i + 1);
+                Data.totalVotes += 100 * (i + 1);
+            }
+        }
+
+        void GetData()
         {
             int totalRows;
             int[] rowData;
@@ -175,6 +185,18 @@ namespace TwitchChatinator
                     Data.amounts[i] = rowData[i];
                 }
                 Data.totalVotes = totalRows;
+            }
+        }
+
+        void DrawingTick_Tick(object sender, EventArgs e)
+        {
+            if (OptionsName == "_preview")
+            {
+                GeneratePreviewData();
+            }
+            else
+            {
+                GetData();
             }
 
             if (!Disposing)

@@ -11,6 +11,8 @@ namespace TwitchChatinator
 {
     public class PieGraphOptions
     {
+        public static PieGraphOptions PreviewOptions;
+
         [XmlElement]
         public int Width { get; set; }
         [XmlElement]
@@ -24,9 +26,6 @@ namespace TwitchChatinator
         public int MarginLeft { get; set; }
         [XmlElement]
         public int MarginRight { get; set; }
-
-        [XmlElement]
-        public int BarSpacing { get; set; }
 
         [XmlIgnore]
         public Color ChromaKey { get; set; }
@@ -156,8 +155,6 @@ namespace TwitchChatinator
             MarginLeft = 5;
             MarginRight = 5;
 
-            BarSpacing = 3;
-
             ChromaKey = Color.Black;
             Option1Color = Color.Maroon;
             Option2Color = Color.RoyalBlue;
@@ -186,6 +183,18 @@ namespace TwitchChatinator
         //TODO - Add in exception
         static public PieGraphOptions Load(string name)
         {
+            if (name == "_preview")
+            {
+                if (PreviewOptions != null)
+                {
+                    return PreviewOptions;
+                }
+                else
+                {
+                    return new PieGraphOptions();
+                }
+            }
+
             var reader = new XmlSerializer(typeof(PieGraphOptions));
             var stream = new StreamReader(getPathFromName(name));
             var obj = new PieGraphOptions();

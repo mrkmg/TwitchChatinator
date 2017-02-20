@@ -68,7 +68,17 @@ namespace TwitchChatinator
 
         }
 
-        void DrawingTick_Tick(object sender, EventArgs e)
+        void GeneratePreviewData()
+        {
+            Data.totalVotes = 0;
+            for (int i = 0; i < CountEntries; i++)
+            {
+                Data.amounts[i] = 100 * (i + 1);
+                Data.totalVotes += 100 * (i + 1);
+            }
+        }
+
+        void GetData()
         {
             int totalRows;
             int[] rowData;
@@ -108,6 +118,18 @@ namespace TwitchChatinator
                     Data.amounts[i] = rowData[i];
                 }
                 Data.totalVotes = totalRows;
+            }
+        }
+
+        void DrawingTick_Tick(object sender, EventArgs e)
+        {
+            if (OptionsName == "_preview")
+            {
+                GeneratePreviewData();
+            }
+            else
+            {
+                GetData();
             }
 
             if (!Disposing)
@@ -183,12 +205,12 @@ namespace TwitchChatinator
                             var OptionWidth = Graphic.MeasureString(Data.options[i], Options.OptionFont).Width;
                             var TitleWidth = Graphic.MeasureString("(" + Data.amounts[i].ToString() + ")", Options.CountFont).Width;
                             var LabelHeight = Math.Max(Options.TitleFont.Height, Options.CountFont.Height);
-                            PointF textPoint = PointOnCircle((float)PieRec.Width / 3, sum + degrees[i]/2, new PointF(PieRec.X + PieRec.Width / 2, PieRec.Y + PieRec.Height / 2));
+                            PointF textPoint = PointOnCircle((float)PieRec.Width / 3, sum + degrees[i]/2, new PointF(PieRec.X + PieRec.Width / 2, (PieRec.Y + PieRec.Height / 2)));
                             textPoint.X -= (float)(OptionWidth + TitleWidth)/2;
                             textPoint.Y -= LabelHeight / 2;
-                            Graphic.DrawString(Data.options[i], Options.OptionFont, LabelBrush, textPoint);
-                            textPoint.X += OptionWidth;
-                            LabelsToDraw.Add(new LabelToDraw("(" + Data.amounts[i].ToString() + ")", Options.CountFont, CountBrush, textPoint));
+                            LabelsToDraw.Add(new LabelToDraw(Data.options[i], Options.OptionFont, LabelBrush, textPoint));
+                            PointF countPoint = new PointF(textPoint.X + OptionWidth, textPoint.Y);
+                            LabelsToDraw.Add(new LabelToDraw("(" + Data.amounts[i].ToString() + ")", Options.CountFont, CountBrush, countPoint));
                         }
 
                     }
@@ -257,13 +279,13 @@ namespace TwitchChatinator
                 case "Top":
                     TotalRec.X = Options.MarginLeft;
                     TotalRec.Y = Options.MarginTop;
-                    offTop = TotalRec.Height + Options.MarginTop;
+                    offTop = Options.TitleFont.Height;
                     break;
                 case "Bottom":
                 default:
                     TotalRec.X = Options.MarginLeft;
                     TotalRec.Y = Options.Height - Options.MarginBottom - Options.TitleFont.Height;
-                    offTop = Options.MarginTop;
+                    offTop = 0;
                     break;
             }
 
@@ -278,7 +300,7 @@ namespace TwitchChatinator
                 int diff = AvaliableHeight - AvaliableWidth;
 
                 PieRec.X = Options.MarginTop;
-                PieRec.Y = Options.MarginLeft + diff/2;
+                PieRec.Y = Options.MarginLeft + diff/2 + offTop;
                 PieRec.Width = Options.Width - Options.MarginLeft - Options.MarginRight;
                 PieRec.Height = Options.Height - Options.MarginTop - Options.MarginBottom - Options.TitleFont.Height - diff;
             }
@@ -287,14 +309,14 @@ namespace TwitchChatinator
                 int diff = AvaliableWidth - AvaliableHeight;
 
                 PieRec.X = Options.MarginTop + diff/2;
-                PieRec.Y = Options.MarginLeft;
+                PieRec.Y = Options.MarginLeft + offTop;
                 PieRec.Width = Options.Width - Options.MarginLeft - Options.MarginRight - diff;
                 PieRec.Height = Options.Height - Options.MarginTop - Options.MarginBottom - Options.TitleFont.Height;
             }
             else
             {
                 PieRec.X = Options.MarginLeft;
-                PieRec.Y = Options.MarginTop;
+                PieRec.Y = Options.MarginTop + offTop;
                 PieRec.Height = Options.Height - Options.MarginTop - Options.MarginBottom - Options.TitleFont.Height;
                 PieRec.Width = Options.Width - Options.MarginLeft - Options.MarginRight;
             }

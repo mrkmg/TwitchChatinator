@@ -21,6 +21,8 @@ namespace TwitchChatinator
         private Font CountFont;
         private Font TotalFont;
 
+        private RunPollBar RunPollBar;
+
         public SetupBarGraph(string N)
         {
             InitializeComponent();
@@ -45,9 +47,77 @@ namespace TwitchChatinator
 
             CancelButton.Click += CancelButton_Click;
             SaveButton.Click += SaveButton_Click;
+            
+            FormClosed += SetupBarGraph_FormClosed;
+
+            RefreshPreview();
+
+            HeightInput.ValueChanged += EventHandler_Change;
+            WidthInput.ValueChanged += EventHandler_Change;
+
+            MarginTop.ValueChanged += EventHandler_Change;
+            MarginBottom.ValueChanged += EventHandler_Change;
+            MarginLeft.ValueChanged += EventHandler_Change;
+            MarginRight.ValueChanged += EventHandler_Change;
+            BarSpacing.ValueChanged += EventHandler_Change;
+
+            ChromaKey.BackColorChanged += EventHandler_Change;
+            Option1Color.BackColorChanged += EventHandler_Change;
+            Option2Color.BackColorChanged += EventHandler_Change;
+            Option3Color.BackColorChanged += EventHandler_Change;
+            Option4Color.BackColorChanged += EventHandler_Change;
+            
+            OptionFontColor.BackColorChanged += EventHandler_Change;
+            
+            CountFontColor.BackColorChanged += EventHandler_Change;
+            
+            TotalFontColor.BackColorChanged += EventHandler_Change;
+
+            TotalPosition.SelectedIndexChanged += EventHandler_Change;
+
         }
 
-        void SaveButton_Click(object sender, EventArgs e)
+        private void EventHandler_Change(object sender, EventArgs e)
+        {
+            RefreshPreview();
+        }
+
+        private void SetupBarGraph_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (RunPollBar != null && ! RunPollBar.IsDisposed)
+            {
+                RunPollBar.Close();
+            }
+        }
+
+        private void RefreshPreview()
+        {
+            if (RunPollBar != null && !RunPollBar.IsDisposed)
+            {
+                RunPollBar.Close();
+            }
+
+            setOptionsToValues();
+            BarGraphOptions.PreviewOptions = Options;
+
+            string[] vals = new string[4];
+            vals[0] = "One";
+            vals[1] = "Two";
+            vals[2] = "Three";
+            vals[3] = "Four";
+
+            foreach (Control control in Controls)
+            {
+                if (control is NumericUpDown) {
+                    setOptionsToValues();
+                }
+            }
+
+            RunPollBar = new RunPollBar(DateTime.MinValue, "_preview", "Demo Poll", vals);
+            RunPollBar.Show();
+        }
+
+        void setOptionsToValues()
         {
             Options.Height = (int)HeightInput.Value;
             Options.Width = (int)WidthInput.Value;
@@ -74,7 +144,11 @@ namespace TwitchChatinator
             Options.TitleFontColor = TotalFontColor.BackColor;
 
             Options.TotalPosition = TotalPosition.SelectedItem.ToString();
+        }
 
+        void SaveButton_Click(object sender, EventArgs e)
+        {
+            setOptionsToValues();
             Options.Save(OptionsName);
             Close();
         }
@@ -148,6 +222,7 @@ namespace TwitchChatinator
                 if (FD.ShowDialog() == DialogResult.OK)
                 {
                     OptionLabelFont = FD.Font;
+                    RefreshPreview();
                 }
             }
         }
@@ -160,6 +235,7 @@ namespace TwitchChatinator
                 if (FD.ShowDialog() == DialogResult.OK)
                 {
                     CountFont = FD.Font;
+                    RefreshPreview();
                 }
             }
         }
@@ -172,6 +248,7 @@ namespace TwitchChatinator
                 if (FD.ShowDialog() == DialogResult.OK)
                 {
                     TotalFont = FD.Font;
+                    RefreshPreview();
                 }
             }
         }

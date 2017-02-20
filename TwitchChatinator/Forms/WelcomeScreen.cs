@@ -70,7 +70,7 @@ namespace TwitchChatinator
             StartListenButton.Text = "Stop Listening";
             StartListenButton.Enabled = true;
             isConnected = true;
-            ConnectedLabel.Text = "Connected to " + channel;
+            ConnectedLabel.Text = channel;
         }
 
         void WelcomeScreen_FormClosed(object sender, FormClosedEventArgs e)

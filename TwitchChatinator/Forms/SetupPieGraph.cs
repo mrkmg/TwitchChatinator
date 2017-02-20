@@ -21,6 +21,8 @@ namespace TwitchChatinator
         private Font CountFont;
         private Font TotalFont;
 
+        private RunPollPie RunPollPie;
+
         public SetupPieGraph(string N)
         {
             InitializeComponent();
@@ -45,9 +47,68 @@ namespace TwitchChatinator
 
             CancelButton.Click += CancelButton_Click;
             SaveButton.Click += SaveButton_Click;
+
+            FormClosed += SetupPieGraph_FormClosed;
+
+            RefreshPreview();
+
+            HeightInput.ValueChanged += EventHandler_Change;
+            WidthInput.ValueChanged += EventHandler_Change;
+
+            MarginTop.ValueChanged += EventHandler_Change;
+            MarginBottom.ValueChanged += EventHandler_Change;
+            MarginLeft.ValueChanged += EventHandler_Change;
+            MarginRight.ValueChanged += EventHandler_Change;
+
+            ChromaKey.BackColorChanged += EventHandler_Change;
+            Option1Color.BackColorChanged += EventHandler_Change;
+            Option2Color.BackColorChanged += EventHandler_Change;
+            Option3Color.BackColorChanged += EventHandler_Change;
+            Option4Color.BackColorChanged += EventHandler_Change;
+
+            OptionFontColor.BackColorChanged += EventHandler_Change;
+
+            CountFontColor.BackColorChanged += EventHandler_Change;
+
+            TotalFontColor.BackColorChanged += EventHandler_Change;
+
+            TotalPosition.SelectedIndexChanged += EventHandler_Change;
         }
 
-        void SaveButton_Click(object sender, EventArgs e)
+        private void EventHandler_Change(object sender, EventArgs e)
+        {
+            RefreshPreview();
+        }
+
+        private void SetupPieGraph_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (RunPollPie != null && !RunPollPie.IsDisposed)
+            {
+                RunPollPie.Close();
+            }
+        }
+
+        private void RefreshPreview()
+        {
+            if (RunPollPie != null && !RunPollPie.IsDisposed)
+            {
+                RunPollPie.Close();
+            }
+
+            setOptionsToValues();
+            PieGraphOptions.PreviewOptions = Options;
+
+            string[] vals = new string[4];
+            vals[0] = "One";
+            vals[1] = "Two";
+            vals[2] = "Three";
+            vals[3] = "Four";
+
+            RunPollPie = new RunPollPie(DateTime.MinValue, "_preview", "Demo Poll", vals);
+            RunPollPie.Show();
+        }
+
+        void setOptionsToValues()
         {
             Options.Height = (int)HeightInput.Value;
             Options.Width = (int)WidthInput.Value;
@@ -56,7 +117,6 @@ namespace TwitchChatinator
             Options.MarginBottom = (int)MarginBottom.Value;
             Options.MarginLeft = (int)MarginLeft.Value;
             Options.MarginRight = (int)MarginRight.Value;
-            Options.BarSpacing = (int)BarSpacing.Value;
 
             Options.ChromaKey = ChromaKey.BackColor;
             Options.Option1Color = Option1Color.BackColor;
@@ -74,7 +134,11 @@ namespace TwitchChatinator
             Options.TitleFontColor = TotalFontColor.BackColor;
 
             Options.TotalPosition = TotalPosition.SelectedItem.ToString();
+        }
 
+        void SaveButton_Click(object sender, EventArgs e)
+        {
+            setOptionsToValues();
             Options.Save(OptionsName);
             Close();
         }
@@ -104,7 +168,6 @@ namespace TwitchChatinator
             MarginBottom.Value = Options.MarginBottom;
             MarginLeft.Value = Options.MarginLeft;
             MarginRight.Value = Options.MarginRight;
-            BarSpacing.Value = Options.BarSpacing;
 
             ChromaKey.BackColor = Options.ChromaKey;
             Option1Color.BackColor = Options.Option1Color;
@@ -134,6 +197,7 @@ namespace TwitchChatinator
                 if (CD.ShowDialog() == DialogResult.OK)
                 {
                     T.BackColor = CD.Color;
+                    RefreshPreview();
                 }
             }
 
@@ -148,6 +212,7 @@ namespace TwitchChatinator
                 if (FD.ShowDialog() == DialogResult.OK)
                 {
                     OptionLabelFont = FD.Font;
+                    RefreshPreview();
                 }
             }
         }
@@ -160,6 +225,7 @@ namespace TwitchChatinator
                 if (FD.ShowDialog() == DialogResult.OK)
                 {
                     CountFont = FD.Font;
+                    RefreshPreview();
                 }
             }
         }
@@ -172,6 +238,7 @@ namespace TwitchChatinator
                 if (FD.ShowDialog() == DialogResult.OK)
                 {
                     TotalFont = FD.Font;
+                    RefreshPreview();
                 }
             }
         }

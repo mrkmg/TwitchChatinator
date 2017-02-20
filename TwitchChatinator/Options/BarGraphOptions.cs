@@ -11,6 +11,8 @@ namespace TwitchChatinator
 {
     public class BarGraphOptions
     {
+        public static BarGraphOptions PreviewOptions;
+
         [XmlElement]
         public int Width { get; set; }
         [XmlElement]
@@ -177,6 +179,18 @@ namespace TwitchChatinator
         //TODO - Add in exception
         static public BarGraphOptions Load(string name)
         {
+            if (name == "_preview")
+            {
+                if (PreviewOptions != null)
+                {
+                    return PreviewOptions;
+                }
+                else
+                {
+                    return new BarGraphOptions();
+                }
+            }
+
             var reader = new XmlSerializer(typeof(BarGraphOptions));
             var stream = new StreamReader(getPathFromName(name));
             var obj = new BarGraphOptions();

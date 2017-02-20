@@ -35,8 +35,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.BarSpacing = new System.Windows.Forms.NumericUpDown();
-            this.label16 = new System.Windows.Forms.Label();
             this.MarginRight = new System.Windows.Forms.NumericUpDown();
             this.MarginLeft = new System.Windows.Forms.NumericUpDown();
             this.MarginBottom = new System.Windows.Forms.NumericUpDown();
@@ -79,7 +77,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.HeightInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.WidthInput)).BeginInit();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.BarSpacing)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.MarginRight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.MarginLeft)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.MarginBottom)).BeginInit();
@@ -156,8 +153,6 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.BarSpacing);
-            this.groupBox2.Controls.Add(this.label16);
             this.groupBox2.Controls.Add(this.MarginRight);
             this.groupBox2.Controls.Add(this.MarginLeft);
             this.groupBox2.Controls.Add(this.MarginBottom);
@@ -168,31 +163,10 @@
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Location = new System.Drawing.Point(12, 109);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(200, 125);
+            this.groupBox2.Size = new System.Drawing.Size(200, 106);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Margins";
-            // 
-            // BarSpacing
-            // 
-            this.BarSpacing.Location = new System.Drawing.Point(128, 99);
-            this.BarSpacing.Maximum = new decimal(new int[] {
-            9999999,
-            0,
-            0,
-            0});
-            this.BarSpacing.Name = "BarSpacing";
-            this.BarSpacing.Size = new System.Drawing.Size(66, 20);
-            this.BarSpacing.TabIndex = 9;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(6, 101);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(73, 13);
-            this.label16.TabIndex = 8;
-            this.label16.Text = "Between Bars";
             // 
             // MarginRight
             // 
@@ -388,7 +362,7 @@
             this.groupBox4.Controls.Add(this.OptionFontColor);
             this.groupBox4.Controls.Add(this.OptionFontSelector);
             this.groupBox4.Controls.Add(this.label12);
-            this.groupBox4.Location = new System.Drawing.Point(12, 240);
+            this.groupBox4.Location = new System.Drawing.Point(12, 223);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(200, 92);
             this.groupBox4.TabIndex = 4;
@@ -472,18 +446,18 @@
             // 
             // SaveButton
             // 
-            this.SaveButton.Location = new System.Drawing.Point(330, 301);
+            this.SaveButton.Location = new System.Drawing.Point(337, 292);
             this.SaveButton.Name = "SaveButton";
-            this.SaveButton.Size = new System.Drawing.Size(75, 23);
+            this.SaveButton.Size = new System.Drawing.Size(81, 23);
             this.SaveButton.TabIndex = 5;
             this.SaveButton.Text = "Save";
             this.SaveButton.UseVisualStyleBackColor = true;
             // 
             // CancelButton
             // 
-            this.CancelButton.Location = new System.Drawing.Point(223, 301);
+            this.CancelButton.Location = new System.Drawing.Point(218, 292);
             this.CancelButton.Name = "CancelButton";
-            this.CancelButton.Size = new System.Drawing.Size(75, 23);
+            this.CancelButton.Size = new System.Drawing.Size(80, 23);
             this.CancelButton.TabIndex = 6;
             this.CancelButton.Text = "Cancel";
             this.CancelButton.UseVisualStyleBackColor = true;
@@ -498,7 +472,7 @@
             this.groupBox5.Controls.Add(this.label15);
             this.groupBox5.Location = new System.Drawing.Point(218, 177);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(200, 118);
+            this.groupBox5.Size = new System.Drawing.Size(200, 107);
             this.groupBox5.TabIndex = 7;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Other";
@@ -566,7 +540,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(428, 342);
+            this.ClientSize = new System.Drawing.Size(428, 325);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.CancelButton);
             this.Controls.Add(this.SaveButton);
@@ -584,7 +558,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.WidthInput)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.BarSpacing)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.MarginRight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.MarginLeft)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.MarginBottom)).EndInit();
@@ -643,8 +616,6 @@
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.ComboBox TotalPosition;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.NumericUpDown BarSpacing;
-        private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Button ChangeBackgroundImage;
         private System.Windows.Forms.Label label18;
