@@ -105,14 +105,14 @@ namespace TwitchChatinator
             {
                 Giveaway.Close();
                 RollButton.Enabled = false;
-                StartButton.Text = "Start Poll";
+                StartButton.Text = "Start Giveaway";
             }
         }
 
         void Giveaway_FormClosed(object sender, FormClosedEventArgs e)
         {
             Giveaway = null;
-            StartButton.Text = "Start Poll";
+            StartButton.Text = "Start Giveaway";
         }
 
         private void RollButton_Click(object sender, EventArgs e)
@@ -132,6 +132,15 @@ namespace TwitchChatinator
                 GiveawayOptions.CreateNew(result.Text);
             }
             PopulateList();
+            editGiveaway(result.Text);
+        }
+
+        void editGiveaway(string name)
+        {
+            var sp = new SetupGiveaway(name);
+            sp.Show();
+            Hide();
+            sp.Closed += (o, args) => Show();
         }
 
         private void EditButton_Click(object sender, EventArgs e)
@@ -139,8 +148,7 @@ namespace TwitchChatinator
             switch (Options[List.SelectedIndex].type)
             {
                 case "Giveaway":
-                    var sp = new SetupGiveaway(Options[List.SelectedIndex].name);
-                    sp.Show();
+                   editGiveaway(Options[List.SelectedIndex].name);
                     break;
             }
         }

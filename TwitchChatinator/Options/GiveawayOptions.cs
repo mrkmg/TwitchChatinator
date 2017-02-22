@@ -11,6 +11,8 @@ namespace TwitchChatinator
 {
     public class GiveawayOptions
     {
+        public static GiveawayOptions PreviewOptions;
+
         [XmlElement]
         public int Width { get; set; }
 
@@ -128,6 +130,18 @@ namespace TwitchChatinator
         //TODO - Add in exception
         static public GiveawayOptions Load(string name)
         {
+            if (name == "_preview")
+            {
+                if (PreviewOptions != null)
+                {
+                    return PreviewOptions;
+                }
+                else
+                {
+                    return new GiveawayOptions();
+                }
+            }
+
             var reader = new XmlSerializer(typeof(GiveawayOptions));
             var stream = new StreamReader(getPathFromName(name));
             var obj = new GiveawayOptions();

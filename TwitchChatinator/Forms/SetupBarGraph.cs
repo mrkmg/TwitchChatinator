@@ -115,6 +115,7 @@ namespace TwitchChatinator
 
             RunPollBar = new RunPollBar(DateTime.MinValue, "_preview", "Demo Poll", vals);
             RunPollBar.Show();
+            Focus();
         }
 
         void setOptionsToValues()

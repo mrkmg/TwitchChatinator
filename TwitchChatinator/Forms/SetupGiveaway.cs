@@ -20,6 +20,8 @@ namespace TwitchChatinator
         private Font EntriesFont;
         private Font TitleFont;
 
+        private RunGiveaway RunGiveAway;
+
         public SetupGiveaway(string N)
         {
             OptionsName = N;
@@ -27,6 +29,8 @@ namespace TwitchChatinator
             InitializeComponent();
             Populate();
             CalcuateAndShowHeight();
+
+            Closed += SetupGiveaway_Closed;
 
             ChangeBackgroundImage.Text = Options.BackgroundImage.Image == null ? "Load Image" : "Remove Image";
             ChangeForegroundImage.Text = Options.ForegroundImage.Image == null ? "Load Image" : "Remove Image";
@@ -49,6 +53,59 @@ namespace TwitchChatinator
 
             CancelButton.Click += CancelButton_Click;
             SaveButton.Click += SaveButton_Click;
+
+            WidthInput.ValueChanged += EventHandler_Change;
+
+            MarginTop.ValueChanged += EventHandler_Change;
+            MarginBottom.ValueChanged += EventHandler_Change;
+            MarginLeft.ValueChanged += EventHandler_Change;
+            MarginRight.ValueChanged += EventHandler_Change;
+            Spacing.ValueChanged += EventHandler_Change;
+
+            ChromaKey.BackColorChanged += EventHandler_Change;
+            EntriesFontColor.BackColorChanged += EventHandler_Change;
+            RollerFontColor.BackColorChanged += EventHandler_Change;
+            TitleFontColor.BackColorChanged += EventHandler_Change;
+
+            RefreshPreview();
+        }
+
+        private void SetupGiveaway_Closed(object sender, EventArgs e)
+        {
+            if (RunGiveAway != null && !RunGiveAway.IsDisposed)
+            {
+                RunGiveAway.Close();
+            }
+        }
+
+        private void EventHandler_Change(object sender, EventArgs e)
+        {
+            RefreshPreview();
+        }
+
+        private void RefreshPreview()
+        {
+            if (RunGiveAway != null && !RunGiveAway.IsDisposed)
+            {
+                RunGiveAway.Close();
+            }
+
+            setOptionsToValues();
+            GiveawayOptions.PreviewOptions = Options;
+
+            RunGiveAway = new RunGiveaway(DateTime.MinValue, "_preview", "Demo Giveaway");
+            RunGiveAway.Show();
+            var RollStartTimer = new Timer();
+            RollStartTimer.Tick += (o, args) =>
+            {
+                RunGiveAway.Roll();
+                RollStartTimer.Dispose();
+            };
+            RollStartTimer.Interval = 10000;
+            RollStartTimer.Enabled = true;
+            RunGiveAway.Closed += (o, args) => RollStartTimer.Dispose();
+
+            Focus();
         }
 
         private void ValueChanged(object sender, EventArgs e)
@@ -56,7 +113,7 @@ namespace TwitchChatinator
             CalcuateAndShowHeight();
         }
 
-        void SaveButton_Click(object sender, EventArgs e)
+        void setOptionsToValues()
         {
             Options.Width = (int)WidthInput.Value;
 
@@ -76,6 +133,11 @@ namespace TwitchChatinator
 
             Options.TitleFont = TitleFont;
             Options.TitleFontColor = TitleFontColor.BackColor;
+        }
+
+        void SaveButton_Click(object sender, EventArgs e)
+        {
+           setOptionsToValues();
 
             Options.Save(OptionsName);
             Close();
@@ -149,6 +211,7 @@ namespace TwitchChatinator
                 if (FD.ShowDialog() == DialogResult.OK)
                 {
                     EntriesFont = FD.Font;
+                    RefreshPreview();
                 }
             }
         }
@@ -161,6 +224,7 @@ namespace TwitchChatinator
                 if (FD.ShowDialog() == DialogResult.OK)
                 {
                     RollerFont = FD.Font;
+                    RefreshPreview();
                 }
             }
         }
@@ -173,6 +237,7 @@ namespace TwitchChatinator
                 if (FD.ShowDialog() == DialogResult.OK)
                 {
                     TitleFont = FD.Font;
+                    RefreshPreview();
                 }
             }
         }

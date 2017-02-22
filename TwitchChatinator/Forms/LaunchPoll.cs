@@ -223,17 +223,31 @@ namespace TwitchChatinator
             StartButton.Text = "Start Poll";
         }
 
+        void editBarGraph(string name)
+        {
+            var sb = new SetupBarGraph(name);
+            sb.Show();
+            Hide();
+            sb.Closed += (o, args) => Show();
+        }
+
+        void editPieGraph(string name)
+        {
+            var sp = new SetupPieGraph(name);
+            sp.Show();
+            Hide();
+            sp.Closed += (o, args) => Show();
+        }
+
         private void EditButton_Click(object sender, EventArgs e)
         {
             switch (Options[List.SelectedIndex].type)
             {
                 case "Bar":
-                    var sb = new SetupBarGraph(Options[List.SelectedIndex].name);
-                    sb.Show();
+                    editBarGraph(Options[List.SelectedIndex].name);
                     break;
                 case "Pie":
-                    var sp = new SetupPieGraph(Options[List.SelectedIndex].name);
-                    sp.Show();
+                    editPieGraph(Options[List.SelectedIndex].name);
                     break;
             }
         }
@@ -311,6 +325,7 @@ namespace TwitchChatinator
                 BarGraphOptions.CreateNew(result.Text);
             }
             PopulateList();
+            editBarGraph(result.Text);
         }
 
         private void NewPieButton_Click(object sender, EventArgs e)
@@ -321,7 +336,8 @@ namespace TwitchChatinator
                 //TODO: Add Exception Control
                 PieGraphOptions.CreateNew(result.Text);
             }
-            PopulateList();          
+            PopulateList();        
+            editPieGraph(result.Text);  
         }
 
         private void ExportButton_Click(object sender, EventArgs e)

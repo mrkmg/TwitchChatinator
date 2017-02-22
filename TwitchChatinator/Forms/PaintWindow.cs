@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 
@@ -17,12 +13,12 @@ namespace TwitchChatinator
 
         public PaintWindow()
         {
-            this.MouseDown += PaintWindow_MouseDown;
-            this.KeyUp += PaintWindow_KeyUp;
+            MouseDown += PaintWindow_MouseDown;
+            KeyUp += PaintWindow_KeyUp;
             SetStyle(ControlStyles.ResizeRedraw, true);
-            this.Resize += PaintWindow_Resize;
-            FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Icon = TwitchChatinator.Properties.Resources.ChatinatorIcon;
+            Resize += PaintWindow_Resize;
+            FormBorderStyle = FormBorderStyle.None;
+            Icon = Properties.Resources.ChatinatorIcon;
         }
 
         void PaintWindow_KeyUp(object sender, KeyEventArgs e)
@@ -66,15 +62,14 @@ namespace TwitchChatinator
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PaintWindow));
-            this.SuspendLayout();
+            SuspendLayout();
             // 
             // PaintWindow
             // 
-            this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "PaintWindow";
-            this.ResumeLayout(false);
-
+            ClientSize = new System.Drawing.Size(284, 261);
+            Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            Name = "PaintWindow";
+            ResumeLayout(false);
         }
     }
 

@@ -106,6 +106,7 @@ namespace TwitchChatinator
 
             RunPollPie = new RunPollPie(DateTime.MinValue, "_preview", "Demo Poll", vals);
             RunPollPie.Show();
+            Focus();
         }
 
         void setOptionsToValues()

@@ -146,7 +146,42 @@ namespace TwitchChatinator
 
         void PaintWaiting()
         {
-            PaintScreen(GiveawayTitle, "Taking Votes", "Total Entries: " + Count.ToString());
+            PaintScreen(GiveawayTitle, "Taking Submissions", "Total Entries: " + Count.ToString());
+        }
+
+        void UpdateCount()
+        {
+            if (OptionsName == "_preview")
+            {
+                Count = 5000;
+                return;
+            }
+
+            DataSetSelection DSS = new DataSetSelection();
+            DSS.Start = StartTime;
+            try
+            {
+                Count = DataStore.GetUniqueUsersCount(DSS);
+            }
+            catch (Exception ex)
+            {
+                Log.LogException(ex);
+            }
+        }
+
+        void GetEntries()
+        {
+            if (OptionsName == "_preview")
+            {
+                EntryList = new List<string>();
+                for (var i = 1; i <= 5000; i++) EntryList.Add("User" + i);
+                return;
+            }
+
+            DataSetSelection DSS = new DataSetSelection();
+            DSS.Start = StartTime;
+            DSS.End = EndTime;
+            EntryList = DataStore.GetUniqueUsersString(DSS);
         }
 
         public void Roll()
@@ -155,10 +190,7 @@ namespace TwitchChatinator
 
             if (Stage == STAGE_WAITING || Stage == STAGE_POSTROLL)
             {
-                DataSetSelection DSS = new DataSetSelection();
-                DSS.Start = StartTime;
-                DSS.End = EndTime;
-                EntryList = DataStore.GetUniqueUsersString(DSS);
+                GetEntries();
                 if (EntryList.Count == 0) EntryList.Add("No Entries :-(");
                 EntryList.Shuffle();
                 TotalEntriesFound = Math.Min(EntryList.Count, ROLLING_ENTRIES_COUNT);
@@ -175,19 +207,10 @@ namespace TwitchChatinator
             switch (Stage)
             {
                 case STAGE_WAITING:
-                    DataSetSelection DSS = new DataSetSelection();
-                    DSS.Start = StartTime;
-                    try
-                    {
-                        Count = DataStore.GetUniqueUsersCount(DSS);
-                    }
-                    catch (Exception ex)
-                    {
-                        Log.LogException(ex);
-                    }
+                    UpdateCount();
                     break;
                 case STAGE_ROLLING:
-                    DrawingTick.Interval = (int)Math.Pow(ROLLING_MAGIC_NUM, (CurrentEntryIndex * 20) / ROLLING_ENTRIES_COUNT);
+                    DrawingTick.Interval = Math.Max(16, (int)Math.Pow(ROLLING_MAGIC_NUM, (CurrentEntryIndex * 20) / ROLLING_ENTRIES_COUNT));
                     CurrentEntryIndex++;
                     if (CurrentEntryIndex == ROLLING_ENTRIES_COUNT - 1)
                     {

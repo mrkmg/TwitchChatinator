@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TwitchChatinator
@@ -230,6 +227,7 @@ namespace TwitchChatinator
             SFLabel = new StringFormat(StringFormatFlags.NoWrap | StringFormatFlags.NoClip);
             SFLabel.Alignment = StringAlignment.Near;
             SFLabel.LineAlignment = StringAlignment.Center;
+            SFLabel.Trimming = StringTrimming.None;
 
             SFCount = new StringFormat(StringFormatFlags.NoWrap | StringFormatFlags.NoClip);
             SFCount.Alignment = StringAlignment.Far;
