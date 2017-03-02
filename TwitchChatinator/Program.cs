@@ -1,23 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Drawing;
-using System.Security.Cryptography;
 using System.Data;
-using System.Text;
 using System.IO;
+using System.Linq;
+using System.Windows.Forms;
+using TwitchChatinator.Forms;
+using TwitchChatinator.Options;
 
 namespace TwitchChatinator
 {
-    static class Program
+    internal static class Program
     {
         /// <summary>
-        /// The main entry point for the application.
+        ///     The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        private static void Main()
         {
             CreateDefaultTypes();
 
@@ -26,7 +24,7 @@ namespace TwitchChatinator
             Application.Run(new WelcomeScreen());
         }
 
-        static void CreateDefaultTypes()
+        private static void CreateDefaultTypes()
         {
             if (BarGraphOptions.GetAvaliable().Count == 0)
             {
@@ -38,7 +36,7 @@ namespace TwitchChatinator
                 PieGraphOptions.CreateNew("Default");
             }
 
-            if(GiveawayOptions.GetAvaliable().Count == 0)
+            if (GiveawayOptions.GetAvaliable().Count == 0)
             {
                 GiveawayOptions.CreateNew("Default");
             }
@@ -48,13 +46,13 @@ namespace TwitchChatinator
         //http://stackoverflow.com/questions/273313/randomize-a-listt-in-c-sharp 2014-08-13
         public static void Shuffle<T>(this IList<T> list)
         {
-            Random rng = new Random();
-            int n = list.Count;
+            var rng = new Random();
+            var n = list.Count;
             while (n > 1)
             {
                 n--;
-                int k = rng.Next(n + 1);
-                T value = list[k];
+                var k = rng.Next(n + 1);
+                var value = list[k];
                 list[k] = list[n];
                 list[n] = value;
             }
@@ -62,21 +60,25 @@ namespace TwitchChatinator
 
         //Thank you [SuperLucky](http://stackoverflow.com/users/766963/superlucky)
         //http://stackoverflow.com/questions/888181/convert-datatable-to-csv-stream 2014-08-13
-        public static bool DataTableToCSV(DataTable dtSource, StreamWriter writer, bool includeHeader)
+        public static bool DataTableToCsv(DataTable dtSource, StreamWriter writer, bool includeHeader)
         {
             if (dtSource == null || writer == null) return false;
 
             if (includeHeader)
             {
-                string[] columnNames = dtSource.Columns.Cast<DataColumn>().Select(column => "\"" + column.ColumnName.Replace("\"", "\"\"") + "\"").ToArray<string>();
-                writer.WriteLine(String.Join(",", columnNames));
+                var columnNames =
+                    dtSource.Columns.Cast<DataColumn>()
+                        .Select(column => "\"" + column.ColumnName.Replace("\"", "\"\"") + "\"")
+                        .ToArray();
+                writer.WriteLine(string.Join(",", columnNames));
                 writer.Flush();
             }
 
             foreach (DataRow row in dtSource.Rows)
             {
-                string[] fields = row.ItemArray.Select(field => "\"" + field.ToString().Replace("\"", "\"\"") + "\"").ToArray<string>();
-                writer.WriteLine(String.Join(",", fields));
+                var fields =
+                    row.ItemArray.Select(field => "\"" + field.ToString().Replace("\"", "\"\"") + "\"").ToArray();
+                writer.WriteLine(string.Join(",", fields));
                 writer.Flush();
             }
 
@@ -89,20 +91,19 @@ namespace TwitchChatinator
         }
     }
 
-    class SelectListObject
+    internal class SelectListObject
     {
-        public string name { get; set; }
-        public string type { get; set; }
-
         public SelectListObject()
         {
-
         }
 
         public SelectListObject(string n, string t)
         {
-            name = n;
-            type = t;
+            Name = n;
+            Type = t;
         }
+
+        public string Name { get; set; }
+        public string Type { get; set; }
     }
 }

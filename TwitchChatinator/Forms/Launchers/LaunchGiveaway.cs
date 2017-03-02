@@ -1,27 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using TwitchChatinator.Forms.Components;
+using TwitchChatinator.Forms.Runners;
+using TwitchChatinator.Forms.Setups;
+using TwitchChatinator.Options;
 
-namespace TwitchChatinator
+namespace TwitchChatinator.Forms.Launchers
 {
     public partial class LaunchGiveaway : Form
     {
-        List<SelectListObject> Options;
-        RunGiveaway Giveaway;
-        DateTime StartTime;
+        private RunGiveaway _giveaway;
+        private List<SelectListObject> _options;
+        private readonly DateTime _startTime;
 
         public LaunchGiveaway()
         {
             InitializeComponent();
 
             PopulateList();
-            StartTime = DateTime.Now;
+            _startTime = DateTime.Now;
             RollButton.Enabled = false;
 
             FormClosed += LaunchGiveaway_FormClosed;
@@ -45,26 +43,23 @@ namespace TwitchChatinator
             }
         }
 
-        void LaunchGiveaway_FormClosed(object sender, FormClosedEventArgs e)
+        private void LaunchGiveaway_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (Giveaway != null)
-            {
-                Giveaway.Close();
-            }
+            _giveaway?.Close();
         }
 
-        void PopulateList()
+        private void PopulateList()
         {
             List.Items.Clear();
 
             //Get Giveaways
-            List<string> Giveaways = GiveawayOptions.GetAvaliable();
+            var giveaways = GiveawayOptions.GetAvaliable();
 
-            Options = new List<SelectListObject>();
+            _options = new List<SelectListObject>();
 
-            foreach (string n in Giveaways)
+            foreach (var n in giveaways)
             {
-                Options.Add(new SelectListObject(n, "Giveaway"));
+                _options.Add(new SelectListObject(n, "Giveaway"));
                 List.Items.Add(n);
             }
 
@@ -86,56 +81,51 @@ namespace TwitchChatinator
                 CopyButton.Enabled = false;
                 RenameButton.Enabled = false;
             }
-
-
         }
 
         private void StartButton_Click(object sender, EventArgs e)
         {
-            if (Giveaway == null)
+            if (_giveaway == null)
             {
-                RunGiveaway GV = new RunGiveaway(StartTime, Options[List.SelectedIndex].name, GiveawayTitle.Text);
-                GV.Show();
-                GV.FormClosed += Giveaway_FormClosed;
-                Giveaway = GV;
+                var gv = new RunGiveaway(_startTime, _options[List.SelectedIndex].Name, GiveawayTitle.Text);
+                gv.Show();
+                gv.FormClosed += Giveaway_FormClosed;
+                _giveaway = gv;
                 StartButton.Text = "Stop Giveaway";
                 RollButton.Enabled = true;
             }
             else
             {
-                Giveaway.Close();
+                _giveaway.Close();
                 RollButton.Enabled = false;
                 StartButton.Text = "Start Giveaway";
             }
         }
 
-        void Giveaway_FormClosed(object sender, FormClosedEventArgs e)
+        private void Giveaway_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Giveaway = null;
+            _giveaway = null;
             StartButton.Text = "Start Giveaway";
         }
 
         private void RollButton_Click(object sender, EventArgs e)
         {
-            if (Giveaway != null)
-            {
-                Giveaway.Roll();
-            }
+            _giveaway?.Roll();
         }
 
         private void NewGiveawayButton_Click(object sender, EventArgs e)
         {
-            InputBoxResult result = InputBox.Show("Name:", "New Giveaway Tempalate", "", GiveawayOptions.ValidateNameHandler);
-            if (result.OK)
+            var result = InputBox.Show("Name:", "New Giveaway Tempalate", "", GiveawayOptions.ValidateNameHandler);
+            if (result.Ok)
             {
                 //TODO: Add Exception Control
                 GiveawayOptions.CreateNew(result.Text);
             }
             PopulateList();
-            editGiveaway(result.Text);
+            EditGiveaway(result.Text);
         }
 
-        void editGiveaway(string name)
+        private void EditGiveaway(string name)
         {
             var sp = new SetupGiveaway(name);
             sp.Show();
@@ -145,20 +135,20 @@ namespace TwitchChatinator
 
         private void EditButton_Click(object sender, EventArgs e)
         {
-            switch (Options[List.SelectedIndex].type)
+            switch (_options[List.SelectedIndex].Type)
             {
                 case "Giveaway":
-                   editGiveaway(Options[List.SelectedIndex].name);
+                    EditGiveaway(_options[List.SelectedIndex].Name);
                     break;
             }
         }
 
         private void DeleteButton_Click(object sender, EventArgs e)
         {
-            switch (Options[List.SelectedIndex].type)
+            switch (_options[List.SelectedIndex].Type)
             {
                 case "Giveaway":
-                    GiveawayOptions.Remove(Options[List.SelectedIndex].name);
+                    GiveawayOptions.Remove(_options[List.SelectedIndex].Name);
                     break;
             }
             PopulateList();
@@ -166,13 +156,14 @@ namespace TwitchChatinator
 
         private void RenameButton_Click(object sender, EventArgs e)
         {
-            switch (Options[List.SelectedIndex].type)
+            switch (_options[List.SelectedIndex].Type)
             {
                 case "Giveaway":
-                    InputBoxResult result = InputBox.Show("New Name:", "Rename Giveaway Template", "", GiveawayOptions.ValidateNameHandler);
-                    if (result.OK)
+                    var result = InputBox.Show("New Name:", "Rename Giveaway Template", "",
+                        GiveawayOptions.ValidateNameHandler);
+                    if (result.Ok)
                     {
-                        GiveawayOptions.Rename(Options[List.SelectedIndex].name, result.Text);
+                        GiveawayOptions.Rename(_options[List.SelectedIndex].Name, result.Text);
                     }
                     break;
             }
@@ -181,13 +172,13 @@ namespace TwitchChatinator
 
         private void CopyButton_Click(object sender, EventArgs e)
         {
-            switch (Options[List.SelectedIndex].type)
+            switch (_options[List.SelectedIndex].Type)
             {
                 case "Giveaway":
-                    InputBoxResult result = InputBox.Show("Copy To:", "Copy Bar Graph", "", GiveawayOptions.ValidateNameHandler);
-                    if (result.OK)
+                    var result = InputBox.Show("Copy To:", "Copy Bar Graph", "", GiveawayOptions.ValidateNameHandler);
+                    if (result.Ok)
                     {
-                        var o = GiveawayOptions.Load(Options[List.SelectedIndex].name);
+                        var o = GiveawayOptions.Load(_options[List.SelectedIndex].Name);
                         o.Save(result.Text);
                     }
                     break;

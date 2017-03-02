@@ -1,44 +1,45 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace TwitchChatinator
+namespace TwitchChatinator.Libs
 {
     public static class Log
     {
         public static void LogException(Exception e)
         {
-            LogItem LI = new LogItem();
+            var li = new LogItem
+            {
+                Level = "EXCEPTION",
+                Message = e.Message
+            };
 
-            LI.Level = "EXCEPTION";
-            LI.Message = e.Message;
 
-            Write(LI);   
+            Write(li);
         }
 
 
-        public static void LogInfo(string Message)
+        public static void LogInfo(string message)
         {
-            LogItem LI = new LogItem();
+            var li = new LogItem
+            {
+                Level = "INFO",
+                Message = message
+            };
 
-            LI.Level = "INFO";
-            LI.Message = Message;
 
-            Write(LI);  
+            Write(li);
         }
 
-        private static void Write(LogItem LI){
-            Console.WriteLine(LI.Time.ToString("U") + "\t" + LI.Level + "\t" + LI.Message);
+        private static void Write(LogItem li)
+        {
+            Console.WriteLine(li.Time.ToString("U") + "\t" + li.Level + "\t" + li.Message);
         }
     }
 
-    class LogItem
+    internal class LogItem
     {
-        public DateTime Time;
         public string Level;
         public string Message;
+        public DateTime Time;
 
         public LogItem()
         {

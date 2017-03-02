@@ -1,45 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Drawing;
-using System.Xml.Serialization;
 using System.IO;
+using System.Xml;
+using System.Xml.Schema;
+using System.Xml.Serialization;
 
-namespace TwitchChatinator
+namespace TwitchChatinator.Options
 {
     public sealed class PositionsSaver
     {
-
-        private static readonly Lazy<PositionsSaver> lazy =
+        private static readonly Lazy<PositionsSaver> Lazy =
             new Lazy<PositionsSaver>(() => new PositionsSaver());
-
-        public static PositionsSaver Instance { get { return lazy.Value; } }
 
         public SerializableDictionary<string, Point> Positions;
 
         public PositionsSaver()
         {
             Positions = new SerializableDictionary<string, Point>();
-            load();
+            Load();
         }
 
-        static public Point get(string name)
+        public static PositionsSaver Instance => Lazy.Value;
+
+        public static Point Get(string name)
         {
-            if(Instance.Positions.ContainsKey(name))
-            {
-                return Instance.Positions[name];
-            }
-            else
-            {
-                return Point.Empty;
-            }
+            return Instance.Positions.ContainsKey(name) ? Instance.Positions[name] : Point.Empty;
         }
 
-        static public void put(string name, Point point)
+        public static void Put(string name, Point point)
         {
-            if(Instance.Positions.ContainsKey(name))
+            if (Instance.Positions.ContainsKey(name))
             {
                 Instance.Positions[name] = point;
             }
@@ -47,35 +38,35 @@ namespace TwitchChatinator
             {
                 Instance.Positions.Add(name, point);
             }
-            Instance.save();
+            Instance.Save();
         }
 
-        private void load()
+        private void Load()
         {
-            if(File.Exists(getPath()))
+            if (File.Exists(GetPath()))
             {
-                var reader = new XmlSerializer(typeof(SerializableDictionary<string, Point>));
-                var stream = new StreamReader(getPath());
-                Positions = (SerializableDictionary<string, Point>)reader.Deserialize(stream);
+                var reader = new XmlSerializer(typeof (SerializableDictionary<string, Point>));
+                var stream = new StreamReader(GetPath());
+                Positions = (SerializableDictionary<string, Point>) reader.Deserialize(stream);
                 stream.Close();
             }
             else
             {
-                save();
+                Save();
             }
         }
 
-        private void save()
+        private void Save()
         {
-            var writer = new XmlSerializer(typeof(SerializableDictionary<string, Point>));
-            var stream = new StreamWriter(getPath());
-            
+            var writer = new XmlSerializer(typeof (SerializableDictionary<string, Point>));
+            var stream = new StreamWriter(GetPath());
+
             writer.Serialize(stream, Positions);
 
             stream.Close();
         }
 
-        static public string getPath()
+        public static string GetPath()
         {
             return Program.AppDataFolder() + @"\positions.xml";
         }
@@ -88,35 +79,36 @@ namespace TwitchChatinator
         : Dictionary<TKey, TValue>, IXmlSerializable
     {
         #region IXmlSerializable Members
-        public System.Xml.Schema.XmlSchema GetSchema()
+
+        public XmlSchema GetSchema()
         {
             return null;
         }
 
-        public void ReadXml(System.Xml.XmlReader reader)
+        public void ReadXml(XmlReader reader)
         {
-            XmlSerializer keySerializer = new XmlSerializer(typeof(TKey));
-            XmlSerializer valueSerializer = new XmlSerializer(typeof(TValue));
+            var keySerializer = new XmlSerializer(typeof (TKey));
+            var valueSerializer = new XmlSerializer(typeof (TValue));
 
-            bool wasEmpty = reader.IsEmptyElement;
+            var wasEmpty = reader.IsEmptyElement;
             reader.Read();
 
             if (wasEmpty)
                 return;
 
-            while (reader.NodeType != System.Xml.XmlNodeType.EndElement)
+            while (reader.NodeType != XmlNodeType.EndElement)
             {
                 reader.ReadStartElement("item");
 
                 reader.ReadStartElement("key");
-                TKey key = (TKey)keySerializer.Deserialize(reader);
+                var key = (TKey) keySerializer.Deserialize(reader);
                 reader.ReadEndElement();
 
                 reader.ReadStartElement("value");
-                TValue value = (TValue)valueSerializer.Deserialize(reader);
+                var value = (TValue) valueSerializer.Deserialize(reader);
                 reader.ReadEndElement();
 
-                this.Add(key, value);
+                Add(key, value);
 
                 reader.ReadEndElement();
                 reader.MoveToContent();
@@ -124,12 +116,12 @@ namespace TwitchChatinator
             reader.ReadEndElement();
         }
 
-        public void WriteXml(System.Xml.XmlWriter writer)
+        public void WriteXml(XmlWriter writer)
         {
-            XmlSerializer keySerializer = new XmlSerializer(typeof(TKey));
-            XmlSerializer valueSerializer = new XmlSerializer(typeof(TValue));
+            var keySerializer = new XmlSerializer(typeof (TKey));
+            var valueSerializer = new XmlSerializer(typeof (TValue));
 
-            foreach (TKey key in this.Keys)
+            foreach (var key in Keys)
             {
                 writer.WriteStartElement("item");
 
@@ -138,13 +130,14 @@ namespace TwitchChatinator
                 writer.WriteEndElement();
 
                 writer.WriteStartElement("value");
-                TValue value = this[key];
+                var value = this[key];
                 valueSerializer.Serialize(writer, value);
                 writer.WriteEndElement();
 
                 writer.WriteEndElement();
             }
         }
+
         #endregion
     }
 }

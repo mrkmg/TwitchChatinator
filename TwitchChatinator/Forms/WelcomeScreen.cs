@@ -1,35 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using TwitchChatinator.Forms.Launchers;
+using TwitchChatinator.Libs;
+using TwitchChatinator.Properties;
 
-namespace TwitchChatinator
+namespace TwitchChatinator.Forms
 {
     public partial class WelcomeScreen : Form
     {
-        public TwitchIRC TI;
-
-        private bool isConnected = false;
+        private bool _isConnected;
+        public TwitchIrc Ti;
 
 
         public WelcomeScreen()
         {
             InitializeComponent();
 
-            VersionLabel.Text = "V" + Application.ProductVersion;
+            VersionLabel.Text = @"V" + Application.ProductVersion;
 
-            this.FormClosed += WelcomeScreen_FormClosed;
+            FormClosed += WelcomeScreen_FormClosed;
 
-            TI = new TwitchIRC();
-            TI.OnReceiveMessage += ReceiveMessage;
-            TI.OnConnected += TI_OnConnected;
-            TI.OnDisconnected += TI_OnDisconnected;
+            Ti = new TwitchIrc();
+            Ti.OnReceiveMessage += ReceiveMessage;
+            Ti.OnConnected += TI_OnConnected;
+            Ti.OnDisconnected += TI_OnDisconnected;
 
             if (Settings.Default.TwitchUsername != "" && Settings.Default.TwitchPassword != "")
             {
@@ -37,7 +31,7 @@ namespace TwitchChatinator
             }
         }
 
-        void TI_OnDisconnected()
+        private void TI_OnDisconnected()
         {
             try
             {
@@ -47,144 +41,149 @@ namespace TwitchChatinator
             {
                 Log.LogException(e);
             }
-            
         }
 
-        void OnListenDisconnected()
+        private void OnListenDisconnected()
         {
-            ListeningStatus.Image = Properties.Resources.Red;
-            StartListenButton.Text = "Start Listening";
+            ListeningStatus.Image = Resources.Red;
+            StartListenButton.Text = @"Start Listening";
             StartListenButton.Enabled = true;
-            isConnected = false;
-            ConnectedLabel.Text = "Not Connected";
+            _isConnected = false;
+            ConnectedLabel.Text = @"Not Connected";
         }
 
-        void TI_OnConnected(string channel)
+        private void TI_OnConnected(string channel)
         {
-            Invoke(new Action<string>(OnListenConnected), new string[1] { channel });
+            Invoke(new Action<string>(OnListenConnected), channel);
         }
 
-        void OnListenConnected(string channel)
+        private void OnListenConnected(string channel)
         {
-            ListeningStatus.Image = Properties.Resources.Green;
-            StartListenButton.Text = "Stop Listening";
+            ListeningStatus.Image = Resources.Green;
+            StartListenButton.Text = @"Stop Listening";
             StartListenButton.Enabled = true;
-            isConnected = true;
+            _isConnected = true;
             ConnectedLabel.Text = channel;
         }
 
-        void WelcomeScreen_FormClosed(object sender, FormClosedEventArgs e)
+        private void WelcomeScreen_FormClosed(object sender, FormClosedEventArgs e)
         {
             StopListen();
-            Console.WriteLine("Good Bye");
+            Console.WriteLine(@"Good Bye");
         }
 
-        private void ReceiveMessage(TwitchMessageObject Message)
+        private void ReceiveMessage(TwitchMessageObject message)
         {
         }
 
         public void ShowListenButton()
         {
-            this.StartListenButton.Visible = true;
-            this.ListeningStatus.Visible = true;
+            StartListenButton.Visible = true;
+            ListeningStatus.Visible = true;
         }
 
         public void StartListen()
         {
-            TI.Start();
-            ConnectedLabel.Text = "Connecting";
+            Ti.Start();
+            ConnectedLabel.Text = @"Connecting";
         }
 
         public void StopListen()
         {
-            TI.Stop();
-            ConnectedLabel.Text = "Disconnecting";
+            Ti.Stop();
+            ConnectedLabel.Text = @"Disconnecting";
         }
 
         private void SetCredentialsButton_Click(object sender, EventArgs e)
         {
-            SetCredentialsScreen LS = new SetCredentialsScreen(ShowListenButton);
-            LS.ShowDialog();
+            var ls = new SetCredentialsScreen(ShowListenButton);
+            ls.ShowDialog();
         }
 
         private void StartListenButton_Click(object sender, EventArgs e)
         {
-            if(isConnected)
+            if (_isConnected)
             {
                 StopListen();
-                StartListenButton.Text = "Please Wait";
+                StartListenButton.Text = @"Please Wait";
             }
             else
             {
                 StartListen();
-                StartListenButton.Text = "Please Wait";
+                StartListenButton.Text = @"Please Wait";
             }
             StartListenButton.Enabled = false;
         }
 
         private void ShowMessageBrowser_Click(object sender, EventArgs e)
         {
-            MessageBrowser MB = new MessageBrowser();
-            MB.Show();
+            var mb = new MessageBrowser();
+            mb.Show();
         }
 
         private void StartPollButton_Click(object sender, EventArgs e)
         {
-            var Launcher = new LaunchPoll();
-            Launcher.Show();
+            var launcher = new LaunchPoll();
+            launcher.Show();
         }
 
         private void StartRollButton_Click(object sender, EventArgs e)
         {
-            var Launcher = new LaunchGiveaway();
-            Launcher.Show();
+            var launcher = new LaunchGiveaway();
+            launcher.Show();
         }
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (disposing)
             {
-                components.Dispose();
+                components?.Dispose();
             }
 
-            TI.Dispose();
+            Ti.Dispose();
 
             base.Dispose(disposing);
         }
 
         private void ExportButton_Click(object sender, EventArgs e)
         {
-            SaveFileDialog D = new SaveFileDialog();
-            D.AddExtension = true;
-            D.DefaultExt = "csv";
-            D.Filter = "CSV files (*.csv)|*.csv|All files (*.*)|*.*";
-
-            if (D.ShowDialog() == DialogResult.OK)
+            var d = new SaveFileDialog
             {
-                DataStore.ExportToCsv(D.FileName);
+                AddExtension = true,
+                DefaultExt = "csv",
+                Filter = @"CSV files (*.csv)|*.csv|All files (*.*)|*.*"
+            };
+
+            if (d.ShowDialog() == DialogResult.OK)
+            {
+                DataStore.ExportToCsv(d.FileName);
             }
         }
 
         private void CopyRandomButton_Click(object sender, EventArgs e)
         {
-            var DSS = new DataSetSelection();
-            DSS.Start = DateTime.Now.AddMinutes(-5);
+            var dss = new DataSetSelection {Start = DateTime.Now.AddMinutes(-5)};
 
-            List<string> users = DataStore.GetUniqueUsersString(DSS);
-            Random r = new Random();
+            var users = DataStore.GetUniqueUsersString(dss);
+            var r = new Random();
             if (users.Count > 0)
             {
-                string winner = users[(int)(r.NextDouble() * (users.Count - 1))];
+                var winner = users[(int) (r.NextDouble()*(users.Count - 1))];
                 Clipboard.SetText(winner);
-                ((Button)sender).Text = winner;
+                ((Button) sender).Text = winner;
             }
             else
             {
-                ((Button)sender).Text = "NO ENTRIES";
+                ((Button) sender).Text = @"NO ENTRIES";
             }
-            System.Windows.Forms.Timer T = new System.Windows.Forms.Timer();
+            var T = new Timer();
             //TODO - Make this timer go away if clicked again.
-            T.Tick += delegate(object S, EventArgs E) { ((Button)sender).Text = "Copy Random User"; T.Stop(); T.Dispose(); };
+            T.Tick += delegate
+            {
+                ((Button) sender).Text = @"Copy Random User";
+                T.Stop();
+                T.Dispose();
+            };
             T.Interval = 1500;
             T.Start();
         }

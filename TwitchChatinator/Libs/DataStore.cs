@@ -1,85 +1,89 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Data;
 using System.Data.SQLite;
 using System.IO;
+using System.Text;
 
-namespace TwitchChatinator
+namespace TwitchChatinator.Libs
 {
     public sealed class DataStore : IDisposable
     {
-        private static readonly Lazy<DataStore> lazy =
+        private const string DatetimeFormat = "yyyyMMddHHmmssffff";
+
+        private static readonly Lazy<DataStore> Lazy =
             new Lazy<DataStore>(() => new DataStore());
 
-        public static DataStore Instance { get { return lazy.Value; } }
-
-        private SQLiteConnection Connection;
-        string LastError;
-        private const string datetimeFormat = "yyyyMMddHHmmssffff";
+        private readonly SQLiteConnection _connection;
+        private string _lastError;
 
         private DataStore()
         {
-            string saveLocation = Program.AppDataFolder();
-            Connection = new SQLiteConnection("Data Source=" + saveLocation + @"\Database.sqlite;Version=3");
-            Connection.Open();
-            InitDB();
+            var saveLocation = Program.AppDataFolder();
+            _connection = new SQLiteConnection("Data Source=" + saveLocation + @"\Database.sqlite;Version=3");
+            _connection.Open();
+            InitDb();
         }
 
-        public static DataSet GetDataSet(DataSetSelection Selection)
+        public static DataStore Instance => Lazy.Value;
+
+        public void Dispose()
         {
-            StringBuilder Command = new StringBuilder("SELECT datetime, channel, user, message FROM messages ");
-            Command.Append(getSqlFromSelections(Selection));
+            _connection.Close();
+        }
+
+        public static DataSet GetDataSet(DataSetSelection selection)
+        {
+            var command = new StringBuilder("SELECT datetime, channel, user, message FROM messages ");
+            command.Append(GetSqlFromSelections(selection));
 
             var ds = new DataSet();
-            using (var da = new SQLiteDataAdapter(Command.ToString(), Instance.Connection))
+            using (var da = new SQLiteDataAdapter(command.ToString(), Instance._connection))
             {
                 da.Fill(ds);
             }
             return ds;
         }
 
-        static public bool InsertMessage(string Channel, string User, string Message)
+        public static bool InsertMessage(string channel, string user, string message)
         {
-            string Command = "INSERT INTO messages (datetime,channel,user,message) VALUES (@datetime,@channel,@user,@message)";
-            bool good = false;
-            using (SQLiteCommand SCommand = new SQLiteCommand(Command, Instance.Connection))
+            var command =
+                "INSERT INTO messages (datetime,channel,user,message) VALUES (@datetime,@channel,@user,@message)";
+            var good = false;
+            using (var sCommand = new SQLiteCommand(command, Instance._connection))
             {
-                SCommand.Parameters.AddWithValue("@user", User);
-                SCommand.Parameters.AddWithValue("@channel", Channel);
-                SCommand.Parameters.AddWithValue("@message", Message);
-                SCommand.Parameters.AddWithValue("@datetime", DateTime.Now.ToString(datetimeFormat));
+                sCommand.Parameters.AddWithValue("@user", user);
+                sCommand.Parameters.AddWithValue("@channel", channel);
+                sCommand.Parameters.AddWithValue("@message", message);
+                sCommand.Parameters.AddWithValue("@datetime", DateTime.Now.ToString(DatetimeFormat));
 
                 try
                 {
-                    good = SCommand.ExecuteNonQuery() > 0;
+                    good = sCommand.ExecuteNonQuery() > 0;
                 }
                 catch (Exception e)
                 {
-                    Instance.LastError = e.Message;
-                    good = InsertMessage(Channel, User, Message);
+                    Instance._lastError = e.Message;
+                    good = InsertMessage(channel, user, message);
                 }
             }
 
 
             return good;
-
         }
 
-        static public int GetUniqueUsersCount(DataSetSelection Selection)
+        public static int GetUniqueUsersCount(DataSetSelection selection)
         {
-            int count = 0;
-            StringBuilder Command = new StringBuilder();
-            Command.Append("SELECT COUNT(DISTINCT user) as count FROM messages ");
-            Command.Append(getSqlFromSelections(Selection));
+            var count = 0;
+            var command = new StringBuilder();
+            command.Append("SELECT COUNT(DISTINCT user) as count FROM messages ");
+            command.Append(GetSqlFromSelections(selection));
 
-            using (SQLiteCommand SCommand = new SQLiteCommand(Command.ToString(), Instance.Connection))
+            using (var sCommand = new SQLiteCommand(command.ToString(), Instance._connection))
             {
                 try
                 {
-                    object a = SCommand.ExecuteScalar();
+                    var a = sCommand.ExecuteScalar();
                     count = int.Parse(a.ToString());
                 }
                 catch (Exception e)
@@ -88,24 +92,24 @@ namespace TwitchChatinator
                 }
             }
 
-            return (int)count;
+            return count;
         }
 
-        static public List<string> GetUniqueUsersString(DataSetSelection Selection)
+        public static List<string> GetUniqueUsersString(DataSetSelection selection)
         {
-            List<string> users = new List<string>();
-            StringBuilder Command = new StringBuilder();
-            Command.Append("SELECT DISTINCT user as count FROM messages ");
-            Command.Append(getSqlFromSelections(Selection));
+            var users = new List<string>();
+            var command = new StringBuilder();
+            command.Append("SELECT DISTINCT user as count FROM messages ");
+            command.Append(GetSqlFromSelections(selection));
 
-            using (SQLiteCommand SCommand = new SQLiteCommand(Command.ToString(), Instance.Connection))
+            using (var sCommand = new SQLiteCommand(command.ToString(), Instance._connection))
             {
                 try
                 {
-                    SQLiteDataReader Reader = SCommand.ExecuteReader();
-                    while (Reader.Read())
+                    var reader = sCommand.ExecuteReader();
+                    while (reader.Read())
                     {
-                        users.Add(Reader.GetValue(0).ToString());
+                        users.Add(reader.GetValue(0).ToString());
                     }
                 }
                 catch (Exception e)
@@ -117,117 +121,113 @@ namespace TwitchChatinator
             return users;
         }
 
-        static public void ExportToCsv(string Filename)
+        public static void ExportToCsv(string filename)
         {
-            string Delimiter = "\"";
-            string Separator = ",";
+            var delimiter = "\"";
+            var separator = ",";
 
-            SQLiteCommand Command = new SQLiteCommand("SELECT * FROM messages ORDER BY datetime DESC",Instance.Connection);
-            SQLiteDataReader SQLReader = Command.ExecuteReader();
-            StreamWriter FileWriter = new StreamWriter(Filename);
+            var command = new SQLiteCommand("SELECT * FROM messages ORDER BY datetime DESC", Instance._connection);
+            var sqlReader = command.ExecuteReader();
+            var fileWriter = new StreamWriter(filename);
 
             // write header row
-            for (int columnCounter = 0; columnCounter < SQLReader.FieldCount; columnCounter++)
+            for (var columnCounter = 0; columnCounter < sqlReader.FieldCount; columnCounter++)
             {
                 if (columnCounter > 0)
                 {
-                    FileWriter.Write(Separator);
+                    fileWriter.Write(separator);
                 }
-                FileWriter.Write(Delimiter + SQLReader.GetName(columnCounter) + Delimiter);
+                fileWriter.Write(delimiter + sqlReader.GetName(columnCounter) + delimiter);
             }
-            FileWriter.WriteLine(string.Empty);
+            fileWriter.WriteLine(string.Empty);
 
             // data loop
-            while (SQLReader.Read())
+            while (sqlReader.Read())
             {
                 // column loop
-                for (int columnCounter = 0; columnCounter < SQLReader.FieldCount; columnCounter++)
+                for (var columnCounter = 0; columnCounter < sqlReader.FieldCount; columnCounter++)
                 {
                     if (columnCounter > 0)
                     {
-                        FileWriter.Write(Separator);
+                        fileWriter.Write(separator);
                     }
-                    FileWriter.Write(Delimiter + SQLReader.GetValue(columnCounter).ToString().Replace('"', '\'') + Delimiter);
-                }   // end of column loop
-                FileWriter.WriteLine(string.Empty);
-            }   // data loop
+                    fileWriter.Write(delimiter + sqlReader.GetValue(columnCounter).ToString().Replace('"', '\'') +
+                                     delimiter);
+                } // end of column loop
+                fileWriter.WriteLine(string.Empty);
+            } // data loop
 
-            FileWriter.Flush();
+            fileWriter.Flush();
 
-            Command.Dispose();
-            SQLReader.Dispose();
-            FileWriter.Dispose();
+            command.Dispose();
+            sqlReader.Dispose();
+            fileWriter.Dispose();
         }
 
-        static private string getSqlFromSelections(DataSetSelection Selection)
+        private static string GetSqlFromSelections(DataSetSelection selection)
         {
-            List<string> Wheres = new List<string>();
-            List<string> Orders = new List<string>();
-            StringBuilder ResultSqlPart = new StringBuilder();
+            var wheres = new List<string>();
+            var orders = new List<string>();
+            var resultSqlPart = new StringBuilder();
 
-            if (Selection.Start != DateTime.MinValue)
+            if (selection.Start != DateTime.MinValue)
             {
-                Wheres.Add("datetime >= " + Selection.Start.ToString(datetimeFormat));
+                wheres.Add("datetime >= " + selection.Start.ToString(DatetimeFormat));
             }
-            if (Selection.End != DateTime.MinValue)
+            if (selection.End != DateTime.MinValue)
             {
-                Wheres.Add("datetime <= " + Selection.End.ToString(datetimeFormat));
+                wheres.Add("datetime <= " + selection.End.ToString(DatetimeFormat));
             }
 
-            Orders.Add("datetime DESC"); //May add this in the selection object
+            orders.Add("datetime DESC"); //May add this in the selection object
 
-            if (Wheres.Count > 0)
+            if (wheres.Count > 0)
             {
-                ResultSqlPart.Append("WHERE ");
-                for (int i = 0; i < Wheres.Count; i++)
+                resultSqlPart.Append("WHERE ");
+                for (var i = 0; i < wheres.Count; i++)
                 {
-                    ResultSqlPart.Append(Wheres[i]);
-                    if (i != Wheres.Count - 1)
+                    resultSqlPart.Append(wheres[i]);
+                    if (i != wheres.Count - 1)
                     {
-                        ResultSqlPart.Append(" AND ");
+                        resultSqlPart.Append(" AND ");
                     }
                 }
-                ResultSqlPart.Append(" ");
+                resultSqlPart.Append(" ");
             }
 
-            if (Orders.Count > 0)
+            if (orders.Count > 0)
             {
-                ResultSqlPart.Append("ORDER BY ");
-                for (int i = 0; i < Orders.Count; i++)
+                resultSqlPart.Append("ORDER BY ");
+                for (var i = 0; i < orders.Count; i++)
                 {
-                    ResultSqlPart.Append(Orders[i]);
-                    if (i != Orders.Count - 1)
+                    resultSqlPart.Append(orders[i]);
+                    if (i != orders.Count - 1)
                     {
-                        ResultSqlPart.Append(", ");
+                        resultSqlPart.Append(", ");
                     }
                 }
-                ResultSqlPart.Append(" ");
+                resultSqlPart.Append(" ");
             }
 
-            return ResultSqlPart.ToString();
+            return resultSqlPart.ToString();
         }
 
-        private void InitDB()
+        private void InitDb()
         {
-            string Command = "CREATE TABLE IF NOT EXISTS messages (" +
-                                "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
-                                "datetime INTEGER NOT NULL," +
-                                "channel char(100) NOT NULL," +
-                                "user CHAR(100) NOT NULL," +
-                                "message TEXT);";
-            SQLiteCommand SCommand = new SQLiteCommand(Command, Connection);
-            SCommand.ExecuteNonQuery();
-        }
-
-        public void Dispose()
-        {
-            Connection.Close();
+            var command = "CREATE TABLE IF NOT EXISTS messages (" +
+                          "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
+                          "datetime INTEGER NOT NULL," +
+                          "channel char(100) NOT NULL," +
+                          "user CHAR(100) NOT NULL," +
+                          "message TEXT);";
+            var sCommand = new SQLiteCommand(command, _connection);
+            sCommand.ExecuteNonQuery();
         }
     }
 
     public class DataSetSelection
     {
-        public DateTime Start;
         public DateTime End;
+        public DateTime Start;
     }
 }

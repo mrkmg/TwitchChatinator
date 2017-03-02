@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
+﻿using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
-using System.ComponentModel;
+using System.Xml.Serialization;
 
-namespace TwitchChatinator
+namespace TwitchChatinator.Libs
 {
     public class SerializableFont
     {
@@ -27,21 +23,13 @@ namespace TwitchChatinator
         [XmlElement("FontValue")]
         public string SerializeFontAttribute
         {
-            get
-            {
-                return FontXmlConverter.ConvertToString(FontValue);
-            }
-            set
-            {
-                FontValue = FontXmlConverter.ConvertToFont(value);
-            }
+            get { return FontXmlConverter.ConvertToString(FontValue); }
+            set { FontValue = FontXmlConverter.ConvertToFont(value); }
         }
 
         public static implicit operator Font(SerializableFont serializeableFont)
         {
-            if (serializeableFont == null)
-                return null;
-            return serializeableFont.FontValue;
+            return serializeableFont?.FontValue;
         }
 
         public static implicit operator SerializableFont(Font font)
@@ -58,23 +46,29 @@ namespace TwitchChatinator
             {
                 if (font != null)
                 {
-                    TypeConverter converter = TypeDescriptor.GetConverter(typeof(Font));
+                    var converter = TypeDescriptor.GetConverter(typeof (Font));
                     return converter.ConvertToString(font);
                 }
-                else
-                    return null;
+                return null;
             }
-            catch { System.Diagnostics.Debug.WriteLine("Unable to convert"); }
+            catch
+            {
+                Debug.WriteLine("Unable to convert");
+            }
             return null;
         }
+
         public static Font ConvertToFont(string fontString)
         {
             try
             {
-                TypeConverter converter = TypeDescriptor.GetConverter(typeof(Font));
-                return (Font)converter.ConvertFromString(fontString);
+                var converter = TypeDescriptor.GetConverter(typeof (Font));
+                return (Font) converter.ConvertFromString(fontString);
             }
-            catch { System.Diagnostics.Debug.WriteLine("Unable to convert"); }
+            catch
+            {
+                Debug.WriteLine("Unable to convert");
+            }
             return null;
         }
     }

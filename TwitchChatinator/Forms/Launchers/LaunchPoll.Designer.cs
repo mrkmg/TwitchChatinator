@@ -1,4 +1,4 @@
-﻿namespace TwitchChatinator
+﻿namespace TwitchChatinator.Forms.Launchers
 {
     partial class LaunchPoll
     {
@@ -61,7 +61,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(50, 13);
             this.label1.TabIndex = 10;
-            this.label1.Text = "Poll Style";
+            this.label1.Text = "_poll Style";
             // 
             // StartButton
             // 
@@ -69,7 +69,7 @@
             this.StartButton.Name = "StartButton";
             this.StartButton.Size = new System.Drawing.Size(75, 23);
             this.StartButton.TabIndex = 6;
-            this.StartButton.Text = "Start Poll";
+            this.StartButton.Text = "Start _poll";
             this.StartButton.UseVisualStyleBackColor = true;
             this.StartButton.Click += new System.EventHandler(this.StartButton_Click);
             // 
@@ -80,7 +80,7 @@
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(47, 13);
             this.label6.TabIndex = 12;
-            this.label6.Text = "Poll Title";
+            this.label6.Text = "_poll Title";
             // 
             // PollTitle
             // 
@@ -97,7 +97,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(43, 13);
             this.label2.TabIndex = 13;
-            this.label2.Text = "Options";
+            this.label2.Text = "_options";
             // 
             // InfoLabel
             // 
@@ -209,7 +209,7 @@
             this.Controls.Add(this.List);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "LaunchPoll";
-            this.Text = "Start a Poll - Chatinator";
+            this.Text = "Start a _poll - Chatinator";
             this.ResumeLayout(false);
             this.PerformLayout();
 

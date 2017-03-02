@@ -1,149 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Drawing;
-using System.Xml.Serialization;
 using System.IO;
+using System.Windows.Forms;
+using System.Xml.Serialization;
+using TwitchChatinator.Forms.Components;
+using TwitchChatinator.Libs;
 
-namespace TwitchChatinator
+namespace TwitchChatinator.Options
 {
     public class PieGraphOptions
     {
         public static PieGraphOptions PreviewOptions;
-
-        [XmlElement]
-        public int Width { get; set; }
-        [XmlElement]
-        public int Height { get; set; }
-
-        [XmlElement]
-        public int MarginTop { get; set; }
-        [XmlElement]
-        public int MarginBottom { get; set; }
-        [XmlElement]
-        public int MarginLeft { get; set; }
-        [XmlElement]
-        public int MarginRight { get; set; }
-
-        [XmlIgnore]
-        public Color ChromaKey { get; set; }
-        [XmlIgnore]
-        public Color Option1Color { get; set; }
-        [XmlIgnore]
-        public Color Option2Color { get; set; }
-        [XmlIgnore]
-        public Color Option3Color { get; set; }
-        [XmlIgnore]
-        public Color Option4Color { get; set; }
-        [XmlIgnore]
-        public Color LabelBoxColor { get; set; }
-
-        [XmlIgnore]
-        public Color OptionFontColor { get; set; }
-        [XmlIgnore]
-        public Font OptionFont { get; set; }
-
-        [XmlIgnore]
-        public Color CountFontColor { get; set; }
-        [XmlIgnore]
-        public Font CountFont { get; set; }
-
-        [XmlIgnore]
-        public Color TitleFontColor { get; set; }
-        [XmlIgnore]
-        public Font TitleFont { get; set; }
-
-        [XmlElement]
-        public bool AllowMulti { get; set; }
-
-        [XmlElement]
-        public string TotalPosition { get; set; }
-
-        [XmlElement]
-        public StorableImage BackgroundImage { get; set; }
-        [XmlElement]
-        public StorableImage ForegroundImage { get; set; }
-
-
-        //Special for XMLSerialization
-        //Thank you [BenAlabaster] (https://stackoverflow.com/users/40650/benalabaster)
-        //https://stackoverflow.com/questions/376234/best-solution-for-xmlserializer-and-system-drawing-color/376254#376254
-        [XmlElement]
-        public string ChromaKeyCode
-        {
-            get { return ColorTranslator.ToHtml(ChromaKey); }
-            set { ChromaKey = ColorTranslator.FromHtml(value); }
-        }
-        [XmlElement]
-        public string Option1ColorCode
-        {
-            get { return ColorTranslator.ToHtml(Option1Color); }
-            set { Option1Color = ColorTranslator.FromHtml(value); }
-        }
-        [XmlElement]
-        public string Option2ColorCode
-        {
-            get { return ColorTranslator.ToHtml(Option2Color); }
-            set { Option2Color = ColorTranslator.FromHtml(value); }
-        }
-        [XmlElement]
-        public string Option3ColorCode
-        {
-            get { return ColorTranslator.ToHtml(Option3Color); }
-            set { Option3Color = ColorTranslator.FromHtml(value); }
-        }
-        [XmlElement]
-        public string Option4ColorCode
-        {
-            get { return ColorTranslator.ToHtml(Option4Color); }
-            set { Option4Color = ColorTranslator.FromHtml(value); }
-        }
-        [XmlElement]
-        public string LabelBoxColorCode
-        {
-            get { return ColorTranslator.ToHtml(LabelBoxColor); }
-            set { LabelBoxColor = ColorTranslator.FromHtml(value); }
-        }
-        [XmlElement]
-        public string OptionFontColorCode
-        {
-            get { return ColorTranslator.ToHtml(OptionFontColor); }
-            set { OptionFontColor = ColorTranslator.FromHtml(value); }
-        }
-        [XmlElement]
-        public string CountFontColorCode
-        {
-            get { return ColorTranslator.ToHtml(CountFontColor); }
-            set { CountFontColor = ColorTranslator.FromHtml(value); }
-        }
-        [XmlElement]
-        public string TitleFontColorCode
-        {
-            get { return ColorTranslator.ToHtml(TitleFontColor); }
-            set { TitleFontColor = ColorTranslator.FromHtml(value); }
-        }
-
-
-        [XmlElement]
-        public string OptionFontName
-        {
-            get { return FontXmlConverter.ConvertToString(OptionFont); }
-            set { OptionFont = FontXmlConverter.ConvertToFont(value); }
-        }
-        [XmlElement]
-        public string CountFontName
-        {
-            get { return FontXmlConverter.ConvertToString(CountFont); }
-            set { CountFont = FontXmlConverter.ConvertToFont(value); }
-        }
-        [XmlElement]
-        public string TitleFontName
-        {
-            get { return FontXmlConverter.ConvertToString(TitleFont); }
-            set { TitleFont = FontXmlConverter.ConvertToFont(value); }
-        }
 
         public PieGraphOptions()
         {
@@ -179,9 +47,164 @@ namespace TwitchChatinator
             ForegroundImage = new StorableImage();
         }
 
+        [XmlElement]
+        public int Width { get; set; }
+
+        [XmlElement]
+        public int Height { get; set; }
+
+        [XmlElement]
+        public int MarginTop { get; set; }
+
+        [XmlElement]
+        public int MarginBottom { get; set; }
+
+        [XmlElement]
+        public int MarginLeft { get; set; }
+
+        [XmlElement]
+        public int MarginRight { get; set; }
+
+        [XmlIgnore]
+        public Color ChromaKey { get; set; }
+
+        [XmlIgnore]
+        public Color Option1Color { get; set; }
+
+        [XmlIgnore]
+        public Color Option2Color { get; set; }
+
+        [XmlIgnore]
+        public Color Option3Color { get; set; }
+
+        [XmlIgnore]
+        public Color Option4Color { get; set; }
+
+        [XmlIgnore]
+        public Color LabelBoxColor { get; set; }
+
+        [XmlIgnore]
+        public Color OptionFontColor { get; set; }
+
+        [XmlIgnore]
+        public Font OptionFont { get; set; }
+
+        [XmlIgnore]
+        public Color CountFontColor { get; set; }
+
+        [XmlIgnore]
+        public Font CountFont { get; set; }
+
+        [XmlIgnore]
+        public Color TitleFontColor { get; set; }
+
+        [XmlIgnore]
+        public Font TitleFont { get; set; }
+
+        [XmlElement]
+        public bool AllowMulti { get; set; }
+
+        [XmlElement]
+        public string TotalPosition { get; set; }
+
+        [XmlElement]
+        public StorableImage BackgroundImage { get; set; }
+
+        [XmlElement]
+        public StorableImage ForegroundImage { get; set; }
+
+
+        //Special for XMLSerialization
+        //Thank you [BenAlabaster] (https://stackoverflow.com/users/40650/benalabaster)
+        //https://stackoverflow.com/questions/376234/best-solution-for-xmlserializer-and-system-drawing-color/376254#376254
+        [XmlElement]
+        public string ChromaKeyCode
+        {
+            get { return ColorTranslator.ToHtml(ChromaKey); }
+            set { ChromaKey = ColorTranslator.FromHtml(value); }
+        }
+
+        [XmlElement]
+        public string Option1ColorCode
+        {
+            get { return ColorTranslator.ToHtml(Option1Color); }
+            set { Option1Color = ColorTranslator.FromHtml(value); }
+        }
+
+        [XmlElement]
+        public string Option2ColorCode
+        {
+            get { return ColorTranslator.ToHtml(Option2Color); }
+            set { Option2Color = ColorTranslator.FromHtml(value); }
+        }
+
+        [XmlElement]
+        public string Option3ColorCode
+        {
+            get { return ColorTranslator.ToHtml(Option3Color); }
+            set { Option3Color = ColorTranslator.FromHtml(value); }
+        }
+
+        [XmlElement]
+        public string Option4ColorCode
+        {
+            get { return ColorTranslator.ToHtml(Option4Color); }
+            set { Option4Color = ColorTranslator.FromHtml(value); }
+        }
+
+        [XmlElement]
+        public string LabelBoxColorCode
+        {
+            get { return ColorTranslator.ToHtml(LabelBoxColor); }
+            set { LabelBoxColor = ColorTranslator.FromHtml(value); }
+        }
+
+        [XmlElement]
+        public string OptionFontColorCode
+        {
+            get { return ColorTranslator.ToHtml(OptionFontColor); }
+            set { OptionFontColor = ColorTranslator.FromHtml(value); }
+        }
+
+        [XmlElement]
+        public string CountFontColorCode
+        {
+            get { return ColorTranslator.ToHtml(CountFontColor); }
+            set { CountFontColor = ColorTranslator.FromHtml(value); }
+        }
+
+        [XmlElement]
+        public string TitleFontColorCode
+        {
+            get { return ColorTranslator.ToHtml(TitleFontColor); }
+            set { TitleFontColor = ColorTranslator.FromHtml(value); }
+        }
+
+
+        [XmlElement]
+        public string OptionFontName
+        {
+            get { return FontXmlConverter.ConvertToString(OptionFont); }
+            set { OptionFont = FontXmlConverter.ConvertToFont(value); }
+        }
+
+        [XmlElement]
+        public string CountFontName
+        {
+            get { return FontXmlConverter.ConvertToString(CountFont); }
+            set { CountFont = FontXmlConverter.ConvertToFont(value); }
+        }
+
+        [XmlElement]
+        public string TitleFontName
+        {
+            get { return FontXmlConverter.ConvertToString(TitleFont); }
+            set { TitleFont = FontXmlConverter.ConvertToFont(value); }
+        }
+
 
         //TODO - Add in exception
-        static public PieGraphOptions Load(string name)
+        public static PieGraphOptions Load(string name)
         {
             if (name == "_preview")
             {
@@ -189,16 +212,12 @@ namespace TwitchChatinator
                 {
                     return PreviewOptions;
                 }
-                else
-                {
-                    return new PieGraphOptions();
-                }
+                return new PieGraphOptions();
             }
 
-            var reader = new XmlSerializer(typeof(PieGraphOptions));
-            var stream = new StreamReader(getPathFromName(name));
-            var obj = new PieGraphOptions();
-            obj = (PieGraphOptions)reader.Deserialize(stream);
+            var reader = new XmlSerializer(typeof (PieGraphOptions));
+            var stream = new StreamReader(GetPathFromName(name));
+            var obj = (PieGraphOptions) reader.Deserialize(stream);
 
             stream.Close();
             return obj;
@@ -207,43 +226,43 @@ namespace TwitchChatinator
         //TODO - Add in exception
         public void Save(string name)
         {
-            var writer = new XmlSerializer(typeof(PieGraphOptions));
-            var stream = new StreamWriter(getPathFromName(name));
+            var writer = new XmlSerializer(typeof (PieGraphOptions));
+            var stream = new StreamWriter(GetPathFromName(name));
 
             writer.Serialize(stream, this);
 
             stream.Close();
         }
 
-        static public void CreateNew(string name)
+        public static void CreateNew(string name)
         {
             var obj = new PieGraphOptions();
             obj.Save(name);
         }
 
-        static public void Remove(string name)
+        public static void Remove(string name)
         {
-            File.Delete(getPathFromName(name));
+            File.Delete(GetPathFromName(name));
         }
 
-        static public void Rename(string fromName, string toName)
+        public static void Rename(string fromName, string toName)
         {
-            File.Move(getPathFromName(fromName), getPathFromName(toName));
+            File.Move(GetPathFromName(fromName), GetPathFromName(toName));
         }
 
-        static public List<string> GetAvaliable()
+        public static List<string> GetAvaliable()
         {
             var names = new List<string>();
-            string directory = getPath();
+            var directory = GetPath();
 
             if (!Directory.Exists(directory))
             {
                 Directory.CreateDirectory(directory);
             }
 
-            string[] files = Directory.GetFiles(directory);
+            var files = Directory.GetFiles(directory);
 
-            foreach (string file in files)
+            foreach (var file in files)
             {
                 names.Add(Path.GetFileNameWithoutExtension(file));
             }
@@ -253,17 +272,17 @@ namespace TwitchChatinator
             return names;
         }
 
-        static public string getPath()
+        public static string GetPath()
         {
             return Program.AppDataFolder() + @"\Polls\PieGraphs";
         }
 
-        static public string getPathFromName(string name)
+        public static string GetPathFromName(string name)
         {
-            return  getPath() + @"\" + name + ".xpie";
+            return GetPath() + @"\" + name + ".xpie";
         }
 
-        static public void ValidateNameHandler(object sender, InputBoxValidatingArgs e)
+        public static void ValidateNameHandler(object sender, InputBoxValidatingArgs e)
         {
             if (e.Text.Length == 0)
             {
@@ -273,7 +292,7 @@ namespace TwitchChatinator
 
             try
             {
-                new FileInfo(getPathFromName(e.Text));
+                new FileInfo(GetPathFromName(e.Text));
             }
             catch (Exception ex)
             {
@@ -282,18 +301,20 @@ namespace TwitchChatinator
             }
         }
 
-        static public void Export(string name)
+        public static void Export(string name)
         {
-            System.Windows.Forms.SaveFileDialog Dialog = new System.Windows.Forms.SaveFileDialog();
-
-            Dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            Dialog.Filter = "XPie Files (*.xpie)|*.xpie";
-            Dialog.Title = "Save Pie Graph";
-            Dialog.OverwritePrompt = true;
-
-            if (Dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            var dialog = new SaveFileDialog
             {
-                File.Copy(getPathFromName(name), Dialog.FileName, true);
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                Filter = "XPie Files (*.xpie)|*.xpie",
+                Title = "Save Pie Graph",
+                OverwritePrompt = true
+            };
+
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                File.Copy(GetPathFromName(name), dialog.FileName, true);
             }
         }
     }

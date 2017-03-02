@@ -1,4 +1,4 @@
-﻿namespace TwitchChatinator
+﻿namespace TwitchChatinator.Forms
 {
     partial class WelcomeScreen
     {
