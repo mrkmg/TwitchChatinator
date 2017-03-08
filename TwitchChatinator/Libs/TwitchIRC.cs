@@ -4,6 +4,7 @@
 
 using System;
 using System.IO;
+using System.Net.Security;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
@@ -12,6 +13,9 @@ namespace TwitchChatinator.Libs
 {
     public class TwitchIrc : IDisposable
     {
+        private const string TwitchServerUrl = "irc.chat.twitch.tv";
+        private const int TwitchServerPort = 443;
+
         public delegate void Connected(string channel);
 
         public delegate void Disconnected();
@@ -28,6 +32,7 @@ namespace TwitchChatinator.Libs
         private NetworkStream _nwStream;
         private StreamReader _reader;
         private StreamWriter _writer;
+        private SslStream _sslStream;
 
         public TwitchIrc()
         {
@@ -69,9 +74,7 @@ namespace TwitchChatinator.Libs
 
         private void JoinChannel()
         {
-            _channel = Settings.Default.TwitchChannel;
-
-            Write("JOIN #" + _channel + "\n");
+            Write("JOIN #" + _channel);
         }
 
         private void SetConnected()
@@ -118,17 +121,21 @@ namespace TwitchChatinator.Libs
             try
             {
                 Log.LogInfo("Pre - Client");
-                using (_client = new TcpClient("irc.chat.twitch.tv", 6667))
+                using (_client = new TcpClient(TwitchServerUrl, TwitchServerPort))
                 {
                     _nwStream = _client.GetStream();
-                    _reader = new StreamReader(_nwStream, Encoding.GetEncoding("iso8859-1"));
-                    _writer = new StreamWriter(_nwStream, Encoding.GetEncoding("iso8859-1"));
+                    _sslStream = new SslStream(_nwStream);
+                    
+                    _sslStream.AuthenticateAsClient(TwitchServerUrl);
+
+                    _reader = new StreamReader(_sslStream, Encoding.GetEncoding("iso8859-1"));
+                    _writer = new StreamWriter(_sslStream, Encoding.GetEncoding("iso8859-1"));
 
                     Login();
 
                     var loginResult = _reader.ReadLine();
 
-                    Console.WriteLine("TwitchIRC Login Result: " + loginResult);
+                    Log.LogInfo("TwitchIRC Login Result\t" + loginResult);
 
                     if (loginResult != null && loginResult.Contains(":Login authentication failed"))
                     {
@@ -136,6 +143,7 @@ namespace TwitchChatinator.Libs
                     }
                     else
                     {
+                        _channel = Settings.Default.TwitchChannel;
                         SetConnected();
                         JoinChannel();
                     }
@@ -155,22 +163,20 @@ namespace TwitchChatinator.Libs
                         }
 
                         //Check for and Handle Message Object
-                        if (OnReceiveMessage != null)
+                        if (OnReceiveMessage != null && data.Contains(msgStringIdentifier))
                         {
-                            if (data.Contains(msgStringIdentifier))
-                            {
-                                var usrStart = data.IndexOf("!", StringComparison.Ordinal);
-                                var username = data.Substring(1, usrStart - 1);
-                                var msgStart = data.IndexOf(msgStringIdentifier, StringComparison.Ordinal);
-                                var message = data.Substring(msgStart + msgStringIdentifier.Length + 2);
-                                DoReceiveMessage(new TwitchMessageObject(_channel, username, message));
-                            }
+                            var usrStart = data.IndexOf("!", StringComparison.Ordinal);
+                            var username = data.Substring(1, usrStart - 1);
+                            var msgStart = data.IndexOf(msgStringIdentifier, StringComparison.Ordinal);
+                            var message = data.Substring(msgStart + msgStringIdentifier.Length + 2);
+                            DoReceiveMessage(new TwitchMessageObject(_channel, username, message));
                         }
                     }
                     OnDisconnected?.Invoke();
 
                     _writer.Dispose();
                     _reader.Dispose();
+                    _sslStream.Dispose();
                     _nwStream.Dispose();
                 }
             }
@@ -191,12 +197,11 @@ namespace TwitchChatinator.Libs
         {
             try
             {
-                if (_writer != null && _listen.ThreadState == ThreadState.Running)
-                {
-                    Log.LogInfo("TwitchMessageSent\t" + s);
-                    _writer.WriteLine(s);
-                    _writer.Flush();
-                }
+                if (_writer == null || _listen.ThreadState != ThreadState.Running) return;
+
+                Log.LogInfo("TwitchMessageSent\t" + s);
+                _writer.WriteLine(s);
+                _writer.Flush();
             }
             catch (Exception e)
             {

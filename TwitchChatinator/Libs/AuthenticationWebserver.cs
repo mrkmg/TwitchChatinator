@@ -18,7 +18,7 @@ namespace TwitchChatinator.Libs
 
         private const string TwitchAuthUrl = "https://api.twitch.tv/kraken/oauth2/authorize";
         private const string TwitchClientId = "geybikx6e1oowq816gtln56zhsfkcw";
-        private const string TwitchRedirectUrl = "http://localhost:8080/auth/";
+        private const string TwitchRedirectUrl = "http://localhost:8080/auth_return/";
         private const string TwitchScope = "chat_login";
 
         public AuthenticationWebserver()
@@ -28,18 +28,18 @@ namespace TwitchChatinator.Libs
                     "Needs Windows XP SP2, Server 2003 or later.");
 
             _listener.Prefixes.Add(@"http://localhost:8080/");
-            _listener.Prefixes.Add(@"http://localhost:8080/auth/");
+            _listener.Prefixes.Add(@"http://localhost:8080/auth_return/");
+            _listener.Prefixes.Add(@"http://localhost:8080/auth_apply/");
             _listener.Start();
         }
 
         private string BuildUrl()
         {
             return TwitchAuthUrl +
-                   "?response_type=code" +
+                   "?response_type=token" +
                    "&client_id=" + Uri.EscapeDataString(TwitchClientId) +
                    "&redirect_uri=" + Uri.EscapeDataString(TwitchRedirectUrl) +
-                   "&scope=" + Uri.EscapeDataString(TwitchScope) +
-                   "&force_verify";
+                   "&scope=" + Uri.EscapeDataString(TwitchScope);
         }
 
         private string RequestHandler(HttpListenerRequest request)
@@ -47,9 +47,12 @@ namespace TwitchChatinator.Libs
             switch (request.Url.AbsolutePath)
             {
                 case "/":
-                    return "Redirecting<script>window.location = '" + BuildUrl() + "';</script>";
-                case "/auth/":
-                    OnOnReceivedAuthCode(request.QueryString["code"]);
+//                    return BuildUrl();
+                    return "<html><body>Redirecting<script>window.location = '" + BuildUrl() + "';</script></body></html>";
+                case "/auth_return/":
+                    return "<html><body>Please Wait<script>setTimeout(function () { window.location = 'http://localhost:8080/auth_apply/?' + window.location.hash.substr(1); }, 500);</script></body></html>";
+                case "/auth_apply/":
+                    OnOnReceivedAuthCode(request.QueryString["access_token"]);
                     return "Checking Auth";
                 default:
                     return "Bad URL";
