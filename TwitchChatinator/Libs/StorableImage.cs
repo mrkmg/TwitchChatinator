@@ -5,7 +5,7 @@ using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
-namespace TwitchChatinator.Options
+namespace TwitchChatinator.Libs
 {
     //Thank you [Rubens Farias](http://stackoverflow.com/users/113794/rubens-farias)
     //http://stackoverflow.com/questions/1907077/serialize-a-bitmap-in-c-net-to-xml

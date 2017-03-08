@@ -11,7 +11,7 @@ using TwitchChatinator.Options;
 
 namespace TwitchChatinator.Forms.Runners
 {
-    public partial class RunPollPie : PaintWindow
+    public sealed partial class RunPollPie : PaintWindow
     {
         private SolidBrush _countBrush;
         private readonly int _countEntries;
@@ -41,12 +41,12 @@ namespace TwitchChatinator.Forms.Runners
         {
             InitializeComponent();
 
-            Text = "Poll ( " + name + ") - Chatinator";
+            Text = @"Poll ( " + name + @") - Chatinator";
 
             _startTime = start;
             _optionsName = name;
             _pollTitle = title;
-            _countEntries = pollvars.Count();
+            _countEntries = pollvars.Length;
             _data = new PollData(_countEntries) {Options = pollvars};
 
             ReadOptions();
@@ -180,7 +180,7 @@ namespace TwitchChatinator.Forms.Runners
                 {
                     // http://www.codeproject.com/Articles/463284/Create-Pie-Chart-Using-Graphics-in-Csharp-NET
                     // Thank you [hari19113](http://www.codeproject.com/script/Membership/View.aspx?mid=8124215)
-                    var degrees = new float[_data.Options.Count()];
+                    var degrees = new float[_data.Options.Length];
 
                     var labelsToDraw = new List<LabelToDraw>();
 
@@ -198,6 +198,7 @@ namespace TwitchChatinator.Forms.Runners
                         var textPoint = PointOnCircle((float) _pieRec.Width/3, sum + degrees[i]/2,
                             new PointF(_pieRec.X + _pieRec.Width/2, _pieRec.Y + _pieRec.Height/2));
                         textPoint.X -= (optionWidth + titleWidth)/2;
+                        // ReSharper disable once PossibleLossOfFraction
                         textPoint.Y -= labelHeight/2;
                         labelsToDraw.Add(new LabelToDraw(_data.Options[i], _options.OptionFont, _labelBrush, textPoint));
                         var countPoint = new PointF(textPoint.X + optionWidth, textPoint.Y);
@@ -219,6 +220,7 @@ namespace TwitchChatinator.Forms.Runners
         }
 
         //http://stackoverflow.com/questions/839899/how-do-i-calculate-a-point-on-a-circle-s-circumference
+        // ReSharper disable once CommentTypo
         //Thank you [Justin Ethier](http://stackoverflow.com/users/101258/justin-ethier)
         private static PointF PointOnCircle(float radius, float angleInDegrees, PointF origin)
         {
@@ -240,9 +242,11 @@ namespace TwitchChatinator.Forms.Runners
             _countBrush = new SolidBrush(_options.CountFontColor);
             _totalBrush = new SolidBrush(_options.TitleFontColor);
 
-            _totalRec = new Rectangle();
-            _totalRec.Height = _options.TitleFont.Height;
-            _totalRec.Width = _options.Width - _options.MarginLeft - _options.MarginRight;
+            _totalRec = new Rectangle
+            {
+                Height = _options.TitleFont.Height,
+                Width = _options.Width - _options.MarginLeft - _options.MarginRight
+            };
 
 
             _titleStringFormat = new StringFormat(StringFormatFlags.NoWrap | StringFormatFlags.NoClip)
@@ -269,7 +273,7 @@ namespace TwitchChatinator.Forms.Runners
                 LineAlignment = StringAlignment.Near
             };
 
-            var offTop = 0;
+            int offTop;
 
             switch (_options.TotalPosition)
             {
@@ -278,7 +282,7 @@ namespace TwitchChatinator.Forms.Runners
                     _totalRec.Y = _options.MarginTop;
                     offTop = _options.TitleFont.Height;
                     break;
-                case "Bottom":
+                //case "Bottom":
                 default:
                     _totalRec.X = _options.MarginLeft;
                     _totalRec.Y = _options.Height - _options.MarginBottom - _options.TitleFont.Height;

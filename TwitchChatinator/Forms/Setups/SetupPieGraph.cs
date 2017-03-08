@@ -144,16 +144,9 @@ namespace TwitchChatinator.Forms.Setups
             Close();
         }
 
-        private bool Populate()
+        private void Populate()
         {
-            try
-            {
-                _options = PieGraphOptions.Load(_optionsName);
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+            _options = PieGraphOptions.Load(_optionsName);
 
             NameLabel.Text = _optionsName;
 
@@ -181,7 +174,6 @@ namespace TwitchChatinator.Forms.Setups
             TotalFontColor.BackColor = _options.TitleFontColor;
 
             TotalPosition.SelectedItem = _options.TotalPosition;
-            return true;
         }
 
         private void ColorClickHandler(object sender, EventArgs e)
@@ -244,19 +236,19 @@ namespace TwitchChatinator.Forms.Setups
             if (_options.BackgroundImage.Image == null)
             {
                 FileDialog fd = new OpenFileDialog();
-                fd.Filter = "PNG Files (*.png)|*.png";
+                fd.Filter = @"PNG Files (*.png)|*.png";
                 fd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
-                fd.Title = "Choose A Background Image";
+                fd.Title = @"Choose A Background Image";
                 if (fd.ShowDialog() == DialogResult.OK)
                 {
                     _options.BackgroundImage.Name = Path.GetFileNameWithoutExtension(fd.FileName);
                     _options.BackgroundImage.Image = Image.FromFile(fd.FileName);
-                    ((Button) sender).Text = "Remove Image";
+                    ((Button) sender).Text = @"Remove Image";
                 }
             }
             else
             {
-                ((Button) sender).Text = "Load Image";
+                ((Button) sender).Text = @"Load Image";
                 _options.BackgroundImage.Image = null;
             }
         }
@@ -266,26 +258,26 @@ namespace TwitchChatinator.Forms.Setups
             if (_options.ForegroundImage.Image == null)
             {
                 FileDialog fd = new OpenFileDialog();
-                fd.Filter = "PNG Files (*.png)|*.png";
+                fd.Filter = @"PNG Files (*.png)|*.png";
                 fd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
-                fd.Title = "Choose A Foreground Image";
+                fd.Title = @"Choose A Foreground Image";
                 if (fd.ShowDialog() == DialogResult.OK)
                 {
                     try
                     {
                         _options.ForegroundImage.Name = Path.GetFileNameWithoutExtension(fd.FileName);
                         _options.ForegroundImage.Image = Image.FromFile(fd.FileName);
-                        ((Button) sender).Text = "Remove Image";
+                        ((Button) sender).Text = @"Remove Image";
                     }
                     catch
                     {
-                        MessageBox.Show("Could not load image.");
+                        MessageBox.Show(@"Could not load image.");
                     }
                 }
             }
             else
             {
-                ((Button) sender).Text = "Load Image";
+                ((Button) sender).Text = @"Load Image";
                 _options.ForegroundImage.Image = null;
             }
         }

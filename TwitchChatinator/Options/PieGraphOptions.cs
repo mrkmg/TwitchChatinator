@@ -294,7 +294,7 @@ namespace TwitchChatinator.Options
             {
                 new FileInfo(GetPathFromName(e.Text));
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 e.Cancel = true;
                 e.Message = "Invalid Characters";

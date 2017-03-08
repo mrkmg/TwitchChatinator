@@ -65,6 +65,7 @@
             this.ChangeForegroundImage = new System.Windows.Forms.Button();
             this.label17 = new System.Windows.Forms.Label();
             this.ChangeBackgroundImage = new System.Windows.Forms.Button();
+            this.TestButton = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.HeightInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.WidthInput)).BeginInit();
@@ -307,7 +308,7 @@
             this.groupBox4.Controls.Add(this.EntriesFontColor);
             this.groupBox4.Controls.Add(this.EntriesFontSelector);
             this.groupBox4.Controls.Add(this.label12);
-            this.groupBox4.Location = new System.Drawing.Point(12, 293);
+            this.groupBox4.Location = new System.Drawing.Point(228, 37);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(200, 92);
             this.groupBox4.TabIndex = 4;
@@ -391,18 +392,18 @@
             // 
             // SaveButton
             // 
-            this.SaveButton.Location = new System.Drawing.Point(130, 478);
+            this.SaveButton.Location = new System.Drawing.Point(299, 251);
             this.SaveButton.Name = "SaveButton";
-            this.SaveButton.Size = new System.Drawing.Size(75, 23);
+            this.SaveButton.Size = new System.Drawing.Size(58, 23);
             this.SaveButton.TabIndex = 5;
             this.SaveButton.Text = "Save";
             this.SaveButton.UseVisualStyleBackColor = true;
             // 
             // CancelButton
             // 
-            this.CancelButton.Location = new System.Drawing.Point(23, 478);
+            this.CancelButton.Location = new System.Drawing.Point(228, 251);
             this.CancelButton.Name = "CancelButton";
-            this.CancelButton.Size = new System.Drawing.Size(75, 23);
+            this.CancelButton.Size = new System.Drawing.Size(57, 23);
             this.CancelButton.TabIndex = 6;
             this.CancelButton.Text = "Cancel";
             this.CancelButton.UseVisualStyleBackColor = true;
@@ -413,7 +414,7 @@
             this.groupBox5.Controls.Add(this.ChangeForegroundImage);
             this.groupBox5.Controls.Add(this.label17);
             this.groupBox5.Controls.Add(this.ChangeBackgroundImage);
-            this.groupBox5.Location = new System.Drawing.Point(12, 391);
+            this.groupBox5.Location = new System.Drawing.Point(228, 144);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(200, 79);
             this.groupBox5.TabIndex = 8;
@@ -458,11 +459,21 @@
             this.ChangeBackgroundImage.UseVisualStyleBackColor = true;
             this.ChangeBackgroundImage.Click += new System.EventHandler(this.ChangeBackgroundImage_Click);
             // 
+            // TestButton
+            // 
+            this.TestButton.Location = new System.Drawing.Point(370, 251);
+            this.TestButton.Name = "TestButton";
+            this.TestButton.Size = new System.Drawing.Size(60, 23);
+            this.TestButton.TabIndex = 9;
+            this.TestButton.Text = "Test";
+            this.TestButton.UseVisualStyleBackColor = true;
+            // 
             // SetupGiveaway
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(227, 521);
+            this.ClientSize = new System.Drawing.Size(446, 307);
+            this.Controls.Add(this.TestButton);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.CancelButton);
             this.Controls.Add(this.SaveButton);
@@ -535,5 +546,6 @@
         private System.Windows.Forms.Button ChangeForegroundImage;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Button ChangeBackgroundImage;
+        private System.Windows.Forms.Button TestButton;
     }
 }

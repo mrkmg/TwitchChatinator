@@ -26,7 +26,7 @@ namespace TwitchChatinator.Forms.Launchers
 
             AddInput("Yes");
             AddInput("No");
-            AddInput("");
+            AddInput();
             _startTime = DateTime.Now;
 
             InfoLabel.Text = @"Stopped | " + _startTime.ToString("h:mm t");
@@ -104,7 +104,6 @@ namespace TwitchChatinator.Forms.Launchers
 
             _inputs.Remove(self);
             self.Dispose();
-            self = null;
             SetWindowSize();
             PositionInputs();
         }
@@ -189,7 +188,7 @@ namespace TwitchChatinator.Forms.Launchers
                         rpb.Show();
                         rpb.FormClosed += Poll_FormClosed;
                         _poll = rpb;
-                        StartButton.Text = @"Stop _poll";
+                        StartButton.Text = @"Stop Poll";
                         break;
                     case "Pie":
                         var rpp = new RunPollPie(_startTime, _options[List.SelectedIndex].Name, PollTitle.Text,
@@ -197,7 +196,7 @@ namespace TwitchChatinator.Forms.Launchers
                         rpp.Show();
                         rpp.FormClosed += Poll_FormClosed;
                         _poll = rpp;
-                        StartButton.Text = @"Stop _poll";
+                        StartButton.Text = @"Stop Poll";
                         break;
                 }
                 InfoLabel.Text = @"Started | " + _startTime.ToString("h:mm t");
@@ -205,7 +204,7 @@ namespace TwitchChatinator.Forms.Launchers
             else
             {
                 _poll.Close();
-                StartButton.Text = @"Start _poll";
+                StartButton.Text = @"Start Poll";
                 InfoLabel.Text = @"Stopped | " + _startTime.ToString("h:mm t");
             }
         }
@@ -213,7 +212,7 @@ namespace TwitchChatinator.Forms.Launchers
         private void Poll_FormClosed(object sender, FormClosedEventArgs e)
         {
             _poll = null;
-            StartButton.Text = @"Start _poll";
+            StartButton.Text = @"Start Poll";
         }
 
         private void EditBarGraph(string name)

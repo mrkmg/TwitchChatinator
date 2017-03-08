@@ -6,7 +6,7 @@ using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
-namespace TwitchChatinator.Options
+namespace TwitchChatinator.Libs
 {
     public sealed class PositionsSaver
     {

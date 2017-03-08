@@ -50,12 +50,12 @@ namespace TwitchChatinator {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string TwithChannel {
+        public string TwitchChannel {
             get {
-                return ((string)(this["TwithChannel"]));
+                return ((string)(this["TwitchChannel"]));
             }
             set {
-                this["TwithChannel"] = value;
+                this["TwitchChannel"] = value;
             }
         }
     }

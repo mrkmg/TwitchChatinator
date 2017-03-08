@@ -1,6 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using TwitchChatinator.Properties;
@@ -11,6 +9,7 @@ namespace TwitchChatinator.Forms.Components
     //2014-08-13
     public class PaintWindow : Form
     {
+        // ReSharper disable once IdentifierTypo
         private const int WmNclbuttondown = 0xA1;
         private const int Htcaption = 0x2;
 
@@ -62,17 +61,17 @@ namespace TwitchChatinator.Forms.Components
             }
         }
 
-        private void InitializeComponent()
-        {
-            var resources = new ComponentResourceManager(typeof (PaintWindow));
-            SuspendLayout();
-            // 
-            // PaintWindow
-            // 
-            ClientSize = new Size(284, 261);
-            Icon = (Icon) resources.GetObject("$this.Icon");
-            Name = "PaintWindow";
-            ResumeLayout(false);
-        }
+//        private void InitializeComponent()
+//        {
+//            var resources = new ComponentResourceManager(typeof (PaintWindow));
+//            SuspendLayout();
+//            // 
+//            // PaintWindow
+//            // 
+//            ClientSize = new Size(284, 261);
+//            Icon = (Icon) resources.GetObject("$this.Icon");
+//            Name = "PaintWindow";
+//            ResumeLayout(false);
+//        }
     }
 }

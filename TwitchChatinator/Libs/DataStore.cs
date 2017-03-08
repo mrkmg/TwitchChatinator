@@ -15,7 +15,6 @@ namespace TwitchChatinator.Libs
             new Lazy<DataStore>(() => new DataStore());
 
         private readonly SQLiteConnection _connection;
-        private string _lastError;
 
         private DataStore()
         {
@@ -47,9 +46,8 @@ namespace TwitchChatinator.Libs
 
         public static bool InsertMessage(string channel, string user, string message)
         {
-            var command =
-                "INSERT INTO messages (datetime,channel,user,message) VALUES (@datetime,@channel,@user,@message)";
-            var good = false;
+            const string command = "INSERT INTO messages (datetime,channel,user,message) VALUES (@datetime,@channel,@user,@message)";
+            bool good;
             using (var sCommand = new SQLiteCommand(command, Instance._connection))
             {
                 sCommand.Parameters.AddWithValue("@user", user);
@@ -61,9 +59,8 @@ namespace TwitchChatinator.Libs
                 {
                     good = sCommand.ExecuteNonQuery() > 0;
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
-                    Instance._lastError = e.Message;
                     good = InsertMessage(channel, user, message);
                 }
             }

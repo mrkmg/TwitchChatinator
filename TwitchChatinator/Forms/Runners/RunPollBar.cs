@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 using TwitchChatinator.Forms.Components;
 using TwitchChatinator.Forms.Launchers;
@@ -11,7 +10,7 @@ using TwitchChatinator.Options;
 
 namespace TwitchChatinator.Forms.Runners
 {
-    public partial class RunPollBar : PaintWindow
+    public sealed partial class RunPollBar : PaintWindow
     {
         private SolidBrush[] _barBrushes;
 
@@ -41,12 +40,12 @@ namespace TwitchChatinator.Forms.Runners
         {
             InitializeComponent();
 
-            Text = "Poll ( " + name + ") - Chatinator";
+            Text = @"Poll ( " + name + @") - Chatinator";
 
             _startTime = start;
             _optionsName = name;
             _pollTitle = title;
-            _countEntries = pollvars.Count();
+            _countEntries = pollvars.Length;
             _data = new PollData(_countEntries) {Options = pollvars};
 
             ReadOptions();
@@ -239,7 +238,7 @@ namespace TwitchChatinator.Forms.Runners
                 LineAlignment = StringAlignment.Near
             };
 
-            var offTop = 0;
+            int offTop;
 
             switch (_options.TotalPosition)
             {
@@ -248,7 +247,7 @@ namespace TwitchChatinator.Forms.Runners
                     _totalRec.Y = _options.MarginTop;
                     offTop = _totalRec.Height + _options.MarginTop;
                     break;
-                case "Bottom":
+                //case "Bottom":
                 default:
                     _totalRec.X = _options.MarginLeft;
                     _totalRec.Y = _options.Height - _options.MarginBottom - _options.TitleFont.Height;

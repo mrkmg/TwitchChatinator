@@ -160,40 +160,41 @@ namespace TwitchChatinator.Forms.Components
         /// <param name="title">String expression displayed in the title bar of the dialog box</param>
         /// <param name="defaultResponse">String expression displayed in the text box as the default response</param>
         /// <param name="validator">Delegate used to validate the text</param>
-        /// <param name="xpos">
+        /// <param name="xPosition">
         ///     Numeric expression that specifies the distance of the left edge of the dialog box from the left edge
         ///     of the screen.
         /// </param>
-        /// <param name="ypos">
+        /// <param name="yPosition">
         ///     Numeric expression that specifies the distance of the upper edge of the dialog box from the top of
         ///     the screen
         /// </param>
         /// <returns>An InputBoxResult object with the Text and the OK property set to true when OK was clicked.</returns>
         public static InputBoxResult Show(string prompt, string title, string defaultResponse,
-            InputBoxValidatingHandler validator, int xpos, int ypos)
+            InputBoxValidatingHandler validator, int xPosition, int yPosition)
         {
             using (var form = new InputBox())
             {
                 form.LabelPrompt.Text = prompt;
                 form.Text = title;
                 form.TextBoxText.Text = defaultResponse;
-                if (xpos >= 0 && ypos >= 0)
+                if (xPosition >= 0 && yPosition >= 0)
                 {
                     form.StartPosition = FormStartPosition.Manual;
-                    form.Left = xpos;
-                    form.Top = ypos;
+                    form.Left = xPosition;
+                    form.Top = yPosition;
                 }
                 form.Validator = validator;
 
                 var result = form.ShowDialog();
 
-                var retval = new InputBoxResult();
-                if (result == DialogResult.OK)
-                {
-                    retval.Text = form.TextBoxText.Text;
-                    retval.Ok = true;
-                }
-                return retval;
+                var returnValue = new InputBoxResult();
+
+                if (result != DialogResult.OK) return returnValue;
+
+                returnValue.Text = form.TextBoxText.Text;
+                returnValue.Ok = true;
+
+                return returnValue;
             }
         }
 

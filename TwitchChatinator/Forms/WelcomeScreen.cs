@@ -73,7 +73,8 @@ namespace TwitchChatinator.Forms
         }
 
         private void ReceiveMessage(TwitchMessageObject message)
-        {
+        { 
+            DataStore.InsertMessage(message.Channel, message.Username, message.Message);
         }
 
         public void ShowListenButton()

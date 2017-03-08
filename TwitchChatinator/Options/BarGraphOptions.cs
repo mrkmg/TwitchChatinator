@@ -211,8 +211,7 @@ namespace TwitchChatinator.Options
 
             var reader = new XmlSerializer(typeof (BarGraphOptions));
             var stream = new StreamReader(GetPathFromName(name));
-            var obj = new BarGraphOptions();
-            obj = (BarGraphOptions) reader.Deserialize(stream);
+            var obj = (BarGraphOptions) reader.Deserialize(stream);
 
             stream.Close();
             return obj;
@@ -289,7 +288,7 @@ namespace TwitchChatinator.Options
             {
                 new FileInfo(GetPathFromName(e.Text));
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 e.Cancel = true;
                 e.Message = "Invalid Characters";

@@ -1,6 +1,6 @@
 ﻿namespace TwitchChatinator.Forms.Runners
 {
-    partial class RunPollPie
+    sealed partial class RunPollPie
     {
         /// <summary>
         /// Required designer variable.

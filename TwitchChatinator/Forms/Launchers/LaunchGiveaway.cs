@@ -91,21 +91,21 @@ namespace TwitchChatinator.Forms.Launchers
                 gv.Show();
                 gv.FormClosed += Giveaway_FormClosed;
                 _giveaway = gv;
-                StartButton.Text = "Stop Giveaway";
+                StartButton.Text = @"Stop Giveaway";
                 RollButton.Enabled = true;
             }
             else
             {
                 _giveaway.Close();
                 RollButton.Enabled = false;
-                StartButton.Text = "Start Giveaway";
+                StartButton.Text = @"Start Giveaway";
             }
         }
 
         private void Giveaway_FormClosed(object sender, FormClosedEventArgs e)
         {
             _giveaway = null;
-            StartButton.Text = "Start Giveaway";
+            StartButton.Text = @"Start Giveaway";
         }
 
         private void RollButton_Click(object sender, EventArgs e)
@@ -115,7 +115,7 @@ namespace TwitchChatinator.Forms.Launchers
 
         private void NewGiveawayButton_Click(object sender, EventArgs e)
         {
-            var result = InputBox.Show("Name:", "New Giveaway Tempalate", "", GiveawayOptions.ValidateNameHandler);
+            var result = InputBox.Show("Name:", "New Giveaway Template", "", GiveawayOptions.ValidateNameHandler);
             if (result.Ok)
             {
                 //TODO: Add Exception Control

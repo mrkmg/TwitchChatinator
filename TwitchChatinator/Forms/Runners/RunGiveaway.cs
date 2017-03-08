@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 using TwitchChatinator.Forms.Components;
 using TwitchChatinator.Libs;
@@ -9,12 +8,12 @@ using TwitchChatinator.Options;
 
 namespace TwitchChatinator.Forms.Runners
 {
-    public partial class RunGiveaway : PaintWindow
+    public sealed partial class RunGiveaway : PaintWindow
     {
         private const short StageWaiting = 0;
         private const short StageRolling = 1;
         private const short StagePostroll = 2;
-        private const short StageDie = 255;
+//        private const short StageDie = 255;
 
         private const double RollingMagicNum = 1.35;
         private const int RollingEntriesCount = 100;
@@ -40,13 +39,12 @@ namespace TwitchChatinator.Forms.Runners
         private SolidBrush _titleBrush;
 
         private Rectangle _titleRec;
-        private int _totalEntriesFound;
 
         public RunGiveaway(DateTime startTime, string name, string title)
         {
             InitializeComponent();
 
-            Text = "Giveaway (" + name + ") - Chatinator";
+            Text = @"Giveaway (" + name + @") - Chatinator";
 
             _startTime = startTime;
             _giveawayTitle = title;
@@ -55,7 +53,7 @@ namespace TwitchChatinator.Forms.Runners
             ReadOptions();
             SetupVars();
 
-            Text = "Roller - Chatinator";
+            Text = @"Giveaway - Chatinator";
             BackColor = _options.ChromaKey;
 
             Paint += RunRoll_Paint;
@@ -135,13 +133,13 @@ namespace TwitchChatinator.Forms.Runners
 
         private void PaintPostroll()
         {
-            PaintScreen(_giveawayTitle, _entryList[_currentEntryIndex%_entryList.Count()], "Of " + _count + ", you won!");
+            PaintScreen(_giveawayTitle, _entryList[_currentEntryIndex%_entryList.Count], "Of " + _count + ", you won!");
             _drawingTick.Enabled = false;
         }
 
         private void PaintRolling()
         {
-            PaintScreen(_giveawayTitle, _entryList[_currentEntryIndex%_entryList.Count()], "Rolling!!!");
+            PaintScreen(_giveawayTitle, _entryList[_currentEntryIndex%_entryList.Count], "Rolling!!!");
         }
 
         private void PaintWaiting()
@@ -194,7 +192,6 @@ namespace TwitchChatinator.Forms.Runners
                 GetEntries();
                 if (_entryList.Count == 0) _entryList.Add("No Entries :-(");
                 _entryList.Shuffle();
-                _totalEntriesFound = Math.Min(_entryList.Count, RollingEntriesCount);
                 _currentEntryIndex = 0;
                 _drawingTick.Interval = 1;
                 _stage = StageRolling;
@@ -212,6 +209,7 @@ namespace TwitchChatinator.Forms.Runners
                     break;
                 case StageRolling:
                     _drawingTick.Interval = Math.Max(16,
+                        // ReSharper disable once PossibleLossOfFraction
                         (int) Math.Pow(RollingMagicNum, _currentEntryIndex*20/RollingEntriesCount));
                     _currentEntryIndex++;
                     if (_currentEntryIndex == RollingEntriesCount - 1)

@@ -1,4 +1,5 @@
 ﻿//Much Code Boworroed/Stolen from https://github.com/Phoinx/PhoinxBot/blob/master/PhoinxBot/IRC.cs
+// ReSharper disable once CommentTypo
 //Thank you to Phoinx for making this avaliable
 
 using System;
@@ -58,20 +59,17 @@ namespace TwitchChatinator.Libs
 
         private void Login()
         {
-            string username;
-            string password;
+            var username = Settings.Default.TwitchUsername.ToLower();
+            var password = Settings.Default.TwitchPassword;
 
-            username = Settings.Default.TwitchUsername;
-            password = Settings.Default.TwitchPassword;
-
-            Write("USER " + username + "tmi " + password);
-            Write("PASS " + password);
+//            Write("USER " + username + "tmi " + password);
+            Write("PASS oauth:" + password);
             Write("NICK " + username);
         }
 
         private void JoinChannel()
         {
-            _channel = Settings.Default.TwithChannel;
+            _channel = Settings.Default.TwitchChannel;
 
             Write("JOIN #" + _channel + "\n");
         }
@@ -91,10 +89,10 @@ namespace TwitchChatinator.Libs
                     _listen.Start();
                     break;
                 case ThreadState.Running:
-                    //SOMETHING
+                    //TODO SOMETHING
                     break;
                 case ThreadState.AbortRequested:
-                    OnDisconnected();
+                    OnDisconnected?.Invoke();
                     break;
                 default:
                     CreateListenThread();
@@ -111,9 +109,7 @@ namespace TwitchChatinator.Libs
 
         public void DoReceiveMessage(TwitchMessageObject message)
         {
-            DataStore.InsertMessage(message.Channel, message.Username, message.Message);
-
-            OnReceiveMessage(message);
+            OnReceiveMessage?.Invoke(message);
         }
 
         public void ListenThread()
@@ -122,31 +118,37 @@ namespace TwitchChatinator.Libs
             try
             {
                 Log.LogInfo("Pre - Client");
-                using (_client = new TcpClient("irc.twitch.tv", 6667))
+                using (_client = new TcpClient("irc.chat.twitch.tv", 6667))
                 {
                     _nwStream = _client.GetStream();
                     _reader = new StreamReader(_nwStream, Encoding.GetEncoding("iso8859-1"));
                     _writer = new StreamWriter(_nwStream, Encoding.GetEncoding("iso8859-1"));
 
                     Login();
-                    JoinChannel();
 
-                    var data = "";
-                    var msgStringIdent = "PRIVMSG #" + Settings.Default.TwithChannel;
-                    string[] ex;
-                    while ((data = _reader.ReadLine()) != null && !_shouldStop)
+                    var loginResult = _reader.ReadLine();
+
+                    Console.WriteLine("TwitchIRC Login Result: " + loginResult);
+
+                    if (loginResult != null && loginResult.Contains(":Login authentication failed"))
+                    {
+                        _shouldStop = true;
+                    }
+                    else
+                    {
+                        SetConnected();
+                        JoinChannel();
+                    }
+
+
+                    string data;
+                    var msgStringIdentifier = "PRIVMSG #" + Settings.Default.TwitchChannel;
+                    while (!_shouldStop && (data = _reader.ReadLine()) != null)
                     {
                         Log.LogInfo("TwitchMessageReceived\t" + data);
-                        //TODO: Look for a better way to do this.
-                        //Not sure if this is reliable
-                        //IDEA: Check if properly joined channel
-                        if (!_isConnected && data.Contains(":Welcome, GLHF!"))
-                        {
-                            SetConnected();
-                        }
 
                         //Check for Pings, and Pong them back
-                        ex = data.Split(new[] {' '}, 5);
+                        var ex = data.Split(new[] {' '}, 5);
                         if (ex[0] == "PING")
                         {
                             Write("PONG " + ex[1]);
@@ -155,17 +157,17 @@ namespace TwitchChatinator.Libs
                         //Check for and Handle Message Object
                         if (OnReceiveMessage != null)
                         {
-                            if (data.Contains(msgStringIdent))
+                            if (data.Contains(msgStringIdentifier))
                             {
-                                var usrStart = data.IndexOf("!");
+                                var usrStart = data.IndexOf("!", StringComparison.Ordinal);
                                 var username = data.Substring(1, usrStart - 1);
-                                var msgStart = data.IndexOf(msgStringIdent);
-                                var message = data.Substring(msgStart + msgStringIdent.Length + 2);
+                                var msgStart = data.IndexOf(msgStringIdentifier, StringComparison.Ordinal);
+                                var message = data.Substring(msgStart + msgStringIdentifier.Length + 2);
                                 DoReceiveMessage(new TwitchMessageObject(_channel, username, message));
                             }
                         }
                     }
-                    OnDisconnected();
+                    OnDisconnected?.Invoke();
 
                     _writer.Dispose();
                     _reader.Dispose();
@@ -179,11 +181,9 @@ namespace TwitchChatinator.Libs
                 {
                     _listen.Abort();
                 }
-                if (OnDisconnected != null)
-                {
-                    OnDisconnected();
-                    _isConnected = false;
-                }
+
+                OnDisconnected?.Invoke();
+                _isConnected = false;
             }
         }
 

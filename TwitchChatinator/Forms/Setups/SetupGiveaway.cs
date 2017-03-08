@@ -24,7 +24,7 @@ namespace TwitchChatinator.Forms.Setups
 
             InitializeComponent();
             Populate();
-            CalcuateAndShowHeight();
+            CalculateAndShowHeight();
 
             Closed += SetupGiveaway_Closed;
 
@@ -49,6 +49,7 @@ namespace TwitchChatinator.Forms.Setups
 
             CancelButton.Click += CancelButton_Click;
             SaveButton.Click += SaveButton_Click;
+            TestButton.Click += TestButton_Click;
 
             WidthInput.ValueChanged += EventHandler_Change;
 
@@ -91,22 +92,12 @@ namespace TwitchChatinator.Forms.Setups
 
             _runGiveAway = new RunGiveaway(DateTime.MinValue, "_preview", "Demo Giveaway");
             _runGiveAway.Show();
-            var rollStartTimer = new Timer();
-            rollStartTimer.Tick += (o, args) =>
-            {
-                _runGiveAway.Roll();
-                rollStartTimer.Dispose();
-            };
-            rollStartTimer.Interval = 10000;
-            rollStartTimer.Enabled = true;
-            _runGiveAway.Closed += (o, args) => rollStartTimer.Dispose();
-
             Focus();
         }
 
         private void ValueChanged(object sender, EventArgs e)
         {
-            CalcuateAndShowHeight();
+            CalculateAndShowHeight();
         }
 
         private void SetOptionsToValues()
@@ -144,22 +135,20 @@ namespace TwitchChatinator.Forms.Setups
             Close();
         }
 
-        private void CalcuateAndShowHeight()
+        private void TestButton_Click(object sender, EventArgs e)
+        {
+            _runGiveAway?.Roll();
+        }
+
+        private void CalculateAndShowHeight()
         {
             HeightInput.Value = MarginTop.Value + MarginBottom.Value + _titleFont.Height + _rollerFont.Height +
                                 _entriesFont.Height + Spacing.Value*2;
         }
 
-        private bool Populate()
+        private void Populate()
         {
-            try
-            {
-                _options = GiveawayOptions.Load(_optionsName);
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+            _options = GiveawayOptions.Load(_optionsName);
 
             NameLabel.Text = _optionsName;
 
@@ -181,8 +170,6 @@ namespace TwitchChatinator.Forms.Setups
 
             _titleFont = _options.TitleFont;
             TitleFontColor.BackColor = _options.TitleFontColor;
-
-            return true;
         }
 
         private void ColorClickHandler(object sender, EventArgs e)
@@ -244,19 +231,19 @@ namespace TwitchChatinator.Forms.Setups
             if (_options.BackgroundImage.Image == null)
             {
                 FileDialog fd = new OpenFileDialog();
-                fd.Filter = "PNG Files (*.png)|*.png";
+                fd.Filter = @"PNG Files (*.png)|*.png";
                 fd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
-                fd.Title = "Choose A Background Image";
+                fd.Title = @"Choose A Background Image";
                 if (fd.ShowDialog() == DialogResult.OK)
                 {
                     _options.BackgroundImage.Name = Path.GetFileNameWithoutExtension(fd.FileName);
                     _options.BackgroundImage.Image = Image.FromFile(fd.FileName);
-                    ((Button) sender).Text = "Remove Image";
+                    ((Button) sender).Text = @"Remove Image";
                 }
             }
             else
             {
-                ((Button) sender).Text = "Load Image";
+                ((Button) sender).Text = @"Load Image";
                 _options.BackgroundImage.Image = null;
             }
         }
@@ -266,26 +253,26 @@ namespace TwitchChatinator.Forms.Setups
             if (_options.ForegroundImage.Image == null)
             {
                 FileDialog fd = new OpenFileDialog();
-                fd.Filter = "PNG Files (*.png)|*.png";
+                fd.Filter = @"PNG Files (*.png)|*.png";
                 fd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
-                fd.Title = "Choose A Foreground Image";
+                fd.Title = @"Choose A Foreground Image";
                 if (fd.ShowDialog() == DialogResult.OK)
                 {
                     try
                     {
                         _options.ForegroundImage.Name = Path.GetFileNameWithoutExtension(fd.FileName);
                         _options.ForegroundImage.Image = Image.FromFile(fd.FileName);
-                        ((Button) sender).Text = "Remove Image";
+                        ((Button) sender).Text = @"Remove Image";
                     }
                     catch
                     {
-                        MessageBox.Show("Could not load image.");
+                        MessageBox.Show(@"Could not load image.");
                     }
                 }
             }
             else
             {
-                ((Button) sender).Text = "Load Image";
+                ((Button) sender).Text = @"Load Image";
                 _options.ForegroundImage.Image = null;
             }
         }

@@ -1,6 +1,6 @@
 ﻿namespace TwitchChatinator.Forms.Runners
 {
-    partial class RunGiveaway
+    sealed partial class RunGiveaway
     {
         /// <summary>
         /// Required designer variable.
