@@ -12,15 +12,16 @@ namespace TwitchChatinator.Forms.Launchers
     {
         private RunGiveaway _giveaway;
         private List<SelectListObject> _options;
-        private readonly DateTime _startTime;
+        private DateTime _startTime;
 
         public LaunchGiveaway()
         {
             InitializeComponent();
 
             PopulateList();
-            _startTime = DateTime.Now;
             RollButton.Enabled = false;
+
+            InfoLabel.Text = "Stopped";
 
             FormClosed += LaunchGiveaway_FormClosed;
 
@@ -85,20 +86,22 @@ namespace TwitchChatinator.Forms.Launchers
 
         private void StartButton_Click(object sender, EventArgs e)
         {
+            _startTime = DateTime.Now;
+
             if (_giveaway == null)
             {
-                var gv = new RunGiveaway(_startTime, _options[List.SelectedIndex].Name, GiveawayTitle.Text);
+                var gv = new RunGiveaway(_startTime, _options[List.SelectedIndex].Name, GiveawayTitle.Text, GiveawayKeyword.Text);
                 gv.Show();
                 gv.FormClosed += Giveaway_FormClosed;
                 _giveaway = gv;
                 StartButton.Text = @"Stop Giveaway";
                 RollButton.Enabled = true;
+                InfoLabel.Text = @"Started @ " + _startTime.ToString("h:mm t");
             }
             else
             {
                 _giveaway.Close();
                 RollButton.Enabled = false;
-                StartButton.Text = @"Start Giveaway";
             }
         }
 
@@ -106,6 +109,7 @@ namespace TwitchChatinator.Forms.Launchers
         {
             _giveaway = null;
             StartButton.Text = @"Start Giveaway";
+            InfoLabel.Text = @"Stopped";
         }
 
         private void RollButton_Click(object sender, EventArgs e)
@@ -184,6 +188,11 @@ namespace TwitchChatinator.Forms.Launchers
                     break;
             }
             PopulateList();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

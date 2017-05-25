@@ -27,9 +27,8 @@ namespace TwitchChatinator.Forms.Launchers
             AddInput("Yes");
             AddInput("No");
             AddInput();
-            _startTime = DateTime.Now;
 
-            InfoLabel.Text = @"Stopped | " + _startTime.ToString("h:mm t");
+            InfoLabel.Text = @"Stopped";
 
             FormClosed += LaunchPoll_FormClosed;
 
@@ -168,6 +167,7 @@ namespace TwitchChatinator.Forms.Launchers
 
         private void StartButton_Click(object sender, EventArgs e)
         {
+            _startTime = DateTime.Now;
             if (_poll == null)
             {
                 var labels = new List<string>();
@@ -199,13 +199,11 @@ namespace TwitchChatinator.Forms.Launchers
                         StartButton.Text = @"Stop Poll";
                         break;
                 }
-                InfoLabel.Text = @"Started | " + _startTime.ToString("h:mm t");
+                InfoLabel.Text = @"Started @ " + _startTime.ToString("h:mm t");
             }
             else
             {
                 _poll.Close();
-                StartButton.Text = @"Start Poll";
-                InfoLabel.Text = @"Stopped | " + _startTime.ToString("h:mm t");
             }
         }
 
@@ -213,6 +211,7 @@ namespace TwitchChatinator.Forms.Launchers
         {
             _poll = null;
             StartButton.Text = @"Start Poll";
+            InfoLabel.Text = @"Stopped";
         }
 
         private void EditBarGraph(string name)

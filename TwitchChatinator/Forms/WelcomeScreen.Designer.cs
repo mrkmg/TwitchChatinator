@@ -30,6 +30,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.VersionLabel = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.UserListProgress = new System.Windows.Forms.ProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.ListeningStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -164,11 +165,19 @@
             this.button1.Text = "Hype Meter";
             this.button1.UseVisualStyleBackColor = true;
             // 
+            // UserListProgress
+            // 
+            this.UserListProgress.Location = new System.Drawing.Point(193, 429);
+            this.UserListProgress.Name = "UserListProgress";
+            this.UserListProgress.Size = new System.Drawing.Size(106, 23);
+            this.UserListProgress.TabIndex = 15;
+            // 
             // WelcomeScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(306, 464);
+            this.Controls.Add(this.UserListProgress);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.VersionLabel);
             this.Controls.Add(this.label1);
@@ -184,6 +193,8 @@
             this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "WelcomeScreen";
             this.Text = "Chatinator - Welcome";
             ((System.ComponentModel.ISupportInitialize)(this.ListeningStatus)).EndInit();
@@ -208,5 +219,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label VersionLabel;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ProgressBar UserListProgress;
     }
 }

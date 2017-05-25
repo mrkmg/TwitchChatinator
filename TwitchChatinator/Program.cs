@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Deployment.Application;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -40,6 +41,18 @@ namespace TwitchChatinator
             {
                 GiveawayOptions.CreateNew("Default");
             }
+        }
+
+        // Thank you sylvanaar
+        //https://stackoverflow.com/questions/1488918/how-to-synchronise-the-publish-version-to-the-assembly-version-in-a-net-clickon
+        public static string GetVersion()
+        {
+            if (ApplicationDeployment.IsNetworkDeployed)
+            {
+                return ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString();
+            }
+
+            return "Debug";
         }
 
         //Thank you [grenade](http://stackoverflow.com/users/68115/grenade)

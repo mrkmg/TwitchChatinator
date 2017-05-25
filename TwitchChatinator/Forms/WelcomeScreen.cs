@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Threading;
 using System.Windows.Forms;
 using TwitchChatinator.Forms.Launchers;
 using TwitchChatinator.Libs;
 using TwitchChatinator.Properties;
+using Timer = System.Windows.Forms.Timer;
 
 namespace TwitchChatinator.Forms
 {
@@ -10,13 +12,17 @@ namespace TwitchChatinator.Forms
     {
         private bool _isConnected;
         public TwitchIrc Ti;
+        private string _channel;
+        private Thread _getUsersThread;
 
 
         public WelcomeScreen()
         {
             InitializeComponent();
 
-            VersionLabel.Text = @"V" + Application.ProductVersion;
+            UserListProgress.Hide();
+
+            VersionLabel.Text = @"v " + Program.GetVersion();
 
             FormClosed += WelcomeScreen_FormClosed;
 
@@ -24,11 +30,24 @@ namespace TwitchChatinator.Forms
             Ti.OnReceiveMessage += ReceiveMessage;
             Ti.OnConnected += TI_OnConnected;
             Ti.OnDisconnected += TI_OnDisconnected;
+            Ti.OnUserJoin += Ti_OnUserJoin;
+            Ti.OnUserLeave += Ti_OnUserLeave;
 
             if (Settings.Default.TwitchUsername != "" && Settings.Default.TwitchPassword != "")
             {
                 ShowListenButton();
             }
+        }
+
+        private void Ti_OnUserLeave(string user)
+        {
+            Log.LogInfo("User Leave\t" + user);
+        }
+
+        private void Ti_OnUserJoin(string user)
+        {
+            Log.LogInfo("User Join\t" + user);
+            DataStore.AddUser(user);
         }
 
         private void TI_OnDisconnected()
@@ -64,6 +83,52 @@ namespace TwitchChatinator.Forms
             StartListenButton.Enabled = true;
             _isConnected = true;
             ConnectedLabel.Text = channel;
+            _channel = channel;
+
+            if (_getUsersThread != null && _getUsersThread.IsAlive)
+            {
+                _getUsersThread.Abort();
+            }
+            _getUsersThread = new Thread(GetChatters);
+            _getUsersThread.Start();
+        }
+
+        private void UpdateProgress(int value)
+        { 
+            if (value == 0 || value == 100)
+            {
+                UserListProgress.Hide();
+            }
+            else
+            {
+                UserListProgress.Show();
+                UserListProgress.Value = value;
+            }
+        }
+
+        private void GetChatters()
+        {
+            Log.LogInfo("Retreiving chatters");
+            var chattersFromApi = TwitchApi.ChattersInChannel(_channel);
+            double totalToProcess = chattersFromApi.chatters.moderators.Count + chattersFromApi.chatters.viewers.Count;
+
+            Log.LogInfo("Retreived chatters " + totalToProcess);
+
+            double i = 0;
+
+            foreach (string chatter in chattersFromApi.chatters.moderators)
+            {
+                var progress = ++i / totalToProcess;
+                Invoke(new Action<int>(UpdateProgress), (int)Math.Round(progress * 100));
+                DataStore.AddUser(chatter);
+            }
+
+            foreach (string chatter in chattersFromApi.chatters.viewers)
+            {
+                var progress = ++i / totalToProcess;
+                Invoke(new Action<int>(UpdateProgress), (int)Math.Round(progress * 100));
+                DataStore.AddUser(chatter);
+            }
         }
 
         private void WelcomeScreen_FormClosed(object sender, FormClosedEventArgs e)
@@ -85,6 +150,7 @@ namespace TwitchChatinator.Forms
 
         public void StartListen()
         {
+            DataStore.ResetUsers();
             Ti.Start();
             ConnectedLabel.Text = @"Connecting";
         }
@@ -141,6 +207,11 @@ namespace TwitchChatinator.Forms
                 components?.Dispose();
             }
 
+            if (_getUsersThread != null && _getUsersThread.IsAlive)
+            {
+                _getUsersThread.Abort();
+            }
+
             Ti.Dispose();
 
             base.Dispose(disposing);
@@ -163,13 +234,11 @@ namespace TwitchChatinator.Forms
 
         private void CopyRandomButton_Click(object sender, EventArgs e)
         {
-            var dss = new DataSetSelection {Start = DateTime.Now.AddMinutes(-5)};
-
-            var users = DataStore.GetUniqueUsersString(dss);
+            var users = DataStore.GetOnlineUsers();
             var r = new Random();
             if (users.Count > 0)
             {
-                var winner = users[(int) (r.NextDouble()*(users.Count - 1))];
+                var winner = users[ (int)Math.Round(r.NextDouble()*(users.Count - 1)) ];
                 Clipboard.SetText(winner);
                 ((Button) sender).Text = winner;
             }

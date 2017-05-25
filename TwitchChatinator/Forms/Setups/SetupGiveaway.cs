@@ -90,7 +90,7 @@ namespace TwitchChatinator.Forms.Setups
             SetOptionsToValues();
             GiveawayOptions.PreviewOptions = _options;
 
-            _runGiveAway = new RunGiveaway(DateTime.MinValue, "_preview", "Demo Giveaway");
+            _runGiveAway = new RunGiveaway(DateTime.MinValue, "_preview", "Demo Giveaway", "keyword");
             _runGiveAway.Show();
             Focus();
         }

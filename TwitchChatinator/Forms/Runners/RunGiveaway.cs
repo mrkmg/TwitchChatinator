@@ -34,13 +34,15 @@ namespace TwitchChatinator.Forms.Runners
 
         private int _stage = StageWaiting;
 
-        private readonly DateTime _startTime;
+        private DateTime _startTime;
+
+        private string _keyword;
 
         private SolidBrush _titleBrush;
 
         private Rectangle _titleRec;
 
-        public RunGiveaway(DateTime startTime, string name, string title)
+        public RunGiveaway(DateTime startTime, string name, string title, string keyword)
         {
             InitializeComponent();
 
@@ -49,6 +51,7 @@ namespace TwitchChatinator.Forms.Runners
             _startTime = startTime;
             _giveawayTitle = title;
             _optionsName = name;
+            _keyword = keyword;
 
             ReadOptions();
             SetupVars();
@@ -155,7 +158,7 @@ namespace TwitchChatinator.Forms.Runners
                 return;
             }
 
-            var dss = new DataSetSelection {Start = _startTime};
+            var dss = new DataSetSelection {Start = _startTime, MessagePartial = _keyword};
             try
             {
                 _count = DataStore.GetUniqueUsersCount(dss);
@@ -178,7 +181,8 @@ namespace TwitchChatinator.Forms.Runners
             var dss = new DataSetSelection
             {
                 Start = _startTime,
-                End = _endTime
+                End = _endTime,
+                MessagePartial = _keyword
             };
             _entryList = DataStore.GetUniqueUsersString(dss);
         }
@@ -208,13 +212,19 @@ namespace TwitchChatinator.Forms.Runners
                     UpdateCount();
                     break;
                 case StageRolling:
+                    if (_currentEntryIndex == RollingEntriesCount - 1)
+                    {
+                        _stage = StagePostroll;
+                        Invalidate();
+                        return;
+                    }
                     _drawingTick.Interval = Math.Max(16,
                         // ReSharper disable once PossibleLossOfFraction
                         (int) Math.Pow(RollingMagicNum, _currentEntryIndex*20/RollingEntriesCount));
                     _currentEntryIndex++;
                     if (_currentEntryIndex == RollingEntriesCount - 1)
                     {
-                        _stage = StagePostroll;
+                        _drawingTick.Interval = 1000;
                     }
                     break;
             }

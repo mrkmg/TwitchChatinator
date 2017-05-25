@@ -26,6 +26,8 @@ namespace TwitchChatinator.Libs
 
         public static DataStore Instance => Lazy.Value;
 
+        private List<string> _onlineUsers = new List<string>();
+
         public void Dispose()
         {
             _connection.Close();
@@ -118,6 +120,29 @@ namespace TwitchChatinator.Libs
             return users;
         }
 
+        public static void ResetUsers()
+        {
+            Instance._onlineUsers.Clear();
+        }
+
+        public static void AddUser(string username)
+        {
+            if (!Instance._onlineUsers.Contains(username))
+            {
+                Instance._onlineUsers.Add(username);
+            }
+        }
+
+        public static void RemoveUser(string username)
+        {
+            Instance._onlineUsers.Remove(username);
+        }
+
+        public static List<string> GetOnlineUsers()
+        {
+            return new List<string>(Instance._onlineUsers);
+        }
+
         public static void ExportToCsv(string filename)
         {
             var delimiter = "\"";
@@ -175,6 +200,10 @@ namespace TwitchChatinator.Libs
             {
                 wheres.Add("datetime <= " + selection.End.ToString(DatetimeFormat));
             }
+            if (!String.IsNullOrEmpty(selection.MessagePartial))
+            {
+                wheres.Add("message LIKE \"%" + selection.MessagePartial + "%\"");
+            }
 
             orders.Add("datetime DESC"); //May add this in the selection object
 
@@ -226,5 +255,6 @@ namespace TwitchChatinator.Libs
     {
         public DateTime End;
         public DateTime Start;
+        public string MessagePartial;
     }
 }

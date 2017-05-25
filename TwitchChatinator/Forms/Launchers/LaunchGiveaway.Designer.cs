@@ -39,6 +39,9 @@
             this.RenameButton = new System.Windows.Forms.Button();
             this.DeleteButton = new System.Windows.Forms.Button();
             this.EditButton = new System.Windows.Forms.Button();
+            this.InfoLabel = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.GiveawayKeyword = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // List
@@ -61,7 +64,7 @@
             // 
             // StartButton
             // 
-            this.StartButton.Location = new System.Drawing.Point(12, 70);
+            this.StartButton.Location = new System.Drawing.Point(12, 104);
             this.StartButton.Name = "StartButton";
             this.StartButton.Size = new System.Drawing.Size(113, 23);
             this.StartButton.TabIndex = 2;
@@ -88,7 +91,7 @@
             // 
             // RollButton
             // 
-            this.RollButton.Location = new System.Drawing.Point(131, 70);
+            this.RollButton.Location = new System.Drawing.Point(131, 104);
             this.RollButton.Name = "RollButton";
             this.RollButton.Size = new System.Drawing.Size(93, 23);
             this.RollButton.TabIndex = 3;
@@ -146,11 +149,41 @@
             this.EditButton.UseVisualStyleBackColor = true;
             this.EditButton.Click += new System.EventHandler(this.EditButton_Click);
             // 
+            // InfoLabel
+            // 
+            this.InfoLabel.AutoSize = true;
+            this.InfoLabel.Location = new System.Drawing.Point(230, 109);
+            this.InfoLabel.Name = "InfoLabel";
+            this.InfoLabel.Size = new System.Drawing.Size(139, 13);
+            this.InfoLabel.TabIndex = 18;
+            this.InfoLabel.Text = "INFO_LABEL_STARTTIME";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(41, 79);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(48, 13);
+            this.label2.TabIndex = 20;
+            this.label2.Text = "Keyword";
+            // 
+            // GiveawayKeyword
+            // 
+            this.GiveawayKeyword.Location = new System.Drawing.Point(98, 76);
+            this.GiveawayKeyword.Name = "GiveawayKeyword";
+            this.GiveawayKeyword.Size = new System.Drawing.Size(126, 20);
+            this.GiveawayKeyword.TabIndex = 19;
+            this.GiveawayKeyword.Text = "keyword";
+            this.GiveawayKeyword.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
             // LaunchGiveaway
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(428, 105);
+            this.ClientSize = new System.Drawing.Size(428, 137);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.GiveawayKeyword);
+            this.Controls.Add(this.InfoLabel);
             this.Controls.Add(this.NewGiveawayButton);
             this.Controls.Add(this.CopyButton);
             this.Controls.Add(this.RenameButton);
@@ -183,5 +216,8 @@
         private System.Windows.Forms.Button RenameButton;
         private System.Windows.Forms.Button DeleteButton;
         private System.Windows.Forms.Button EditButton;
+        private System.Windows.Forms.Label InfoLabel;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox GiveawayKeyword;
     }
 }

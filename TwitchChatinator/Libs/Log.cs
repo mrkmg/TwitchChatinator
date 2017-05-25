@@ -31,7 +31,7 @@ namespace TwitchChatinator.Libs
 
         private static void Write(LogItem li)
         {
-            Console.WriteLine(li.Time.ToString("U") + "\t" + li.Level + "\t" + li.Message);
+            System.Diagnostics.Debug.WriteLine(li.Time.ToString("U") + "\t" + li.Level + "\t" + li.Message);
         }
     }
 
