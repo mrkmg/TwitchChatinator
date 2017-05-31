@@ -17,7 +17,7 @@ namespace TwitchChatinator.Libs
         public static TwitchChatters ChattersInChannel(string channel)
         {
             var request = new RestRequest("/group/user/{channel}/chatters", Method.GET);
-            request.AddUrlSegment("channel", channel);
+            request.AddUrlSegment("channel", channel.ToLower());
 
             var response = Instance.Client.Execute<TwitchChatters>(request);
 

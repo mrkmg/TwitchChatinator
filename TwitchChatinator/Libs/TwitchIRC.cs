@@ -138,7 +138,7 @@ namespace TwitchChatinator.Libs
 
                     _reader = new StreamReader(_sslStream, Encoding.GetEncoding("iso8859-1"));
                     _writer = new StreamWriter(_sslStream, Encoding.GetEncoding("iso8859-1"));
-                    _channel = Settings.Default.TwitchChannel;
+                    _channel = Settings.Default.TwitchChannel.ToLower();
 
                     Login();
 
@@ -170,7 +170,7 @@ namespace TwitchChatinator.Libs
         private void HandleMessage(string data)
         {
             var username = Settings.Default.TwitchUsername.ToLower();
-            var channel = _channel.ToLower();
+            var channel = _channel;
             Log.LogInfo("TwitchMessageReceived\t" + data);
 
             //Check for Pings, and Pong them back
@@ -182,7 +182,7 @@ namespace TwitchChatinator.Libs
             }
 
             //Check for and Handle Message Object
-            var msgStringIdentifier = "PRIVMSG #" + Settings.Default.TwitchChannel;
+            var msgStringIdentifier = "PRIVMSG #" + channel;
             if (OnReceiveMessage != null && data.Contains(msgStringIdentifier))
             {
                 var usrStart = data.IndexOf("!", StringComparison.Ordinal);

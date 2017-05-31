@@ -159,14 +159,27 @@ namespace TwitchChatinator.Forms.Runners
             var rowData = new int[_countEntries];
             var recordedUsers = new List<string>();
 
-            foreach (DataRow row in rawData.Tables[0].Rows)
+//            foreach (DataRow row in rawData.Tables[0].Rows)
+//            {
+//                for (var i = 0; i < _countEntries; i++)
+//                {
+//                    if (!row.ItemArray[3].ToString().ToLower().Contains(_data.Options[i].ToLower()) ||
+//                        (!_options.AllowMulti && recordedUsers.Contains(row.ItemArray[2].ToString()))) continue;
+//
+//                    recordedUsers.Add(row.ItemArray[2].ToString());
+//                    rowData[i]++;
+//                    totalRows++;
+//                    break;
+//                }
+//            }
+
+            foreach (var row in rawData)
             {
                 for (var i = 0; i < _countEntries; i++)
                 {
-                    if (!row.ItemArray[3].ToString().ToLower().Contains(_data.Options[i].ToLower()) ||
-                        (!_options.AllowMulti && recordedUsers.Contains(row.ItemArray[2].ToString()))) continue;
-
-                    recordedUsers.Add(row.ItemArray[2].ToString());
+                    if (!row.Message.ToLower().Contains(_data.Options[i].ToLower())) continue;
+                    if (!_options.AllowMulti && recordedUsers.Contains(row.Username)) continue;
+                    recordedUsers.Add(row.Username);
                     rowData[i]++;
                     totalRows++;
                     break;

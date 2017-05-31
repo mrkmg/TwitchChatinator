@@ -24,7 +24,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>false</MapFileExtensions>
-    <InstallUrl>http://microapp.co/twitch-chatinator/build/</InstallUrl>
+    <InstallUrl>https://microapp.co/twitch-chatinator/build/</InstallUrl>
     <SupportUrl>http://microapp.co/twitch-chatinator</SupportUrl>
     <ErrorReportUrl>http://microapp.co/twitch-chatinator</ErrorReportUrl>
     <ProductName>Chatinator for Twitch</ProductName>
@@ -32,7 +32,7 @@
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.html</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>17</ApplicationRevision>
+    <ApplicationRevision>20</ApplicationRevision>
     <ApplicationVersion>1.1.0.%2a</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -77,10 +77,10 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>B14CC2EDDBB1DDD4526905385A7EDA5CFADB9527</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>9880293FA00021C2FA389B9E328DD5DDD01E27C3</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>TwitchChatinator_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>SignedWithPrivateKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -89,7 +89,7 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>TwitchChatinator_TemporaryKey.pfx</AssemblyOriginatorKeyFile>
@@ -102,6 +102,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>ChatinatorIcon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestTimestampUrl>http://tsa.starfieldtech.com</ManifestTimestampUrl>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -267,6 +270,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
+    <None Include="SignedWithPrivateKey.pfx" />
     <None Include="TwitchChatinator_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
@@ -300,8 +304,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PostBuildEvent>"C:\Program Files (x86)\Windows Kits\10\bin\x64\signtool.exe" sign /f $(ProjectDir)\SignedWithPrivateKey.pfx /p "TheRealOC!" /tr http://tsa.starfieldtech.com /td SHA256 $(TargetPath)</PostBuildEvent>
   </PropertyGroup>
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.104.0\build\net45\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.104.0\build\net45\System.Data.SQLite.Core.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
