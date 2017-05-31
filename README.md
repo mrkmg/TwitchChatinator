@@ -31,7 +31,7 @@ Where to get
 ------------
 
 Binaries
-- Download the Installer or ZIP from [My Blog](https://mrkmg.com/chatinator)
+- Download the Installer or ZIP from [Chatinator](https://microapp.co/twitch-chatinator/)
 
 Build yourself
 - Download or Clone this repository.
@@ -45,24 +45,17 @@ Build yourself
 Screen Shots
 -------------
 
-![Version 1](https://mrkmg.com/wp-content/uploads/2014/08/All_v1.png)
+Screenshots can be found on [imgur](http://imgur.com/a/TcNcZ).
 
 In Progress Features
 --------------------
 
   - Working on Release 1
 
-Future Features
----------------
+Potential Future Features
+-------------------------
 
-  - Hype Meter (Need ideas for this)
-  - User Activity Lookup
-  - On Screen Chat Window (with optional filtering)
-  - Chat Reports (Will not come for a long time)
-    - Most Active Users
-    - Topic Lookup
-    - Most Asked Questions
-    - More!
+**Hype Meter** A gauge of how hyped chat is. Basically a messages per second meter. Potentially allow filtering to only specific keywords. Optionally only show if messages / second passes a certian threshold.
 
 License
 -------
