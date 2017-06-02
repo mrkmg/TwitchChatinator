@@ -28,12 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.List = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.StartButton = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.PollTitle = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.InfoLabel = new System.Windows.Forms.Label();
             this.EditButton = new System.Windows.Forms.Button();
             this.DeleteButton = new System.Windows.Forms.Button();
@@ -43,21 +41,13 @@
             this.NewPieButton = new System.Windows.Forms.Button();
             this.ImportButton = new System.Windows.Forms.Button();
             this.ExportButton = new System.Windows.Forms.Button();
+            this.List = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
-            // 
-            // List
-            // 
-            this.List.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.List.FormattingEnabled = true;
-            this.List.Location = new System.Drawing.Point(85, 13);
-            this.List.Name = "List";
-            this.List.Size = new System.Drawing.Size(126, 21);
-            this.List.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 16);
+            this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(50, 13);
             this.label1.TabIndex = 10;
@@ -65,7 +55,7 @@
             // 
             // StartButton
             // 
-            this.StartButton.Location = new System.Drawing.Point(7, 165);
+            this.StartButton.Location = new System.Drawing.Point(309, 126);
             this.StartButton.Name = "StartButton";
             this.StartButton.Size = new System.Drawing.Size(75, 23);
             this.StartButton.TabIndex = 6;
@@ -76,7 +66,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(12, 47);
+            this.label6.Location = new System.Drawing.Point(75, 173);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(47, 13);
             this.label6.TabIndex = 12;
@@ -84,25 +74,16 @@
             // 
             // PollTitle
             // 
-            this.PollTitle.Location = new System.Drawing.Point(85, 44);
+            this.PollTitle.Location = new System.Drawing.Point(128, 170);
             this.PollTitle.Name = "PollTitle";
-            this.PollTitle.Size = new System.Drawing.Size(126, 20);
+            this.PollTitle.Size = new System.Drawing.Size(193, 20);
             this.PollTitle.TabIndex = 1;
             this.PollTitle.Text = "Strawpoll";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(90, 79);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(43, 13);
-            this.label2.TabIndex = 13;
-            this.label2.Text = "Options";
             // 
             // InfoLabel
             // 
             this.InfoLabel.AutoSize = true;
-            this.InfoLabel.Location = new System.Drawing.Point(85, 170);
+            this.InfoLabel.Location = new System.Drawing.Point(164, 131);
             this.InfoLabel.Name = "InfoLabel";
             this.InfoLabel.Size = new System.Drawing.Size(139, 13);
             this.InfoLabel.TabIndex = 14;
@@ -110,7 +91,7 @@
             // 
             // EditButton
             // 
-            this.EditButton.Location = new System.Drawing.Point(217, 12);
+            this.EditButton.Location = new System.Drawing.Point(138, 25);
             this.EditButton.Name = "EditButton";
             this.EditButton.Size = new System.Drawing.Size(57, 23);
             this.EditButton.TabIndex = 15;
@@ -120,7 +101,7 @@
             // 
             // DeleteButton
             // 
-            this.DeleteButton.Location = new System.Drawing.Point(280, 12);
+            this.DeleteButton.Location = new System.Drawing.Point(327, 25);
             this.DeleteButton.Name = "DeleteButton";
             this.DeleteButton.Size = new System.Drawing.Size(57, 23);
             this.DeleteButton.TabIndex = 16;
@@ -130,7 +111,7 @@
             // 
             // RenameButton
             // 
-            this.RenameButton.Location = new System.Drawing.Point(343, 13);
+            this.RenameButton.Location = new System.Drawing.Point(264, 25);
             this.RenameButton.Name = "RenameButton";
             this.RenameButton.Size = new System.Drawing.Size(57, 23);
             this.RenameButton.TabIndex = 17;
@@ -140,7 +121,7 @@
             // 
             // CopyButton
             // 
-            this.CopyButton.Location = new System.Drawing.Point(217, 42);
+            this.CopyButton.Location = new System.Drawing.Point(201, 25);
             this.CopyButton.Name = "CopyButton";
             this.CopyButton.Size = new System.Drawing.Size(57, 23);
             this.CopyButton.TabIndex = 18;
@@ -150,7 +131,7 @@
             // 
             // NewBarButton
             // 
-            this.NewBarButton.Location = new System.Drawing.Point(280, 42);
+            this.NewBarButton.Location = new System.Drawing.Point(264, 54);
             this.NewBarButton.Name = "NewBarButton";
             this.NewBarButton.Size = new System.Drawing.Size(57, 23);
             this.NewBarButton.TabIndex = 19;
@@ -160,7 +141,7 @@
             // 
             // NewPieButton
             // 
-            this.NewPieButton.Location = new System.Drawing.Point(343, 42);
+            this.NewPieButton.Location = new System.Drawing.Point(327, 54);
             this.NewPieButton.Name = "NewPieButton";
             this.NewPieButton.Size = new System.Drawing.Size(57, 23);
             this.NewPieButton.TabIndex = 20;
@@ -170,7 +151,7 @@
             // 
             // ImportButton
             // 
-            this.ImportButton.Location = new System.Drawing.Point(406, 42);
+            this.ImportButton.Location = new System.Drawing.Point(138, 54);
             this.ImportButton.Name = "ImportButton";
             this.ImportButton.Size = new System.Drawing.Size(57, 23);
             this.ImportButton.TabIndex = 22;
@@ -180,7 +161,7 @@
             // 
             // ExportButton
             // 
-            this.ExportButton.Location = new System.Drawing.Point(406, 13);
+            this.ExportButton.Location = new System.Drawing.Point(201, 54);
             this.ExportButton.Name = "ExportButton";
             this.ExportButton.Size = new System.Drawing.Size(57, 23);
             this.ExportButton.TabIndex = 21;
@@ -188,11 +169,20 @@
             this.ExportButton.UseVisualStyleBackColor = true;
             this.ExportButton.Click += new System.EventHandler(this.ExportButton_Click);
             // 
+            // List
+            // 
+            this.List.FormattingEnabled = true;
+            this.List.Location = new System.Drawing.Point(15, 25);
+            this.List.Name = "List";
+            this.List.Size = new System.Drawing.Size(117, 134);
+            this.List.TabIndex = 23;
+            // 
             // LaunchPoll
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(471, 209);
+            this.ClientSize = new System.Drawing.Size(403, 282);
+            this.Controls.Add(this.List);
             this.Controls.Add(this.ImportButton);
             this.Controls.Add(this.ExportButton);
             this.Controls.Add(this.NewPieButton);
@@ -202,12 +192,10 @@
             this.Controls.Add(this.DeleteButton);
             this.Controls.Add(this.EditButton);
             this.Controls.Add(this.InfoLabel);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.PollTitle);
             this.Controls.Add(this.StartButton);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.List);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "LaunchPoll";
             this.Text = "Start a Poll - Chatinator";
@@ -217,13 +205,10 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.ComboBox List;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button StartButton;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox PollTitle;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label InfoLabel;
         private System.Windows.Forms.Button EditButton;
         private System.Windows.Forms.Button DeleteButton;
@@ -233,5 +218,6 @@
         private System.Windows.Forms.Button NewPieButton;
         private System.Windows.Forms.Button ImportButton;
         private System.Windows.Forms.Button ExportButton;
+        private System.Windows.Forms.ListBox List;
     }
 }

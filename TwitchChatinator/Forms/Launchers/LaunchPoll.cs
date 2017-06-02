@@ -60,8 +60,8 @@ namespace TwitchChatinator.Forms.Launchers
         {
             var input = new TextBox
             {
-                Width = Width - SystemInformation.BorderSize.Width*2 - 36,
-                Left = 12,
+                Width = Width - SystemInformation.BorderSize.Width*2 - 50,
+                Left = 20,
                 Text = option
             };
 
@@ -111,15 +111,13 @@ namespace TwitchChatinator.Forms.Launchers
         {
             for (var i = 0; i < _inputs.Count; i++)
             {
-                _inputs[i].Top = i*30 + 100;
+                _inputs[i].Top = i*30 + 200;
             }
         }
 
         private void SetWindowSize()
         {
-            Height = _inputs.Count*30 + 160;
-            StartButton.Top = Height - 65;
-            InfoLabel.Top = Height - 63;
+            Height = _inputs.Count*30 + 240;
         }
 
         private void PopulateList()

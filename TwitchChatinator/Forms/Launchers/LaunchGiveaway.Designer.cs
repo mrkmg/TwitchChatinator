@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.List = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.StartButton = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.GiveawayTitle = new System.Windows.Forms.TextBox();
@@ -44,31 +42,14 @@
             this.GiveawayKeyword = new System.Windows.Forms.TextBox();
             this.ImportButton = new System.Windows.Forms.Button();
             this.ExportButton = new System.Windows.Forms.Button();
+            this.List = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
-            // 
-            // List
-            // 
-            this.List.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.List.FormattingEnabled = true;
-            this.List.Location = new System.Drawing.Point(98, 12);
-            this.List.Name = "List";
-            this.List.Size = new System.Drawing.Size(126, 21);
-            this.List.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 15);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(80, 13);
-            this.label1.TabIndex = 10;
-            this.label1.Text = "Giveaway Style";
             // 
             // StartButton
             // 
-            this.StartButton.Location = new System.Drawing.Point(12, 104);
+            this.StartButton.Location = new System.Drawing.Point(139, 98);
             this.StartButton.Name = "StartButton";
-            this.StartButton.Size = new System.Drawing.Size(113, 23);
+            this.StartButton.Size = new System.Drawing.Size(120, 23);
             this.StartButton.TabIndex = 2;
             this.StartButton.Text = "Start Giveaway";
             this.StartButton.UseVisualStyleBackColor = true;
@@ -77,7 +58,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(12, 47);
+            this.label6.Location = new System.Drawing.Point(12, 161);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(77, 13);
             this.label6.TabIndex = 12;
@@ -85,17 +66,17 @@
             // 
             // GiveawayTitle
             // 
-            this.GiveawayTitle.Location = new System.Drawing.Point(98, 44);
+            this.GiveawayTitle.Location = new System.Drawing.Point(98, 158);
             this.GiveawayTitle.Name = "GiveawayTitle";
-            this.GiveawayTitle.Size = new System.Drawing.Size(126, 20);
+            this.GiveawayTitle.Size = new System.Drawing.Size(114, 20);
             this.GiveawayTitle.TabIndex = 1;
             this.GiveawayTitle.Text = "Giveaway";
             // 
             // RollButton
             // 
-            this.RollButton.Location = new System.Drawing.Point(131, 104);
+            this.RollButton.Location = new System.Drawing.Point(265, 98);
             this.RollButton.Name = "RollButton";
-            this.RollButton.Size = new System.Drawing.Size(93, 23);
+            this.RollButton.Size = new System.Drawing.Size(120, 23);
             this.RollButton.TabIndex = 3;
             this.RollButton.Text = "Roll";
             this.RollButton.UseVisualStyleBackColor = true;
@@ -103,9 +84,9 @@
             // 
             // NewGiveawayButton
             // 
-            this.NewGiveawayButton.Location = new System.Drawing.Point(295, 42);
+            this.NewGiveawayButton.Location = new System.Drawing.Point(139, 42);
             this.NewGiveawayButton.Name = "NewGiveawayButton";
-            this.NewGiveawayButton.Size = new System.Drawing.Size(122, 23);
+            this.NewGiveawayButton.Size = new System.Drawing.Size(120, 23);
             this.NewGiveawayButton.TabIndex = 17;
             this.NewGiveawayButton.Text = "New Giveaway";
             this.NewGiveawayButton.UseVisualStyleBackColor = true;
@@ -113,7 +94,7 @@
             // 
             // CopyButton
             // 
-            this.CopyButton.Location = new System.Drawing.Point(230, 42);
+            this.CopyButton.Location = new System.Drawing.Point(202, 13);
             this.CopyButton.Name = "CopyButton";
             this.CopyButton.Size = new System.Drawing.Size(57, 23);
             this.CopyButton.TabIndex = 16;
@@ -123,7 +104,7 @@
             // 
             // RenameButton
             // 
-            this.RenameButton.Location = new System.Drawing.Point(360, 12);
+            this.RenameButton.Location = new System.Drawing.Point(265, 13);
             this.RenameButton.Name = "RenameButton";
             this.RenameButton.Size = new System.Drawing.Size(57, 23);
             this.RenameButton.TabIndex = 15;
@@ -133,7 +114,7 @@
             // 
             // DeleteButton
             // 
-            this.DeleteButton.Location = new System.Drawing.Point(295, 12);
+            this.DeleteButton.Location = new System.Drawing.Point(328, 13);
             this.DeleteButton.Name = "DeleteButton";
             this.DeleteButton.Size = new System.Drawing.Size(57, 23);
             this.DeleteButton.TabIndex = 14;
@@ -143,7 +124,7 @@
             // 
             // EditButton
             // 
-            this.EditButton.Location = new System.Drawing.Point(230, 12);
+            this.EditButton.Location = new System.Drawing.Point(139, 13);
             this.EditButton.Name = "EditButton";
             this.EditButton.Size = new System.Drawing.Size(57, 23);
             this.EditButton.TabIndex = 13;
@@ -154,7 +135,7 @@
             // InfoLabel
             // 
             this.InfoLabel.AutoSize = true;
-            this.InfoLabel.Location = new System.Drawing.Point(230, 109);
+            this.InfoLabel.Location = new System.Drawing.Point(139, 134);
             this.InfoLabel.Name = "InfoLabel";
             this.InfoLabel.Size = new System.Drawing.Size(139, 13);
             this.InfoLabel.TabIndex = 18;
@@ -163,7 +144,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(41, 79);
+            this.label2.Location = new System.Drawing.Point(218, 161);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(48, 13);
             this.label2.TabIndex = 20;
@@ -171,16 +152,16 @@
             // 
             // GiveawayKeyword
             // 
-            this.GiveawayKeyword.Location = new System.Drawing.Point(98, 76);
+            this.GiveawayKeyword.Location = new System.Drawing.Point(272, 158);
             this.GiveawayKeyword.Name = "GiveawayKeyword";
-            this.GiveawayKeyword.Size = new System.Drawing.Size(126, 20);
+            this.GiveawayKeyword.Size = new System.Drawing.Size(113, 20);
             this.GiveawayKeyword.TabIndex = 19;
             this.GiveawayKeyword.Text = "keyword";
             this.GiveawayKeyword.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // ImportButton
             // 
-            this.ImportButton.Location = new System.Drawing.Point(423, 41);
+            this.ImportButton.Location = new System.Drawing.Point(265, 42);
             this.ImportButton.Name = "ImportButton";
             this.ImportButton.Size = new System.Drawing.Size(57, 23);
             this.ImportButton.TabIndex = 24;
@@ -190,7 +171,7 @@
             // 
             // ExportButton
             // 
-            this.ExportButton.Location = new System.Drawing.Point(423, 12);
+            this.ExportButton.Location = new System.Drawing.Point(328, 42);
             this.ExportButton.Name = "ExportButton";
             this.ExportButton.Size = new System.Drawing.Size(57, 23);
             this.ExportButton.TabIndex = 23;
@@ -198,11 +179,20 @@
             this.ExportButton.UseVisualStyleBackColor = true;
             this.ExportButton.Click += new System.EventHandler(this.ExportButton_Click);
             // 
+            // List
+            // 
+            this.List.FormattingEnabled = true;
+            this.List.Location = new System.Drawing.Point(13, 13);
+            this.List.Name = "List";
+            this.List.Size = new System.Drawing.Size(120, 134);
+            this.List.TabIndex = 25;
+            // 
             // LaunchGiveaway
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(489, 137);
+            this.ClientSize = new System.Drawing.Size(401, 189);
+            this.Controls.Add(this.List);
             this.Controls.Add(this.ImportButton);
             this.Controls.Add(this.ExportButton);
             this.Controls.Add(this.label2);
@@ -217,8 +207,6 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.GiveawayTitle);
             this.Controls.Add(this.StartButton);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.List);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "LaunchGiveaway";
             this.Text = "Start a Giveaway - Chatinator";
@@ -228,9 +216,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.ComboBox List;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button StartButton;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox GiveawayTitle;
@@ -245,5 +230,6 @@
         private System.Windows.Forms.TextBox GiveawayKeyword;
         private System.Windows.Forms.Button ImportButton;
         private System.Windows.Forms.Button ExportButton;
+        private System.Windows.Forms.ListBox List;
     }
 }
