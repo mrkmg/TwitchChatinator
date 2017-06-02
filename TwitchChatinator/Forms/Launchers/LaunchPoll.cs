@@ -154,6 +154,7 @@ namespace TwitchChatinator.Forms.Launchers
                 DeleteButton.Enabled = true;
                 CopyButton.Enabled = true;
                 RenameButton.Enabled = true;
+                ExportButton.Enabled = true;
             }
             else
             {
@@ -162,6 +163,7 @@ namespace TwitchChatinator.Forms.Launchers
                 DeleteButton.Enabled = false;
                 CopyButton.Enabled = false;
                 RenameButton.Enabled = false;
+                ExportButton.Enabled = false;
             }
         }
 
@@ -349,6 +351,34 @@ namespace TwitchChatinator.Forms.Launchers
                     break;
                 default:
                     throw new Exception("Unknown Type: " + _options[List.SelectedIndex].Type);
+            }
+        }
+
+        private void ImportButton_Click(object sender, EventArgs e)
+        {
+            var dialog = new OpenFileDialog
+            {
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                Filter = "XBar Files (*.xbar)|*.xbar|XPie Files (*.xpie)|*.xpie",
+                Title = "Import Pie Graph"
+            };
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                if (dialog.FileName.EndsWith(".xbar"))
+                {
+                    BarGraphOptions.Import(dialog.FileName);
+                    PopulateList();
+                }
+                else if (dialog.FileName.EndsWith(".xpie"))
+                {
+                    PieGraphOptions.Import(dialog.FileName);
+                    PopulateList();
+                }
+                else
+                {
+                    MessageBox.Show(this, "Invalid File Type", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
     }

@@ -73,6 +73,7 @@ namespace TwitchChatinator.Forms.Launchers
                 CopyButton.Enabled = true;
                 RenameButton.Enabled = true;
                 StartButton.Enabled = true;
+                ExportButton.Enabled = true;
             }
             else
             {
@@ -81,6 +82,7 @@ namespace TwitchChatinator.Forms.Launchers
                 DeleteButton.Enabled = false;
                 CopyButton.Enabled = false;
                 RenameButton.Enabled = false;
+                ExportButton.Enabled = false;
             }
         }
 
@@ -193,6 +195,34 @@ namespace TwitchChatinator.Forms.Launchers
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void ExportButton_Click(object sender, EventArgs e)
+        {
+            GiveawayOptions.Export(_options[List.SelectedIndex].Name);
+        }
+
+        private void ImportButton_Click(object sender, EventArgs e)
+        {
+            var dialog = new OpenFileDialog
+            {
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                Filter = "XBar Files (*.xroll)|*.xroll",
+                Title = "Import Pie Graph"
+            };
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                if (dialog.FileName.EndsWith(".xroll"))
+                {
+                    GiveawayOptions.Import(dialog.FileName);
+                    PopulateList();
+                }
+                else
+                {
+                    MessageBox.Show(this, "Invalid File Type", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
     }
 }

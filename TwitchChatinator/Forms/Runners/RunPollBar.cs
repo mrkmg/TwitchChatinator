@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Windows.Forms;
 using TwitchChatinator.Forms.Components;
 using TwitchChatinator.Forms.Launchers;
@@ -109,9 +110,11 @@ namespace TwitchChatinator.Forms.Runners
 
             using (var graphic = CreateGraphics())
             {
+                graphic.TextRenderingHint = TextRenderingHint.AntiAlias;
+
                 if (_options.BackgroundImage?.Image != null)
                 {
-                    graphic.DrawImage(_options.BackgroundImage.Image, new Point(0, 0));
+                    graphic.DrawImage(_options.BackgroundImage.Image, 0, 0, _options.BackgroundImage.Image.Width, _options.BackgroundImage.Image.Height);
                 }
 
                 graphic.DrawString(_pollTitle, _options.TitleFont, _totalBrush, _totalRec, _titleStringFormat);
@@ -133,7 +136,7 @@ namespace TwitchChatinator.Forms.Runners
 
                 if (_options.ForegroundImage?.Image != null)
                 {
-                    graphic.DrawImage(_options.ForegroundImage.Image, new Point(0, 0));
+                    graphic.DrawImage(_options.ForegroundImage.Image, 0, 0, _options.ForegroundImage.Image.Width, _options.ForegroundImage.Image.Height);
                 }
             }
         }
@@ -241,7 +244,7 @@ namespace TwitchChatinator.Forms.Runners
             _sfLabel = new StringFormat(StringFormatFlags.NoWrap | StringFormatFlags.NoClip)
             {
                 Alignment = StringAlignment.Near,
-                LineAlignment = StringAlignment.Center,
+                LineAlignment = StringAlignment.Far,
                 Trimming = StringTrimming.None
             };
 

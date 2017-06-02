@@ -22,9 +22,9 @@ namespace TwitchChatinator.Forms
             _loginHandler = l;
             InitializeComponent();
 
-            UsernameInput.KeyUp += CheckInputs;
-            PasswordInput.KeyUp += CheckInputs;
-            ChannelInput.KeyUp += CheckInputs;
+            UsernameInput.KeyUp += TriggerCheckInputs;
+            PasswordInput.KeyUp += TriggerCheckInputs;
+            ChannelInput.KeyUp += TriggerCheckInputs;
             UsernameInput.KeyUp += CopyUserToChannel;
 
             if (Settings.Default.TwitchUsername != "" && Settings.Default.TwitchPassword != "" &&
@@ -41,13 +41,19 @@ namespace TwitchChatinator.Forms
         public void CopyUserToChannel(object sender, KeyEventArgs e)
         {
             ChannelInput.Text = UsernameInput.Text.ToLower();
+            CheckInputs();
         }
 
-        private void CheckInputs(object sender, KeyEventArgs e)
+        private void CheckInputs()
         {
             if (UsernameInput.Text.Length > 1 && PasswordInput.Text.Length > 1 && ChannelInput.Text.Length > 1)
                 LoginButton.Enabled = true;
             else LoginButton.Enabled = false;
+        }
+
+        private void TriggerCheckInputs(object send, KeyEventArgs e)
+        {
+            CheckInputs();
         }
 
         private void LoginButton_Click(object sender, EventArgs e)
@@ -86,9 +92,6 @@ namespace TwitchChatinator.Forms
             _authBrowserForm.Controls.Add(webview);
             _authBrowserForm.Show();
             _authBrowserForm.Closed += (o, args) => authenticationServer.Stop();
-
-            //            Process.Start("http://localhost:8080
-            //            Process.Start("http://www.twitchapps.com/tmi/");
         }
 
         private void SetPassword(string code)

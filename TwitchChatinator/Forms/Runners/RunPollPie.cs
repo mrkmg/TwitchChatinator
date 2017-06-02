@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Linq;
 using System.Windows.Forms;
 using TwitchChatinator.Forms.Components;
@@ -180,9 +181,11 @@ namespace TwitchChatinator.Forms.Runners
 
             using (var graphic = CreateGraphics())
             {
+                graphic.TextRenderingHint = TextRenderingHint.AntiAlias;
+
                 if (_options.BackgroundImage?.Image != null)
                 {
-                    graphic.DrawImage(_options.BackgroundImage.Image, new Point(0, 0));
+                    graphic.DrawImage(_options.BackgroundImage.Image, 0, 0, _options.BackgroundImage.Image.Width, _options.BackgroundImage.Image.Height);
                 }
 
                 graphic.DrawString(_pollTitle, _options.TitleFont, _totalBrush, _totalRec, _titleStringFormat);
@@ -227,7 +230,7 @@ namespace TwitchChatinator.Forms.Runners
 
                 if (_options.ForegroundImage?.Image != null)
                 {
-                    graphic.DrawImage(_options.ForegroundImage.Image, new Point(0, 0));
+                    graphic.DrawImage(_options.ForegroundImage.Image, 0, 0, _options.ForegroundImage.Image.Width, _options.ForegroundImage.Image.Height);
                 }
             }
         }
@@ -313,8 +316,8 @@ namespace TwitchChatinator.Forms.Runners
             {
                 var diff = avaliableHeight - avaliableWidth;
 
-                _pieRec.X = _options.MarginTop;
-                _pieRec.Y = _options.MarginLeft + diff/2 + offTop;
+                _pieRec.X = _options.MarginLeft;
+                _pieRec.Y = _options.MarginTop + diff/2 + offTop;
                 _pieRec.Width = _options.Width - _options.MarginLeft - _options.MarginRight;
                 _pieRec.Height = _options.Height - _options.MarginTop - _options.MarginBottom - _options.TitleFont.Height -
                                 diff;
@@ -323,8 +326,8 @@ namespace TwitchChatinator.Forms.Runners
             {
                 var diff = avaliableWidth - avaliableHeight;
 
-                _pieRec.X = _options.MarginTop + diff/2;
-                _pieRec.Y = _options.MarginLeft + offTop;
+                _pieRec.X = _options.MarginLeft + diff/2;
+                _pieRec.Y = _options.MarginTop + offTop;
                 _pieRec.Width = _options.Width - _options.MarginLeft - _options.MarginRight - diff;
                 _pieRec.Height = _options.Height - _options.MarginTop - _options.MarginBottom - _options.TitleFont.Height;
             }

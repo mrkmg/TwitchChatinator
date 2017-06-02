@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Windows.Forms;
 using System.Xml.Serialization;
 using TwitchChatinator.Forms.Components;
 using TwitchChatinator.Libs;
@@ -188,7 +189,7 @@ namespace TwitchChatinator.Options
         public static List<string> GetAvaliable()
         {
             var names = new List<string>();
-            var directory = Program.AppDataFolder() + @"\Giveaways";
+            var directory = GetPath();
 
             if (!Directory.Exists(directory))
             {
@@ -199,7 +200,8 @@ namespace TwitchChatinator.Options
 
             foreach (var file in files)
             {
-                names.Add(Path.GetFileNameWithoutExtension(file));
+                if (file.EndsWith(".xroll"))
+                    names.Add(Path.GetFileNameWithoutExtension(file));
             }
 
             names.Sort();
@@ -207,9 +209,14 @@ namespace TwitchChatinator.Options
             return names;
         }
 
+        public static string GetPath()
+        {
+            return Program.AppDataFolder() + @"\Giveaways\";
+        }
+
         public static string GetPathFromName(string name)
         {
-            return Program.AppDataFolder() + @"\Giveaways\" + name + ".xml";
+            return GetPath() + name + ".xroll";
         }
 
         public static void ValidateNameHandler(object sender, InputBoxValidatingArgs e)
@@ -228,6 +235,38 @@ namespace TwitchChatinator.Options
             {
                 e.Cancel = true;
                 e.Message = "Invalid Characters";
+            }
+        }
+
+        public static void Import(string filename)
+        {
+            var fileInfo = new FileInfo(filename);
+
+            var name = fileInfo.Name;
+
+            var i = 0;
+            while (File.Exists(GetPath() + @"\" + name))
+            {
+                name = fileInfo.Name.Substring(0, fileInfo.Name.Length - 6) + " - " + (++i) + ".xroll";
+            }
+
+            File.Copy(filename, GetPath() + @"\" + name);
+        }
+
+        public static void Export(string name)
+        {
+            var dialog = new SaveFileDialog
+            {
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                Filter = "XBar Files (*.xroll)|*.xroll",
+                Title = "Save Roller",
+                OverwritePrompt = true
+            };
+
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                File.Copy(GetPathFromName(name), dialog.FileName, true);
             }
         }
     }

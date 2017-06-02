@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Windows.Forms;
 using TwitchChatinator.Forms.Components;
 using TwitchChatinator.Libs;
@@ -112,6 +113,8 @@ namespace TwitchChatinator.Forms.Runners
         {
             using (var graphic = CreateGraphics())
             {
+                graphic.TextRenderingHint = TextRenderingHint.AntiAlias;
+
                 var sf = new StringFormat
                 {
                     Alignment = StringAlignment.Center,
@@ -120,7 +123,7 @@ namespace TwitchChatinator.Forms.Runners
 
                 if (_options.BackgroundImage?.Image != null)
                 {
-                    graphic.DrawImage(_options.BackgroundImage.Image, new Point(0, 0));
+                    graphic.DrawImage(_options.BackgroundImage.Image, 0, 0, _options.BackgroundImage.Image.Width, _options.BackgroundImage.Image.Height);
                 }
 
                 graphic.DrawString(title, _options.TitleFont, _titleBrush, _titleRec, sf);
@@ -129,7 +132,7 @@ namespace TwitchChatinator.Forms.Runners
 
                 if (_options.ForegroundImage?.Image != null)
                 {
-                    graphic.DrawImage(_options.ForegroundImage.Image, new Point(0, 0));
+                    graphic.DrawImage(_options.ForegroundImage.Image, 0, 0, _options.ForegroundImage.Image.Width, _options.ForegroundImage.Image.Height);
                 }
             }
         }
@@ -218,7 +221,7 @@ namespace TwitchChatinator.Forms.Runners
                         Invalidate();
                         return;
                     }
-                    _drawingTick.Interval = Math.Max(16,
+                    _drawingTick.Interval = Math.Max(64,
                         // ReSharper disable once PossibleLossOfFraction
                         (int) Math.Pow(RollingMagicNum, _currentEntryIndex*20/RollingEntriesCount));
                     _currentEntryIndex++;

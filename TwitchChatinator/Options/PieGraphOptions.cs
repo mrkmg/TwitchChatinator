@@ -264,7 +264,8 @@ namespace TwitchChatinator.Options
 
             foreach (var file in files)
             {
-                names.Add(Path.GetFileNameWithoutExtension(file));
+                if (file.EndsWith(".xpie"))
+                    names.Add(Path.GetFileNameWithoutExtension(file));
             }
 
             names.Sort();
@@ -299,6 +300,21 @@ namespace TwitchChatinator.Options
                 e.Cancel = true;
                 e.Message = "Invalid Characters";
             }
+        }
+
+        public static void Import(string filename)
+        {
+            var fileInfo = new FileInfo(filename);
+
+            var name = fileInfo.Name;
+
+            var i = 0;
+            while (File.Exists(GetPath() + @"\" + name))
+            {
+                name = fileInfo.Name.Substring(0, fileInfo.Name.Length - 5) + " - " + (++i) + ".xpie";
+            }
+
+            File.Copy(filename, GetPath() + @"\" + name);
         }
 
         public static void Export(string name)

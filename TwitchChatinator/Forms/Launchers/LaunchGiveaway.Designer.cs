@@ -42,6 +42,8 @@
             this.InfoLabel = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.GiveawayKeyword = new System.Windows.Forms.TextBox();
+            this.ImportButton = new System.Windows.Forms.Button();
+            this.ExportButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // List
@@ -176,11 +178,33 @@
             this.GiveawayKeyword.Text = "keyword";
             this.GiveawayKeyword.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
+            // ImportButton
+            // 
+            this.ImportButton.Location = new System.Drawing.Point(423, 41);
+            this.ImportButton.Name = "ImportButton";
+            this.ImportButton.Size = new System.Drawing.Size(57, 23);
+            this.ImportButton.TabIndex = 24;
+            this.ImportButton.Text = "Import";
+            this.ImportButton.UseVisualStyleBackColor = true;
+            this.ImportButton.Click += new System.EventHandler(this.ImportButton_Click);
+            // 
+            // ExportButton
+            // 
+            this.ExportButton.Location = new System.Drawing.Point(423, 12);
+            this.ExportButton.Name = "ExportButton";
+            this.ExportButton.Size = new System.Drawing.Size(57, 23);
+            this.ExportButton.TabIndex = 23;
+            this.ExportButton.Text = "Export";
+            this.ExportButton.UseVisualStyleBackColor = true;
+            this.ExportButton.Click += new System.EventHandler(this.ExportButton_Click);
+            // 
             // LaunchGiveaway
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(428, 137);
+            this.ClientSize = new System.Drawing.Size(489, 137);
+            this.Controls.Add(this.ImportButton);
+            this.Controls.Add(this.ExportButton);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.GiveawayKeyword);
             this.Controls.Add(this.InfoLabel);
@@ -219,5 +243,7 @@
         private System.Windows.Forms.Label InfoLabel;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox GiveawayKeyword;
+        private System.Windows.Forms.Button ImportButton;
+        private System.Windows.Forms.Button ExportButton;
     }
 }
