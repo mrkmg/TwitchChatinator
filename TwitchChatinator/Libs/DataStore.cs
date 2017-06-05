@@ -22,6 +22,9 @@ namespace TwitchChatinator.Libs
 
         public static DataStore Instance => Lazy.Value;
 
+        public event MessageReceived OnMessageReceived;
+        public delegate void MessageReceived(DataStoreMessage message);
+
         private readonly List<string> _onlineUsers = new List<string>();
         private readonly List<DataStoreMessage> _messages = new List<DataStoreMessage>();
 
@@ -45,7 +48,10 @@ namespace TwitchChatinator.Libs
 
         public static bool InsertMessage(string channel, string user, string message)
         {
-            Instance._messages.Add(new DataStoreMessage {Datetime = DateTime.Now, Message = message, Username = user});
+            var dsMessage = new DataStoreMessage {Datetime = DateTime.Now, Message = message, Username = user};
+            Instance._messages.Add(dsMessage);
+            Instance.OnMessageReceived?.Invoke(dsMessage);
+
             return true;
         }
 

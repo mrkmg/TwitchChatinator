@@ -51,6 +51,8 @@ namespace TwitchChatinator.Forms.Launchers
 
         private void PopulateList()
         {
+            var originalIndex = List.SelectedIndex;
+
             List.Items.Clear();
 
             //Get Giveaways
@@ -67,7 +69,7 @@ namespace TwitchChatinator.Forms.Launchers
 
             if (List.Items.Count > 0)
             {
-                List.SelectedIndex = 0;
+                List.SelectedIndex = originalIndex < List.Items.Count ? originalIndex : 0;
                 EditButton.Enabled = true;
                 DeleteButton.Enabled = true;
                 CopyButton.Enabled = true;

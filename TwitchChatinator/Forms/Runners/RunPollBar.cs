@@ -21,8 +21,6 @@ namespace TwitchChatinator.Forms.Runners
 
         private readonly PollData _data;
 
-        private readonly Timer _drawingTick;
-
         private SolidBrush _labelBrush;
         private BarGraphOptions _options;
         private readonly string _optionsName;
@@ -36,6 +34,8 @@ namespace TwitchChatinator.Forms.Runners
 
         private Rectangle _totalRec;
         private StringFormat _totalStringFormat;
+        
+        private List<string> _recordedUsers = new List<string>();
 
         public RunPollBar(DateTime start, string name, string title, string[] pollvars)
         {
@@ -50,8 +50,16 @@ namespace TwitchChatinator.Forms.Runners
             _data = new PollData(_countEntries) {Options = pollvars};
 
             ReadOptions();
-
             SetupVars();
+
+            if (_optionsName == "_preview")
+            {
+                GeneratePreviewData();
+            }
+            else
+            {
+                SetupDataStoreWatcher();
+            }
 
             SetClientSizeCore(_options.Width, _options.Height);
             BackColor = _options.ChromaKey;
@@ -60,15 +68,34 @@ namespace TwitchChatinator.Forms.Runners
             Load += RunPollBar_Load;
             FormClosing += RunPollBar_FormClosing;
             Disposed += RunPollBar_Disposed;
+        }
 
-            _drawingTick = new Timer();
-            _drawingTick.Tick += DrawingTick_Tick;
-            _drawingTick.Interval = 200;
-            _drawingTick.Start();
+        private void SetupDataStoreWatcher()
+        {
+            DataStore.Instance.OnMessageReceived += MessageReceived;
+        }
+
+        private void MessageReceived(DataStoreMessage message)
+        {
+            for (var i = 0; i < _countEntries; i++)
+            {
+                if (!message.Message.ToLower().Contains(_data.Options[i].ToLower())) continue;
+                if (!_options.AllowMulti && _recordedUsers.Contains(message.Username)) continue;
+                _recordedUsers.Add(message.Username);
+                _data.TotalVotes++;
+                _data.Amounts[i]++;
+                Invalidate();
+                break;
+            }
         }
 
         private void RunPollBar_Disposed(object sender, EventArgs e)
         {
+            if (_optionsName != "_preview")
+            {
+                DataStore.Instance.OnMessageReceived -= MessageReceived;
+            }
+
             _labelBrush.Dispose();
             _countBrush.Dispose();
             _totalBrush.Dispose();
@@ -77,9 +104,6 @@ namespace TwitchChatinator.Forms.Runners
             {
                 b?.Dispose();
             }
-
-            _drawingTick.Stop();
-            _drawingTick.Dispose();
 
             _titleStringFormat.Dispose();
             _totalStringFormat.Dispose();
@@ -151,62 +175,8 @@ namespace TwitchChatinator.Forms.Runners
             }
         }
 
-        private void GetData()
-        {
-            if (_countEntries <= 0) return;
-
-            var dss = new DataSetSelection {Start = _startTime};
-            var rawData = DataStore.GetDataSet(dss);
-
-            var totalRows = 0;
-            var rowData = new int[_countEntries];
-            var recordedUsers = new List<string>();
-
-//            foreach (DataRow row in rawData.Tables[0].Rows)
-//            {
-//                for (var i = 0; i < _countEntries; i++)
-//                {
-//                    if (!row.ItemArray[3].ToString().ToLower().Contains(_data.Options[i].ToLower()) ||
-//                        (!_options.AllowMulti && recordedUsers.Contains(row.ItemArray[2].ToString()))) continue;
-//
-//                    recordedUsers.Add(row.ItemArray[2].ToString());
-//                    rowData[i]++;
-//                    totalRows++;
-//                    break;
-//                }
-//            }
-
-            foreach (var row in rawData)
-            {
-                for (var i = 0; i < _countEntries; i++)
-                {
-                    if (!row.Message.ToLower().Contains(_data.Options[i].ToLower())) continue;
-                    if (!_options.AllowMulti && recordedUsers.Contains(row.Username)) continue;
-                    recordedUsers.Add(row.Username);
-                    rowData[i]++;
-                    totalRows++;
-                    break;
-                }
-            }
-
-            for (var i = 0; i < _countEntries; i++)
-            {
-                _data.Amounts[i] = rowData[i];
-            }
-            _data.TotalVotes = totalRows;
-        }
-
         private void DrawingTick_Tick(object sender, EventArgs e)
         {
-            if (_optionsName == "_preview")
-            {
-                GeneratePreviewData();
-            }
-            else
-            {
-                GetData();
-            }
-
             if (!Disposing)
                 Invalidate();
         }

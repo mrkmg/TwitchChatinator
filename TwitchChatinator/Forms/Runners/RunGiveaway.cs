@@ -52,10 +52,21 @@ namespace TwitchChatinator.Forms.Runners
             _startTime = startTime;
             _giveawayTitle = title;
             _optionsName = name;
-            _keyword = keyword;
+            _keyword = keyword.ToLower();
+
+            _entryList = new List<string>();
 
             ReadOptions();
             SetupVars();
+
+            if (_optionsName == "_preview")
+            {
+                GeneratePreviewData();
+            }
+            else
+            {
+                SetupDataStoreWatcher();
+            }
 
             Text = @"Giveaway - Chatinator";
             BackColor = _options.ChromaKey;
@@ -67,12 +78,31 @@ namespace TwitchChatinator.Forms.Runners
             _drawingTick = new Timer();
             _drawingTick.Tick += DrawingTick_Tick;
             _drawingTick.Interval = 200;
-            _drawingTick.Start();
         }
 
         private void ReadOptions()
         {
             _options = GiveawayOptions.Load(_optionsName);
+        }
+
+        private void GeneratePreviewData()
+        {
+            for (var i = 1; i <= 5000; i++) _entryList.Add("User" + i);
+        }
+
+        private void SetupDataStoreWatcher()
+        {
+            DataStore.Instance.OnMessageReceived += MessageReceived;
+        }
+
+        private void MessageReceived(DataStoreMessage message)
+        {
+            if (!_entryList.Contains(message.Username) && message.Message.ToLower().Contains(_keyword))
+            {
+                _count++;
+                _entryList.Add(message.Username);
+                Invalidate();
+            }
         }
 
         private void RunRoll_Load(object sender, EventArgs e)
@@ -153,33 +183,9 @@ namespace TwitchChatinator.Forms.Runners
             PaintScreen(_giveawayTitle, "Taking Submissions", "Total Entries: " + _count);
         }
 
-        private void UpdateCount()
-        {
-            if (_optionsName == "_preview")
-            {
-                _count = 5000;
-                return;
-            }
-
-            var dss = new DataSetSelection {Start = _startTime, MessagePartial = _keyword};
-            try
-            {
-                _count = DataStore.GetUniqueUsersCount(dss);
-            }
-            catch (Exception ex)
-            {
-                Log.LogException(ex);
-            }
-        }
-
         private void GetEntries()
         {
-            if (_optionsName == "_preview")
-            {
-                _entryList = new List<string>();
-                for (var i = 1; i <= 5000; i++) _entryList.Add("User" + i);
-                return;
-            }
+            
 
             var dss = new DataSetSelection
             {
@@ -202,34 +208,27 @@ namespace TwitchChatinator.Forms.Runners
                 _currentEntryIndex = 0;
                 _drawingTick.Interval = 1;
                 _stage = StageRolling;
-                if (!_drawingTick.Enabled)
-                    _drawingTick.Enabled = true;
+                _drawingTick.Start();
             }
         }
 
         private void DrawingTick_Tick(object sender, EventArgs e)
         {
-            switch (_stage)
+            if (_stage != StageRolling) return;
+
+            if (_currentEntryIndex == RollingEntriesCount - 1)
             {
-                case StageWaiting:
-                    UpdateCount();
-                    break;
-                case StageRolling:
-                    if (_currentEntryIndex == RollingEntriesCount - 1)
-                    {
-                        _stage = StagePostroll;
-                        Invalidate();
-                        return;
-                    }
-                    _drawingTick.Interval = Math.Max(64,
-                        // ReSharper disable once PossibleLossOfFraction
-                        (int) Math.Pow(RollingMagicNum, _currentEntryIndex*20/RollingEntriesCount));
-                    _currentEntryIndex++;
-                    if (_currentEntryIndex == RollingEntriesCount - 1)
-                    {
-                        _drawingTick.Interval = 1000;
-                    }
-                    break;
+                _stage = StagePostroll;
+                Invalidate();
+                return;
+            }
+            _drawingTick.Interval = Math.Max(64,
+                // ReSharper disable once PossibleLossOfFraction
+                (int)Math.Pow(RollingMagicNum, _currentEntryIndex * 20 / RollingEntriesCount));
+            _currentEntryIndex++;
+            if (_currentEntryIndex == RollingEntriesCount - 1)
+            {
+                _drawingTick.Interval = 1000;
             }
             Invalidate();
         }
@@ -266,6 +265,11 @@ namespace TwitchChatinator.Forms.Runners
 
         protected override void Dispose(bool disposing)
         {
+            if (_optionsName == "_preview")
+            {
+                DataStore.Instance.OnMessageReceived += MessageReceived;
+            }
+
             if (disposing)
             {
                 components?.Dispose();

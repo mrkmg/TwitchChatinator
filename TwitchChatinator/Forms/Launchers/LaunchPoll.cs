@@ -122,6 +122,8 @@ namespace TwitchChatinator.Forms.Launchers
 
         private void PopulateList()
         {
+            var originalIndex = List.SelectedIndex;
+
             List.Items.Clear();
 
             //Get Bar Graphs
@@ -146,7 +148,7 @@ namespace TwitchChatinator.Forms.Launchers
 
             if (List.Items.Count > 0)
             {
-                List.SelectedIndex = 0;
+                List.SelectedIndex = originalIndex < List.Items.Count ? originalIndex : 0;
                 StartButton.Enabled = true;
                 EditButton.Enabled = true;
                 DeleteButton.Enabled = true;
