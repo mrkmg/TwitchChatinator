@@ -69,6 +69,12 @@ namespace TwitchChatinator.Forms.Runners
             }
 
             Text = @"Giveaway - Chatinator";
+            if (_options.TransparentBackground)
+            {
+                SetStyle(ControlStyles.SupportsTransparentBackColor, true);
+                SetStyle(ControlStyles.UserPaint, true);
+                TransparencyKey = _options.ChromaKey;
+            }
             BackColor = _options.ChromaKey;
 
             Paint += RunRoll_Paint;

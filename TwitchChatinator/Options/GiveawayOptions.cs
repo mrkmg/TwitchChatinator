@@ -25,6 +25,7 @@ namespace TwitchChatinator.Options
             Spacing = 3;
 
             ChromaKey = Color.Black;
+            TransparentBackground = false;
 
             TitleFontColor = Color.White;
             TitleFont = new Font("Segoe UI", 15.75f, FontStyle.Bold);
@@ -59,6 +60,9 @@ namespace TwitchChatinator.Options
 
         [XmlIgnore]
         public Color ChromaKey { get; set; }
+
+        [XmlElement]
+        public bool TransparentBackground { get; set; }
 
         [XmlIgnore]
         public Color TitleFontColor { get; set; }

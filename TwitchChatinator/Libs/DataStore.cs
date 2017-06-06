@@ -11,8 +11,6 @@ namespace TwitchChatinator.Libs
 {
     public sealed class DataStore
     {
-        private const string DatetimeFormat = "yyyyMMddHHmmssffff";
-
         private static readonly Lazy<DataStore> Lazy =
             new Lazy<DataStore>(() => new DataStore());
 

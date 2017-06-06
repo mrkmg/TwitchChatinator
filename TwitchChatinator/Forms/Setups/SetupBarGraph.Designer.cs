@@ -75,6 +75,8 @@
             this.ChangeBackgroundImage = new System.Windows.Forms.Button();
             this.TotalPosition = new System.Windows.Forms.ComboBox();
             this.label15 = new System.Windows.Forms.Label();
+            this.TransparentBackground = new System.Windows.Forms.CheckBox();
+            this.label19 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.HeightInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.WidthInput)).BeginInit();
@@ -280,6 +282,8 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.TransparentBackground);
+            this.groupBox3.Controls.Add(this.label19);
             this.groupBox3.Controls.Add(this.Option4Color);
             this.groupBox3.Controls.Add(this.Option3Color);
             this.groupBox3.Controls.Add(this.Option2Color);
@@ -292,35 +296,35 @@
             this.groupBox3.Controls.Add(this.label7);
             this.groupBox3.Location = new System.Drawing.Point(12, 109);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(200, 135);
+            this.groupBox3.Size = new System.Drawing.Size(200, 161);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Colors";
             // 
             // Option4Color
             // 
-            this.Option4Color.Location = new System.Drawing.Point(173, 105);
+            this.Option4Color.Location = new System.Drawing.Point(173, 122);
             this.Option4Color.Name = "Option4Color";
             this.Option4Color.Size = new System.Drawing.Size(20, 20);
             this.Option4Color.TabIndex = 9;
             // 
             // Option3Color
             // 
-            this.Option3Color.Location = new System.Drawing.Point(173, 83);
+            this.Option3Color.Location = new System.Drawing.Point(173, 100);
             this.Option3Color.Name = "Option3Color";
             this.Option3Color.Size = new System.Drawing.Size(20, 20);
             this.Option3Color.TabIndex = 8;
             // 
             // Option2Color
             // 
-            this.Option2Color.Location = new System.Drawing.Point(173, 61);
+            this.Option2Color.Location = new System.Drawing.Point(173, 78);
             this.Option2Color.Name = "Option2Color";
             this.Option2Color.Size = new System.Drawing.Size(20, 20);
             this.Option2Color.TabIndex = 7;
             // 
             // Option1Color
             // 
-            this.Option1Color.Location = new System.Drawing.Point(173, 39);
+            this.Option1Color.Location = new System.Drawing.Point(173, 56);
             this.Option1Color.Name = "Option1Color";
             this.Option1Color.Size = new System.Drawing.Size(20, 20);
             this.Option1Color.TabIndex = 6;
@@ -335,7 +339,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(6, 109);
+            this.label11.Location = new System.Drawing.Point(6, 126);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(74, 13);
             this.label11.TabIndex = 4;
@@ -344,7 +348,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(6, 87);
+            this.label10.Location = new System.Drawing.Point(6, 104);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(74, 13);
             this.label10.TabIndex = 3;
@@ -353,7 +357,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(6, 65);
+            this.label9.Location = new System.Drawing.Point(6, 82);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(74, 13);
             this.label9.TabIndex = 2;
@@ -362,7 +366,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(6, 43);
+            this.label8.Location = new System.Drawing.Point(6, 60);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(74, 13);
             this.label8.TabIndex = 1;
@@ -472,7 +476,7 @@
             // 
             // SaveButton
             // 
-            this.SaveButton.Location = new System.Drawing.Point(351, 310);
+            this.SaveButton.Location = new System.Drawing.Point(351, 358);
             this.SaveButton.Name = "SaveButton";
             this.SaveButton.Size = new System.Drawing.Size(73, 23);
             this.SaveButton.TabIndex = 5;
@@ -481,7 +485,7 @@
             // 
             // CancelButton
             // 
-            this.CancelButton.Location = new System.Drawing.Point(224, 310);
+            this.CancelButton.Location = new System.Drawing.Point(224, 358);
             this.CancelButton.Name = "CancelButton";
             this.CancelButton.Size = new System.Drawing.Size(75, 23);
             this.CancelButton.TabIndex = 6;
@@ -496,7 +500,7 @@
             this.groupBox5.Controls.Add(this.ChangeBackgroundImage);
             this.groupBox5.Controls.Add(this.TotalPosition);
             this.groupBox5.Controls.Add(this.label15);
-            this.groupBox5.Location = new System.Drawing.Point(12, 250);
+            this.groupBox5.Location = new System.Drawing.Point(12, 276);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(200, 106);
             this.groupBox5.TabIndex = 7;
@@ -562,11 +566,29 @@
             this.label15.TabIndex = 0;
             this.label15.Text = "Title Position";
             // 
+            // TransparentBackground
+            // 
+            this.TransparentBackground.AutoSize = true;
+            this.TransparentBackground.Location = new System.Drawing.Point(176, 40);
+            this.TransparentBackground.Name = "TransparentBackground";
+            this.TransparentBackground.Size = new System.Drawing.Size(15, 14);
+            this.TransparentBackground.TabIndex = 13;
+            this.TransparentBackground.UseVisualStyleBackColor = true;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(6, 42);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(72, 13);
+            this.label19.TabIndex = 12;
+            this.label19.Text = "Transparency";
+            // 
             // SetupBarGraph
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(431, 375);
+            this.ClientSize = new System.Drawing.Size(431, 393);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.CancelButton);
             this.Controls.Add(this.SaveButton);
@@ -649,5 +671,7 @@
         private System.Windows.Forms.Button ChangeBackgroundImage;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Button ChangeForegroundImage;
+        private System.Windows.Forms.CheckBox TransparentBackground;
+        private System.Windows.Forms.Label label19;
     }
 }

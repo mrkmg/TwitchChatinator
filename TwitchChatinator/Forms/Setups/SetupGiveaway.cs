@@ -60,6 +60,8 @@ namespace TwitchChatinator.Forms.Setups
             Spacing.ValueChanged += EventHandler_Change;
 
             ChromaKey.BackColorChanged += EventHandler_Change;
+            TransparentBackground.CheckedChanged += EventHandler_Change;
+
             EntriesFontColor.BackColorChanged += EventHandler_Change;
             RollerFontColor.BackColorChanged += EventHandler_Change;
             TitleFontColor.BackColorChanged += EventHandler_Change;
@@ -111,6 +113,7 @@ namespace TwitchChatinator.Forms.Setups
             _options.Spacing = (int) Spacing.Value;
 
             _options.ChromaKey = ChromaKey.BackColor;
+            _options.TransparentBackground = TransparentBackground.Checked;
 
             _options.RollerFont = _rollerFont;
             _options.RollerFontColor = EntriesFontColor.BackColor;
@@ -161,6 +164,9 @@ namespace TwitchChatinator.Forms.Setups
             Spacing.Value = _options.Spacing;
 
             ChromaKey.BackColor = _options.ChromaKey;
+            TransparentBackground.CheckState = _options.TransparentBackground
+                ? CheckState.Checked
+                : CheckState.Unchecked;
 
             _rollerFont = _options.RollerFont;
             RollerFontColor.BackColor = _options.RollerFontColor;

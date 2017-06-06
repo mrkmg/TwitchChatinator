@@ -134,7 +134,6 @@ namespace TwitchChatinator.Forms
         private void WelcomeScreen_FormClosed(object sender, FormClosedEventArgs e)
         {
             StopListen();
-            Console.WriteLine(@"Good Bye");
         }
 
         private void ReceiveMessage(TwitchMessageObject message)

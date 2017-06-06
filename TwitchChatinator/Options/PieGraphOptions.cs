@@ -24,6 +24,7 @@ namespace TwitchChatinator.Options
             MarginRight = 5;
 
             ChromaKey = Color.Black;
+            TransparentBackground = false;
             Option1Color = Color.Maroon;
             Option2Color = Color.RoyalBlue;
             Option3Color = Color.Orange;
@@ -67,6 +68,9 @@ namespace TwitchChatinator.Options
 
         [XmlIgnore]
         public Color ChromaKey { get; set; }
+
+        [XmlElement]
+        public bool TransparentBackground { get; set; }
 
         [XmlIgnore]
         public Color Option1Color { get; set; }

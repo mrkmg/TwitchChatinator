@@ -63,6 +63,12 @@ namespace TwitchChatinator.Forms.Runners
             }
 
             SetClientSizeCore(_options.Width, _options.Height);
+            if (_options.TransparentBackground)
+            {
+                SetStyle(ControlStyles.SupportsTransparentBackColor, true);
+                SetStyle(ControlStyles.UserPaint, true);
+                TransparencyKey = _options.ChromaKey;
+            }
             BackColor = _options.ChromaKey;
 
             Paint += RunPollPie_Paint;

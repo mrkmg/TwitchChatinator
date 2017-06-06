@@ -56,6 +56,7 @@ namespace TwitchChatinator.Forms.Setups
             MarginRight.ValueChanged += EventHandler_Change;
 
             ChromaKey.BackColorChanged += EventHandler_Change;
+            TransparentBackground.CheckedChanged += EventHandler_Change;
             Option1Color.BackColorChanged += EventHandler_Change;
             Option2Color.BackColorChanged += EventHandler_Change;
             Option3Color.BackColorChanged += EventHandler_Change;
@@ -115,6 +116,7 @@ namespace TwitchChatinator.Forms.Setups
             _options.MarginRight = (int) MarginRight.Value;
 
             _options.ChromaKey = ChromaKey.BackColor;
+            _options.TransparentBackground = TransparentBackground.Checked;
             _options.Option1Color = Option1Color.BackColor;
             _options.Option2Color = Option2Color.BackColor;
             _options.Option3Color = Option3Color.BackColor;
@@ -159,6 +161,9 @@ namespace TwitchChatinator.Forms.Setups
             MarginRight.Value = _options.MarginRight;
 
             ChromaKey.BackColor = _options.ChromaKey;
+            TransparentBackground.CheckState = _options.TransparentBackground
+                ? CheckState.Checked
+                : CheckState.Unchecked;
             Option1Color.BackColor = _options.Option1Color;
             Option2Color.BackColor = _options.Option2Color;
             Option3Color.BackColor = _options.Option3Color;

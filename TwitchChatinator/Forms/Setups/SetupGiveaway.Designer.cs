@@ -66,6 +66,8 @@
             this.label17 = new System.Windows.Forms.Label();
             this.ChangeBackgroundImage = new System.Windows.Forms.Button();
             this.TestButton = new System.Windows.Forms.Button();
+            this.TransparentBackground = new System.Windows.Forms.CheckBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.HeightInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.WidthInput)).BeginInit();
@@ -272,11 +274,13 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.TransparentBackground);
+            this.groupBox3.Controls.Add(this.label8);
             this.groupBox3.Controls.Add(this.ChromaKey);
             this.groupBox3.Controls.Add(this.label7);
             this.groupBox3.Location = new System.Drawing.Point(12, 240);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(200, 47);
+            this.groupBox3.Size = new System.Drawing.Size(200, 69);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Colors";
@@ -392,7 +396,7 @@
             // 
             // SaveButton
             // 
-            this.SaveButton.Location = new System.Drawing.Point(299, 251);
+            this.SaveButton.Location = new System.Drawing.Point(299, 284);
             this.SaveButton.Name = "SaveButton";
             this.SaveButton.Size = new System.Drawing.Size(58, 23);
             this.SaveButton.TabIndex = 5;
@@ -401,7 +405,7 @@
             // 
             // CancelButton
             // 
-            this.CancelButton.Location = new System.Drawing.Point(228, 251);
+            this.CancelButton.Location = new System.Drawing.Point(228, 284);
             this.CancelButton.Name = "CancelButton";
             this.CancelButton.Size = new System.Drawing.Size(57, 23);
             this.CancelButton.TabIndex = 6;
@@ -461,18 +465,36 @@
             // 
             // TestButton
             // 
-            this.TestButton.Location = new System.Drawing.Point(370, 251);
+            this.TestButton.Location = new System.Drawing.Point(370, 284);
             this.TestButton.Name = "TestButton";
             this.TestButton.Size = new System.Drawing.Size(60, 23);
             this.TestButton.TabIndex = 9;
             this.TestButton.Text = "Test";
             this.TestButton.UseVisualStyleBackColor = true;
             // 
+            // TransparentBackground
+            // 
+            this.TransparentBackground.AutoSize = true;
+            this.TransparentBackground.Location = new System.Drawing.Point(176, 42);
+            this.TransparentBackground.Name = "TransparentBackground";
+            this.TransparentBackground.Size = new System.Drawing.Size(15, 14);
+            this.TransparentBackground.TabIndex = 13;
+            this.TransparentBackground.UseVisualStyleBackColor = true;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(6, 44);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(72, 13);
+            this.label8.TabIndex = 12;
+            this.label8.Text = "Transparency";
+            // 
             // SetupGiveaway
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(446, 307);
+            this.ClientSize = new System.Drawing.Size(446, 321);
             this.Controls.Add(this.TestButton);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.CancelButton);
@@ -547,5 +569,7 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Button ChangeBackgroundImage;
         private System.Windows.Forms.Button TestButton;
+        private System.Windows.Forms.CheckBox TransparentBackground;
+        private System.Windows.Forms.Label label8;
     }
 }
