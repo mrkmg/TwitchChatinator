@@ -210,36 +210,36 @@ namespace TwitchChatinator.Libs
             if (data == ":tmi.twitch.tv 001 " + username + " :Welcome, GLHF!")
             {
                 SetMembershipCaps();
-                return;
+            }
+
+            // Error Logging in
+            if (data.Contains(":Error logging in"))
+            {
+                Stop();
             }
 
             // Got Caps
             if (data == ":tmi.twitch.tv CAP * ACK :twitch.tv/membership")
             {
                 JoinChannel();
-                // cool, got the caps
-                return;
             }
 
             // Joined Channel
             if (data == ":" + username + "!" + username + "@" + username + ".tmi.twitch.tv JOIN #" + channel)
             {
                 SetConnected();
-                return;
             }
 
             if (OnUserLeave != null && data.Contains(".tmi.twitch.tv PART #"))
             {
                 var userNameEnd = data.IndexOf('!');
                 OnUserLeave(data.Substring(1, userNameEnd -1));
-                return;
             }
 
             if (OnUserJoin != null && data.Contains(".tmi.twitch.tv JOIN #"))
             {
                 var userNameEnd = data.IndexOf('!');
                 OnUserJoin(data.Substring(1, userNameEnd - 1));
-                return;
             }
 
             

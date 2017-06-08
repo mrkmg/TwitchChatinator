@@ -20,8 +20,6 @@ namespace TwitchChatinator.Forms
         {
             InitializeComponent();
 
-            UserListProgress.Hide();
-
             VersionLabel.Text = @"v " + Program.GetVersion();
 
             FormClosed += WelcomeScreen_FormClosed;
@@ -93,19 +91,6 @@ namespace TwitchChatinator.Forms
             _getUsersThread.Start();
         }
 
-        private void UpdateProgress(int value)
-        { 
-            if (value == 0 || value == 100)
-            {
-                UserListProgress.Hide();
-            }
-            else
-            {
-                UserListProgress.Show();
-                UserListProgress.Value = value;
-            }
-        }
-
         private void GetChatters()
         {
             Log.LogInfo("Retreiving chatters");
@@ -114,19 +99,13 @@ namespace TwitchChatinator.Forms
 
             Log.LogInfo("Retreived chatters " + totalToProcess);
 
-            double i = 0;
-
-            foreach (string chatter in chattersFromApi.chatters.moderators)
+            foreach (var chatter in chattersFromApi.chatters.moderators)
             {
-                var progress = ++i / totalToProcess;
-                Invoke(new Action<int>(UpdateProgress), (int)Math.Round(progress * 100));
                 DataStore.AddUser(chatter);
             }
 
-            foreach (string chatter in chattersFromApi.chatters.viewers)
+            foreach (var chatter in chattersFromApi.chatters.viewers)
             {
-                var progress = ++i / totalToProcess;
-                Invoke(new Action<int>(UpdateProgress), (int)Math.Round(progress * 100));
                 DataStore.AddUser(chatter);
             }
         }
@@ -181,12 +160,6 @@ namespace TwitchChatinator.Forms
             StartListenButton.Enabled = false;
         }
 
-        private void ShowMessageBrowser_Click(object sender, EventArgs e)
-        {
-            var mb = new MessageBrowser();
-            mb.Show();
-        }
-
         private void StartPollButton_Click(object sender, EventArgs e)
         {
             var launcher = new LaunchPoll();
@@ -231,6 +204,8 @@ namespace TwitchChatinator.Forms
             }
         }
 
+        private Timer copyRandomUserTimer;
+
         private void CopyRandomButton_Click(object sender, EventArgs e)
         {
             var users = DataStore.GetOnlineUsers();
@@ -245,16 +220,18 @@ namespace TwitchChatinator.Forms
             {
                 ((Button) sender).Text = @"NO ENTRIES";
             }
-            var T = new Timer();
-            //TODO - Make this timer go away if clicked again.
-            T.Tick += delegate
+            copyRandomUserTimer?.Dispose();
+
+            copyRandomUserTimer = new Timer();
+            copyRandomUserTimer.Tick += delegate
             {
                 ((Button) sender).Text = @"Copy Random User";
-                T.Stop();
-                T.Dispose();
+                copyRandomUserTimer.Stop();
+                copyRandomUserTimer.Dispose();
+                copyRandomUserTimer = null;
             };
-            T.Interval = 1500;
-            T.Start();
+            copyRandomUserTimer.Interval = 1500;
+            copyRandomUserTimer.Start();
         }
     }
 }

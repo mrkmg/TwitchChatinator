@@ -22,10 +22,10 @@ namespace TwitchChatinator.Forms
             _loginHandler = l;
             InitializeComponent();
 
-            UsernameInput.KeyUp += TriggerCheckInputs;
-            PasswordInput.KeyUp += TriggerCheckInputs;
-            ChannelInput.KeyUp += TriggerCheckInputs;
             UsernameInput.KeyUp += CopyUserToChannel;
+            UsernameInput.KeyUp += (s, e) => CheckInputs();
+            PasswordInput.KeyUp += (s, e) => CheckInputs();
+            ChannelInput.KeyUp += (s, e) => CheckInputs();
 
             if (Settings.Default.TwitchUsername != "" && Settings.Default.TwitchPassword != "" &&
                 Settings.Default.TwitchChannel != "")
@@ -49,11 +49,6 @@ namespace TwitchChatinator.Forms
             if (UsernameInput.Text.Length > 1 && PasswordInput.Text.Length > 1 && ChannelInput.Text.Length > 1)
                 LoginButton.Enabled = true;
             else LoginButton.Enabled = false;
-        }
-
-        private void TriggerCheckInputs(object send, KeyEventArgs e)
-        {
-            CheckInputs();
         }
 
         private void LoginButton_Click(object sender, EventArgs e)
@@ -105,6 +100,7 @@ namespace TwitchChatinator.Forms
             {
                 PasswordInput.Text = code;
                 _authBrowserForm?.Close();
+                CheckInputs();
             }
         }
     }
